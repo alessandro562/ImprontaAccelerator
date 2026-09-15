@@ -1,0 +1,49 @@
+---
+import { APPLICATION_FORM_URL, CONTACT_EMAIL, hasApplicationForm } from '../config';
+import { useTranslations } from '../i18n';
+import type { Locale } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  /** da dove parte il click: finisce in utm_content per l'attribuzione */
+  source: string;
+  label?: string;
+  variant?: 'primary' | 'on-dark';
+  class?: string;
+}
+
+const { locale, source, label, variant = 'primary', class: className = '' } = Astro.props;
+const t = useTranslations(locale);
+const text = label ?? t.hero.ctaPrimary;
+
+/**
+ * Finché APPLICATION_FORM_URL non è impostato la CTA non viene disattivata:
+ * ricade sull'email di contatto, così la pagina resta pubblicabile e
+ * funzionante. Sostituire l'URL in src/config.ts è una modifica di una riga.
+ */
+let url: string;
+if (hasApplicationForm) {
+  const u = new URL(APPLICATION_FORM_URL);
+  u.searchParams.set('lang', locale);
+  u.searchParams.set('utm_source', 'landing');
+  u.searchParams.set('utm_medium', 'cta');
+  u.searchParams.set('utm_content', source);
+  url = u.toString();
+} else {
+  const subject = locale === 'it' ? 'Candidatura a Impronta Accelerator' : 'Application to Impronta Accelerator';
+  url = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}`;
+}
+
+const classes = `btn ${variant === 'on-dark' ? 'btn-on-dark' : 'btn-primary'} ${className}`;
+---
+<a
+  href={url}
+  class={classes}
+  target={hasApplicationForm ? '_blank' : undefined}
+  rel={hasApplicationForm ? 'noopener' : undefined}
+>
+  {text}
+  <svg viewBox="0 0 16 16" class="h-3.5 w-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 8h10M9 4l4 4-4 4" />
+  </svg>
+</a>

@@ -1,0 +1,40 @@
+---
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+<section id="percorso" class="bg-cream">
+  <div class="shell py-20 md:py-28">
+    <div class="max-w-3xl">
+      <p class="eyebrow">{t.journey.eyebrow}</p>
+      <h2 class="mt-5 text-3xl leading-tight text-ink md:text-4xl lg:text-5xl">{t.journey.title}</h2>
+      <p class="mt-6 text-lg leading-relaxed text-slate">{t.journey.intro}</p>
+    </div>
+
+    <ol class="mt-14 grid gap-5 lg:grid-cols-4">
+      {t.journey.phases.map((phase, i) => (
+        <li class="card relative flex flex-col p-7">
+          <div class="flex items-center gap-3">
+            <span class="flex h-9 w-9 items-center justify-center rounded-full bg-ink font-display text-sm font-bold text-white">
+              {i + 1}
+            </span>
+            <span class="rounded-full bg-brand-magenta/10 px-3 py-1 text-xs font-semibold text-magenta-deep">
+              {phase.duration}
+            </span>
+          </div>
+
+          <h3 class="mt-5 text-xl leading-snug text-ink">{phase.name}</h3>
+          <p class="mt-3 flex-1 text-sm leading-relaxed text-slate">{phase.text}</p>
+
+          <p class="mt-6 border-t border-line pt-4 text-xs text-slate">
+            <span class="font-semibold uppercase tracking-wider">{t.journey.operatorLabel}</span>
+            <span class="mt-1 block text-ink">{phase.operator}</span>
+          </p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

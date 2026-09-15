@@ -1,0 +1,120 @@
+---
+import '@fontsource-variable/figtree';
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+
+// I subset non latini restano disponibili via unicode-range, ma solo questi due
+// file finiscono sul critical path: sono quelli che servono al primo paint.
+import figtreeLatin from '@fontsource-variable/figtree/files/figtree-latin-wght-normal.woff2?url';
+import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+
+import { absoluteLocaleUrl, asset, LOCALES, type Locale } from '../i18n/utils';
+import { useTranslations } from '../i18n';
+import { CONTACT_EMAIL, PARTNER_URLS, VENUE } from '../config';
+
+interface Props {
+  locale: Locale;
+  /** chiave di pagina neutra rispetto alla lingua: '' | 'privacy' | 'cookie' */
+  pageKey?: string;
+  title?: string;
+  description?: string;
+  /** i dati strutturati delle FAQ si emettono solo sulla home */
+  faq?: { q: string; a: string }[];
+}
+
+const { locale, pageKey = '', title, description, faq } = Astro.props;
+const t = useTranslations(locale);
+
+const pageTitle = title ?? t.meta.title;
+const pageDescription = description ?? t.meta.description;
+const canonical = absoluteLocaleUrl(locale, pageKey);
+const ogImage = new URL(asset(t.meta.ogImage), Astro.site).toString();
+
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Impronta Accelerator',
+  url: absoluteLocaleUrl('it'),
+  logo: new URL(asset('apple-touch-icon.png'), Astro.site).toString(),
+  email: CONTACT_EMAIL,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: VENUE.street,
+    postalCode: VENUE.postalCode,
+    addressLocality: VENUE.city,
+    addressCountry: VENUE.country,
+  },
+  member: [
+    { '@type': 'Organization', name: 'Next4', url: PARTNER_URLS.next4 },
+    { '@type': 'Organization', name: 'ELIS Innovation Hub', url: PARTNER_URLS.elis },
+    { '@type': 'Organization', name: 'WDA', url: PARTNER_URLS.wda },
+  ],
+};
+
+// Costruito dallo stesso dizionario che renderizza le FAQ visibili: i dati
+// strutturati non possono divergere dal testo in pagina.
+const faqSchema = faq && {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="theme-color" content="#FCFCFA" />
+
+    <link rel="canonical" href={canonical} />
+    {LOCALES.map((code) => (
+      <link rel="alternate" hreflang={code} href={absoluteLocaleUrl(code, pageKey)} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={absoluteLocaleUrl('it', pageKey)} />
+
+    <link rel="preload" href={figtreeLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
+
+    <link rel="icon" href={asset('favicon.svg')} type="image/svg+xml" />
+    <link rel="icon" href={asset('favicon-32.png')} sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href={asset('apple-touch-icon.png')} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Impronta Accelerator" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content={t.meta.locale} />
+    {LOCALES.filter((c) => c !== locale).map((c) => (
+      <meta property="og:locale:alternate" content={c === 'it' ? 'it_IT' : 'en_US'} />
+    ))}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(organization)} />
+    {faqSchema && <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+    >
+      {t.meta.skipToContent}
+    </a>
+    <slot />
+  </body>
+</html>

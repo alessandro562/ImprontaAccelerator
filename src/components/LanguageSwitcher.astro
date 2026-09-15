@@ -1,0 +1,48 @@
+---
+import { LOCALES, localeUrl, pageKeyFromUrl, type Locale } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  label: string;
+  class?: string;
+}
+const { locale, label, class: className = '' } = Astro.props;
+const pageKey = pageKeyFromUrl(Astro.url.pathname);
+const NAMES: Record<Locale, string> = { it: 'Italiano', en: 'English' };
+---
+<nav class={`flex items-center gap-0.5 rounded-full border border-line bg-white/70 p-0.5 ${className}`} aria-label={label}>
+  {LOCALES.map((code) => {
+    const url = localeUrl(code, pageKey);
+    const active = code === locale;
+    return (
+      <a
+        href={url}
+        data-href={url}
+        data-lang-switch
+        hreflang={code}
+        lang={code}
+        aria-current={active ? 'true' : undefined}
+        title={NAMES[code]}
+        class:list={[
+          'rounded-full px-2.5 py-1 text-xs font-semibold uppercase transition-colors',
+          active ? 'bg-ink text-white' : 'text-slate hover:text-ink',
+        ]}
+      >
+        {code}
+      </a>
+    );
+  })}
+</nav>
+
+<script>
+  // Il fragment (#faq) non viene mai inviato al server: un href statico lo
+  // perderebbe. Riscriviamo l'href — invece di intercettare il click — così
+  // continuano a funzionare ctrl+click, click centrale e "copia indirizzo".
+  const sync = () => {
+    document.querySelectorAll<HTMLAnchorElement>('a[data-lang-switch]').forEach((a) => {
+      a.href = (a.dataset.href ?? '') + location.hash;
+    });
+  };
+  sync();
+  addEventListener('hashchange', sync);
+</script>

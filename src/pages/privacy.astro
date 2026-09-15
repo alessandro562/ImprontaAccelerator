@@ -1,0 +1,22 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { useTranslations } from '../i18n';
+import { currentLocale } from '../i18n/utils';
+import { CONTACT_EMAIL } from '../config';
+
+const locale = currentLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const updated = new Date().toISOString().slice(0, 10);
+---
+<Legal
+  locale={locale}
+  pageKey="privacy"
+  title={t.privacy.title}
+  updated={updated}
+  updatedLabel={t.privacy.updated}
+  intro={t.privacy.intro}
+  sections={t.privacy.sections}
+  back={t.privacy.back}
+  placeholder={t.privacy.placeholder}
+  contact={{ prefix: t.privacy.contactPrefix, email: CONTACT_EMAIL }}
+/>

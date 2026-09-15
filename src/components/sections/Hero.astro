@@ -1,0 +1,56 @@
+---
+import Cta from '../Cta.astro';
+import Brandmark from '../Brandmark.astro';
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../i18n/utils';
+import { formattedDeadline } from '../../config';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const deadline = formattedDeadline(locale);
+---
+<section class="relative overflow-hidden">
+  <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-brand-green via-brand-amber to-brand-magenta" aria-hidden="true"></div>
+
+  <Brandmark
+    uid="hero"
+    class="pointer-events-none absolute -right-28 -top-10 h-[28rem] w-auto opacity-[0.06] sm:-right-16 md:-right-4 md:h-[36rem] md:opacity-[0.08]"
+  />
+
+  <div class="shell relative py-16 md:py-24 lg:py-28">
+    <div class="max-w-3xl">
+      <p class="inline-flex items-center gap-2 rounded-full border border-brand-magenta/25 bg-white px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-magenta">
+        <span class="h-1.5 w-1.5 rounded-full bg-brand-magenta" aria-hidden="true"></span>
+        {t.hero.badge}
+      </p>
+
+      <h1 class="mt-6 text-4xl leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl">
+        <span class="block text-ink">{t.hero.titleLead}</span>
+        <span class="mt-1 block text-gradient">{t.hero.titleAccent}</span>
+      </h1>
+
+      <p class="mt-7 max-w-2xl text-lg leading-relaxed text-slate md:text-xl">{t.hero.sub}</p>
+
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <Cta locale={locale} source="hero" label={t.hero.ctaPrimary} class="w-full text-base sm:w-auto" />
+        <a href="#percorso" class="btn btn-ghost w-full text-base sm:w-auto">{t.hero.ctaSecondary}</a>
+      </div>
+
+      {deadline && (
+        <p class="mt-4 text-sm text-slate">
+          {t.hero.deadlinePrefix} <strong class="font-semibold text-ink">{deadline}</strong>
+        </p>
+      )}
+    </div>
+
+    <dl class="mt-14 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 md:mt-20 lg:grid-cols-4">
+      {t.hero.facts.map((fact) => (
+        <div class="bg-white p-5 md:p-6">
+          <dt class="font-display text-2xl font-extrabold tracking-tight text-ink md:text-3xl">{fact.value}</dt>
+          <dd class="mt-2 text-sm leading-snug text-slate">{fact.label}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>

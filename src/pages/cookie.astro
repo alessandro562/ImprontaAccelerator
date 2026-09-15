@@ -1,0 +1,20 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { useTranslations } from '../i18n';
+import { currentLocale } from '../i18n/utils';
+
+const locale = currentLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const updated = new Date().toISOString().slice(0, 10);
+---
+<Legal
+  locale={locale}
+  pageKey="cookie"
+  title={t.cookie.title}
+  updated={updated}
+  updatedLabel={t.cookie.updated}
+  intro={t.cookie.intro}
+  sections={t.cookie.sections}
+  back={t.cookie.back}
+  placeholder={t.cookie.placeholder}
+/>

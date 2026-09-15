@@ -1,0 +1,56 @@
+---
+import Base from './Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { localeUrl, type Locale } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  pageKey: string;
+  title: string;
+  updated: string;
+  updatedLabel: string;
+  intro: string;
+  sections: { h: string; p: string }[];
+  back: string;
+  placeholder: string;
+  contact?: { prefix: string; email: string };
+}
+
+const { locale, pageKey, title, updated, updatedLabel, intro, sections, back, placeholder, contact } = Astro.props;
+---
+<Base locale={locale} pageKey={pageKey} title={`${title} — Impronta Accelerator`} description={intro}>
+  <Nav locale={locale} />
+  <main id="main" class="shell py-16 md:py-24">
+    <article class="mx-auto max-w-2xl">
+      <a href={localeUrl(locale)} class="text-sm font-medium text-brand-magenta underline-offset-4 hover:underline">
+        ← {back}
+      </a>
+
+      <h1 class="mt-6 text-3xl text-ink md:text-4xl">{title}</h1>
+      <p class="mt-3 text-sm text-slate">{updatedLabel}: {updated}</p>
+      <hr class="rule-gradient mt-6 w-24" />
+
+      <p class="mt-8 text-base leading-relaxed text-slate">{intro}</p>
+
+      {sections.map((section) => (
+        <section class="mt-10">
+          <h2 class="text-xl text-ink">{section.h}</h2>
+          <p class="mt-3 text-base leading-relaxed text-slate">{section.p}</p>
+        </section>
+      ))}
+
+      {contact && (
+        <p class="mt-10 text-base leading-relaxed text-slate">
+          {contact.prefix}{' '}
+          <a href={`mailto:${contact.email}`} class="font-medium text-ink underline underline-offset-4">{contact.email}</a>.
+        </p>
+      )}
+
+      <p class="mt-12 rounded-2xl border border-dashed border-line bg-white p-5 text-sm leading-relaxed text-slate">
+        {placeholder}
+      </p>
+    </article>
+  </main>
+  <Footer locale={locale} />
+</Base>

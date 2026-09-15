@@ -1,0 +1,69 @@
+name: Deploy su GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# I deploy di Pages non vanno interrotti a metà: si accodano.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Configura Pages
+        id: pages
+        uses: actions/configure-pages@v6
+
+      - run: npm ci
+
+      # Fallisce se i dizionari IT ed EN divergono
+      - run: npx astro check
+
+      - name: Build
+        run: npm run build
+        env:
+          # Arrivano dalle impostazioni Pages del repo: impostando un dominio
+          # custom, base_path diventa "" e la build si adatta da sola.
+          SITE_URL: ${{ steps.pages.outputs.origin }}
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+
+      - name: Verifica che nessun link salti il base path
+        run: |
+          BASE='${{ steps.pages.outputs.base_path }}'
+          if [ -n "$BASE" ] && [ "$BASE" != "/" ]; then
+            BAD=$(grep -rhoE '(href|src)="/[^"]*' dist --include='*.html' | grep -v "\"$BASE/" || true)
+            if [ -n "$BAD" ]; then
+              echo "::error::Link o asset che ignorano il base path:"; echo "$BAD" | sort -u; exit 1
+            fi
+          fi
+          echo "Nessun link assoluto fuori dal base path."
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

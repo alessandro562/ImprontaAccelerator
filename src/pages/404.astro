@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { useTranslations } from '../i18n';
+import { currentLocale, localeUrl } from '../i18n/utils';
+
+const locale = currentLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const copy = {
+  it: { title: 'Pagina non trovata', text: 'Il link che hai seguito non porta a nessuna pagina di questo sito.' },
+  en: { title: 'Page not found', text: 'The link you followed does not lead to any page on this site.' },
+}[locale];
+---
+<Base locale={locale} title={`${copy.title} — Impronta Accelerator`} description={copy.text}>
+  <Nav locale={locale} />
+  <main id="main" class="shell flex min-h-[55vh] flex-col items-center justify-center py-20 text-center">
+    <p class="font-display text-6xl font-extrabold text-gradient">404</p>
+    <h1 class="mt-5 text-2xl text-ink md:text-3xl">{copy.title}</h1>
+    <p class="mt-3 max-w-md text-base text-slate">{copy.text}</p>
+    <a href={localeUrl(locale)} class="btn btn-primary mt-8">{t.privacy.back}</a>
+  </main>
+  <Footer locale={locale} />
+</Base>

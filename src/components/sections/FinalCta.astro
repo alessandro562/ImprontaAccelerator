@@ -1,0 +1,39 @@
+---
+import Cta from '../Cta.astro';
+import Brandmark from '../Brandmark.astro';
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../i18n/utils';
+import { CONTACT_EMAIL, formattedDeadline } from '../../config';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const deadline = formattedDeadline(locale);
+---
+<section class="relative overflow-hidden bg-ink-deep text-white">
+  <div class="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-green via-brand-amber to-brand-magenta" aria-hidden="true"></div>
+  <Brandmark
+    uid="cta"
+    class="pointer-events-none absolute -right-20 -top-24 h-[30rem] w-auto opacity-[0.13] md:right-0 md:h-[36rem]"
+  />
+
+  <div class="shell relative py-20 text-center md:py-28">
+    <h2 class="mx-auto max-w-3xl text-3xl leading-tight md:text-4xl lg:text-5xl">{t.finalCta.title}</h2>
+    <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-soft md:text-lg">{t.finalCta.text}</p>
+
+    <div class="mt-10 flex justify-center">
+      <Cta locale={locale} source="final" variant="on-dark" label={t.finalCta.cta} class="text-base" />
+    </div>
+
+    {deadline && (
+      <p class="mt-5 text-sm text-slate-soft">
+        {t.finalCta.deadlinePrefix} <strong class="font-semibold text-white">{deadline}</strong>
+      </p>
+    )}
+
+    <p class="mt-8 text-sm text-slate-soft">
+      {t.finalCta.contactPrefix}{' '}
+      <a href={`mailto:${CONTACT_EMAIL}`} class="font-medium text-white underline underline-offset-4">{CONTACT_EMAIL}</a>
+    </p>
+  </div>
+</section>

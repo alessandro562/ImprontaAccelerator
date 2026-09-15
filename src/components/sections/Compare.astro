@@ -1,0 +1,48 @@
+---
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const rows = t.compare.without.map((without, i) => ({ without, with: t.compare.with[i] ?? '' }));
+---
+<section class="bg-cream">
+  <div class="shell py-20 md:py-28">
+    <div class="max-w-3xl">
+      <p class="eyebrow">{t.compare.eyebrow}</p>
+      <h2 class="mt-5 text-3xl leading-tight text-ink md:text-4xl lg:text-5xl">{t.compare.title}</h2>
+    </div>
+
+    <div class="mt-12 grid gap-5 md:grid-cols-2">
+      <div class="rounded-2xl border border-line bg-white/60 p-7 md:p-9">
+        <h3 class="flex items-center gap-2.5 text-lg text-slate">
+          <span class="h-2.5 w-2.5 rounded-full bg-slate-soft" aria-hidden="true"></span>
+          {t.compare.withoutTitle}
+        </h3>
+        <ul class="mt-6 space-y-4">
+          {rows.map((row) => (
+            <li class="border-t border-line pt-4 text-sm leading-relaxed text-slate first:border-0 first:pt-0">
+              {row.without}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="rounded-2xl border border-brand-magenta/25 bg-white p-7 shadow-[0_24px_60px_-40px_rgb(210_47_100/0.7)] md:p-9">
+        <h3 class="flex items-center gap-2.5 text-lg text-ink">
+          <span class="h-2.5 w-2.5 rounded-full bg-brand-magenta" aria-hidden="true"></span>
+          {t.compare.withTitle}
+        </h3>
+        <ul class="mt-6 space-y-4">
+          {rows.map((row) => (
+            <li class="border-t border-line pt-4 text-sm font-medium leading-relaxed text-ink first:border-0 first:pt-0">
+              {row.with}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

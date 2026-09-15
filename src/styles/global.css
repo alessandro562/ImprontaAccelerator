@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens — derivati dal logo ufficiale Impronta.
+   Gradiente arco esterno:  green → amber
+   Gradiente arco interno:  amber → coral (50%) → magenta (82%)
+--------------------------------------------------------------------------- */
+@theme {
+  --color-brand-green: #76b830;
+  --color-brand-amber: #f9b233;
+  --color-brand-coral: #e16251;
+  --color-brand-magenta: #d22f64;
+  /* Varianti leggibili del magenta e del corallo: quelle piene non reggono il
+     contrasto AA come testo piccolo su tinte chiare o su fondo scuro. */
+  --color-magenta-deep: #a82450;
+  --color-coral-deep: #a8441f;
+  --color-brand-pink: #f58bac;
+
+  --color-ink: #3c3c3b;
+  --color-ink-deep: #1c1e22;
+  --color-forest: #176a52;
+  --color-slate: #5c6b7e;
+  --color-slate-soft: #9aa7b6;
+
+  --color-cream: #fcfcfa;
+  --color-mint-50: #e7f1ec;
+  --color-mint-100: #d6eae1;
+  --color-amber-50: #fdf0e2;
+  --color-line: #e6e4e0;
+
+  --font-display: "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1.25rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* compensa la nav sticky quando si salta a un'ancora */
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-magenta);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .shell { padding-inline: 2rem; }
+  }
+
+  /* Titolo di sezione: occhiello + heading */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-brand-magenta);
+  }
+  /* Su fondo scuro il magenta pieno scende a 3.4:1: serve la variante chiara. */
+  .eyebrow-dark {
+    color: var(--color-brand-pink);
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 1.5rem;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--color-brand-green), var(--color-brand-magenta));
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1;
+    padding: 0.875rem 1.5rem;
+    transition: transform 150ms ease, box-shadow 150ms ease, background-color 150ms ease, color 150ms ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+
+  .btn-primary {
+    background-color: var(--color-brand-magenta);
+    color: #fff;
+    box-shadow: 0 8px 24px -10px rgb(210 47 100 / 0.8);
+  }
+  .btn-primary:hover { background-color: #b82454; }
+
+  .btn-ghost {
+    background-color: transparent;
+    color: var(--color-ink);
+    border: 1px solid var(--color-line);
+  }
+  .btn-ghost:hover { background-color: #fff; border-color: var(--color-ink); }
+
+  .btn-on-dark {
+    background-color: #fff;
+    color: var(--color-ink-deep);
+  }
+  .btn-on-dark:hover { background-color: var(--color-mint-50); }
+
+  .card {
+    background-color: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+  }
+
+  /* Testo con il gradiente ufficiale del logo */
+  .text-gradient {
+    background: linear-gradient(122deg, var(--color-brand-green) 0%, var(--color-brand-amber) 24%, var(--color-brand-coral) 42%, var(--color-brand-magenta) 62%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .rule-gradient {
+    height: 3px;
+    border: 0;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--color-brand-green), var(--color-brand-amber), var(--color-brand-coral), var(--color-brand-magenta));
+  }
+}
