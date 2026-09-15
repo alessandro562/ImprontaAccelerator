@@ -8,38 +8,29 @@ interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 ---
-<section class="bg-cream">
-  <div class="shell py-20 md:py-28">
-    <div class="relative overflow-hidden rounded-3xl bg-forest text-white">
-      <Brandmark
-        uid="venue"
-        mono
-        class="pointer-events-none absolute -bottom-20 -right-16 h-[26rem] w-auto text-white/[0.07] md:right-8 md:h-[32rem]"
-      />
-
-      <div class="relative grid gap-10 p-8 md:p-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16 lg:p-16">
-        <div>
-          <p class="eyebrow !text-mint-100">{t.venue.eyebrow}</p>
-          <h2 class="mt-5 text-3xl leading-tight md:text-4xl">{t.venue.title}</h2>
-          <p class="mt-6 max-w-xl text-base leading-relaxed text-mint-100 md:text-lg">{t.venue.text}</p>
-
-          <div class="mt-8">
-            <p class="text-xs font-semibold uppercase tracking-widest text-mint-100">{t.venue.addressLabel}</p>
-            <address class="mt-2 text-base not-italic text-white">
-              {VENUE.name} — {VENUE.street}, {VENUE.postalCode} {VENUE.city}
-            </address>
-          </div>
-        </div>
-
-        <dl class="grid grid-cols-2 gap-x-8 gap-y-7 self-center">
-          {t.venue.facts.map((fact) => (
-            <div>
-              <dt class="font-display text-2xl font-extrabold tracking-tight text-white md:text-3xl">{fact.value}</dt>
-              <dd class="mt-1.5 text-sm text-mint-100">{fact.label}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
+<section class="relative overflow-hidden bg-forest text-white">
+  <Brandmark
+    uid="venue"
+    mono
+    class="pointer-events-none absolute -bottom-24 -right-16 h-[22rem] w-auto text-white/[0.07] md:right-12 md:h-[28rem]"
+  />
+  <div class="shell relative grid gap-8 py-14 md:grid-cols-[1.3fr_1fr] md:items-end md:gap-16 md:py-16">
+    <div data-reveal>
+      <p class="eyebrow !text-mint-100">{t.venue.eyebrow}</p>
+      <h2 class="mt-4 font-display text-2xl font-extrabold tracking-tight md:text-3xl">{t.venue.title}</h2>
+      <p class="measure-wide mt-4 text-base leading-relaxed text-mint-100">{t.venue.text}</p>
+      <address class="mt-4 text-sm not-italic text-mint-100">
+        {VENUE.street}, {VENUE.postalCode} {VENUE.city}
+      </address>
     </div>
+
+    <dl class="flex flex-wrap gap-x-10 gap-y-5" data-reveal>
+      {t.venue.facts.map((fact) => (
+        <div>
+          <dt class="stat text-2xl text-white md:text-3xl">{fact.value}</dt>
+          <dd class="mt-1 text-sm text-mint-100">{fact.label}</dd>
+        </div>
+      ))}
+    </dl>
   </div>
 </section>

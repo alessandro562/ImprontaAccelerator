@@ -75,12 +75,31 @@ src/
     utils.ts             asset(), localeUrl(), pageKeyFromUrl()
   layouts/               Base (meta, OG, hreflang, JSON-LD), Legal
   components/            Nav, Footer, Logo, Brandmark, Cta, LanguageSwitcher
-    sections/            le 14 sezioni della one-pager
+    sections/            le sezioni della one-pager
   pages/                 index, privacy, cookie, 404, robots.txt + gli stessi sotto en/
   assets/                i tre SVG del logo, ripuliti dal blocco metadata C2PA
 public/                  favicon, icone, immagini Open Graph
 brand/                   materiale sorgente (logo originale, PPTX, proposta VTL)
 ```
+
+### Regole di scrittura
+
+La pagina ha una voce precisa, e vale la pena non perderla modificando un testo:
+
+- **Seconda persona singolare**, sempre, anche parlando a un team.
+- **Frasi corte, verbi, numeri nudi.** «€150.000», non «un investimento iniziale pari a».
+- **Niente gergo da bando nel corpo.** RIS3, FESR e FARE Venture stanno solo nella
+  striscia istituzionale e nel footer, dove servono davvero.
+- **I titoli di sezione sono affermazioni, non etichette.** «Cerchiamo chi ha la
+  tecnologia e non ha ancora un cliente», non «Chi cerchiamo».
+- **Il tono è diretto, i fatti no.** Ogni claim è ancorato alla proposta VTL in `brand/`:
+  le corporate citate sono partner dei programmi ELIS, non di Impronta, e la nota sotto
+  l'elenco lo dice. Dove il documento tace — percentuale di equity, valutazione, date —
+  la pagina rimanda al termsheet invece di inventare.
+
+Il dettaglio che serve solo a una minoranza (i nove moduli, i criteri di selezione, i
+passaggi della candidatura, l'ecosistema) sta dentro elementi `<details>`: resta in
+pagina e indicizzabile, ma non pesa sulla lettura. Le parole visibili sono circa 760.
 
 ### Come modificare i contenuti
 
