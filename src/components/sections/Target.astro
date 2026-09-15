@@ -6,7 +6,6 @@ interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 
-const AREA_ACCENT = ['text-brand-green', 'text-brand-amber', 'text-brand-magenta'];
 ---
 <section id="target" class="bg-cream">
   <div class="shell py-20 md:py-28">
@@ -35,17 +34,6 @@ const AREA_ACCENT = ['text-brand-green', 'text-brand-amber', 'text-brand-magenta
       </div>
     </div>
 
-    <div class="mt-16" data-reveal>
-      <h3 class="font-display text-sm font-bold uppercase tracking-widest text-slate">{t.target.areasLabel}</h3>
-      <div class="mt-6 grid gap-8 sm:grid-cols-3">
-        {t.target.areas.map((area, i) => (
-          <div class="border-t-2 border-ink pt-4">
-            <h4 class={`font-display text-xl font-bold ${AREA_ACCENT[i % 3]}`}>{area.name}</h4>
-            <p class="mt-2 text-sm leading-relaxed text-slate">{area.verticals.join(' · ')}</p>
-          </div>
-        ))}
-      </div>
-    </div>
 
     <div class="mt-12" data-reveal>
       <details class="disclosure">
@@ -60,8 +48,6 @@ const AREA_ACCENT = ['text-brand-green', 'text-brand-amber', 'text-brand-magenta
               </div>
             ))}
           </dl>
-          <p class="mt-7 text-sm font-semibold text-ink">{t.target.emergingLabel}</p>
-          <p class="mt-2 text-sm text-slate">{t.target.emerging.join(' · ')}</p>
         </div>
       </details>
     </div>

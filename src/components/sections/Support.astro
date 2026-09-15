@@ -1,0 +1,40 @@
+---
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+<section id="sostegno" class="bg-bone">
+  <div class="shell py-20 md:py-28">
+    <p class="eyebrow" data-reveal>{t.support.eyebrow}</p>
+    <h2 class="display-lg mt-5 max-w-[18ch] text-ink" data-reveal>{t.support.title}</h2>
+    <p class="measure-wide mt-6 text-lg text-slate" data-reveal>{t.support.lead}</p>
+
+    <!-- Tre pilastri sullo stesso piano: gli importi stanno nel corpo del primo,
+         una volta sola, senza trattamento da titolo. -->
+    <ul class="mt-14 grid gap-10 md:grid-cols-3 md:gap-12">
+      {t.support.pillars.map((pillar) => (
+        <li class="border-t-2 border-ink pt-5" data-reveal>
+          <h3 class="font-display text-xl font-bold leading-snug text-ink">{pillar.title}</h3>
+          <p class="mt-3 text-base leading-relaxed text-slate">{pillar.text}</p>
+        </li>
+      ))}
+    </ul>
+
+    <div class="mt-14" data-reveal>
+      <details class="disclosure">
+        <summary class="text-ink">{t.support.detailsLabel}</summary>
+        <div class="grid gap-7 pb-2 pt-4 sm:grid-cols-2">
+          {t.support.details.map((item) => (
+            <div>
+              <h4 class="text-sm font-semibold text-ink">{item.h}</h4>
+              <p class="mt-2 text-sm leading-relaxed text-slate">{item.p}</p>
+            </div>
+          ))}
+        </div>
+      </details>
+    </div>
+  </div>
+</section>

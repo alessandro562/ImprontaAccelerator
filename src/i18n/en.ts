@@ -8,19 +8,19 @@ import type { Dict } from './it';
 export const en: Dict = {
   meta: {
     locale: "en_US",
-    title: "Impronta — €150,000 for impact startups in Lazio, before the programme starts",
+    title: "Impronta — the impact accelerator of Italy's Lazio Region",
     description:
-      "Six seats per cohort. €150,000 in equity in the bank before the programme starts, up to €350,000 with follow-on, and real PoCs with corporates from the ELIS network. By Next4, ELIS Innovation Hub and WDA.",
+      "We help researchers, spin-offs and technical teams in Lazio take technology out of the lab: cutting emissions, making care and services reachable, creating skilled work. A programme by Next4, ELIS Innovation Hub and WDA.",
     ogImage: "og-image-en.png",
     skipToContent: "Skip to content",
   },
 
   nav: {
     items: [
-      { id: "deal", label: "The deal" },
-      { id: "target", label: "Who gets in" },
+      { id: "impatto", label: "What changes" },
+      { id: "target", label: "Who we work with" },
+      { id: "sostegno", label: "How we support you" },
       { id: "percorso", label: "The four months" },
-      { id: "partner", label: "Who's behind it" },
       { id: "faq", label: "FAQ" },
     ],
     cta: "Apply",
@@ -31,11 +31,11 @@ export const en: Dict = {
 
   hero: {
     badge: "Applications open · 2026 cohort",
-    titleLead: "Most programmes pay you in advice.",
-    titleAccent: "We pay first.",
-    sub: "€150,000 in equity, in the bank before the programme starts. Up to €350,000 with follow-on.",
+    titleLead: "A technology that stays in the lab",
+    titleAccent: "hasn't helped anyone yet.",
+    sub: "Impronta helps researchers, spin-offs and technical teams in Lazio turn what they have built into something that reaches people.",
     ctaPrimary: "Apply",
-    ctaSecondary: "Not ready for this cohort? Write to us",
+    ctaSecondary: "Not your moment yet? Write to us",
     deadlinePrefix: "Applications close on",
   },
 
@@ -46,92 +46,113 @@ export const en: Dict = {
     funding: "Venture Tech Lazio · Lazio Innova · Lazio Region · ERDF ROP 2021/2027",
   },
 
-  deal: {
-    eyebrow: "The investment",
-    title: "We give you €150,000 before we ask you for anything.",
-    lead: "Not at the end. Not in services. In equity, when the programme starts.",
-    figures: [
-      { value: "€150,000", label: "up front, in equity" },
-      { value: "€200,000", label: "follow-on if you deliver" },
-      { value: "6", label: "seats per cohort" },
-    ],
-    points: [
+  change: {
+    eyebrow: "What changes",
+    title: "Three ways a technology stops being a promise.",
+    lead: "We select solutions with an effect you can name: something that goes down, something that becomes reachable, someone who gets work.",
+    effects: [
       {
-        title: "The money comes before the work",
-        text: "It is paid out when incubation begins, not after Demo Day. Hit your milestones and you unlock follow-on of up to €200,000 over the following two years.",
+        headline: "Fewer emissions, less waste",
+        text: "Technologies for efficient use of resources, circular materials, clean energy.",
+        verticals: ["Cleantech", "Renewables", "Precision agriculture", "Bioplastics"],
       },
       {
-        title: "The board stays yours",
-        text: "Three seats: you appoint two, the investor one. Venture Tech Lazio sits as an observer, with no voting rights.",
+        headline: "Care and services that arrive",
+        text: "Solutions that improve health, inclusion and access to essential services in communities.",
+        verticals: ["Digital health", "Biotechnology", "Assistive technology", "Rehabilitation"],
       },
       {
-        title: "Then you go to the corporates",
-        text: "After Demo Day a real proof of concept or Joint Development Agreement kicks off: up to 24 weeks, with sprints, checkpoints and agreed KPIs.",
+        headline: "Skilled work",
+        text: "Scientific research and deep tech that become industrial applications, and bring skills to the region.",
+        verticals: ["Sustainable manufacturing", "Robotics", "Sensing", "AI for production"],
       },
     ],
-    detailsLabel: "How the investment works, in detail",
-    details: [
-      {
-        h: "Who puts up the money",
-        p: "Every deal is co-invested by Venture Tech Lazio, which brings €1,680,000 to the programme, and Next4 as Active Investor, which brings €720,000. €2,400,000 in total, across 12 startups and 3 follow-ons.",
-      },
-      {
-        h: "Two conditions, stated up front",
-        p: "The investment only takes effect if you have an operating office in Lazio — or commit to opening one before the money is paid out — and if you take part in the whole programme. These are not preferences: they are conditions of the Venture Tech Lazio call.",
-      },
-      {
-        h: "How follow-on is decided",
-        p: "We look at progress against the milestones agreed on entry, market validation — pilot customers, letters of intent, first revenue, industrial partnerships — founders' full-time availability, and the financial sustainability of the project.",
-      },
-      {
-        h: "Stake and terms",
-        p: "The investment is in equity. The specific stake and terms are set in the term sheet, based on the assessment of the project: it is one of the topics discussed with the Advisory Board, before the investment proposal.",
-      },
-    ],
+    measureTitle: "And then we measure it.",
+    measureText:
+      "At the start you build an impact plan: which effects you expect, and with which indicators. At the end we check what actually happened, using the SROI methodology. That's the difference between claiming impact and showing it.",
+    measureStat: {
+      value: "1:4.16",
+      label: "the social return measured on the startups of ELIS Innovation Hub's ZERO accelerator",
+    },
+    detailsLabel: "The other fields we look at",
+    detailsText:
+      "We stay open to emerging verticals, still uncommon but moving fast across Italy and Europe.",
+    emerging: ["Green hydrogen", "Environmental biotechnology", "Water technologies", "Advanced sensing", "Next-generation robotics"],
   },
 
   target: {
-    eyebrow: "Who gets in",
-    title: "We look for people who have the technology and don't have a customer yet.",
-    lead: "Six seats per cohort, twelve in total. Read this before applying — it will save you time.",
-    yesTitle: "You're a fit if",
+    eyebrow: "Who we work with",
+    title: "Researchers, spin-offs and technical teams. Even before incorporation.",
+    lead: "Six places per cohort, twelve in total. The requirements are few and clear: reading them now will save you time.",
+    yesTitle: "You're in if",
     yes: [
-      "You're between TRL 3 and 6: from proof of concept to first field test.",
-      "The technology is yours, not just a new business model.",
-      "You operate in Lazio, or you'll open an office there before payout.",
-      "Impact is your competitive edge, not your claim.",
-      "You're not a company yet: that's fine, we'll walk you through incorporation.",
+      "Your technology is between TRL 3 and 6: from proof of concept to first field test.",
+      "You built it, and it isn't just a new business model.",
+      "You work in Lazio, or you'll open an office there before the programme starts.",
+      "The effect on people or the environment is part of the solution, not an add-on.",
+      "You haven't incorporated yet: we'll walk you through it.",
     ],
-    noTitle: "Don't waste your time if",
+    noTitle: "Probably not if",
     no: [
-      "You've already closed a significant seed. We're late.",
+      "You've already closed a significant seed round: we're late.",
       "The technology isn't yours.",
-      "You can't commit to the whole programme.",
-      "You don't want to build in Lazio.",
+      "You can't follow the whole programme.",
+      "You don't intend to build in Lazio.",
     ],
-    areasLabel: "The three areas we invest in",
-    areas: [
-      { name: "Environment", verticals: ["Cleantech", "Renewables", "Precision agriculture"] },
-      { name: "Social", verticals: ["Digital health", "Biotech", "Assistive technology"] },
-      { name: "Industrial deep tech", verticals: ["Robotics", "Sensing", "AI for production"] },
-    ],
-    detailsLabel: "Selection criteria and the other verticals",
-    criteriaTitle: "What we assess you on",
+    detailsLabel: "How we read applications",
+    criteriaTitle: "What we look at",
     criteria: [
-      { title: "Technology", text: "Substantial technological content, validated to a degree consistent with pre-seed and seed." },
-      { title: "Impact", text: "Measurable social, environmental or economic effects." },
-      { title: "Scalability", text: "A model that can attract capital in seed or pre-Series A rounds." },
-      { title: "Industrial fit", text: "Complementarity with the supply chains and corporate networks of the programme." },
-      { title: "Team", text: "Skills consistent with the core business, and real operational commitment." },
+      { title: "The technology", text: "Real scientific or technical content, at a maturity consistent with the early stages." },
+      { title: "The effect", text: "A social or environmental benefit you can describe and measure, not just state." },
+      { title: "The reach", text: "A concrete chance that the solution leaves the prototype and gets to people." },
+      { title: "The industrial fit", text: "Proximity to the supply chains and companies the programme works with." },
+      { title: "The team", text: "Skills that match what you're building, and real time to give it." },
     ],
-    emergingLabel: "We also look at",
-    emerging: ["Green hydrogen", "Environmental biotech", "Water technologies", "Bioplastics", "Blockchain", "Sustainable manufacturing"],
+  },
+
+  support: {
+    eyebrow: "How we support you",
+    title: "Capital, method, and an open door into industry.",
+    lead: "The three things that, taken one at a time, are never enough to get a technology out of the lab.",
+    pillars: [
+      {
+        title: "Capital at the start",
+        text: "€150,000 in equity paid when the programme begins, and up to €200,000 for those who carry on over the following two years. The board stays with a founder majority.",
+      },
+      {
+        title: "A team that works with you",
+        text: "Four months with people who have built startups: model, market, positioning. Plus work on your own growth as a founder, not only on the company.",
+      },
+      {
+        title: "Industry, for real",
+        text: "After Demo Day an experiment of up to 24 weeks opens with a corporate partner, with objectives and indicators agreed up front.",
+      },
+    ],
+    detailsLabel: "The conditions, in full",
+    details: [
+      {
+        h: "Where the capital comes from",
+        p: "Every deal is co-invested by Venture Tech Lazio, which brings €1,680,000 to the programme, and Next4 as Active Investor, which brings €720,000. €2,400,000 in total, across twelve startups and three continuations.",
+      },
+      {
+        h: "Two conditions, stated up front",
+        p: "Support only takes effect if you have an operating office in Lazio — or commit to opening one before payout — and if you take part in the whole programme. These aren't our preferences: they are conditions of the Venture Tech Lazio call.",
+      },
+      {
+        h: "How it continues after the first year",
+        p: "We look at progress against the objectives agreed on entry, the first signals from the market — pilot users, letters of intent, industrial collaborations — and the time founders actually give the project.",
+      },
+      {
+        h: "Stake and terms",
+        p: "The investment is in equity. The specific stake and terms are set in the term sheet based on the assessment of the project, and it is one of the topics discussed with the Advisory Board before the proposal.",
+      },
+    ],
   },
 
   journey: {
     eyebrow: "The four months",
-    title: "Demo Day isn't the finish line. It's where you start talking to buyers.",
-    lead: "One cohort a year. The money arrives at the start, the work with corporates carries on after the end.",
+    title: "Demo Day isn't the finish line. It's where the technology gets tested.",
+    lead: "One cohort a year. Support arrives at the start, and the work with industry carries on after the programme ends.",
     phases: [
       {
         name: "Scouting and selection",
@@ -149,57 +170,56 @@ export const en: Dict = {
         name: "Demo Day",
         duration: "1 day",
         weeks: 1,
-        text: "Investors, corporates and institutions, at Villa Fassini.",
+        text: "Companies, investors and institutions, at Villa Fassini.",
       },
       {
-        name: "PoC with corporates",
+        name: "Testing with industry",
         duration: "up to 24 weeks",
         weeks: 24,
-        text: "Experiments run in sprints, with a final business case. Alongside it, coaching on fundraising and go-to-market.",
+        text: "The solution is tried in a real setting, in sprints, with a final review of the results.",
       },
     ],
     detailsLabel: "The nine modules and the six steps of selection",
     modulesTitle: "What happens in the four months",
     modules: [
-      { name: "Personal impact plan", by: "WDA", text: "The E.m.p.a.c.t. framework: positioning yourself as a founder and building a personal development plan." },
-      { name: "Design thinking", by: "WDA", text: "From problem to an MVP tested with real users, iterating on the results." },
-      { name: "Business model", by: "WDA", text: "Business Model Canvas, Lean Canvas and Value Proposition Canvas, starting from validation." },
-      { name: "Strategic marketing", by: "WDA", text: "PESTEL, five forces and SWOT. Positioning, naming, tone of voice and visual identity." },
-      { name: "Sales", by: "WDA", text: "The B2B, B2C and public-sector sales cycle, with sales pitch role-play." },
-      { name: "Impact assessment", by: "ELIS", text: "The SROI methodology: outcomes, indicators, financial proxies and the impact pitch." },
-      { name: "Market discovery", by: "ELIS", text: "The trends corporates are actually looking for, in one-to-one meetings." },
-      { name: "Corporate solution identification", by: "ELIS", text: "The «Why Collaborate» toolkit: how to put a use case to a corporate." },
+      { name: "Personal impact plan", by: "WDA", text: "The E.m.p.a.c.t. framework: your purpose as a founder, a personal development plan, and work on the barriers that make getting there harder." },
+      { name: "Design thinking", by: "WDA", text: "From the real problem to an MVP tested with the people who should be using it." },
+      { name: "Business model", by: "WDA", text: "Business Model Canvas, Lean Canvas and Value Proposition Canvas, starting from what validation told you." },
+      { name: "Positioning", by: "WDA", text: "Context analysis, segmentation, naming, tone of voice and visual identity." },
+      { name: "Reaching your first users", by: "WDA", text: "The commercial cycle towards companies, people and public bodies, with hands-on practice." },
+      { name: "Impact measurement", by: "ELIS", text: "The SROI methodology: expected outcomes, indicators, financial proxies and how to present results." },
+      { name: "Market discovery", by: "ELIS", text: "The needs companies are actually trying to solve, in one-to-one meetings." },
+      { name: "Building a collaboration", by: "ELIS", text: "The «Why Collaborate» toolkit: how to propose an experiment to a company." },
       { name: "1:1 mentorship", by: "ELIS + WDA", text: "Dedicated hours with mentors and experts from the joint network." },
     ],
-    processTitle: "From application to cheque: nine weeks",
+    processTitle: "From application to kick-off: nine weeks",
     steps: [
       { name: "Online application", text: "Preliminary eligibility check." },
-      { name: "Interview", text: "Technological maturity, expected impact, team composition." },
-      { name: "Advisory Board", text: "Project review and a monitoring sheet with milestones and KPIs." },
-      { name: "Investment proposal", text: "Approval by the Investment Committee and by the Venture Tech Lazio committee." },
+      { name: "Interview", text: "Maturity of the technology, expected effect, team composition." },
+      { name: "Advisory Board", text: "Project review and a sheet with objectives and indicators." },
+      { name: "Proposal", text: "Approval by the Investment Committee and the Venture Tech Lazio committee." },
       { name: "Acceptance", text: "Signing the agreement and verifying the two conditions." },
-      { name: "Payout and kick-off", text: "The money lands and the programme begins." },
+      { name: "Kick-off", text: "The programme begins and support is paid out." },
     ],
   },
 
   backers: {
     eyebrow: "Who's behind it",
-    title: "The people signing the cheque have done this before.",
-    lead: "Impronta doesn't start from scratch: it starts from the track record of three organisations that cover the whole path, from the lab to scale-up.",
-    corporatesLabel: "The network you're joining has already put startups inside",
+    title: "Three organisations that have done this work before.",
+    lead: "Impronta doesn't start from scratch: it starts with people who have been bringing research and industry together for years, covering the whole stretch from the lab to industrial scale.",
+    corporatesLabel: "Technologies from this network have already been tested inside",
     corporates: ["Eni", "Acea", "FS", "Microsoft", "Vodafone", "Saipem", "Maire Tecnimont", "CNR", "SACE", "European Space Agency"],
-    corporatesNote: "Corporate partners of ELIS Innovation Hub's OPEN ITALY, ZERO and CrossConnect programmes.",
+    corporatesNote: "Partners of ELIS Innovation Hub's OPEN ITALY, ZERO and CrossConnect programmes. A solution adopted by a company at that scale is impact that multiplies.",
     stats: [
-      { value: "200+", label: "PoCs closed with corporates in ten years of OPEN ITALY" },
-      { value: "34", label: "startups accelerated in ZERO, with over €3M invested" },
-      { value: "1:4.16", label: "the social return measured on ZERO's startups" },
+      { value: "200+", label: "experiments completed in ten years of OPEN ITALY" },
+      { value: "34", label: "startups supported in the ZERO cleantech accelerator" },
       { value: "60+", label: "startups built by WDA since 2021" },
-      { value: "122–316%", label: "the return on Next4's three exits in the last 36 months" },
+      { value: "100+", label: "companies, universities and research centres in the network" },
     ],
     orgs: [
-      { name: "Next4", role: "Active Investor — puts up the capital", text: "An investment holding with 11 direct holdings and over €15M in equity value. An accredited investor on CDP Venture Capital SGR's Fondo Rilancio platform.", url: "https://www.next4.it/" },
-      { name: "ELIS Innovation Hub", role: "Opens the corporate doors", text: "Runs OPEN ITALY since 2015 and the ZERO and CrossConnect accelerators in CDP Venture Capital's National Network. In Rome since 1965.", url: "https://www.elis.org/innovation-hub/" },
-      { name: "WDA", role: "Works inside the startup", text: "A venture builder that stands beside founders as an executive co-founder: from validation to incorporation and go-to-market.", url: "https://wda.company" },
+      { name: "Next4", role: "Active Investor of the programme", text: "An investment holding and innovation platform, accredited on CDP Venture Capital SGR's Fondo Rilancio platform.", url: "https://www.next4.it/" },
+      { name: "ELIS Innovation Hub", role: "Open innovation and impact measurement", text: "Runs OPEN ITALY since 2015 and the ZERO and CrossConnect accelerators in CDP Venture Capital's National Network. In Rome since 1965.", url: "https://www.elis.org/innovation-hub/" },
+      { name: "WDA", role: "Venture building beside the founders", text: "Works with teams as an executive co-founder: from validation to incorporation and first users.", url: "https://wda.company" },
     ],
     detailsLabel: "The other ecosystem partners",
     ecosystemIntro: "Agreements for scouting, technology transfer and growth after acceleration.",
@@ -209,7 +229,7 @@ export const en: Dict = {
   venue: {
     eyebrow: "The venue",
     title: "Villa Fassini, Rome.",
-    text: "Dedicated space inside an innovation hub: an agora for kick-offs and Demo Day, an equipped coworking area, and a park where people actually meet.",
+    text: "Dedicated space inside an innovation hub: an agora for gatherings and Demo Day, an equipped coworking area, and a park where companies, educators and non-profits cross paths.",
     facts: [
       { value: "2,000+ sqm", label: "of space" },
       { value: "8 hectares", label: "of park" },
@@ -219,39 +239,39 @@ export const en: Dict = {
   },
 
   faq: {
-    eyebrow: "The awkward questions",
+    eyebrow: "Frequently asked questions",
     title: "What you'd want to ask before applying.",
     items: [
       {
         q: "Should I apply?",
-        a: "If your technology is between TRL 3 and 6, if you built it, and if you're willing to work in Lazio: yes. If you've already closed a significant seed round, no — we're late and we know it.",
+        a: "If your technology is between TRL 3 and 6, if you built it, and if you're willing to develop it in Lazio: yes. If you've already closed a significant seed round, no — we're late and we know it.",
       },
       {
-        q: "How much equity do you take?",
-        a: "The investment is in equity, co-invested by Venture Tech Lazio and Next4. The stake is set in the term sheet based on the assessment of the project, and it's one of the topics discussed with the Advisory Board before the proposal. What we can tell you now: founders keep the majority of the board, and Venture Tech Lazio sits as an observer with no voting rights.",
+        q: "What do you mean by impact?",
+        a: "A benefit for people or the environment that can be described and measured: emissions avoided, services that become reachable, skilled employment. Not a statement of intent at the end of a pitch, but an effect with indicators, verified at the end of the programme using the SROI methodology.",
       },
       {
         q: "We haven't incorporated yet.",
-        a: "Not a problem. Teams, university spin-offs and research groups can apply: WDA walks you through incorporation, which has to be completed before payout.",
+        a: "Not a problem. Teams, university spin-offs and research groups can apply: WDA walks you through incorporation, which has to be completed before the programme starts.",
       },
       {
         q: "Do I have to move to Rome?",
-        a: "You need an operating office in Lazio, or a commitment to open one before payout. That's a condition of the Venture Tech Lazio call, not our preference. The programme has space at Villa Fassini, and full participation is part of the investment agreement.",
+        a: "You need an operating office in Lazio, or a commitment to open one before kick-off: that's a condition of the Venture Tech Lazio call. The programme has space at Villa Fassini, and taking part in full is part of the agreement.",
+      },
+      {
+        q: "How does the financial support work?",
+        a: "€150,000 in equity at the start of the programme, and up to €200,000 for those who carry on over the following two years. It's co-invested by Venture Tech Lazio and Next4; the stake is set in the term sheet, and the board stays with a founder majority.",
       },
       {
         q: "What happens after Demo Day?",
-        a: "The part that matters begins. ELIS kicks off proofs of concept and Joint Development Agreements with corporates — up to 24 weeks, with sprints, checkpoints and a final business case — while WDA carries on coaching you on fundraising, go-to-market and operations.",
-      },
-      {
-        q: "When do we get the money?",
-        a: "When the programme starts, once the two conditions are verified. Not at the end, and not conditional on Demo Day.",
+        a: "The part where the technology leaves the programme begins. ELIS starts an experiment with a corporate partner — up to 24 weeks, with objectives, interim checks and a final review of results — while WDA carries on supporting you on growth and fundraising.",
       },
     ],
   },
 
   finalCta: {
-    title: "Six seats. One cohort a year.",
-    text: "Applying takes a few minutes. Then an interview and a meeting with the Advisory Board: no commitment before the investment proposal.",
+    title: "If what you've built could be useful to someone, let's get it out of the lab.",
+    text: "Applying takes a few minutes. Then an interview and a meeting with the Advisory Board: no commitment before the proposal.",
     cta: "Apply",
     deadlinePrefix: "Applications close on",
     contactPrefix: "Got a question before applying? Write to",

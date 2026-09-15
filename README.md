@@ -84,22 +84,31 @@ brand/                   materiale sorgente (logo originale, PPTX, proposta VTL)
 
 ### Regole di scrittura
 
-La pagina ha una voce precisa, e vale la pena non perderla modificando un testo:
+La pagina ha una linea comunicativa precisa, e vale la pena non perderla modificando
+un testo. **Impronta è un acceleratore di impatto, non un fondo**: il racconto parte da
+cosa cambia nel mondo, non da quanto si prende.
 
-- **Seconda persona singolare**, sempre, anche parlando a un team.
-- **Frasi corte, verbi, numeri nudi.** «€150.000», non «un investimento iniziale pari a».
-- **Niente gergo da bando nel corpo.** RIS3, FESR e FARE Venture stanno solo nella
-  striscia istituzionale e nel footer, dove servono davvero.
-- **I titoli di sezione sono affermazioni, non etichette.** «Cerchiamo chi ha la
-  tecnologia e non ha ancora un cliente», non «Chi cerchiamo».
-- **Il tono è diretto, i fatti no.** Ogni claim è ancorato alla proposta VTL in `brand/`:
-  le corporate citate sono partner dei programmi ELIS, non di Impronta, e la nota sotto
-  l'elenco lo dice. Dove il documento tace — percentuale di equity, valutazione, date —
-  la pagina rimanda al termsheet invece di inventare.
+- **Effetti, non transazioni.** Si parla di emissioni evitate, cure che diventano
+  raggiungibili, lavoro qualificato. Il capitale è uno dei mezzi, non il messaggio.
+- **Nessun titolo contiene una cifra o un riferimento a denaro.** Gli importi vivono in
+  un posto solo, la sezione «Come ti sosteniamo», detti una volta e nel corpo del testo.
+- **Seconda persona singolare**, frasi corte, verbi concreti.
+- **Niente retorica.** «Cambiare il mondo» e «fare la differenza» sono vietati: ogni
+  affermazione va ancorata a un effetto nominabile o a un dato della proposta VTL.
+- **Niente gergo da bando nel corpo.** RIS3 e FESR stanno solo nella striscia
+  istituzionale e nel footer, dove servono davvero.
+- **Il tono è diretto, i fatti no.** Le corporate citate sono partner dei programmi ELIS,
+  non di Impronta, e la nota sotto l'elenco lo dichiara. Dove il documento tace —
+  percentuale di equity, valutazione, date — la pagina rimanda al termsheet invece di
+  inventare.
 
-Il dettaglio che serve solo a una minoranza (i nove moduli, i criteri di selezione, i
-passaggi della candidatura, l'ecosistema) sta dentro elementi `<details>`: resta in
-pagina e indicizzabile, ma non pesa sulla lettura. Le parole visibili sono circa 760.
+Per controllare di non aver spostato il baricentro, si può rieseguire la misura usata in
+sviluppo: contare le occorrenze del lessico del denaro contro quelle dell'impatto nel
+testo di `dist/index.html`. Il rapporto deve restare a favore del secondo.
+
+Il dettaglio che serve solo a una minoranza (i nove moduli, i criteri, i passaggi della
+candidatura, l'ecosistema) sta dentro elementi `<details>`: resta in pagina e
+indicizzabile, ma non pesa sulla lettura. Le parole visibili sono circa 900.
 
 ### Come modificare i contenuti
 
