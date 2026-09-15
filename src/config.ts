@@ -17,6 +17,13 @@ export const APPLICATION_FORM_URL = '';
  */
 export const APPLICATION_DEADLINE = '';
 
+/**
+ * Mettere a `true` quando APPLICATION_FORM_URL è impostato e i testi legali
+ * sono definitivi. Finché è `false` il sito resta raggiungibile da chiunque
+ * abbia il link, ma chiede ai motori di ricerca di non indicizzarlo.
+ */
+export const INDEXABLE = false;
+
 export const CONTACT_EMAIL = 'info@improntaaccelerator.it';
 
 /** Sedi e riferimenti fisici del programma. */

@@ -10,7 +10,7 @@ import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal
 
 import { absoluteLocaleUrl, asset, LOCALES, type Locale } from '../i18n/utils';
 import { useTranslations } from '../i18n';
-import { CONTACT_EMAIL, PARTNER_URLS, VENUE } from '../config';
+import { CONTACT_EMAIL, INDEXABLE, PARTNER_URLS, VENUE } from '../config';
 
 interface Props {
   locale: Locale;
@@ -73,6 +73,7 @@ const faqSchema = faq && {
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <meta name="theme-color" content="#FCFCFA" />
+    {!INDEXABLE && <meta name="robots" content="noindex, nofollow" />}
 
     <link rel="canonical" href={canonical} />
     {LOCALES.map((code) => (

@@ -19,6 +19,7 @@ Tutto quello che cambia senza toccare i componenti sta in **`src/config.ts`**:
 | `APPLICATION_DEADLINE` | I riferimenti alla scadenza spariscono da hero e CTA finale. Formato ISO, es. `2026-03-31`. |
 | `CONTACT_EMAIL` | Attualmente `info@improntaaccelerator.it`: verificare che esista. |
 | `SOCIAL` | Le voci vuote non vengono renderizzate nel footer. |
+| `INDEXABLE` | **Oggi `false`.** Il sito è raggiungibile da chiunque abbia il link, ma chiede ai motori di ricerca di non indicizzarlo e `robots.txt` risponde `Disallow: /`. Mettila a `true` quando il form è collegato e i testi legali sono definitivi. |
 
 Da rivedere prima della pubblicazione:
 
@@ -108,8 +109,11 @@ Il workflow `.github/workflows/deploy.yml` builda e pubblica a ogni push su
 `main`, e può essere lanciato a mano da *Actions → Deploy su GitHub Pages*.
 
 **Passaggio da fare una volta a mano:** *Settings → Pages → Build and deployment
-→ Source: **GitHub Actions*** (non "Deploy from a branch"). Senza questo, il
-primo deploy fallisce con un errore poco chiaro.
+→ Source: **GitHub Actions*** (non "Deploy from a branch").
+
+Finché non è fatto, il workflow costruisce comunque il sito usando i valori di
+default e fallisce solo l'ultimo step (`deploy-pages`), con un errore che dice
+di attivare Pages. Dopo l'attivazione basta rilanciare il run da *Actions*.
 
 ### Dominio custom
 

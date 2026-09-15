@@ -26,28 +26,39 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
 
+      # Fallisce finché Pages non è stato attivato a mano nelle impostazioni del
+      # repo. Non è un motivo per bloccare la build: si prosegue con i default e
+      # a fallire resta il solo deploy finale, il cui errore dice esattamente
+      # cosa fare.
       - name: Configura Pages
         id: pages
         uses: actions/configure-pages@v6
+        continue-on-error: true
+
+      - name: Risolvi URL e base path
+        run: |
+          SITE_URL="${{ steps.pages.outputs.origin }}"
+          BASE_PATH="${{ steps.pages.outputs.base_path }}"
+          if [ -z "$SITE_URL" ]; then
+            SITE_URL="https://${{ github.repository_owner }}.github.io"
+            BASE_PATH="/${{ github.event.repository.name }}"
+            echo "::warning::Pages non ancora attivo: uso i valori di default. Settings -> Pages -> Source: GitHub Actions."
+          fi
+          echo "SITE_URL=$SITE_URL"   >> "$GITHUB_ENV"
+          echo "BASE_PATH=$BASE_PATH" >> "$GITHUB_ENV"
+          echo "Build per ${SITE_URL}${BASE_PATH}/"
 
       - run: npm ci
 
       # Fallisce se i dizionari IT ed EN divergono
       - run: npx astro check
 
-      - name: Build
-        run: npm run build
-        env:
-          # Arrivano dalle impostazioni Pages del repo: impostando un dominio
-          # custom, base_path diventa "" e la build si adatta da sola.
-          SITE_URL: ${{ steps.pages.outputs.origin }}
-          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+      - run: npm run build
 
       - name: Verifica che nessun link salti il base path
         run: |
-          BASE='${{ steps.pages.outputs.base_path }}'
-          if [ -n "$BASE" ] && [ "$BASE" != "/" ]; then
-            BAD=$(grep -rhoE '(href|src)="/[^"]*' dist --include='*.html' | grep -v "\"$BASE/" || true)
+          if [ -n "$BASE_PATH" ] && [ "$BASE_PATH" != "/" ]; then
+            BAD=$(grep -rhoE '(href|src)="/[^"]*' dist --include='*.html' | grep -v "\"$BASE_PATH/" || true)
             if [ -n "$BAD" ]; then
               echo "::error::Link o asset che ignorano il base path:"; echo "$BAD" | sort -u; exit 1
             fi
