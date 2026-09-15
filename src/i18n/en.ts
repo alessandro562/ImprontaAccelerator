@@ -10,7 +10,7 @@ export const en: Dict = {
     locale: "en_US",
     title: "Impronta — the impact accelerator of Italy's Lazio Region",
     description:
-      "We help researchers, spin-offs and technical teams in Lazio take technology out of the lab: cutting emissions, making care and services reachable, creating skilled work. A programme by Next4, ELIS Innovation Hub and WDA.",
+      "We accelerate early-stage impact startups in Italy's Lazio Region: technologies that cut emissions, make care and services reachable, create skilled work. Researchers, spin-offs and technical teams welcome. A programme by Next4, ELIS Innovation Hub and WDA.",
     ogImage: "og-image-en.png",
     skipToContent: "Skip to content",
   },
@@ -31,9 +31,10 @@ export const en: Dict = {
 
   hero: {
     badge: "Applications open · 2026 cohort",
-    titleLead: "A technology that stays in the lab",
-    titleAccent: "hasn't helped anyone yet.",
-    sub: "Impronta helps researchers, spin-offs and technical teams in Lazio turn what they have built into something that reaches people.",
+    titleBefore: "Building",
+    titleAccent: "impact",
+    titleAfter: "together.",
+    sub: "The impact accelerator of Italy's Lazio Region. Four months beside people turning research and technology into real benefits for communities and the environment.",
     ctaPrimary: "Apply",
     ctaSecondary: "Not your moment yet? Write to us",
     deadlinePrefix: "Applications close on",
@@ -82,8 +83,8 @@ export const en: Dict = {
 
   target: {
     eyebrow: "Who we work with",
-    title: "Researchers, spin-offs and technical teams. Even before incorporation.",
-    lead: "Six places per cohort, twelve in total. The requirements are few and clear: reading them now will save you time.",
+    title: "Early-stage impact startups. Even before incorporation.",
+    lead: "Six places per cohort, twelve in total. Founding teams, university spin-offs and research groups: what counts is the technology and the effect, not where you come from.",
     yesTitle: "You're in if",
     yes: [
       "Your technology is between TRL 3 and 6: from proof of concept to first field test.",
@@ -113,7 +114,7 @@ export const en: Dict = {
   support: {
     eyebrow: "How we support you",
     title: "Capital, method, and an open door into industry.",
-    lead: "The three things that, taken one at a time, are never enough to get a technology out of the lab.",
+    lead: "The three things that, taken one at a time, are never enough to get a technology in front of people.",
     pillars: [
       {
         title: "Capital at the start",
@@ -270,7 +271,7 @@ export const en: Dict = {
   },
 
   finalCta: {
-    title: "If what you've built could be useful to someone, let's get it out of the lab.",
+    title: "If what you're building could be useful to someone, let's build it together.",
     text: "Applying takes a few minutes. Then an interview and a meeting with the Advisory Board: no commitment before the proposal.",
     cta: "Apply",
     deadlinePrefix: "Applications close on",

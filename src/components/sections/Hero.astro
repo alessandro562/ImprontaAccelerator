@@ -14,23 +14,20 @@ const subject = locale === 'it' ? 'Prossima coorte Impronta' : 'Next Impronta co
 <section class="relative overflow-hidden">
   <Brandmark
     uid="hero"
-    class="pointer-events-none absolute -right-32 -top-24 h-[30rem] w-auto opacity-[0.07] sm:-right-20 md:-right-8 md:h-[42rem] md:opacity-[0.09]"
+    class="pointer-events-none absolute -right-36 -top-16 h-[26rem] w-auto opacity-[0.06] sm:-right-24 md:-right-10 md:h-[38rem] md:opacity-[0.08]"
   />
 
-  <div class="shell relative pb-16 pt-14 md:pb-24 md:pt-24">
-    <!-- Quattro oggetti, non otto: titolo, una riga con il numero, azione, prova. -->
-    <h1 data-reveal>
-      <span class="block max-w-[26ch] font-display text-xl font-semibold leading-snug text-slate md:text-2xl lg:text-[1.75rem]">
-        {t.hero.titleLead}
-      </span>
-      <span class="display-xl mt-4 block text-balance text-gradient">{t.hero.titleAccent}</span>
+  <div class="shell relative pb-20 pt-16 md:pb-28 md:pt-28">
+    <!-- La frase clou, sola. Il gradiente sta su una parola: e' l'accento, non lo sfondo. -->
+    <h1 class="display-xl max-w-[14ch] text-balance text-ink" data-reveal>
+      {t.hero.titleBefore}{' '}<span class="text-gradient-word">{t.hero.titleAccent}</span>{' '}{t.hero.titleAfter}
     </h1>
 
-    <p class="measure-wide mt-8 text-lg leading-relaxed text-ink md:text-xl" data-reveal>
+    <p class="measure-wide mt-8 text-lg leading-relaxed text-slate md:mt-10 md:text-xl" data-reveal>
       {t.hero.sub}
     </p>
 
-    <div class="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center" data-reveal>
+    <div class="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center" data-reveal>
       <Cta locale={locale} source="hero" class="text-base" />
       <a
         href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}`}

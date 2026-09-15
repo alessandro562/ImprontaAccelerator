@@ -3,7 +3,7 @@ export const it = {
     locale: "it_IT",
     title: "Impronta — l’acceleratore di impatto della Regione Lazio",
     description:
-      "Accompagniamo ricercatori, spin-off e team tecnici del Lazio a portare fuori dal laboratorio tecnologie che riducono emissioni, rendono accessibili cure e servizi e creano lavoro qualificato. Un programma di Next4, ELIS Innovation Hub e WDA.",
+      "Acceleriamo startup a impatto in fase iniziale nel Lazio: tecnologie che riducono emissioni, rendono raggiungibili cure e servizi, creano lavoro qualificato. Ricercatori, spin-off e team tecnici sono i benvenuti. Un programma di Next4, ELIS Innovation Hub e WDA.",
     ogImage: "og-image.png",
     skipToContent: "Vai al contenuto",
   },
@@ -24,9 +24,10 @@ export const it = {
 
   hero: {
     badge: "Candidature aperte · Coorte 2026",
-    titleLead: "Una tecnologia che resta in laboratorio",
-    titleAccent: "non ha ancora aiutato nessuno.",
-    sub: "Impronta accompagna ricercatori, spin-off e team tecnici del Lazio a trasformare quello che hanno costruito in qualcosa che arriva alle persone.",
+    titleBefore: "Costruiamo",
+    titleAccent: "impatto",
+    titleAfter: "insieme.",
+    sub: "L’acceleratore di impatto della Regione Lazio. Quattro mesi al fianco di chi trasforma ricerca e tecnologia in benefici reali per le persone e per l’ambiente.",
     ctaPrimary: "Candidati",
     ctaSecondary: "Non è ancora il tuo momento? Scrivici",
     deadlinePrefix: "Le candidature chiudono il",
@@ -75,8 +76,8 @@ export const it = {
 
   target: {
     eyebrow: "Chi accompagniamo",
-    title: "Ricercatori, spin-off e team tecnici. Anche prima della società.",
-    lead: "Sei posti a coorte, dodici in tutto. I requisiti sono pochi e netti: leggerli adesso ti fa risparmiare tempo.",
+    title: "Startup a impatto all’inizio del percorso. Anche prima della società.",
+    lead: "Sei posti a coorte, dodici in tutto. Team imprenditoriali, spin-off universitari e gruppi di ricerca: contano la tecnologia e l’effetto, non da dove arrivate.",
     yesTitle: "Ci sei se",
     yes: [
       "La tua tecnologia è fra TRL 3 e 6: dal proof of concept al primo test sul campo.",
@@ -106,7 +107,7 @@ export const it = {
   support: {
     eyebrow: "Come ti sosteniamo",
     title: "Capitale, metodo e una porta aperta nelle imprese.",
-    lead: "Le tre cose che, prese una alla volta, non bastano mai a far uscire una tecnologia dal laboratorio.",
+    lead: "Le tre cose che, prese una alla volta, non bastano mai a portare una tecnologia davanti alle persone.",
     pillars: [
       {
         title: "Capitale all’avvio",
@@ -263,7 +264,7 @@ export const it = {
   },
 
   finalCta: {
-    title: "Se quello che hai costruito può servire a qualcuno, facciamolo uscire dal laboratorio.",
+    title: "Se quello che stai costruendo può servire a qualcuno, costruiamolo insieme.",
     text: "La candidatura richiede pochi minuti. Poi un colloquio e un incontro con l’Advisory Board: nessun impegno prima della proposta.",
     cta: "Candidati",
     deadlinePrefix: "Le candidature chiudono il",

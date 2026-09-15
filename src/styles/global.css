@@ -234,6 +234,18 @@
     color: transparent;
   }
 
+  /* Il gradiente su una parola sola. Steso su una frase lunga diventa una
+     macchia: qui la sfumatura corre dentro un'unica parola, come nell'arco
+     del marchio. Stops piu' larghi perche' lo spazio e' di poche lettere. */
+  .text-gradient-word {
+    background: linear-gradient(96deg, var(--color-brand-green) 2%, var(--color-brand-amber) 36%, var(--color-brand-coral) 64%, var(--color-brand-magenta) 94%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    /* i discendenti non devono essere tagliati dal box del clip */
+    padding-bottom: 0.06em;
+  }
+
   .rule-gradient {
     height: 3px;
     border: 0;
