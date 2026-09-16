@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impronta — Acceleratore d’impatto</title>
+<meta name="description" content="Impronta accelera ogni anno sei startup e spin-off con tecnologie a impatto su ambiente, salute e industria. Quattro mesi a Roma e un investimento di €150.000.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Geist:wght@300..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0F1412;
+  --ink-2:#18201C;
+  --ink-line:rgba(245,242,235,.14);
+  --paper:#F5F2EB;
+  --paper-2:#EAE4D8;
+  --line:rgba(15,20,18,.14);
+  --muted:#5E6661;
+  --muted-dark:#A3ACA6;
+  --green:#76B830;
+  --amber:#F9B233;
+  --coral:#E16251;
+  --magenta:#D22F64;
+  --display:"Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --sans:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif:"Instrument Serif", Georgia, "Times New Roman", serif;
+  --pad:clamp(20px, 4vw, 56px);
+  --max:1360px;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.display{font-family:var(--display);font-variation-settings:"opsz" 96,"wdth" 86;font-weight:700;letter-spacing:-.035em;line-height:.9}
+.it{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em}
+.label{font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.02em;color:var(--muted);display:flex;align-items:center;gap:10px}
+.label::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.9}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:16px;z-index:100;background:var(--paper);padding:8px 12px}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+
+/* ---------- Pulsanti ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 26px;border-radius:999px;font:500 16px/1 var(--sans);text-decoration:none;transition:background-color .2s,color .2s,transform .2s var(--ease)}
+.btn svg{width:16px;height:16px;transition:transform .25s var(--ease)}
+.btn:hover svg{transform:translate(2px,-2px)}
+.btn--light{background:var(--paper);color:var(--ink)}
+.btn--light:hover{background:var(--amber)}
+.btn--dark{background:var(--ink);color:var(--paper)}
+.btn--dark:hover{background:var(--magenta)}
+.link{font:500 16px/1 var(--sans);text-decoration:none;display:inline-flex;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid currentColor}
+.link:hover{color:var(--amber)}
+
+/* ---------- Nav ---------- */
+.nav{position:fixed;inset:14px 0 auto;z-index:50;pointer-events:none}
+.nav__bar{pointer-events:auto;max-width:calc(var(--max) - 2*var(--pad) + 28px);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:10px 10px 10px 22px;border-radius:999px;transition:background-color .35s,box-shadow .35s}
+.nav.is-solid .nav__bar{background:rgba(15,20,18,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.nav__logo{display:block;width:150px;height:auto}
+.nav__links{display:flex;gap:30px;list-style:none;margin:0;padding:0}
+.nav__links a{color:var(--paper);text-decoration:none;font-size:15px;opacity:.82;transition:opacity .2s}
+.nav__links a:hover{opacity:1}
+.nav__right{display:flex;align-items:center;gap:16px}
+.nav__lang{color:var(--muted-dark);font-size:14px;text-decoration:none}
+.nav__lang b{color:var(--paper);font-weight:500}
+.nav .btn{height:44px;padding:0 20px;font-size:15px}
+@media (max-width:860px){.nav__links{display:none}.nav__logo{width:124px}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;min-height:100svh;background:var(--ink);color:var(--paper);overflow:hidden;display:flex}
+.hero .wrap{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:space-between;width:100%;padding-top:128px;padding-bottom:clamp(36px,6vh,64px)}
+.hero__meta{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.hero__meta .label{color:var(--muted-dark)}
+.hero__meta .label--live{color:var(--green)}
+.hero__meta .label--live span{color:var(--paper)}
+.hero h1{margin:clamp(28px,5vh,64px) 0 0;font-size:clamp(4.1rem,10vw,10rem);max-width:11ch}
+.hero h1 .it{color:var(--amber);font-size:1.08em;line-height:.8;letter-spacing:-.02em}
+.hero h1 .line{display:block;overflow:hidden;padding-bottom:.16em;margin-bottom:-.1em}
+.hero h1 .line > span{display:inline-block}
+.hero__foot{display:flex;flex-direction:column;align-items:flex-start;gap:28px;margin-top:clamp(32px,5vh,56px);max-width:560px}
+.hero__sub{margin:0;max-width:46ch;font-size:clamp(17px,1.35vw,20px);color:var(--muted-dark)}
+.hero__sub strong{color:var(--paper);font-weight:500}
+.hero__cta{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.hero__art{position:absolute;z-index:1;right:-9vw;bottom:-7vw;width:min(56vw,880px);pointer-events:none}
+.arch{fill:none;stroke-linecap:round}
+.arch--draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.8s var(--ease) forwards}
+.dot--pop{transform-box:fill-box;transform-origin:center;transform:scale(0);animation:pop .9s var(--ease) 1.35s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pop{to{transform:scale(1)}}
+.rise{opacity:0;transform:translateY(105%);animation:rise 1s var(--ease) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.fade{opacity:0;animation:fade 1s ease forwards}
+@keyframes fade{to{opacity:1}}
+@media (max-width:860px){
+  .hero__art{width:88vw;right:-34vw;bottom:auto;top:170px;opacity:.42}
+  .hero .wrap{justify-content:flex-end;gap:0}
+  .hero__meta{margin-bottom:auto;flex-direction:column;gap:8px}
+  .hero h1{font-size:clamp(3.6rem,17vw,5rem)}
+}
+
+/* ---------- Numeri ---------- */
+.numbers{padding:clamp(88px,12vw,160px) 0 clamp(72px,9vw,120px)}
+.numbers__intro{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;margin-bottom:clamp(48px,7vw,96px)}
+.numbers__intro .label{grid-column:1/4}
+.numbers__intro p{grid-column:4/12;margin:0;font-family:var(--display);font-variation-settings:"opsz" 48,"wdth" 95;font-weight:500;font-size:clamp(1.7rem,3.2vw,3rem);line-height:1.08;letter-spacing:-.02em}
+.numbers__intro p .it{font-size:1.1em}
+.numbers__grid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;row-gap:clamp(40px,5vw,72px)}
+.num{border-top:1px solid var(--line);padding-top:18px}
+.num__v{font-size:clamp(5rem,15vw,15rem);display:flex;align-items:flex-start;gap:.04em}
+.num__v small{font-size:.32em;letter-spacing:-.02em;margin-top:.14em;font-weight:600}
+.num__v .it{font-size:.62em;align-self:flex-end;margin-bottom:.1em;color:var(--muted)}
+.num__l{margin-top:12px;font-size:16px;color:var(--muted);max-width:26ch}
+.num:nth-child(1){grid-column:1/6}
+.num:nth-child(2){grid-column:6/13}
+.num:nth-child(3){grid-column:1/8}
+.num:nth-child(4){grid-column:8/13}
+.num:nth-child(2) .num__v{color:var(--magenta)}
+.num:nth-child(4) .num__v{font-size:clamp(4rem,10vw,10rem)}
+@media (max-width:700px){
+  .numbers__intro .label,.numbers__intro p{grid-column:1/-1}
+  .num:nth-child(n){grid-column:1/-1}
+}
+
+/* ---------- Fronti d'impatto ---------- */
+.fronts{padding:clamp(24px,3vw,40px) 0 clamp(88px,11vw,150px)}
+.head{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:end;margin-bottom:clamp(40px,6vw,80px)}
+.head > div{grid-column:1/-1}
+.head h2{grid-column:1/9;margin:18px 0 0;font-size:clamp(2.8rem,6.6vw,6.4rem)}
+.head h2 .it{font-size:1.06em}
+.head p{grid-column:9/13;margin:0;color:var(--muted);font-size:16px;max-width:34ch}
+@media (max-width:860px){.head h2,.head p{grid-column:1/-1}}
+.front{position:relative;display:grid;grid-template-columns:80px minmax(0,1.25fr) minmax(0,1fr);gap:24px;align-items:center;padding:clamp(28px,3.4vw,44px) 0;border-top:1px solid var(--line);isolation:isolate;cursor:default}
+.front:last-child{border-bottom:1px solid var(--line)}
+.front::before{content:"";position:absolute;inset:0 calc(-1*var(--pad));background:var(--c);transform:scaleY(0);transform-origin:bottom;transition:transform .55s var(--ease);z-index:-1}
+.front:hover::before{transform:scaleY(1)}
+.front__n{font-family:var(--serif);font-style:italic;font-size:26px;color:var(--muted);transition:color .3s}
+.front__t{font-family:var(--display);font-variation-settings:"opsz" 96,"wdth" 86;font-weight:650;font-size:clamp(2.4rem,5.6vw,5.4rem);line-height:.95;letter-spacing:-.035em;margin:0;display:flex;align-items:center;gap:.3em}
+.front__t i{display:inline-block;width:.34em;height:.34em;border-radius:50%;background:var(--c);flex:none;transition:transform .5s var(--ease),background-color .3s}
+.front:hover .front__t i{transform:scale(.6);background:var(--ink)}
+.front__d{margin:0 0 14px;font-size:17px;max-width:36ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.tags li{font-size:13px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);transition:border-color .3s}
+.front:hover .tags li{border-color:rgba(15,20,18,.4)}
+.front:hover .front__n{color:var(--ink)}
+@media (max-width:860px){
+  .front{grid-template-columns:1fr;gap:12px}
+  .front__n{font-size:20px}
+}
+
+/* ---------- Per chi ---------- */
+.who{background:var(--paper-2);padding:clamp(88px,11vw,150px) 0}
+.who__grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.who__lead{grid-column:1/8}
+.who__lead p{margin:22px 0 0;font-family:var(--display);font-variation-settings:"opsz" 72,"wdth" 92;font-weight:600;font-size:clamp(2.1rem,4.4vw,4.3rem);line-height:1.02;letter-spacing:-.03em}
+.who__lead p .it{font-weight:400}
+.who__list{grid-column:9/13;list-style:none;margin:0;padding:0;align-self:end}
+.who__list li{padding:22px 0;border-top:1px solid var(--line)}
+.who__list li:last-child{border-bottom:1px solid var(--line)}
+.who__k{font-family:var(--display);font-variation-settings:"opsz" 48,"wdth" 90;font-weight:700;font-size:30px;letter-spacing:-.02em;line-height:1}
+.who__v{margin-top:8px;color:var(--muted);font-size:16px}
+@media (max-width:860px){.who__lead,.who__list{grid-column:1/-1}.who__list{margin-top:40px}}
+
+/* ---------- Come funziona ---------- */
+.how{background:var(--ink);color:var(--paper);padding:clamp(88px,11vw,150px) 0}
+.how .label{color:var(--muted-dark)}
+.how .head h2{color:var(--paper)}
+.how .head p{color:var(--muted-dark)}
+.steps{position:relative}
+.steps__list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.steps__track{position:absolute;left:0;right:0;top:0;height:3px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.steps__track span{height:3px;border-radius:3px;background:var(--c);transform:scaleX(0);transform-origin:left;transition:transform .9s var(--ease)}
+.steps.is-in .steps__track span{transform:scaleX(1)}
+.steps.is-in .steps__track span:nth-child(2){transition-delay:.18s}
+.steps.is-in .steps__track span:nth-child(3){transition-delay:.36s}
+.steps.is-in .steps__track span:nth-child(4){transition-delay:.54s}
+.step{padding-top:32px}
+.step__n{font-family:var(--serif);font-style:italic;font-size:clamp(3.4rem,5vw,4.8rem);line-height:.9;color:var(--c)}
+.step h3{margin:22px 0 10px;font-family:var(--display);font-variation-settings:"opsz" 48,"wdth" 92;font-weight:650;font-size:clamp(1.6rem,2.2vw,2.1rem);letter-spacing:-.02em;line-height:1.05}
+.step p{margin:0;color:var(--muted-dark);font-size:16px;max-width:28ch}
+.step__meta{display:inline-block;margin-top:18px;font-size:13px;color:var(--paper);border:1px solid var(--ink-line);border-radius:999px;padding:6px 12px}
+@media (max-width:980px){
+  .steps__list{grid-template-columns:1fr 1fr;row-gap:48px}
+  .steps__track{display:none}
+  .step{border-top:3px solid var(--c)}
+}
+@media (max-width:560px){.steps__list{grid-template-columns:1fr}}
+
+/* ---------- Chi c'è dietro ---------- */
+.team{padding:clamp(88px,11vw,150px) 0 clamp(72px,9vw,120px)}
+.team .label{margin-bottom:clamp(28px,4vw,48px)}
+.orgs{list-style:none;margin:0;padding:0}
+.org{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:24px;padding:clamp(18px,2.2vw,28px) 0;border-top:1px solid var(--line)}
+.org:last-child{border-bottom:1px solid var(--line)}
+.org__name{font-family:var(--display);font-variation-settings:"opsz" 96,"wdth" 84;font-weight:700;font-size:clamp(2.6rem,7.6vw,7.6rem);letter-spacing:-.04em;line-height:.92;margin:0;text-decoration:none;transition:color .3s}
+a.org__name:hover{color:var(--magenta)}
+.org__role{font-size:16px;color:var(--muted);text-align:right;max-width:26ch}
+.team__foot{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:clamp(40px,5vw,64px)}
+.team__foot div{font-size:16px;color:var(--muted);max-width:40ch}
+.team__foot strong{display:block;color:var(--ink);font-family:var(--display);font-variation-settings:"opsz" 48,"wdth" 92;font-weight:650;font-size:24px;letter-spacing:-.02em;margin-bottom:6px}
+@media (max-width:700px){
+  .org{grid-template-columns:1fr;gap:6px}
+  .org__role{text-align:left}
+  .team__foot{grid-template-columns:1fr}
+}
+
+/* ---------- Chiusura ---------- */
+.close{position:relative;background:var(--ink);color:var(--paper);overflow:hidden;padding:clamp(100px,13vw,180px) 0 clamp(100px,12vw,170px);text-align:center}
+.close .label{justify-content:center;color:var(--green)}
+.close .label span{color:var(--paper)}
+.close h2{margin:26px auto 0;font-size:clamp(3.6rem,11vw,11rem)}
+.close h2 .it{color:var(--amber)}
+.close p{margin:24px auto 36px;color:var(--muted-dark);font-size:18px;max-width:44ch}
+.close__mail{display:block;margin-top:26px;color:var(--muted-dark);font-size:15px}
+.close__mail a{color:var(--paper)}
+.close__art{width:clamp(72px,8vw,108px);margin:0 auto 34px}
+
+/* ---------- Footer ---------- */
+.foot{background:var(--ink);color:var(--muted-dark);font-size:14px;padding:0 0 40px}
+.foot__grid{display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:32px;padding-top:40px;border-top:1px solid var(--ink-line)}
+.foot__logo{width:150px}
+.foot p{margin:0 0 6px}
+.foot a{text-decoration:none}
+.foot a:hover{color:var(--paper)}
+.foot__eu{display:flex;align-items:center;justify-content:center;width:190px;height:56px;border:1px dashed var(--ink-line);border-radius:6px;font-size:12px;text-align:center;line-height:1.3}
+.foot__legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:40px;font-size:13px}
+.foot__legal nav{display:flex;gap:20px}
+@media (max-width:860px){.foot__grid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.foot__grid{grid-template-columns:1fr}}
+
+/* ---------- Comparsa allo scroll ---------- */
+.js [data-in]{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js [data-in].is-in{opacity:1;transform:none}
+.js [data-in="2"]{transition-delay:.12s}
+.js [data-in="3"]{transition-delay:.24s}
+.js [data-in="4"]{transition-delay:.36s}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}
+  .js [data-in]{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs> <linearGradient id="outerGradient" gradientUnits="userSpaceOnUse" x1="76" y1="120" x2="168" y2="120"> <stop offset="0%" stop-color="#76B830"/> <stop offset="100%" stop-color="#F9B233"/> </linearGradient> <linearGradient id="innerGradient" gradientUnits="userSpaceOnUse" x1="90" y1="145" x2="170" y2="145"> <stop offset="0%" stop-color="#F9B233"/> <stop offset="50%" stop-color="#E16251"/> <stop offset="82%" stop-color="#D22F64"/> <stop offset="100%" stop-color="#D22F64"/> </linearGradient> </defs><symbol id="logo" viewBox="0 0 1083.22 240"> <g id="pittogramma"> <path d="M 17 229 C 17 91 55 16 129.5 16 C 204 16 242 91 242 229" fill="none" stroke="url(#outerGradient)" stroke-width="20" stroke-linecap="round"/> <path d="M 60 221 C 60 129 87 83 129 83 C 171 83 198 129 198 221" fill="none" stroke="url(#innerGradient)" stroke-width="20" stroke-linecap="round"/> <ellipse cx="129" cy="188" rx="28.5" ry="35" fill="#D22F64"/> </g> <g id="testo"> <path id="titolo" fill="#FFFFFF" transform="translate(287.799 137.160) scale(0.208191 -0.208191)" d="M51.0 441.0V0.0H171.0V441.0ZM49.0 513.0H172.0V630.0H49.0ZM672.0 362.0C653.0 416.0 609.0 453.0 531.0 453.0C464.0 453.0 414.0 419.0 392.0 369.0V441.0H272.0V0.0H392.0V236.0C392.0 310.0 427.0 358.0 485.0 358.0C543.0 358.0 565.0 319.0 565.0 251.0V0.0H685.0V236.0C685.0 310.0 720.0 358.0 778.0 358.0C837.0 358.0 858.0 319.0 858.0 251.0V0.0H978.0V275.0C978.0 371.0 940.0 453.0 821.0 453.0C749.0 453.0 696.0 414.0 672.0 362.0ZM1193.0 229.0C1193.0 309.0 1241.0 359.0 1309.0 359.0C1385.0 359.0 1424.0 304.0 1424.0 220.0C1424.0 137.0 1385.0 82.0 1309.0 82.0C1241.0 82.0 1193.0 131.0 1193.0 212.0ZM1194.0 84.0C1214.0 31.0 1267.0 -12.0 1346.0 -12.0C1476.0 -12.0 1545.0 90.0 1545.0 220.0C1545.0 350.0 1476.0 453.0 1346.0 453.0C1267.0 453.0 1214.0 410.0 1194.0 356.0V441.0H1074.0V-164.0H1194.0ZM1926.0 435.0C1913.0 446.0 1891.0 453.0 1864.0 453.0C1803.0 453.0 1757.0 407.0 1741.0 357.0V441.0H1621.0V0.0H1741.0V218.0C1741.0 298.0 1783.0 342.0 1845.0 342.0C1874.0 342.0 1894.0 336.0 1917.0 323.0ZM2066.0 220.0C2066.0 304.0 2104.0 362.0 2177.0 362.0C2251.0 362.0 2289.0 304.0 2289.0 220.0C2289.0 137.0 2251.0 79.0 2177.0 79.0C2104.0 79.0 2066.0 137.0 2066.0 220.0ZM2410.0 220.0C2410.0 357.0 2314.0 453.0 2177.0 453.0C2041.0 453.0 1945.0 357.0 1945.0 220.0C1945.0 83.0 2041.0 -12.0 2177.0 -12.0C2314.0 -12.0 2410.0 83.0 2410.0 220.0ZM2606.0 236.0C2606.0 310.0 2644.0 358.0 2705.0 358.0C2764.0 358.0 2791.0 319.0 2791.0 251.0V0.0H2911.0V275.0C2911.0 373.0 2868.0 453.0 2750.0 453.0C2684.0 453.0 2628.0 419.0 2606.0 369.0V441.0H2486.0V0.0H2606.0ZM3022.0 112.0C3022.0 18.0 3079.0 -12.0 3147.0 -12.0C3201.0 -12.0 3237.0 2.0 3269.0 26.0V105.0C3243.0 93.0 3218.0 84.0 3194.0 84.0C3158.0 84.0 3141.0 101.0 3141.0 139.0V357.0H3261.0V441.0H3141.0V563.0H3068.0L3054.0 503.0C3044.0 462.0 3032.0 440.0 2989.0 433.0L2959.0 428.0V357.0H3022.0ZM3602.0 191.0C3602.0 120.0 3554.0 72.0 3491.0 72.0C3453.0 72.0 3430.0 90.0 3430.0 120.0C3430.0 164.0 3467.0 173.0 3519.0 184.0L3602.0 202.0ZM3719.0 283.0C3719.0 399.0 3644.0 453.0 3530.0 453.0C3413.0 453.0 3344.0 390.0 3329.0 300.0L3438.0 290.0C3448.0 333.0 3475.0 363.0 3525.0 363.0C3576.0 363.0 3602.0 333.0 3602.0 284.0V274.0L3481.0 250.0C3381.0 230.0 3313.0 195.0 3313.0 111.0C3313.0 35.0 3369.0 -11.0 3461.0 -11.0C3526.0 -11.0 3586.0 16.0 3611.0 67.0C3622.0 19.0 3654.0 -10.0 3704.0 -10.0C3744.0 -10.0 3768.0 3.0 3787.0 18.0V82.0C3774.0 76.0 3762.0 73.0 3750.0 73.0C3731.0 73.0 3719.0 84.0 3719.0 107.0Z"/> <path id="sottotitolo" fill="#D22F64" transform="translate(295.557 227.274) scale(0.069795 -0.069795)" d="M329.0 195.0C329.0 107.0 270.0 49.0 193.0 49.0C143.0 49.0 118.0 77.0 118.0 114.0C118.0 167.0 162.0 180.0 231.0 195.0L329.0 216.0ZM409.0 282.0C409.0 393.0 344.0 449.0 234.0 449.0C131.0 449.0 66.0 389.0 49.0 307.0L123.0 297.0C136.0 348.0 170.0 385.0 233.0 385.0C294.0 385.0 329.0 348.0 329.0 288.0V271.0L211.0 247.0C106.0 226.0 35.0 192.0 35.0 109.0C35.0 34.0 90.0 -12.0 175.0 -12.0C246.0 -12.0 308.0 26.0 332.0 77.0C337.0 25.0 369.0 -9.0 414.0 -9.0C448.0 -9.0 466.0 2.0 481.0 17.0V62.0C469.0 55.0 453.0 52.0 443.0 52.0C422.0 52.0 409.0 63.0 409.0 86.0ZM603.0 218.0C603.0 79.0 695.0 -12.0 827.0 -12.0C955.0 -12.0 1024.0 73.0 1033.0 179.0L960.0 186.0C953.0 109.0 907.0 54.0 826.0 54.0C744.0 54.0 688.0 117.0 688.0 218.0C688.0 319.0 744.0 382.0 826.0 382.0C907.0 382.0 953.0 330.0 960.0 253.0L1033.0 258.0C1024.0 363.0 955.0 449.0 827.0 449.0C695.0 449.0 603.0 357.0 603.0 218.0ZM1183.0 218.0C1183.0 79.0 1275.0 -12.0 1407.0 -12.0C1535.0 -12.0 1604.0 73.0 1613.0 179.0L1540.0 186.0C1533.0 109.0 1487.0 54.0 1406.0 54.0C1324.0 54.0 1268.0 117.0 1268.0 218.0C1268.0 319.0 1324.0 382.0 1406.0 382.0C1487.0 382.0 1533.0 330.0 1540.0 253.0L1613.0 258.0C1604.0 363.0 1535.0 449.0 1407.0 449.0C1275.0 449.0 1183.0 357.0 1183.0 218.0ZM2123.0 155.0C2105.0 88.0 2062.0 53.0 1989.0 53.0C1911.0 53.0 1850.0 113.0 1846.0 198.0H2194.0V231.0C2194.0 350.0 2123.0 449.0 1984.0 449.0C1858.0 449.0 1763.0 350.0 1763.0 212.0C1763.0 76.0 1858.0 -12.0 1988.0 -12.0C2097.0 -12.0 2170.0 48.0 2192.0 147.0ZM1848.0 252.0C1858.0 324.0 1905.0 386.0 1984.0 386.0C2067.0 386.0 2106.0 322.0 2109.0 252.0ZM2370.0 630.0V0.0H2453.0V630.0ZM2988.0 155.0C2970.0 88.0 2927.0 53.0 2854.0 53.0C2776.0 53.0 2715.0 113.0 2711.0 198.0H3059.0V231.0C3059.0 350.0 2988.0 449.0 2849.0 449.0C2723.0 449.0 2628.0 350.0 2628.0 212.0C2628.0 76.0 2723.0 -12.0 2853.0 -12.0C2962.0 -12.0 3035.0 48.0 3057.0 147.0ZM2713.0 252.0C2723.0 324.0 2770.0 386.0 2849.0 386.0C2932.0 386.0 2971.0 322.0 2974.0 252.0ZM3504.0 429.0C3489.0 442.0 3469.0 449.0 3442.0 449.0C3379.0 449.0 3334.0 398.0 3318.0 348.0V437.0H3235.0V0.0H3318.0V231.0C3318.0 315.0 3365.0 372.0 3428.0 372.0C3455.0 372.0 3472.0 367.0 3496.0 354.0ZM3922.0 195.0C3922.0 107.0 3863.0 49.0 3786.0 49.0C3736.0 49.0 3711.0 77.0 3711.0 114.0C3711.0 167.0 3755.0 180.0 3824.0 195.0L3922.0 216.0ZM4002.0 282.0C4002.0 393.0 3937.0 449.0 3827.0 449.0C3724.0 449.0 3659.0 389.0 3642.0 307.0L3716.0 297.0C3729.0 348.0 3763.0 385.0 3826.0 385.0C3887.0 385.0 3922.0 348.0 3922.0 288.0V271.0L3804.0 247.0C3699.0 226.0 3628.0 192.0 3628.0 109.0C3628.0 34.0 3683.0 -12.0 3768.0 -12.0C3839.0 -12.0 3901.0 26.0 3925.0 77.0C3930.0 25.0 3962.0 -9.0 4007.0 -9.0C4041.0 -9.0 4059.0 2.0 4074.0 17.0V62.0C4062.0 55.0 4046.0 52.0 4036.0 52.0C4015.0 52.0 4002.0 63.0 4002.0 86.0ZM4239.0 102.0C4239.0 17.0 4283.0 -12.0 4345.0 -12.0C4393.0 -12.0 4425.0 1.0 4457.0 25.0V81.0C4432.0 67.0 4403.0 55.0 4375.0 55.0C4337.0 55.0 4321.0 73.0 4321.0 112.0V377.0H4444.0V437.0H4321.0V558.0H4274.0L4261.0 497.0C4251.0 455.0 4242.0 435.0 4201.0 427.0L4173.0 422.0V377.0H4239.0ZM4673.0 218.0C4673.0 316.0 4722.0 384.0 4810.0 384.0C4899.0 384.0 4949.0 316.0 4949.0 218.0C4949.0 121.0 4899.0 52.0 4810.0 52.0C4722.0 52.0 4673.0 121.0 4673.0 218.0ZM5034.0 218.0C5034.0 354.0 4939.0 449.0 4810.0 449.0C4682.0 449.0 4588.0 354.0 4588.0 218.0C4588.0 82.0 4682.0 -12.0 4810.0 -12.0C4939.0 -12.0 5034.0 82.0 5034.0 218.0ZM5479.0 429.0C5464.0 442.0 5444.0 449.0 5417.0 449.0C5354.0 449.0 5309.0 398.0 5293.0 348.0V437.0H5210.0V0.0H5293.0V231.0C5293.0 315.0 5340.0 372.0 5403.0 372.0C5430.0 372.0 5447.0 367.0 5471.0 354.0ZM5950.0 155.0C5932.0 88.0 5889.0 53.0 5816.0 53.0C5738.0 53.0 5677.0 113.0 5673.0 198.0H6021.0V231.0C6021.0 350.0 5950.0 449.0 5811.0 449.0C5685.0 449.0 5590.0 350.0 5590.0 212.0C5590.0 76.0 5685.0 -12.0 5815.0 -12.0C5924.0 -12.0 5997.0 48.0 6019.0 147.0ZM5675.0 252.0C5685.0 324.0 5732.0 386.0 5811.0 386.0C5894.0 386.0 5933.0 322.0 5936.0 252.0ZM6797.0 206.0C6797.0 110.0 6737.0 54.0 6658.0 54.0C6572.0 54.0 6524.0 118.0 6524.0 218.0C6524.0 318.0 6572.0 382.0 6658.0 382.0C6737.0 382.0 6797.0 326.0 6797.0 231.0ZM6796.0 0.0H6879.0V630.0H6796.0V345.0C6776.0 399.0 6721.0 449.0 6639.0 449.0C6509.0 449.0 6439.0 347.0 6439.0 218.0C6439.0 89.0 6509.0 -12.0 6639.0 -12.0C6721.0 -12.0 6776.0 37.0 6796.0 91.0ZM7082.0 437.0V0.0H7165.0V437.0ZM7080.0 536.0H7166.0V630.0H7080.0ZM7638.0 437.0V0.0H7721.0V437.0ZM7636.0 536.0H7722.0V630.0H7636.0ZM8289.0 354.0C8270.0 411.0 8224.0 449.0 8146.0 449.0C8079.0 449.0 8028.0 412.0 8007.0 359.0V437.0H7924.0V0.0H8007.0V251.0C8007.0 331.0 8056.0 383.0 8118.0 383.0C8185.0 383.0 8215.0 337.0 8215.0 264.0V0.0H8298.0V251.0C8298.0 331.0 8348.0 383.0 8410.0 383.0C8477.0 383.0 8507.0 337.0 8507.0 264.0V0.0H8590.0V271.0C8590.0 370.0 8550.0 449.0 8436.0 449.0C8366.0 449.0 8312.0 408.0 8289.0 354.0ZM8870.0 231.0C8870.0 326.0 8931.0 382.0 9010.0 382.0C9096.0 382.0 9143.0 318.0 9143.0 218.0C9143.0 118.0 9096.0 54.0 9010.0 54.0C8931.0 54.0 8870.0 110.0 8870.0 206.0ZM8872.0 91.0C8891.0 37.0 8947.0 -12.0 9029.0 -12.0C9158.0 -12.0 9229.0 89.0 9229.0 218.0C9229.0 347.0 9158.0 449.0 9029.0 449.0C8947.0 449.0 8891.0 399.0 8872.0 345.0V437.0H8789.0V-168.0H8872.0ZM9677.0 195.0C9677.0 107.0 9618.0 49.0 9541.0 49.0C9491.0 49.0 9466.0 77.0 9466.0 114.0C9466.0 167.0 9510.0 180.0 9579.0 195.0L9677.0 216.0ZM9757.0 282.0C9757.0 393.0 9692.0 449.0 9582.0 449.0C9479.0 449.0 9414.0 389.0 9397.0 307.0L9471.0 297.0C9484.0 348.0 9518.0 385.0 9581.0 385.0C9642.0 385.0 9677.0 348.0 9677.0 288.0V271.0L9559.0 247.0C9454.0 226.0 9383.0 192.0 9383.0 109.0C9383.0 34.0 9438.0 -12.0 9523.0 -12.0C9594.0 -12.0 9656.0 26.0 9680.0 77.0C9685.0 25.0 9717.0 -9.0 9762.0 -9.0C9796.0 -9.0 9814.0 2.0 9829.0 17.0V62.0C9817.0 55.0 9801.0 52.0 9791.0 52.0C9770.0 52.0 9757.0 63.0 9757.0 86.0ZM9994.0 102.0C9994.0 17.0 10038.0 -12.0 10100.0 -12.0C10148.0 -12.0 10180.0 1.0 10212.0 25.0V81.0C10187.0 67.0 10158.0 55.0 10130.0 55.0C10092.0 55.0 10076.0 73.0 10076.0 112.0V377.0H10199.0V437.0H10076.0V558.0H10029.0L10016.0 497.0C10006.0 455.0 9997.0 435.0 9956.0 427.0L9928.0 422.0V377.0H9994.0ZM10390.0 102.0C10390.0 17.0 10434.0 -12.0 10496.0 -12.0C10544.0 -12.0 10576.0 1.0 10608.0 25.0V81.0C10583.0 67.0 10554.0 55.0 10526.0 55.0C10488.0 55.0 10472.0 73.0 10472.0 112.0V377.0H10595.0V437.0H10472.0V558.0H10425.0L10412.0 497.0C10402.0 455.0 10393.0 435.0 10352.0 427.0L10324.0 422.0V377.0H10390.0ZM10824.0 218.0C10824.0 316.0 10873.0 384.0 10961.0 384.0C11050.0 384.0 11100.0 316.0 11100.0 218.0C11100.0 121.0 11050.0 52.0 10961.0 52.0C10873.0 52.0 10824.0 121.0 10824.0 218.0ZM11185.0 218.0C11185.0 354.0 11090.0 449.0 10961.0 449.0C10833.0 449.0 10739.0 354.0 10739.0 218.0C10739.0 82.0 10833.0 -12.0 10961.0 -12.0C11090.0 -12.0 11185.0 82.0 11185.0 218.0Z"/> </g> </symbol></svg>
+<a class="skip" href="#main">Vai al contenuto</a>
+
+<header class="nav" id="nav">
+  <div class="nav__bar">
+    <a href="#top" aria-label="Impronta, torna all’inizio"><svg class="nav__logo" viewBox="0 0 1083.22 240" role="img" aria-label="Impronta, acceleratore d’impatto"><use href="#logo"/></svg></a>
+    <ul class="nav__links">
+      <li><a href="#programma">Il programma</a></li>
+      <li><a href="#come-funziona">Come funziona</a></li>
+      <li><a href="#chi-siamo">Chi siamo</a></li>
+    </ul>
+    <div class="nav__right">
+      <a class="nav__lang" href="#" hreflang="en"><b>IT</b> / EN</a>
+      <a class="btn btn--light" href="#candidatura" target="_blank" rel="noopener">Candidati <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <svg class="hero__art" viewBox="0 0 260 248" aria-hidden="true">
+      <defs>
+        <linearGradient id="hg-o" gradientUnits="userSpaceOnUse" x1="17" y1="120" x2="242" y2="120"><stop offset="0" stop-color="#76B830"/><stop offset="1" stop-color="#F9B233"/></linearGradient>
+        <linearGradient id="hg-i" gradientUnits="userSpaceOnUse" x1="60" y1="150" x2="198" y2="150"><stop offset="0" stop-color="#F9B233"/><stop offset=".5" stop-color="#E16251"/><stop offset=".82" stop-color="#D22F64"/></linearGradient>
+      </defs>
+      <path class="arch arch--draw" pathLength="1" d="M 17 229 C 17 91 55 16 129.5 16 C 204 16 242 91 242 229" stroke="url(#hg-o)" stroke-width="20"/>
+      <path class="arch arch--draw" style="animation-delay:.2s" pathLength="1" d="M 60 221 C 60 129 87 83 129 83 C 171 83 198 129 198 221" stroke="url(#hg-i)" stroke-width="20"/>
+      <ellipse class="dot--pop" cx="129" cy="188" rx="28.5" ry="35" fill="#D22F64"/>
+    </svg>
+
+    <div class="wrap">
+      <div class="hero__meta fade" style="animation-delay:.2s">
+        <span class="label">Acceleratore d’impatto · Roma</span>
+        <span class="label label--live"><span>Candidature aperte · Coorte 2026</span></span>
+      </div>
+
+      <h1 class="display">
+        <span class="line"><span class="rise" style="animation-delay:.15s">Ricerca</span></span>
+        <span class="line"><span class="rise" style="animation-delay:.27s">che lascia</span></span>
+        <span class="line"><span class="rise" style="animation-delay:.39s">il <span class="it">segno.</span></span></span>
+      </h1>
+
+      <div class="hero__foot fade" style="animation-delay:.8s">
+        <p class="hero__sub">Ogni anno Impronta accelera <strong>sei startup e spin-off</strong> con tecnologie che migliorano l’ambiente, la salute e l’industria. Quattro mesi a Roma, <strong>€150.000 di investimento</strong> e un confronto diretto con le imprese.</p>
+        <div class="hero__cta">
+          <a class="btn btn--light" href="#candidatura" target="_blank" rel="noopener">Candidati <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7"/></svg></a>
+          <a class="link" href="#programma">Scopri il programma</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUMERI -->
+  <section class="numbers" id="programma" aria-labelledby="numbers-title">
+    <div class="wrap">
+      <div class="numbers__intro">
+        <span class="label" data-in>Il programma</span>
+        <p id="numbers-title" data-in="2">Un percorso breve e intenso per portare una tecnologia <span class="it">dal laboratorio</span> alle persone che ne hanno bisogno.</p>
+      </div>
+      <div class="numbers__grid">
+        <div class="num" data-in>
+          <div class="num__v display">6</div>
+          <div class="num__l">startup per coorte, dodici in due anni</div>
+        </div>
+        <div class="num" data-in="2">
+          <div class="num__v display"><small>€</small>150<span class="it">mila</span></div>
+          <div class="num__l">di investimento in equity per ciascuna startup</div>
+        </div>
+        <div class="num" data-in>
+          <div class="num__v display">4<span class="it">mesi</span></div>
+          <div class="num__l">di programma a Villa Fassini, Roma</div>
+        </div>
+        <div class="num" data-in="2">
+          <div class="num__v display">1<span class="it">Demo Day</span></div>
+          <div class="num__l">davanti a imprese, investitori e istituzioni</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRONTI -->
+  <section class="fronts" aria-labelledby="fronts-title">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <span class="label" data-in>Cosa cerchiamo</span>
+        </div>
+        <h2 class="display" id="fronts-title" data-in="2">Tecnologie con un effetto <span class="it">misurabile</span></h2>
+        <p data-in="3">Ogni startup definisce all’ingresso i propri obiettivi d’impatto e li verifica a fine percorso con metodologia SROI.</p>
+      </div>
+
+      <div class="front" style="--c:var(--green)" data-in>
+        <span class="front__n">01</span>
+        <h3 class="front__t"><i aria-hidden="true"></i>Ambiente</h3>
+        <div>
+          <p class="front__d">Meno emissioni e sprechi, materiali circolari, energia pulita.</p>
+          <ul class="tags"><li>Cleantech</li><li>Agritech</li><li>Bioplastiche</li><li>Idrogeno verde</li></ul>
+        </div>
+      </div>
+      <div class="front" style="--c:var(--amber)" data-in>
+        <span class="front__n">02</span>
+        <h3 class="front__t"><i aria-hidden="true"></i>Salute</h3>
+        <div>
+          <p class="front__d">Cure, inclusione e servizi essenziali più vicini alle persone.</p>
+          <ul class="tags"><li>Sanità digitale</li><li>Biotech</li><li>Tecnologie assistive</li></ul>
+        </div>
+      </div>
+      <div class="front" style="--c:var(--coral)" data-in>
+        <span class="front__n">03</span>
+        <h3 class="front__t"><i aria-hidden="true"></i>Industria</h3>
+        <div>
+          <p class="front__d">Deep tech che diventa produzione e lavoro qualificato sul territorio.</p>
+          <ul class="tags"><li>Robotica</li><li>Sensoristica</li><li>AI per la manifattura</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PER CHI -->
+  <section class="who" aria-labelledby="who-title">
+    <div class="wrap who__grid">
+      <div class="who__lead">
+        <span class="label" id="who-title" data-in>Per chi</span>
+        <p data-in="2">Startup, spin-off universitari e gruppi di ricerca con una tecnologia <span class="it">già fuori</span> dal laboratorio.</p>
+      </div>
+      <ul class="who__list">
+        <li data-in><div class="who__k">TRL 3–6</div><div class="who__v">Dal proof of concept al primo test sul campo</div></li>
+        <li data-in="2"><div class="who__k">Lazio</div><div class="who__v">Sede operativa nella regione, anche da aprire prima dell’avvio</div></li>
+        <li data-in="3"><div class="who__k">Pre-seed</div><div class="who__v">Società costituita o ancora da costituire</div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- COME FUNZIONA -->
+  <section class="how" id="come-funziona" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="head">
+        <div><span class="label" data-in>Come funziona</span></div>
+        <h2 class="display" id="how-title" data-in="2">Quattro passaggi,<br><span class="it">in un anno</span></h2>
+        <p data-in="3">Dalla candidatura online alla sperimentazione con le imprese partner.</p>
+      </div>
+
+      <div class="steps" id="steps">
+        <div class="steps__track" aria-hidden="true"><span style="--c:var(--green)"></span><span style="--c:var(--amber)"></span><span style="--c:var(--coral)"></span><span style="--c:var(--magenta)"></span></div>
+        <ol class="steps__list">
+        <li class="step" style="--c:var(--green)">
+          <div class="step__n">01</div>
+          <h3>Candidatura</h3>
+          <p>Racconti la tecnologia, il team e l’effetto che vuoi ottenere.</p>
+          <span class="step__meta">Online</span>
+        </li>
+        <li class="step" style="--c:var(--amber)">
+          <div class="step__n">02</div>
+          <h3>Selezione</h3>
+          <p>Un colloquio e un incontro con l’Advisory Board del programma.</p>
+          <span class="step__meta">Circa 9 settimane</span>
+        </li>
+        <li class="step" style="--c:var(--coral)">
+          <div class="step__n">03</div>
+          <h3>Accelerazione</h3>
+          <p>Moduli operativi, mentorship uno a uno e un investimento in equity.</p>
+          <span class="step__meta">4 mesi · Roma</span>
+        </li>
+        <li class="step" style="--c:var(--magenta)">
+          <div class="step__n">04</div>
+          <h3>Demo Day</h3>
+          <p>La presentazione a imprese e investitori. Le soluzioni scelte dai partner passano alla sperimentazione.</p>
+          <span class="step__meta">Sperimentazione fino a 24 settimane</span>
+        </li>
+      </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHI SIAMO -->
+  <section class="team" id="chi-siamo" aria-labelledby="team-title">
+    <div class="wrap">
+      <span class="label" id="team-title" data-in>Un programma di</span>
+      <ul class="orgs">
+        <li class="org" data-in><a class="org__name" href="https://www.next4.it/" target="_blank" rel="noopener">Next4</a><span class="org__role">Investitore Attivo del programma</span></li>
+        <li class="org" data-in><a class="org__name" href="https://www.elis.org/innovation-hub/" target="_blank" rel="noopener">ELIS Innovation Hub</a><span class="org__role">Open innovation con le imprese e misurazione d’impatto</span></li>
+        <li class="org" data-in><a class="org__name" href="https://wda.company" target="_blank" rel="noopener">WDA</a><span class="org__role">Venture building al fianco dei founder</span></li>
+      </ul>
+      <div class="team__foot">
+        <div data-in><strong>Villa Fassini, Roma</strong>Oltre 2.000 mq di spazi e 8 ettari di parco, a pochi minuti da Roma Tiburtina.</div>
+        <div data-in="2"><strong>Venture Tech Lazio</strong>Il programma è cofinanziato da Venture Tech Lazio, gestito da Lazio Innova.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHIUSURA -->
+  <section class="close" aria-labelledby="close-title">
+    <div class="wrap" style="position:relative;z-index:2">
+      <svg class="close__art" viewBox="0 0 260 248" aria-hidden="true">
+      <path class="arch" d="M 17 229 C 17 91 55 16 129.5 16 C 204 16 242 91 242 229" stroke="url(#hg-o)" stroke-width="20"/>
+      <path class="arch" d="M 60 221 C 60 129 87 83 129 83 C 171 83 198 129 198 221" stroke="url(#hg-i)" stroke-width="20"/>
+      <ellipse cx="129" cy="188" rx="28.5" ry="35" fill="#D22F64"/>
+    </svg>
+      <span class="label" data-in><span>Coorte 2026</span></span>
+      <h2 class="display" id="close-title" data-in="2">Lascia <span class="it">il segno.</span></h2>
+      <p data-in="3">Le candidature si raccolgono sulla piattaforma del programma fino al <strong style="color:var(--paper);font-weight:500">[data da definire]</strong>.</p>
+      <div data-in="3"><a class="btn btn--light" href="#candidatura" target="_blank" rel="noopener">Vai alla candidatura <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7"/></svg></a></div>
+      <span class="close__mail" data-in="4">Domande? <a href="mailto:info@improntaaccelerator.it">info@improntaaccelerator.it</a></span>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div><svg class="foot__logo" viewBox="0 0 1083.22 240" role="img" aria-label="Impronta"><use href="#logo"/></svg></div>
+      <div><p>Un programma di Next4, ELIS Innovation Hub e WDA</p><p>Villa Fassini · Via Giuseppe Donati 174, Roma</p></div>
+      <div><p>Cofinanziato da Venture Tech Lazio</p><p>PR FESR Lazio 2021–2027</p></div>
+      <div class="foot__eu">Loghi istituzionali<br>UE · Regione Lazio · Lazio Innova</div>
+    </div>
+    <div class="foot__legal">
+      <span>© 2026 Impronta</span>
+      <nav aria-label="Note legali"><a href="#">Privacy</a><a href="#">Cookie</a><a href="mailto:info@improntaaccelerator.it">Contatti</a></nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var nav=document.getElementById('nav');
+  var onScroll=function(){nav.classList.toggle('is-solid',window.scrollY>40)};
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+  var els=document.querySelectorAll('[data-in], #steps');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('is-in')});return;}
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('is-in');io.unobserve(en.target)}})
+  },{rootMargin:'0px 0px -10% 0px',threshold:.12});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
