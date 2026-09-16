@@ -10,6 +10,8 @@ import Investimento from '../components/sections/Investimento.astro';
 import Calendario from '../components/sections/Calendario.astro';
 import ChiSiamo from '../components/sections/ChiSiamo.astro';
 import Sede from '../components/sections/Sede.astro';
+import Faq from '../components/sections/Faq.astro';
+import Chiusura from '../components/sections/Chiusura.astro';
 
 import { useTranslations } from '../i18n';
 import { currentLocale } from '../i18n/utils';
@@ -32,6 +34,8 @@ const faqFlat = t.faq.groups.flatMap((group) => group.items);
     <Calendario locale={locale} />
     <ChiSiamo locale={locale} />
     <Sede locale={locale} />
+    <Faq locale={locale} />
+    <Chiusura locale={locale} />
   </main>
   <Footer locale={locale} />
 </Base>

@@ -1,7 +1,7 @@
 ---
 /** Altezza 48px, raggio 6px, nessuna ombra. Reso come <a> o <button>. */
 interface Props {
-  variant?: 'primary' | 'secondary' | 'link';
+  variant?: 'primary' | 'secondary' | 'link' | 'on-dark';
   href?: string;
   type?: 'button' | 'submit';
   external?: boolean;
@@ -15,6 +15,8 @@ const VARIANT = {
   primary: 'h-12 rounded-[6px] bg-magenta px-5 text-white hover:bg-magenta-hover',
   secondary: 'h-12 rounded-[6px] border border-ink px-5 text-ink hover:bg-paper-alt',
   link: 't-link font-medium',
+  // Su fondo scuro il magenta perde contrasto: fondo bianco, testo inchiostro.
+  'on-dark': 'h-12 rounded-[6px] bg-white px-5 text-ink hover:bg-paper-alt',
 } as const;
 
 const classes = [BASE, VARIANT[variant], className];

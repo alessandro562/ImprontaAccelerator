@@ -1,0 +1,25 @@
+---
+import Section from '../ui/Section.astro';
+import Cta from '../Cta.astro';
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../i18n/utils';
+import { CONTACT_EMAIL } from '../../config';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+<Section background="forest-deep">
+  <div class="max-w-3xl">
+    <p class="t-h2">{t.chiusura.text}</p>
+
+    <div class="mt-8">
+      <Cta locale={locale} source="chiusura" label={t.chiusura.ctaPrimary} variant="on-dark" />
+    </div>
+
+    <p class="t-body mt-8 text-forest-soft">
+      {t.chiusura.contactPrefix}{' '}
+      <a href={`mailto:${CONTACT_EMAIL}`} class="t-link">{CONTACT_EMAIL}</a>
+    </p>
+  </div>
+</Section>

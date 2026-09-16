@@ -35,11 +35,7 @@ if (hasApplicationForm) {
   url = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}`;
 }
 
-// Su fondo scuro il magenta perde contrasto: si passa al bianco pieno.
-const onDark = variant === 'on-dark';
-const buttonVariant = onDark ? 'primary' : variant;
-const classes = [onDark ? 'bg-white text-ink hover:bg-paper-alt' : '', className].filter(Boolean).join(' ');
 ---
-<Button variant={buttonVariant} href={url} external={hasApplicationForm} class={classes}>
+<Button variant={variant} href={url} external={hasApplicationForm} class={className}>
   {text}
 </Button>
