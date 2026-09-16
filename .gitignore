@@ -5,3 +5,13 @@ dist/
 *.log
 .env
 .env.production
+
+# Documenti riservati: il repository è pubblico.
+# Restano sul disco come fonte di verità, fuori da git.
+brand/*.pdf
+brand/*.pptx
+
+# Materiali di lavoro del redesign: contengono term sheet e nomi.
+# In repo va solo la versione redatta del brief.
+docs/redesign/*
+!docs/redesign/BRIEF.md
