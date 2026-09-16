@@ -15,3 +15,4 @@ brand/*.pptx
 # In repo va solo la versione redatta del brief.
 docs/redesign/*
 !docs/redesign/BRIEF.md
+.qa-serve/
