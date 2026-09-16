@@ -5,11 +5,11 @@ import type { Dict } from './it';
  * rispetto all'italiano, `astro check` fallisce in CI invece di lasciare
  * testo italiano dentro la pagina inglese.
  *
- * Traduzione provvisoria fedele all'italiano approvato. Le chiavi marcate
- * `EN-DA-RIVEDERE` attendono la revisione madrelingua della fase 10.
+ * Registro istituzionale britannico, allineato all'italiano approvato.
+ * Importi nel formato inglese (€150,000). Una rilettura madrelingua resta
+ * fra le voci di docs/redesign/DA-VERIFICARE.md.
  */
 export const en: Dict = {
-  // EN-DA-RIVEDERE
   meta: {
     locale: "en_GB",
     title: "Impronta — acceleration and investment for impact startups in Lazio",
@@ -19,7 +19,6 @@ export const en: Dict = {
     skipToContent: "Skip to content",
   },
 
-  // EN-DA-RIVEDERE
   nav: {
     items: [
       { id: "programma", label: "Programme" },
@@ -36,7 +35,6 @@ export const en: Dict = {
     conditions: "Terms",
   },
 
-  // EN-DA-RIVEDERE
   hero: {
     h1: "Acceleration and investment for impact startups in Lazio",
     lead: "Each year Impronta selects six startups and spin-offs with technologies between technology readiness level (TRL) 3 and 6, in the environment, health and industry areas. Each receives €150,000 in equity, a four-month programme at Villa Fassini and access to the partner companies.",
@@ -47,7 +45,6 @@ export const en: Dict = {
     photoPlaceholder: "Villa Fassini, exterior or agora",
   },
 
-  // EN-DA-RIVEDERE
   keyFacts: {
     deadlineLabel: "Applications",
     deadlinePending: "Opening soon",
@@ -59,7 +56,6 @@ export const en: Dict = {
     ],
   },
 
-  // EN-DA-RIVEDERE
   programma: {
     title: "Three impact areas",
     lead: "Impronta funds technologies that produce a measurable effect on the environment, on people's health or on the productive capacity of the region.",
@@ -88,7 +84,6 @@ export const en: Dict = {
       "The module is run by ELIS Innovation Hub, which applies the same methodology in the ZERO cleantech accelerator: across the 34 startups of that programme the measured social return was 1:4.16.",
   },
 
-  // EN-DA-RIVEDERE
   requisiti: {
     title: "Who can apply",
     lead: "All requirements must be met. An operating base in Lazio and full participation are conditions precedent: without them the investment lapses.",
@@ -120,7 +115,6 @@ export const en: Dict = {
     ],
   },
 
-  // EN-DA-RIVEDERE
   investimento: {
     title: "Investment and commitments",
     lead: "The programme invests €150,000 in equity per startup, co-invested by Venture Tech Lazio and Next4. The investment carries obligations that are worth knowing before applying.",
@@ -155,7 +149,6 @@ export const en: Dict = {
     cta: "Read all the terms",
   },
 
-  // EN-DA-RIVEDERE
   calendario: {
     title: "Programme timeline",
     lead: "One cohort a year, six startups per cohort, twelve in total between 2026 and 2027.",
@@ -188,7 +181,6 @@ export const en: Dict = {
       "After Demo Day, startups selected by the partner companies begin a proof of concept of up to 24 weeks, organised in sprints with interim reviews and a final assessment of results, run by ELIS Innovation Hub. In parallel WDA continues with three to six months of coaching on growth and fundraising.",
   },
 
-  // EN-DA-RIVEDERE
   chiSiamo: {
     title: "Who runs the programme",
     lead: "Impronta comes from three organisations with distinct roles, and is co-financed by Venture Tech Lazio.",
@@ -235,7 +227,6 @@ export const en: Dict = {
       "One representative of Venture Tech Lazio and four independent members with expertise in digital health, sustainable mobility and the energy transition, entrepreneurship and industrial technology transfer.",
   },
 
-  // EN-DA-RIVEDERE
   sede: {
     title: "Villa Fassini, Rome",
     text: "The programme takes place at Villa Fassini, the operating base of ELIS Innovation Hub. Startups have the use of an agora for meetings and Demo Day, an equipped coworking space and the common areas.",
@@ -251,7 +242,6 @@ export const en: Dict = {
     photoPlaceholder: "Villa Fassini, agora or coworking space",
   },
 
-  // EN-DA-RIVEDERE
   faq: {
     title: "Frequently asked questions",
     groups: [
@@ -290,14 +280,12 @@ export const en: Dict = {
     contactPrefix: "For questions not covered on this page:",
   },
 
-  // EN-DA-RIVEDERE
   chiusura: {
     text: "Impronta is selecting six startups for the 2026 cohort.",
     ctaPrimary: "Apply",
     contactPrefix: "For questions before applying:",
   },
 
-  // EN-DA-RIVEDERE
   footer: {
     tagline: "Acceleration and investment programme for impact startups.",
     promotersTitle: "Promoted by",
@@ -314,13 +302,11 @@ export const en: Dict = {
     rights: "All rights reserved.",
   },
 
-  // EN-DA-RIVEDERE
   formMissing: {
     label: "Application form not configured yet",
     text: "Set APPLICATION_FORM_URL in src/config.ts to activate the calls to action.",
   },
 
-  // EN-DA-RIVEDERE
   condizioni: {
     title: "Investment terms",
     lead: "A summary of the minimum clauses set out by the investment agreement. The binding terms are those of the agreement signed by each company.",

@@ -68,47 +68,102 @@ grep -roE '(href|src)="/[^"]*' dist --include='*.html' | grep -v '"/ImprontaAcce
 
 ```
 src/
-  config.ts              costanti del sito (form, deadline, contatti)
+  config.ts              costanti del sito (form, deadline, contatti, SHOW_PEOPLE_NAMES)
   i18n/
     it.ts                tutto il copy italiano
-    en.ts                inglese, tipizzato su it.ts → la parità delle chiavi è forzata
-    utils.ts             asset(), localeUrl(), pageKeyFromUrl()
+    en.ts                inglese, tipizzato su it.ts -> la parità delle chiavi è forzata
+    utils.ts             asset(), localeUrl(), pageKeyFromUrl(), SECTIONS
   layouts/               Base (meta, OG, hreflang, JSON-LD), Legal
-  components/            Nav, Footer, Logo, Brandmark, Cta, LanguageSwitcher
-    sections/            le sezioni della one-pager
-  pages/                 index, privacy, cookie, 404, robots.txt + gli stessi sotto en/
+  components/
+    ui/                  i dodici primitivi del design system
+    sections/            le sezioni della home
+    Nav, Footer, Logo, Cta, LanguageSwitcher
+  pages/                 index, condizioni, privacy, cookie, 404, stile, robots.txt
+                         + gli stessi sotto en/
   assets/                i tre SVG del logo, ripuliti dal blocco metadata C2PA
 public/                  favicon, icone, immagini Open Graph
-brand/                   materiale sorgente (logo originale, PPTX, proposta VTL)
+docs/redesign/BRIEF.md   il brief di riferimento, in versione redatta
+scripts/                 screens.mjs (QA visivo), lint-copy.mjs (anti-pattern lessicali)
 ```
 
-### Regole di scrittura
+`brand/` contiene il materiale sorgente. I documenti riservati (la proposta VTL
+in PDF e la presentazione) **non sono versionati**: `.gitignore` esclude
+`brand/*.pdf` e `brand/*.pptx`. Il repository è pubblico; quei file non devono
+tornarci dentro.
 
-La pagina ha una linea comunicativa precisa, e vale la pena non perderla modificando
-un testo. **Impronta è un acceleratore di impatto, non un fondo**: il racconto parte da
-cosa cambia nel mondo, non da quanto si prende.
+---
 
-- **Effetti, non transazioni.** Si parla di emissioni evitate, cure che diventano
-  raggiungibili, lavoro qualificato. Il capitale è uno dei mezzi, non il messaggio.
-- **Nessun titolo contiene una cifra o un riferimento a denaro.** Gli importi vivono in
-  un posto solo, la sezione «Come ti sosteniamo», detti una volta e nel corpo del testo.
-- **Seconda persona singolare**, frasi corte, verbi concreti.
-- **Niente retorica.** «Cambiare il mondo» e «fare la differenza» sono vietati: ogni
-  affermazione va ancorata a un effetto nominabile o a un dato della proposta VTL.
-- **Niente gergo da bando nel corpo.** RIS3 e FESR stanno solo nella striscia
-  istituzionale e nel footer, dove servono davvero.
-- **Il tono è diretto, i fatti no.** Le corporate citate sono partner dei programmi ELIS,
-  non di Impronta, e la nota sotto l'elenco lo dichiara. Dove il documento tace —
-  percentuale di equity, valutazione, date — la pagina rimanda al termsheet invece di
-  inventare.
+## Design system
 
-Per controllare di non aver spostato il baricentro, si può rieseguire la misura usata in
-sviluppo: contare le occorrenze del lessico del denaro contro quelle dell'impatto nel
-testo di `dist/index.html`. Il rapporto deve restare a favore del secondo.
+Il riferimento normativo è `docs/redesign/BRIEF.md`. La pagina **`/stile/`**
+mostra tutti i token e tutti i componenti in un posto solo: è il modo più rapido
+per vedere l'effetto di una modifica a `src/styles/global.css`.
 
-Il dettaglio che serve solo a una minoranza (i nove moduli, i criteri, i passaggi della
-candidatura, l'ecosistema) sta dentro elementi `<details>`: resta in pagina e
-indicizzabile, ma non pesa sulla lettura. Le parole visibili sono circa 900.
+### Colori
+
+I token stanno in `@theme` dentro `src/styles/global.css`.
+
+| Token | Valore | Uso |
+|---|---|---|
+| `paper` | `#faf8f3` | fondo principale |
+| `paper-alt` | `#efebe2` | fondo delle sezioni alternate |
+| `ink` | `#1f2622` | testo |
+| `ink-muted` | `#55615b` | testo secondario (6,09:1 su `paper`) |
+| `line` | `#ddd7cb` | filetti e bordi decorativi |
+| `forest` | `#176a52` | link, numeri, accenti (6,14:1 su `paper`) |
+| `forest-deep` | `#0f4a39` | fondo delle sezioni scure |
+| `forest-soft` | `#a8cdbd` | testo secondario su fondo scuro (5,89:1) |
+| `forest-tint` | `#e7f1ec` | fondo dei Callout e della fascia dati |
+| `magenta` | `#da0455` | pulsante primario (bianco sopra: 5,09:1) |
+| `magenta-hover` | `#b8043f` | stato hover del pulsante primario |
+
+Il gradiente del logo resta dentro il logo: non entra nella UI. Tutte le coppie
+testo/fondo in uso superano il 4,5:1 di WCAG AA.
+
+### Tipografia
+
+Source Serif 4 per i titoli, IBM Plex Sans per il testo, entrambi self-hosted
+come font variabili. Le classi `.t-h1`, `.t-h2`, `.t-h3`, `.t-lead`, `.t-body`,
+`.t-small`, `.t-label`, `.t-figure` sono l'unico modo previsto per impostare
+dimensione e peso: nei componenti non si scrivono `text-*` di Tailwind sui testi.
+
+### Componenti
+
+`Container`, `Section`, `SectionHeader`, `Button`, `KeyFacts`, `DataTable`,
+`Steps`, `PersonCard`, `LogoStrip`, `Figure`, `Callout`, `FaqItem`.
+
+`FaqItem` è **l'unico accordion ammesso**: il resto del contenuto sta in pagina.
+`Figure` senza `src` disegna un segnaposto dichiarato («FOTO DA INSERIRE — …»)
+invece di un'immagine finta.
+
+---
+
+## Regole di scrittura
+
+Il registro è quello di una **call pubblica**, non di una campagna: la pagina
+deve risultare corretta a Lazio Innova e alle imprese partner tanto quanto
+comprensibile a un gruppo di ricerca.
+
+Nell'ordine: **correttezza** rispetto alla proposta VTL, **chiarezza**,
+**sobrietà**.
+
+- **Nessun dato inventato.** Numeri, nomi, partner, date e loghi vengono dalla
+  proposta. Dove il documento tace, la pagina lo dice o rimanda alle condizioni.
+- **Precisione sulle cose che vincolano.** La sperimentazione riguarda le startup
+  *selezionate dalle imprese partner*, non tutte. Il follow-on riguarda *al
+  massimo tre* startup. Il corrispettivo per i servizi di incubazione è
+  dichiarato, non nascosto.
+- **Mai «l'acceleratore della Regione Lazio»**: la formula corretta è
+  «cofinanziato da Venture Tech Lazio».
+- **Seconda persona plurale** (vi rivolgete a un team), frasi brevi, verbi
+  concreti.
+- **Niente retorica**: la costruzione «non … ma», l'inciso «, non », «davvero»,
+  le terne nei titoli, le domande come titolo di sezione, e le parole della lista
+  dell'anti-pattern 20 del brief.
+
+`npm run lint:copy` controlla questi ultimi punti sui dizionari e sull'HTML
+costruito. Le poche eccezioni ammesse — precisazioni di merito, non figure
+retoriche — sono elencate e motivate dentro `scripts/lint-copy.mjs`.
 
 ### Come modificare i contenuti
 
@@ -118,16 +173,22 @@ Per cambiare una frase si tocca `src/i18n/it.ts` e la voce corrispondente in
 con esso la build in CI: non è possibile pubblicare una pagina inglese con
 dentro testo italiano.
 
-### Colori
+---
 
-I token in `src/styles/global.css` sono presi dal logo ufficiale:
-verde `#76B830`, ambra `#F9B233`, corallo `#E16251`, magenta `#D22F64`,
-inchiostro `#3C3C3B`.
+## QA
 
-Tre varianti esistono solo per il contrasto e non vanno usate altrove:
-`--color-magenta-deep` e `--color-coral-deep` per il testo piccolo su tinte
-chiare, `--color-brand-pink` per gli accenti su fondo scuro. `slate` è per i
-fondi chiari, `slate-soft` per quelli scuri: invertirli fa fallire il contrasto AA.
+```bash
+npm run check                  # type-check e parità dei dizionari
+npm run lint:copy              # anti-pattern lessicali
+npm run screens -- <nome>      # screenshot a 1440, 768 e 390 + report strutturale
+npm run screens -- <nome> --axe  # aggiunge l'analisi di accessibilità
+```
+
+`screens.mjs` costruisce il sito, lo serve **sotto il base path di GitHub Pages**
+e fotografa ogni pagina e ogni sezione con `id` alle tre viewport. Segnala
+overflow orizzontale, `alt` mancanti, link vuoti o che ignorano il base path,
+gerarchia dei titoli e — con `--axe` — le violazioni WCAG serious e critical.
+Gli screenshot finiscono in `docs/redesign/screens/<nome>/`, che non è versionata.
 
 ---
 
@@ -162,9 +223,10 @@ del dominio): la sitemap va sottomessa a mano in Search Console come
 
 - **Zero JavaScript di framework.** Gli unici script sono il menu mobile e il
   selettore di lingua, poche righe inline. Le FAQ usano `<details>` nativi.
-- **Font self-hosted** (Figtree + Inter via Fontsource): nessuna richiesta a
-  Google Fonts, quindi nessun trasferimento di IP a terzi e nessun banner cookie
-  dovuto ai font.
+- **Nessuna animazione allo scroll.** Il contenuto è in pagina al primo paint.
+- **Font self-hosted** (Source Serif 4 + IBM Plex Sans via Fontsource): nessuna
+  richiesta a Google Fonts, quindi nessun trasferimento di IP a terzi e nessun
+  banner cookie dovuto ai font.
 - **Accessibilità**: le pagine passano axe-core su WCAG 2.1 AA senza violazioni.
 - **Gli SVG del logo hanno gli id prefissati per variante** (`pos-`, `neg-`,
   `mono-`). Astro inlinea gli SVG importati: senza prefisso, due loghi nella
@@ -173,7 +235,10 @@ del dominio): la sitemap va sottomessa a mano in Search Console come
 
 ## Fonte dei contenuti
 
-Il copy si basa sulla proposta Venture Tech Lazio in `brand/`. Non contiene dati
-inventati: dove il documento non dice nulla — percentuale di equity, valutazione,
-date della call — la pagina rimanda al termsheet e al colloquio invece di
-riempire il vuoto.
+Il copy si basa sulla proposta Venture Tech Lazio (documento non versionato, vedi
+*Struttura*) e su `docs/redesign/BRIEF.md`. Non contiene dati inventati: dove il
+documento non dice nulla — percentuale di equity, valutazione, date della call —
+la pagina rimanda alle condizioni e al colloquio invece di riempire il vuoto.
+
+I punti ancora da far validare sono elencati in `docs/redesign/DA-VERIFICARE.md`,
+che resta fuori dal repository.

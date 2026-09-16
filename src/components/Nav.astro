@@ -43,7 +43,7 @@ const anchor = (id: string) => (pageKeyFromUrl(Astro.url.pathname) === '' ? `#${
       <button
         type="button"
         id="menu-toggle"
-        class="inline-flex h-10 w-10 items-center justify-center rounded-[6px] border border-line text-ink lg:hidden"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-[6px] border border-ink-muted text-ink lg:hidden"
         aria-controls="mobile-menu"
         aria-expanded="false"
         aria-label={t.nav.openMenu}

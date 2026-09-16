@@ -14,7 +14,7 @@ import { CONTACT_EMAIL, INDEXABLE, PARTNER_URLS, VENUE } from '../config';
 
 interface Props {
   locale: Locale;
-  /** chiave di pagina neutra rispetto alla lingua: '' | 'privacy' | 'cookie' */
+  /** chiave di pagina neutra rispetto alla lingua: '' | 'condizioni' | 'privacy' | 'cookie' */
   pageKey?: string;
   title?: string;
   description?: string;
@@ -98,7 +98,7 @@ const faqSchema = faq && {
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content={t.meta.locale} />
     {LOCALES.filter((c) => c !== locale).map((c) => (
-      <meta property="og:locale:alternate" content={c === 'it' ? 'it_IT' : 'en_US'} />
+      <meta property="og:locale:alternate" content={useTranslations(c).meta.locale} />
     ))}
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -112,7 +112,7 @@ const faqSchema = faq && {
   <body>
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-[6px] focus:bg-ink focus:px-4 focus:py-2 focus:font-sans focus:text-sm focus:font-medium focus:text-white"
     >
       {t.meta.skipToContent}
     </a>

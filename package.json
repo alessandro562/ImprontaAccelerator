@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "screens": "node scripts/screens.mjs"
+    "screens": "node scripts/screens.mjs",
+    "lint:copy": "node scripts/lint-copy.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
