@@ -1,35 +1,44 @@
 ---
 import Cta from '../Cta.astro';
-import Button from '../ui/Button.astro';
-import Figure from '../ui/Figure.astro';
+import Pittogramma from '../Pittogramma.astro';
 import { useTranslations } from '../../i18n';
-import { localeUrl, type Locale } from '../../i18n/utils';
-import { formattedDeadline } from '../../config';
+import type { Locale } from '../../i18n/utils';
+import { hasApplicationForm } from '../../config';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 
-const deadline = formattedDeadline(locale);
-const callStatus = deadline ? `${t.hero.callOpenPrefix} ${deadline}` : t.hero.callPending;
+// Senza form di candidatura la call non è aperta: pallino grigio, non verde.
+const live = hasApplicationForm;
+const status = live ? t.hero.callOpen : t.hero.callPending;
+
+// Le righe del titolo salgono in sequenza: il ritardo segue l'ordine.
+const DELAYS = ['.15s', '.27s', '.39s'];
 ---
-<section class="border-b border-line bg-paper pb-16 pt-14 md:pb-20 md:pt-20">
-  <div class="container-page grid gap-12 lg:grid-cols-12 lg:gap-16">
-    <div class="lg:col-span-7">
-      <p class="t-label text-forest">{callStatus}</p>
+<section class="hero" id="top">
+  <Pittogramma id="hg" animato class="hero__art" />
 
-      <h1 class="t-h1 mt-5 text-balance">{t.hero.h1}</h1>
-
-      <p class="t-lead mt-6 max-w-[62ch] text-ink-muted">{t.hero.lead}</p>
-
-      <div class="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
-        <Cta locale={locale} source="hero" label={t.hero.ctaPrimary} />
-        <Button variant="link" href={localeUrl(locale, 'condizioni')}>{t.hero.ctaSecondary}</Button>
-      </div>
+  <div class="wrap">
+    <div class="hero__meta fade" style="animation-delay:.2s">
+      <span class="label">{t.hero.place}</span>
+      <span class:list={['label', live && 'label--live']}><span>{status}</span></span>
     </div>
 
-    <div class="lg:col-span-5">
-      <Figure placeholder={t.hero.photoPlaceholder} ratio="4/3" />
+    <h1 class="display">
+      {t.hero.h1.map((line, i) => (
+        <span class="line"><span class="rise" style={`animation-delay:${DELAYS[i] ?? '.39s'}`}>
+          {line.text}{line.accent && <span class="it">{line.accent}</span>}
+        </span></span>
+      ))}
+    </h1>
+
+    <div class="hero__foot fade" style="animation-delay:.8s">
+      <p class="hero__sub">{t.hero.sub.map((part) => (part.strong ? <strong>{part.text}</strong> : part.text))}</p>
+      <div class="hero__cta">
+        <Cta locale={locale} source="hero" label={t.hero.ctaPrimary} />
+        <a class="link" href="#programma">{t.hero.ctaSecondary}</a>
+      </div>
     </div>
   </div>
 </section>

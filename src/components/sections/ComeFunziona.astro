@@ -1,0 +1,37 @@
+---
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const COLORS = ['var(--green)', 'var(--amber)', 'var(--coral)', 'var(--magenta)'];
+---
+<section class="how" id="come-funziona" aria-labelledby="how-title">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="label" data-in>{t.comeFunziona.label}</span></div>
+      <h2 class="display" id="how-title" data-in="2">
+        {t.comeFunziona.title.before}<br /><span class="it">{t.comeFunziona.title.accent}</span>
+      </h2>
+      <p data-in="3">{t.comeFunziona.lead}</p>
+    </div>
+
+    <div class="steps" id="steps">
+      <div class="steps__track" aria-hidden="true">
+        {COLORS.map((color) => <span style={`--c:${color}`}></span>)}
+      </div>
+      <ol class="steps__list">
+        {t.comeFunziona.steps.map((step, i) => (
+          <li class="step" style={`--c:${COLORS[i] ?? COLORS[0]}`}>
+            <div class="step__n">{step.n}</div>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+            <span class="step__meta">{step.meta}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>

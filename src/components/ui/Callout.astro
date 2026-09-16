@@ -1,9 +1,0 @@
----
-/** Nota importante: bordo sinistro forest, nessuna ombra. */
-interface Props { title?: string; class?: string }
-const { title, class: className = '' } = Astro.props;
----
-<aside class:list={['border-l-[3px] border-forest bg-forest-tint px-5 py-4', className]}>
-  {title && <h3 class="t-h3 text-ink">{title}</h3>}
-  <div class:list={['t-body text-ink', title && 'mt-2']}><slot /></div>
-</aside>

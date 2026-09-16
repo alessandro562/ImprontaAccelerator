@@ -1,0 +1,52 @@
+/*
+ * Privacy e cookie. Usano i token e i font definiti da concept.css: qui c'e'
+ * solo quel che serve a una pagina di testo lungo, che nel concept non esiste.
+ */
+.legal {
+  padding: 148px 0 clamp(72px, 9vw, 120px);
+}
+
+.legal__doc {
+  max-width: 68ch;
+}
+.legal h1 {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 72, "wdth" 92;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  line-height: 1;
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  margin: 0;
+}
+.legal__updated {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+.legal__intro {
+  margin: 32px 0 0;
+  font-size: clamp(18px, 1.5vw, 21px);
+}
+.legal h2 {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 48, "wdth" 92;
+  font-weight: 650;
+  letter-spacing: -.02em;
+  font-size: 24px;
+  line-height: 1.15;
+  margin: 44px 0 0;
+}
+.legal p {
+  margin: 12px 0 0;
+  color: var(--muted);
+}
+.legal__note {
+  margin-top: 48px;
+  border-left: 3px solid var(--line);
+  background: var(--paper-2);
+  padding: 18px 22px;
+  font-size: 15px;
+}
+.legal__back {
+  margin-top: 44px;
+}

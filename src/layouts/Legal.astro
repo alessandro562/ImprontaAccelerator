@@ -2,8 +2,8 @@
 import Base from './Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import Button from '../components/ui/Button.astro';
 import { localeUrl, type Locale } from '../i18n/utils';
+import '../styles/legal.css';
 
 interface Props {
   locale: Locale;
@@ -20,37 +20,39 @@ interface Props {
 
 const { locale, pageKey, title, updated, updatedLabel, intro, sections, back, placeholder, contact } = Astro.props;
 ---
-<Base locale={locale} pageKey={pageKey} title={`${title} — Impronta Accelerator`} description={intro}>
-  <Nav locale={locale} />
-  <main id="main" class="container-page py-14 md:py-20">
-    <article class="max-w-2xl">
-      <h1 class="t-h1">{title}</h1>
-      <p class="t-small mt-3 text-ink-muted">{updatedLabel}: {updated}</p>
+<Base locale={locale} pageKey={pageKey} title={`${title} — Impronta`} description={intro}>
+  <Nav locale={locale} solida />
+  <main id="main" class="legal">
+    <div class="wrap">
+      <article class="legal__doc">
+        <h1>{title}</h1>
+        <p class="legal__updated">{updatedLabel}: {updated}</p>
+        <p class="legal__intro">{intro}</p>
 
-      <p class="t-lead mt-8 text-ink-muted">{intro}</p>
+        {sections.map((section) => (
+          <section>
+            <h2>{section.h}</h2>
+            <p>{section.p}</p>
+          </section>
+        ))}
 
-      {sections.map((section) => (
-        <section class="mt-10">
-          <h2 class="t-h3 text-ink">{section.h}</h2>
-          <p class="t-body mt-3 text-ink-muted">{section.p}</p>
-        </section>
-      ))}
+        {contact && (
+          <p>
+            {contact.prefix}{' '}
+            <a href={`mailto:${contact.email}`}>{contact.email}</a>.
+          </p>
+        )}
 
-      {contact && (
-        <p class="t-body mt-10 text-ink-muted">
-          {contact.prefix}{' '}
-          <a href={`mailto:${contact.email}`} class="t-link">{contact.email}</a>.
-        </p>
-      )}
+        <p class="legal__note">{placeholder}</p>
 
-      <p class="t-small mt-12 border-l-[3px] border-line bg-paper-alt px-5 py-4 text-ink-muted">
-        {placeholder}
-      </p>
-
-      <div class="mt-10">
-        <Button variant="secondary" href={localeUrl(locale)}>{back}</Button>
-      </div>
-    </article>
+        <div class="legal__back">
+          <a class="btn btn--dark" href={localeUrl(locale)}>
+            {back}
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7"/></svg>
+          </a>
+        </div>
+      </article>
+    </div>
   </main>
   <Footer locale={locale} />
 </Base>

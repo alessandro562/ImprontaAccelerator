@@ -16,7 +16,7 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 
 const BASE_PATH = '/ImprontaAccelerator';
-const OUT_ROOT = 'docs/redesign/screens';
+const OUT_ROOT = 'docs/redesign-v2/screens';
 const VIEWPORTS = [
   { name: '1440', width: 1440, height: 900 },
   { name: '768', width: 768, height: 1024 },
@@ -98,7 +98,7 @@ async function serve() {
 
 /** Pagine da fotografare: quelle presenti nella build. */
 async function discoverPages() {
-  const wanted = ['/', '/en/', '/condizioni/', '/en/condizioni/', '/stile/', '/privacy/', '/cookie/'];
+  const wanted = ['/', '/en/', '/privacy/', '/cookie/', '/en/privacy/', '/en/cookie/'];
   return wanted.filter((p) => existsSync(path.join('dist', p, 'index.html')) || (p === '/' && existsSync('dist/index.html')));
 }
 
@@ -128,13 +128,27 @@ for (const pagePath of pages) {
     if (!res || res.status() >= 400) { note(`[http ${res?.status()}] ${pagePath}`); await page.close(); await context.close(); continue; }
     await page.evaluate(() => document.fonts.ready);
 
-    // header non sticky, animazioni ferme, tutte le <details> aperte
+    /*
+     * Stato di cattura: tutto visibile e fermo.
+     *
+     * Le sezioni compaiono allo scroll con una transizione su [data-in]: se si
+     * spengono le transizioni senza applicare prima lo stato finale, la pagina
+     * viene fotografata a opacita' zero. Prima si rivela, poi si congela.
+     */
+    await page.evaluate(() => {
+      document.querySelectorAll('[data-in], #steps').forEach((el) => el.classList.add('is-in'));
+    });
     await page.addStyleTag({ content: `
-      *,*::before,*::after{animation:none!important;transition:none!important}
+      *,*::before,*::after{animation-duration:0s!important;animation-delay:0s!important;
+        animation-fill-mode:forwards!important;transition:none!important}
       header{position:static!important}
       html{scroll-behavior:auto!important}
+      .rise{opacity:1!important;transform:none!important}
+      .fade{opacity:1!important}
+      .arch--draw{stroke-dashoffset:0!important}
+      .dot--pop{transform:scale(1)!important}
+      .steps__track span{transform:scaleX(1)!important}
     `});
-    await page.evaluate(() => document.querySelectorAll('details').forEach((d) => (d.open = true)));
     await page.waitForTimeout(150);
 
     if (await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1)) {

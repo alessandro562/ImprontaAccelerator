@@ -1,0 +1,27 @@
+---
+/**
+ * I due archi del marchio con il punto.
+ *
+ * Gli id dei gradienti sono prefissati per istanza: Astro inlinea l'SVG, e due
+ * pittogrammi nella stessa pagina con gli stessi id farebbero ereditare al
+ * secondo i gradienti del primo.
+ */
+interface Props {
+  /** prefisso degli id dei gradienti, unico per istanza */
+  id: string;
+  animato?: boolean;
+  class?: string;
+}
+const { id, animato = false, class: className = '' } = Astro.props;
+const outer = `${id}-o`;
+const inner = `${id}-i`;
+---
+<svg class={className} viewBox="0 0 260 248" aria-hidden="true">
+  <defs>
+    <linearGradient id={outer} gradientUnits="userSpaceOnUse" x1="17" y1="120" x2="242" y2="120"><stop offset="0" stop-color="#76B830"/><stop offset="1" stop-color="#F9B233"/></linearGradient>
+    <linearGradient id={inner} gradientUnits="userSpaceOnUse" x1="60" y1="150" x2="198" y2="150"><stop offset="0" stop-color="#F9B233"/><stop offset=".5" stop-color="#E16251"/><stop offset=".82" stop-color="#D22F64"/></linearGradient>
+  </defs>
+  <path class:list={['arch', animato && 'arch--draw']} pathLength="1" d="M 17 229 C 17 91 55 16 129.5 16 C 204 16 242 91 242 229" stroke={`url(#${outer})`} stroke-width="20"/>
+  <path class:list={['arch', animato && 'arch--draw']} style={animato ? 'animation-delay:.2s' : undefined} pathLength="1" d="M 60 221 C 60 129 87 83 129 83 C 171 83 198 129 198 221" stroke={`url(#${inner})`} stroke-width="20"/>
+  <ellipse class:list={[animato && 'dot--pop']} cx="129" cy="188" rx="28.5" ry="35" fill="#D22F64"/>
+</svg>

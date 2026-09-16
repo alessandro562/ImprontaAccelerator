@@ -2,25 +2,27 @@
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import Button from '../components/ui/Button.astro';
 import { useTranslations } from '../i18n';
 import { currentLocale, localeUrl } from '../i18n/utils';
+import '../styles/legal.css';
 
 const locale = currentLocale(Astro.currentLocale);
 const t = useTranslations(locale);
-const copy = {
-  it: { title: 'Pagina non trovata', text: 'Il link che hai seguito non porta a nessuna pagina di questo sito.' },
-  en: { title: 'Page not found', text: 'The link you followed does not lead to any page on this site.' },
-}[locale];
 ---
-<Base locale={locale} title={`${copy.title} — Impronta Accelerator`} description={copy.text}>
-  <Nav locale={locale} />
-  <main id="main" class="container-page flex min-h-[55vh] flex-col items-center justify-center py-20 text-center">
-    <p class="t-h1 text-forest">404</p>
-    <h1 class="t-h2 mt-5">{copy.title}</h1>
-    <p class="t-body mt-3 max-w-md text-ink-muted">{copy.text}</p>
-    <div class="mt-8">
-      <Button variant="secondary" href={localeUrl(locale)}>{t.privacy.back}</Button>
+<Base locale={locale} title={`${t.notFound.title} — Impronta`} description={t.notFound.text}>
+  <Nav locale={locale} solida />
+  <main id="main" class="legal">
+    <div class="wrap">
+      <article class="legal__doc">
+        <h1>{t.notFound.title}</h1>
+        <p class="legal__intro">{t.notFound.text}</p>
+        <div class="legal__back">
+          <a class="btn btn--dark" href={localeUrl(locale)}>
+            {t.notFound.back}
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7"/></svg>
+          </a>
+        </div>
+      </article>
     </div>
   </main>
   <Footer locale={locale} />

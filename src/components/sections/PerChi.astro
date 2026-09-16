@@ -1,0 +1,26 @@
+---
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+<section class="who" aria-labelledby="who-title">
+  <div class="wrap who__grid">
+    <div class="who__lead">
+      <span class="label" id="who-title" data-in>{t.perChi.label}</span>
+      <p data-in="2">
+        {t.perChi.lead.before}<span class="it">{t.perChi.lead.accent}</span>{t.perChi.lead.after}
+      </p>
+    </div>
+    <ul class="who__list">
+      {t.perChi.items.map((item, i) => (
+        <li data-in={i === 0 ? true : String(i + 1)}>
+          <div class="who__k">{item.k}</div>
+          <div class="who__v">{item.v}</div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

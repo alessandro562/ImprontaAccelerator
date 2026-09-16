@@ -1,0 +1,35 @@
+---
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+// Un colore del marchio per fronte, nell'ordine del concept.
+const COLORS = ['var(--green)', 'var(--amber)', 'var(--coral)'];
+---
+<section class="fronts" aria-labelledby="fronts-title">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <span class="label" data-in>{t.fronti.label}</span>
+      </div>
+      <h2 class="display" id="fronts-title" data-in="2">
+        {t.fronti.title.before}<span class="it">{t.fronti.title.accent}</span>
+      </h2>
+      <p data-in="3">{t.fronti.lead}</p>
+    </div>
+
+    {t.fronti.items.map((item, i) => (
+      <div class="front" style={`--c:${COLORS[i] ?? COLORS[0]}`} data-in>
+        <span class="front__n">{item.n}</span>
+        <h3 class="front__t"><i aria-hidden="true"></i>{item.name}</h3>
+        <div>
+          <p class="front__d">{item.text}</p>
+          <ul class="tags">{item.tags.map((tag) => <li>{tag}</li>)}</ul>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

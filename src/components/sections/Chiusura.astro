@@ -1,25 +1,34 @@
 ---
-import Section from '../ui/Section.astro';
 import Cta from '../Cta.astro';
+import Pittogramma from '../Pittogramma.astro';
 import { useTranslations } from '../../i18n';
 import type { Locale } from '../../i18n/utils';
-import { CONTACT_EMAIL } from '../../config';
+import { CONTACT_EMAIL, formattedDeadline } from '../../config';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = useTranslations(locale);
+
+// Senza data la frase non la annuncia: il futuro al posto del presente.
+const deadline = formattedDeadline(locale);
 ---
-<Section background="forest-deep">
-  <div class="max-w-3xl">
-    <p class="t-h2">{t.chiusura.text}</p>
-
-    <div class="mt-8">
-      <Cta locale={locale} source="chiusura" label={t.chiusura.ctaPrimary} variant="on-dark" />
-    </div>
-
-    <p class="t-body mt-8 text-forest-soft">
-      {t.chiusura.contactPrefix}{' '}
-      <a href={`mailto:${CONTACT_EMAIL}`} class="t-link">{CONTACT_EMAIL}</a>
+<section class="close" aria-labelledby="close-title">
+  <div class="wrap" style="position:relative;z-index:2">
+    <Pittogramma id="cg" class="close__art" />
+    <span class="label" data-in><span>{t.chiusura.label}</span></span>
+    <h2 class="display" id="close-title" data-in="2">
+      {t.chiusura.title.before}<span class="it">{t.chiusura.title.accent}</span>
+    </h2>
+    <p data-in="3">
+      {deadline
+        ? <>{t.chiusura.deadlinePrefix} <strong style="color:var(--paper);font-weight:500">{deadline}</strong>{t.chiusura.deadlineSuffix}</>
+        : t.chiusura.pending}
     </p>
+    <div data-in="3">
+      <Cta locale={locale} source="chiusura" label={t.chiusura.cta} />
+    </div>
+    <span class="close__mail" data-in="4">
+      {t.chiusura.mailPrefix} <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+    </span>
   </div>
-</Section>
+</section>

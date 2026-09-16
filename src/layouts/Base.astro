@@ -1,28 +1,26 @@
 ---
-import '@fontsource-variable/source-serif-4/wght.css';
-import '@fontsource-variable/ibm-plex-sans/wght.css';
-import '../styles/global.css';
+import '@fontsource-variable/geist';
+import '@fontsource/instrument-serif/400.css';
+import '@fontsource/instrument-serif/400-italic.css';
+import '../styles/concept.css';
 
-// I subset non latini restano disponibili via unicode-range, ma solo questi due
-// file finiscono sul critical path: sono quelli che servono al primo paint.
-import serifLatin from '@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2?url';
-import sansLatin from '@fontsource-variable/ibm-plex-sans/files/ibm-plex-sans-latin-wght-normal.woff2?url';
+// Unico font precaricato: e' quello dei titoli, il primo che si vede.
+import bricolage from '../assets/fonts/bricolage-grotesque-latin.woff2?url';
 
+import LogoSprite from '../components/LogoSprite.astro';
 import { absoluteLocaleUrl, asset, LOCALES, type Locale } from '../i18n/utils';
 import { useTranslations } from '../i18n';
 import { CONTACT_EMAIL, INDEXABLE, PARTNER_URLS, VENUE } from '../config';
 
 interface Props {
   locale: Locale;
-  /** chiave di pagina neutra rispetto alla lingua: '' | 'condizioni' | 'privacy' | 'cookie' */
+  /** chiave di pagina neutra rispetto alla lingua: '' | 'privacy' | 'cookie' */
   pageKey?: string;
   title?: string;
   description?: string;
-  /** i dati strutturati delle FAQ si emettono solo sulla home */
-  faq?: { q: string; a: string }[];
 }
 
-const { locale, pageKey = '', title, description, faq } = Astro.props;
+const { locale, pageKey = '', title, description } = Astro.props;
 const t = useTranslations(locale);
 
 const pageTitle = title ?? t.meta.title;
@@ -50,29 +48,17 @@ const organization = {
     { '@type': 'Organization', name: 'WDA', url: PARTNER_URLS.wda },
   ],
 };
-
-// Costruito dallo stesso dizionario che renderizza le FAQ visibili: i dati
-// strutturati non possono divergere dal testo in pagina.
-const faqSchema = faq && {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faq.map(({ q, a }) => ({
-    '@type': 'Question',
-    name: q,
-    acceptedAnswer: { '@type': 'Answer', text: a },
-  })),
-};
 ---
 <!doctype html>
 <html lang={locale}>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
 
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
-    <meta name="theme-color" content="#FAF8F3" />
+    <meta name="theme-color" content="#0F1412" />
     {!INDEXABLE && <meta name="robots" content="noindex, nofollow" />}
 
     <link rel="canonical" href={canonical} />
@@ -81,8 +67,7 @@ const faqSchema = faq && {
     ))}
     <link rel="alternate" hreflang="x-default" href={absoluteLocaleUrl('it', pageKey)} />
 
-    <link rel="preload" href={serifLatin} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={sansLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={bricolage} as="font" type="font/woff2" crossorigin />
 
     <link rel="icon" href={asset('favicon.svg')} type="image/svg+xml" />
     <link rel="icon" href={asset('favicon-32.png')} sizes="32x32" type="image/png" />
@@ -107,15 +92,10 @@ const faqSchema = faq && {
     <meta name="twitter:image" content={ogImage} />
 
     <script is:inline type="application/ld+json" set:html={JSON.stringify(organization)} />
-    {faqSchema && <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
   </head>
   <body>
-    <a
-      href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-[6px] focus:bg-ink focus:px-4 focus:py-2 focus:font-sans focus:text-sm focus:font-medium focus:text-white"
-    >
-      {t.meta.skipToContent}
-    </a>
+    <LogoSprite />
+    <a class="skip" href="#main">{t.meta.skipToContent}</a>
     <slot />
   </body>
 </html>

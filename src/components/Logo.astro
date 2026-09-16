@@ -1,17 +1,9 @@
 ---
-import Positivo from '../assets/logo-impronta.svg';
-import Negativo from '../assets/logo-impronta-negativo.svg';
-import Mono from '../assets/logo-impronta-mono.svg';
-
-const VARIANTS = { positivo: Positivo, negativo: Negativo, mono: Mono };
-
+/** Un'istanza del marchio. Il contenuto sta in LogoSprite, incluso nel layout. */
 interface Props {
-  variant?: keyof typeof VARIANTS;
   class?: string;
   label?: string;
 }
-
-const { variant = 'positivo', class: className = 'h-9 w-auto', label = 'Impronta — acceleratore di impatto' } = Astro.props;
-const Mark = VARIANTS[variant];
+const { class: className = '', label = 'Impronta' } = Astro.props;
 ---
-<Mark class={className} role="img" aria-label={label} />
+<svg class={className} viewBox="0 0 1083.22 240" role="img" aria-label={label}><use href="#logo"/></svg>

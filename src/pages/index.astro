@@ -3,39 +3,58 @@ import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/sections/Hero.astro';
-import Sintesi from '../components/sections/Sintesi.astro';
 import Programma from '../components/sections/Programma.astro';
-import Requisiti from '../components/sections/Requisiti.astro';
-import Investimento from '../components/sections/Investimento.astro';
-import Calendario from '../components/sections/Calendario.astro';
+import Fronti from '../components/sections/Fronti.astro';
+import PerChi from '../components/sections/PerChi.astro';
+import ComeFunziona from '../components/sections/ComeFunziona.astro';
 import ChiSiamo from '../components/sections/ChiSiamo.astro';
-import Sede from '../components/sections/Sede.astro';
-import Faq from '../components/sections/Faq.astro';
 import Chiusura from '../components/sections/Chiusura.astro';
 
-import { useTranslations } from '../i18n';
 import { currentLocale } from '../i18n/utils';
 
 const locale = currentLocale(Astro.currentLocale);
-const t = useTranslations(locale);
-
-// Le FAQ sono raggruppate per tema in pagina; i dati strutturati vogliono una
-// lista piatta di domande.
-const faqFlat = t.faq.groups.flatMap((group) => group.items);
 ---
-<Base locale={locale} faq={faqFlat}>
+<Base locale={locale}>
   <Nav locale={locale} />
   <main id="main">
     <Hero locale={locale} />
-    <Sintesi locale={locale} />
     <Programma locale={locale} />
-    <Requisiti locale={locale} />
-    <Investimento locale={locale} />
-    <Calendario locale={locale} />
+    <Fronti locale={locale} />
+    <PerChi locale={locale} />
+    <ComeFunziona locale={locale} />
     <ChiSiamo locale={locale} />
-    <Sede locale={locale} />
-    <Faq locale={locale} />
     <Chiusura locale={locale} />
   </main>
   <Footer locale={locale} />
 </Base>
+
+<script>
+  document.documentElement.classList.add('js');
+
+  const nav = document.getElementById('nav');
+  if (nav) {
+    const onScroll = () => nav.classList.toggle('is-solid', window.scrollY > 40);
+    onScroll();
+    addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  // Senza IntersectionObserver il contenuto resta visibile: si applica subito
+  // lo stato finale invece di lasciarlo trasparente.
+  const els = document.querySelectorAll('[data-in], #steps');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach((el) => el.classList.add('is-in'));
+  } else {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.12 },
+    );
+    els.forEach((el) => io.observe(el));
+  }
+</script>
