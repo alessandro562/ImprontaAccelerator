@@ -1,0 +1,27 @@
+---
+/** Usa i file in public/logos/ quando esistono, altrimenti il nome in testo. */
+import { asset } from '../../i18n/utils';
+
+interface Props {
+  logos: { name: string; file?: string; href?: string }[];
+  label?: string;
+  class?: string;
+}
+const { logos, label, class: className = '' } = Astro.props;
+---
+<div class:list={[className]}>
+  {label && <p class="t-label mb-4">{label}</p>}
+  <ul class="flex flex-wrap items-center gap-x-10 gap-y-5">
+    {logos.map((logo) => (
+      <li>
+        {logo.file ? (
+          <img src={asset(`logos/${logo.file}`)} alt={logo.name} class="h-8 w-auto" />
+        ) : logo.href ? (
+          <a href={logo.href} target="_blank" rel="noopener" class="t-link font-normal">{logo.name}</a>
+        ) : (
+          <span class="t-body font-normal text-ink">{logo.name}</span>
+        )}
+      </li>
+    ))}
+  </ul>
+</div>

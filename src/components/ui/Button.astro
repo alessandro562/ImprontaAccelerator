@@ -1,0 +1,25 @@
+---
+/** Altezza 48px, raggio 6px, nessuna ombra. Reso come <a> o <button>. */
+interface Props {
+  variant?: 'primary' | 'secondary' | 'link';
+  href?: string;
+  type?: 'button' | 'submit';
+  external?: boolean;
+  class?: string;
+  'aria-label'?: string;
+}
+const { variant = 'primary', href, type = 'button', external = false, class: className = '', ...rest } = Astro.props;
+
+const BASE = 'inline-flex items-center justify-center font-sans text-[16px] font-medium leading-none transition-colors duration-150';
+const VARIANT = {
+  primary: 'h-12 rounded-[6px] bg-magenta px-5 text-white hover:bg-magenta-hover',
+  secondary: 'h-12 rounded-[6px] border border-ink px-5 text-ink hover:bg-paper-alt',
+  link: 't-link font-medium',
+} as const;
+
+const classes = [BASE, VARIANT[variant], className];
+const target = external ? { target: '_blank', rel: 'noopener' } : {};
+---
+{href
+  ? <a href={href} class:list={classes} {...target} {...rest}><slot /></a>
+  : <button type={type} class:list={classes} {...rest}><slot /></button>}

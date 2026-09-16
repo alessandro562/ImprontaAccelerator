@@ -1,0 +1,25 @@
+---
+/** Unico accordion ammesso in tutto il sito. */
+interface Props { question: string; open?: boolean }
+const { question, open = false } = Astro.props;
+---
+<details class="group border-b border-line" open={open}>
+  <summary
+    class="t-h3 flex cursor-pointer list-none items-start justify-between gap-6 py-4 text-ink marker:content-none"
+  >
+    {question}
+    <span
+      class="mt-1 shrink-0 text-forest transition-transform duration-150 group-open:rotate-45"
+      aria-hidden="true"
+    >
+      <svg viewBox="0 0 16 16" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <path d="M8 3v10M3 8h10" />
+      </svg>
+    </span>
+  </summary>
+  <div class="t-body pb-5 text-ink-muted"><slot /></div>
+</details>
+
+<style>
+  summary::-webkit-details-marker { display: none; }
+</style>

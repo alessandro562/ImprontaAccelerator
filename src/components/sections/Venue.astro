@@ -15,7 +15,7 @@ const t = useTranslations(locale);
     class="pointer-events-none absolute -bottom-24 -right-16 h-[22rem] w-auto text-white/[0.07] md:right-12 md:h-[28rem]"
   />
   <div class="shell relative grid gap-8 py-14 md:grid-cols-[1.3fr_1fr] md:items-end md:gap-16 md:py-16">
-    <div data-reveal>
+    <div>
       <p class="eyebrow !text-mint-100">{t.venue.eyebrow}</p>
       <h2 class="mt-4 font-display text-2xl font-extrabold tracking-tight md:text-3xl">{t.venue.title}</h2>
       <p class="measure-wide mt-4 text-base leading-relaxed text-mint-100">{t.venue.text}</p>
@@ -24,7 +24,7 @@ const t = useTranslations(locale);
       </address>
     </div>
 
-    <dl class="flex flex-wrap gap-x-10 gap-y-5" data-reveal>
+    <dl class="flex flex-wrap gap-x-10 gap-y-5">
       {t.venue.facts.map((fact) => (
         <div>
           <dt class="stat text-2xl text-white md:text-3xl">{fact.value}</dt>

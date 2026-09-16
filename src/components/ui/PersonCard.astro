@@ -1,0 +1,28 @@
+---
+/** Senza foto: riquadro con iniziali, mai un avatar generico. */
+interface Props {
+  role: string;
+  name?: string;
+  organisation?: string;
+  photo?: string;
+  photoAlt?: string;
+}
+const { role, name, organisation, photo, photoAlt } = Astro.props;
+const initials = name
+  ? name.split(/\s+/).slice(0, 2).map((w) => w[0]).join('').toUpperCase()
+  : null;
+---
+<article>
+  <div class="aspect-[4/5] w-full overflow-hidden rounded-[6px] border border-line bg-paper-alt">
+    {photo ? (
+      <img src={photo} alt={photoAlt ?? ''} class="h-full w-full object-cover" />
+    ) : (
+      <div class="flex h-full w-full items-center justify-center">
+        <span class="font-serif text-3xl text-ink-muted" aria-hidden="true">{initials ?? '—'}</span>
+      </div>
+    )}
+  </div>
+  {name && <h3 class="t-h3 mt-3 text-ink">{name}</h3>}
+  <p class:list={[name ? 't-small text-ink-muted' : 't-h3 text-ink', name ? 'mt-1' : 'mt-3']}>{role}</p>
+  {organisation && <p class="t-small mt-1 text-ink-muted">{organisation}</p>}
+</article>

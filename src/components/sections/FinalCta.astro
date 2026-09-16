@@ -23,10 +23,10 @@ const deadline = formattedDeadline(locale);
   />
 
   <div class="shell relative py-20 md:py-28">
-    <h2 class="display-xl max-w-[14ch]" data-reveal>{t.finalCta.title}</h2>
-    <p class="measure-wide mt-7 text-lg leading-relaxed text-slate-soft" data-reveal>{t.finalCta.text}</p>
+    <h2 class="display-xl max-w-[14ch]">{t.finalCta.title}</h2>
+    <p class="measure-wide mt-7 text-lg leading-relaxed text-slate-soft">{t.finalCta.text}</p>
 
-    <div class="mt-10 flex flex-col items-start gap-5 sm:flex-row sm:items-center" data-reveal>
+    <div class="mt-10 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
       <Cta locale={locale} source="final" variant="on-dark" class="text-base" />
       {deadline && (
         <p class="text-sm text-slate-soft">
@@ -35,7 +35,7 @@ const deadline = formattedDeadline(locale);
       )}
     </div>
 
-    <p class="mt-8 text-sm text-slate-soft" data-reveal>
+    <p class="mt-8 text-sm text-slate-soft">
       {t.finalCta.contactPrefix}{' '}
       <a href={`mailto:${CONTACT_EMAIL}`} class="font-medium text-white underline underline-offset-4">{CONTACT_EMAIL}</a>
     </p>

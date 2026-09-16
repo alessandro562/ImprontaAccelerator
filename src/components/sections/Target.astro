@@ -9,13 +9,13 @@ const t = useTranslations(locale);
 ---
 <section id="target" class="bg-cream">
   <div class="shell py-20 md:py-28">
-    <p class="eyebrow" data-reveal>{t.target.eyebrow}</p>
-    <h2 class="display-lg mt-5 max-w-[20ch] text-ink" data-reveal>{t.target.title}</h2>
-    <p class="measure-wide mt-6 text-lg text-slate" data-reveal>{t.target.lead}</p>
+    <p class="eyebrow">{t.target.eyebrow}</p>
+    <h2 class="display-lg mt-5 max-w-[20ch] text-ink">{t.target.title}</h2>
+    <p class="measure-wide mt-6 text-lg text-slate">{t.target.lead}</p>
 
     <!-- Due colonne asimmetriche: il sì pesa, il no sta in tono minore. -->
     <div class="mt-14 grid gap-12 lg:grid-cols-[1.5fr_1fr] lg:gap-20">
-      <div data-reveal>
+      <div>
         <h3 class="font-display text-sm font-bold uppercase tracking-widest text-forest">{t.target.yesTitle}</h3>
         <ul class="mt-6 space-y-0">
           {t.target.yes.map((line) => (
@@ -24,7 +24,7 @@ const t = useTranslations(locale);
         </ul>
       </div>
 
-      <div data-reveal>
+      <div>
         <h3 class="font-display text-sm font-bold uppercase tracking-widest text-slate-soft">{t.target.noTitle}</h3>
         <ul class="mt-6 space-y-0">
           {t.target.no.map((line) => (
@@ -35,7 +35,7 @@ const t = useTranslations(locale);
     </div>
 
 
-    <div class="mt-12" data-reveal>
+    <div class="mt-12">
       <details class="disclosure">
         <summary class="text-ink">{t.target.detailsLabel}</summary>
         <div class="pb-2 pt-4">

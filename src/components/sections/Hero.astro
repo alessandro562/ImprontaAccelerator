@@ -19,15 +19,15 @@ const subject = locale === 'it' ? 'Prossima coorte Impronta' : 'Next Impronta co
 
   <div class="shell relative pb-20 pt-16 md:pb-28 md:pt-28">
     <!-- La frase clou, sola. Il gradiente sta su una parola: e' l'accento, non lo sfondo. -->
-    <h1 class="display-xl max-w-[14ch] text-balance text-ink" data-reveal>
+    <h1 class="display-xl max-w-[14ch] text-balance text-ink">
       {t.hero.titleBefore}{' '}<span class="text-gradient-word">{t.hero.titleAccent}</span>{' '}{t.hero.titleAfter}
     </h1>
 
-    <p class="measure-wide mt-8 text-lg leading-relaxed text-slate md:mt-10 md:text-xl" data-reveal>
+    <p class="measure-wide mt-8 text-lg leading-relaxed text-slate md:mt-10 md:text-xl">
       {t.hero.sub}
     </p>
 
-    <div class="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center" data-reveal>
+    <div class="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
       <Cta locale={locale} source="hero" class="text-base" />
       <a
         href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}`}
@@ -38,7 +38,7 @@ const subject = locale === 'it' ? 'Prossima coorte Impronta' : 'Next Impronta co
     </div>
 
     {deadline && (
-      <p class="mt-6 text-sm text-slate" data-reveal>
+      <p class="mt-6 text-sm text-slate">
         {t.hero.deadlinePrefix} <strong class="font-semibold text-ink">{deadline}</strong>
       </p>
     )}

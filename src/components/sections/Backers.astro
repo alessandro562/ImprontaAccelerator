@@ -8,12 +8,12 @@ const t = useTranslations(locale);
 ---
 <section id="partner" class="bg-bone">
   <div class="shell py-20 md:py-28">
-    <p class="eyebrow" data-reveal>{t.backers.eyebrow}</p>
-    <h2 class="display-lg mt-5 max-w-[18ch] text-ink" data-reveal>{t.backers.title}</h2>
-    <p class="measure-wide mt-6 text-lg text-slate" data-reveal>{t.backers.lead}</p>
+    <p class="eyebrow">{t.backers.eyebrow}</p>
+    <h2 class="display-lg mt-5 max-w-[18ch] text-ink">{t.backers.title}</h2>
+    <p class="measure-wide mt-6 text-lg text-slate">{t.backers.lead}</p>
 
     <!-- Nomi, non un conteggio anonimo: «oltre 100 corporate» non dice niente. -->
-    <div class="mt-14 border-t-2 border-ink pt-8" data-reveal>
+    <div class="mt-14 border-t-2 border-ink pt-8">
       <p class="font-display text-sm font-bold uppercase tracking-widest text-slate">
         {t.backers.corporatesLabel}
       </p>
@@ -25,7 +25,7 @@ const t = useTranslations(locale);
       <p class="mt-5 text-xs text-slate">{t.backers.corporatesNote}</p>
     </div>
 
-    <dl class="mt-16 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3" data-reveal>
+    <dl class="mt-16 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
       {t.backers.stats.map((stat) => (
         <div>
           <dt class="stat text-[clamp(2rem,4.4vw,3.25rem)] text-ink">{stat.value}</dt>
@@ -36,7 +36,7 @@ const t = useTranslations(locale);
 
     <ul class="mt-16 grid gap-10 md:grid-cols-3 md:gap-12">
       {t.backers.orgs.map((org) => (
-        <li class="border-t border-line pt-6" data-reveal>
+        <li class="border-t border-line pt-6">
           <h3 class="font-display text-2xl font-extrabold tracking-tight text-ink">{org.name}</h3>
           <p class="mt-1.5 text-sm font-semibold text-brand-magenta">{org.role}</p>
           <p class="mt-4 text-sm leading-relaxed text-slate">{org.text}</p>
@@ -55,7 +55,7 @@ const t = useTranslations(locale);
       ))}
     </ul>
 
-    <div class="mt-14" data-reveal>
+    <div class="mt-14">
       <details class="disclosure">
         <summary class="text-ink">{t.backers.detailsLabel}</summary>
         <div class="pb-2 pt-4">

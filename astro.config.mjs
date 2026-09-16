@@ -34,6 +34,8 @@ export default defineConfig({
 
   integrations: [
     sitemap({
+      // pagina di controllo interna: fuori dalla sitemap
+      filter: (page) => !page.includes('/stile'),
       i18n: {
         defaultLocale: 'it',
         locales: { it: 'it-IT', en: 'en-US' },

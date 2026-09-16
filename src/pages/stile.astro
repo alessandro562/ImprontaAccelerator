@@ -1,0 +1,148 @@
+---
+/**
+ * Pagina di controllo del design system. Esclusa da sitemap e indicizzazione:
+ * serve a verificare token, scala e componenti su una pagina sola.
+ */
+import Base from '../layouts/Base.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import Button from '../components/ui/Button.astro';
+import KeyFacts from '../components/ui/KeyFacts.astro';
+import DataTable from '../components/ui/DataTable.astro';
+import Steps from '../components/ui/Steps.astro';
+import PersonCard from '../components/ui/PersonCard.astro';
+import LogoStrip from '../components/ui/LogoStrip.astro';
+import Figure from '../components/ui/Figure.astro';
+import Callout from '../components/ui/Callout.astro';
+import FaqItem from '../components/ui/FaqItem.astro';
+
+const COLORI = [
+  { token: 'paper', hex: '#FAF8F3', uso: 'Fondo principale', contrasto: '—' },
+  { token: 'paper-alt', hex: '#EFEBE2', uso: 'Fondo sezioni alternate', contrasto: '—' },
+  { token: 'ink', hex: '#1F2622', uso: 'Testo e titoli', contrasto: '14,6:1 su paper' },
+  { token: 'ink-muted', hex: '#55615B', uso: 'Testo secondario', contrasto: '6,1:1 su paper' },
+  { token: 'line', hex: '#DDD7CB', uso: 'Bordi e separatori', contrasto: 'mai testo' },
+  { token: 'forest', hex: '#176A52', uso: 'Link, numeri, dettagli', contrasto: '6,1:1 su paper' },
+  { token: 'forest-deep', hex: '#0F4A39', uso: 'Fondo sezioni scure', contrasto: 'bianco 10,2:1' },
+  { token: 'forest-soft', hex: '#A8CDBD', uso: 'Testo su forest-deep', contrasto: '5,9:1' },
+  { token: 'forest-tint', hex: '#E7F1EC', uso: 'Fondo di evidenza', contrasto: '—' },
+  { token: 'magenta', hex: '#DA0455', uso: 'Solo azioni primarie', contrasto: 'bianco 5,1:1' },
+  { token: 'magenta-hover', hex: '#B8043F', uso: 'Hover del pulsante', contrasto: 'bianco 6,7:1' },
+  { token: 'orange', hex: '#F98426', uso: 'Solo marcatori grafici', contrasto: 'mai testo' },
+];
+---
+<Base locale="it" title="Design system — Impronta" description="Pagina di controllo interna.">
+  <main id="main">
+    <Section>
+      <h1 class="t-h1">Design system</h1>
+      <p class="t-lead mt-5 text-ink-muted">
+        Pagina di controllo interna. Token, scala tipografica e componenti con contenuti reali
+        presi dal copy approvato.
+      </p>
+    </Section>
+
+    <Section background="paper-alt">
+      <SectionHeader title="Colori" lead="Il gradiente del logo resta dentro il logo: non entra nella UI." />
+      <ul class="mt-8 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-3">
+        {COLORI.map((c) => (
+          <li class="bg-paper p-4">
+            <div class="h-14 w-full rounded-[6px] border border-line" style={`background:${c.hex}`}></div>
+            <p class="t-h3 mt-3 text-ink">{c.token}</p>
+            <p class="t-small text-ink-muted">{c.hex} — {c.uso}</p>
+            <p class="t-label mt-1">{c.contrasto}</p>
+          </li>
+        ))}
+      </ul>
+    </Section>
+
+    <Section>
+      <SectionHeader title="Scala tipografica" />
+      <div class="mt-8 space-y-6 border-t border-line pt-6">
+        <div><p class="t-label">H1 — Source Serif 4 600</p><p class="t-h1">Accelerazione e investimento per startup a impatto nel Lazio</p></div>
+        <div><p class="t-label">H2 — Source Serif 4 600</p><p class="t-h2">Investimento e impegni</p></div>
+        <div><p class="t-label">H3 — IBM Plex Sans 600</p><p class="t-h3">Come si misura l’impatto</p></div>
+        <div><p class="t-label">Lead</p><p class="t-lead">Impronta seleziona ogni anno sei startup e spin-off con tecnologie fra il livello di maturità tecnologica (TRL) 3 e 6.</p></div>
+        <div><p class="t-label">Body</p><p class="t-body">All’inizio del programma ogni startup costruisce un impact plan: gli effetti attesi e gli indicatori con cui verificarli. A fine programma gli stessi indicatori vengono rilevati con la metodologia SROI.</p></div>
+        <div><p class="t-label">Small</p><p class="t-small">Sono partner di quei programmi, non di Impronta.</p></div>
+        <div><p class="t-label">Numero chiave</p><p class="t-figure">€150.000</p></div>
+      </div>
+    </Section>
+
+    <Section background="paper-alt">
+      <SectionHeader title="Pulsanti" />
+      <div class="mt-8 flex flex-wrap items-center gap-4">
+        <Button variant="primary" href="#">Candidati</Button>
+        <Button variant="secondary" href="#">Leggi tutte le condizioni</Button>
+        <Button variant="link" href="#">Apri in Maps</Button>
+      </div>
+    </Section>
+
+    <Section>
+      <SectionHeader title="Fascia dati chiave" />
+      <KeyFacts
+        class="mt-8"
+        items={[
+          { label: 'Candidature', value: 'In apertura' },
+          { label: 'Posti', value: '6 per coorte' },
+          { label: 'Investimento iniziale', value: '€150.000' },
+          { label: 'Durata', value: '4 mesi' },
+          { label: 'Sede', value: 'Villa Fassini' },
+        ]}
+      />
+    </Section>
+
+    <Section background="paper-alt">
+      <SectionHeader title="Tabella dati" />
+      <DataTable
+        class="mt-8"
+        headers={['Criterio', 'Che cosa valutiamo']}
+        rows={[
+          ['Innovazione e maturità', 'Il contenuto scientifico o tecnologico e il grado di validazione raggiunto'],
+          ['Impatto', 'L’effetto atteso su ambiente, salute o occupazione, e la possibilità di misurarlo'],
+          ['Team', 'Le competenze rispetto a quello che state costruendo e il tempo che potete dedicarvi'],
+        ]}
+      />
+    </Section>
+
+    <Section>
+      <SectionHeader title="Passaggi" />
+      <Steps
+        class="mt-8"
+        steps={[
+          { name: 'Candidatura online', when: 'W1–W2', detail: 'Verifica dei requisiti' },
+          { name: 'Colloquio online', when: 'W3' },
+          { name: 'Advisory Board', when: 'W4–W5', detail: 'Scheda di monitoraggio' },
+        ]}
+      />
+    </Section>
+
+    <Section background="paper-alt">
+      <SectionHeader title="Persone, loghi, immagini, note" />
+      <div class="mt-8 grid gap-8 md:grid-cols-3">
+        <PersonCard role="Program Manager" />
+        <PersonCard role="Investment Manager" name="Nome Cognome" organisation="Next4" />
+        <Figure placeholder="Villa Fassini, agorà" caption="Segnaposto con rapporto fisso." />
+      </div>
+      <LogoStrip class="mt-10" label="Promosso da" logos={[{ name: 'Next4' }, { name: 'ELIS Innovation Hub' }, { name: 'WDA' }]} />
+      <Callout class="mt-10" title="Condizioni sospensive">
+        Sede operativa nel Lazio e partecipazione integrale al programma sono condizioni
+        sospensive dell’accordo.
+      </Callout>
+      <div class="mt-10 border-t border-line">
+        <FaqItem question="Possiamo candidarci se non abbiamo ancora costituito la società?" open>
+          Sì. Il programma è aperto a gruppi di ricerca e spin-off universitari in costituzione.
+        </FaqItem>
+        <FaqItem question="Quando viene erogato l’investimento?">
+          Dopo l’accettazione della proposta e la verifica delle condizioni sospensive.
+        </FaqItem>
+      </div>
+    </Section>
+
+    <Section background="forest-deep">
+      <SectionHeader title="Sezione su fondo scuro" lead="Unico fondo scuro ammesso nel corpo pagina, più il footer." class="[&_p]:text-forest-soft" />
+      <p class="t-body mt-6 text-forest-soft">
+        Testo secondario su forest-deep. <a href="#" class="t-link">Un link su fondo scuro</a>.
+      </p>
+    </Section>
+  </main>
+</Base>

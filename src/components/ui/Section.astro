@@ -1,0 +1,18 @@
+---
+/** Sezione con fondo e ritmo verticale standard. */
+interface Props {
+  id?: string;
+  background?: 'paper' | 'paper-alt' | 'forest-deep';
+  class?: string;
+}
+const { id, background = 'paper', class: className = '' } = Astro.props;
+
+const BG = {
+  paper: 'bg-paper text-ink',
+  'paper-alt': 'bg-paper-alt text-ink',
+  'forest-deep': 'bg-forest-deep text-white on-dark',
+} as const;
+---
+<section id={id} class:list={['section-space', BG[background], className]}>
+  <div class="container-page"><slot /></div>
+</section>

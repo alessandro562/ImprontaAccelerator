@@ -1,0 +1,32 @@
+---
+/** Tabella semantica. Su mobile ogni riga diventa un blocco etichetta/valore. */
+interface Props {
+  caption?: string;
+  headers: string[];
+  rows: string[][];
+  class?: string;
+}
+const { caption, headers, rows, class: className = '' } = Astro.props;
+---
+<table class:list={['w-full border-collapse text-left', className]}>
+  {caption && <caption class="t-label pb-3 text-left">{caption}</caption>}
+  <thead class="hidden md:table-header-group">
+    <tr>
+      {headers.map((h) => (
+        <th scope="col" class="t-label border-b border-ink py-3 pr-6 align-bottom text-ink">{h}</th>
+      ))}
+    </tr>
+  </thead>
+  <tbody>
+    {rows.map((row) => (
+      <tr class="block border-b border-line py-4 md:table-row md:py-0">
+        {row.map((cell, i) => (
+          <td class="block py-1 pr-6 align-top md:table-cell md:border-b md:border-line md:py-4">
+            <span class="t-label mb-1 block md:hidden">{headers[i]}</span>
+            <span class="t-small md:t-body block text-ink">{cell}</span>
+          </td>
+        ))}
+      </tr>
+    ))}
+  </tbody>
+</table>

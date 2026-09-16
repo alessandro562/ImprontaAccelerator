@@ -9,12 +9,12 @@ const t = useTranslations(locale);
 <section id="faq" class="bg-cream">
   <div class="shell py-20 md:py-28">
     <div class="grid gap-10 lg:grid-cols-[1fr_1.8fr] lg:gap-20">
-      <div class="lg:sticky lg:top-28 lg:self-start" data-reveal>
+      <div class="lg:sticky lg:top-28 lg:self-start">
         <p class="eyebrow">{t.faq.eyebrow}</p>
         <h2 class="display-lg mt-5 text-ink">{t.faq.title}</h2>
       </div>
 
-      <div data-reveal>
+      <div>
         {t.faq.items.map((item, i) => (
           <details class="disclosure group" open={i === 0}>
             <summary class="text-base text-ink md:text-lg">{item.q}</summary>
