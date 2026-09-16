@@ -1,0 +1,38 @@
+---
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Callout from '../ui/Callout.astro';
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+<Section id="programma">
+  <SectionHeader title={t.programma.title} lead={t.programma.lead} />
+
+  <div class="mt-12 grid gap-px border-t border-line md:grid-cols-3 md:gap-10 md:border-t-0">
+    {t.programma.areas.map((area) => (
+      <article class="border-b border-line py-6 md:border-b-0 md:border-t md:pb-0 md:pt-6">
+        <h3 class="t-h3 text-ink">{area.name}</h3>
+        <p class="t-body mt-3 text-ink-muted">{area.text}</p>
+        <ul class="mt-4 space-y-1">
+          {area.verticals.map((vertical) => (
+            <li class="t-small text-ink">{vertical}</li>
+          ))}
+        </ul>
+      </article>
+    ))}
+  </div>
+
+  <p class="t-small mt-8 max-w-3xl text-ink-muted">{t.programma.emerging}</p>
+
+  <div class="mt-14 grid gap-10 lg:grid-cols-12">
+    <div class="lg:col-span-7">
+      <h3 class="t-h3 text-ink">{t.programma.measureTitle}</h3>
+      <p class="t-body mt-4 text-ink-muted">{t.programma.measureText}</p>
+    </div>
+    <Callout class="lg:col-span-5">{t.programma.measureSource}</Callout>
+  </div>
+</Section>
