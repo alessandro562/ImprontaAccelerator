@@ -5,7 +5,8 @@ Sito pubblico del programma **Impronta — acceleratore di impatto**, promosso d
 (FARE Venture 2 · Lazio Innova · Regione Lazio · PR FESR 2021/2027).
 
 One-pager bilingue (italiano di default, inglese sotto `/en/`), costruita con
-Astro e Tailwind CSS, pubblicata su GitHub Pages.
+Astro, pubblicata su GitHub Pages. Il riferimento visivo e di copy è il concept
+in `docs/concept/`: vedi *Il concept è il riferimento*.
 
 ---
 
@@ -39,6 +40,7 @@ npm install
 npm run dev      # http://localhost:4321/ImprontaAccelerator/
 npm run build
 npm run check    # type-check: fallisce se i dizionari IT ed EN divergono
+npm run diff     # confronto a pixel con il concept
 ```
 
 > Il dev server serve sotto il base path `/ImprontaAccelerator/`, non sulla root:
@@ -68,22 +70,25 @@ grep -roE '(href|src)="/[^"]*' dist --include='*.html' | grep -v '"/ImprontaAcce
 
 ```
 src/
-  config.ts              costanti del sito (form, deadline, contatti, SHOW_PEOPLE_NAMES)
+  config.ts              costanti del sito (form, deadline, contatti)
   i18n/
     it.ts                tutto il copy italiano
     en.ts                inglese, tipizzato su it.ts -> la parità delle chiavi è forzata
-    utils.ts             asset(), localeUrl(), pageKeyFromUrl(), SECTIONS
+    utils.ts             asset(), localeUrl(), pageKeyFromUrl()
   layouts/               Base (meta, OG, hreflang, JSON-LD), Legal
   components/
-    ui/                  i dodici primitivi del design system
-    sections/            le sezioni della home
-    Nav, Footer, Logo, Cta, LanguageSwitcher
-  pages/                 index, condizioni, privacy, cookie, 404, stile, robots.txt
-                         + gli stessi sotto en/
-  assets/                i tre SVG del logo, ripuliti dal blocco metadata C2PA
+    sections/            le sette sezioni della home
+    Nav, Footer, Logo, LogoSprite, Pittogramma, Cta
+  pages/                 index, privacy, cookie, 404, robots.txt + gli stessi sotto en/
+  styles/
+    concept.css          il <style> del concept, copiato 1:1
+    legal.css            solo per privacy, cookie e 404
+  assets/
+    fonts/               il woff2 di Bricolage, generato da scripts/fonts.py
+    logo-impronta*.svg   i tre SVG del logo
 public/                  favicon, icone, immagini Open Graph
-docs/redesign/BRIEF.md   il brief di riferimento, in versione redatta
-scripts/                 screens.mjs (QA visivo), lint-copy.mjs (anti-pattern lessicali)
+docs/concept/            il concept approvato: il riferimento visivo
+scripts/                 fonts.py, diff-concept.mjs, screens.mjs
 ```
 
 `brand/` contiene il materiale sorgente. I documenti riservati (la proposta VTL
@@ -93,102 +98,92 @@ tornarci dentro.
 
 ---
 
-## Design system
+## Il concept è il riferimento
 
-Il riferimento normativo è `docs/redesign/BRIEF.md`. La pagina **`/stile/`**
-mostra tutti i token e tutti i componenti in un posto solo: è il modo più rapido
-per vedere l'effetto di una modifica a `src/styles/global.css`.
+`docs/concept/impronta-landing-v2.html` è la pagina approvata. Il sito deve
+riprodurla a 1440px e 390px, e lo verifica `npm run diff`:
 
-### Colori
+```bash
+npm run diff
+```
 
-I token stanno in `@theme` dentro `src/styles/global.css`.
+Lo script fotografa concept e build alle due viewport, con tutto rivelato e le
+animazioni ferme, e le confronta con pixelmatch. Soglie: meno dell'1% di pixel
+diversi e meno di 20px di differenza in altezza.
 
-| Token | Valore | Uso |
-|---|---|---|
-| `paper` | `#faf8f3` | fondo principale |
-| `paper-alt` | `#efebe2` | fondo delle sezioni alternate |
-| `ink` | `#1f2622` | testo |
-| `ink-muted` | `#55615b` | testo secondario (6,09:1 su `paper`) |
-| `line` | `#ddd7cb` | filetti e bordi decorativi |
-| `forest` | `#176a52` | link, numeri, accenti (6,14:1 su `paper`) |
-| `forest-deep` | `#0f4a39` | fondo delle sezioni scure |
-| `forest-soft` | `#a8cdbd` | testo secondario su fondo scuro (5,89:1) |
-| `forest-tint` | `#e7f1ec` | fondo dei Callout e della fascia dati |
-| `magenta` | `#da0455` | pulsante primario (bianco sopra: 5,09:1) |
-| `magenta-hover` | `#b8043f` | stato hover del pulsante primario |
+Due cose da sapere prima di leggerne l'esito:
 
-Il gradiente del logo resta dentro il logo: non entra nella UI. Tutte le coppie
-testo/fondo in uso superano il 4,5:1 di WCAG AA.
+- **Il concept carica i font da Google.** Dove quella rete non c'è — la CI, un
+  container — ripiegherebbe sui font di sistema, e il confronto misurerebbe la
+  differenza fra i caratteri invece che fra i layout. Per questo lo script
+  inietta nel concept le stesse `@font-face` della build. Il resto del CSS del
+  concept non viene toccato.
+- **Due testi dipendono da `src/config.ts`** e restano fuori dal conteggio: lo
+  stato della call nell'hero e la frase di chiusura con la data. Lo script
+  dichiara quanti pixel ha escluso.
 
-### Tipografia
+### I font
 
-Source Serif 4 per i titoli, IBM Plex Sans per il testo, entrambi self-hosted
-come font variabili. Le classi `.t-h1`, `.t-h2`, `.t-h3`, `.t-lead`, `.t-body`,
-`.t-small`, `.t-label`, `.t-figure` sono l'unico modo previsto per impostare
-dimensione e peso: nei componenti non si scrivono `text-*` di Tailwind sui testi.
+```bash
+python3 scripts/fonts.py
+```
 
-### Componenti
+Scarica Bricolage Grotesque dal repo `google/fonts` e ne genera un subset
+`latin` + `latin-ext` **conservando gli assi variabili** (`opsz`, `wdth`,
+`wght`). Gli assi non sono un dettaglio: il concept li imposta a mano con
+`font-variation-settings`, e un subset statico farebbe collassare tutta la
+tipografia sui valori di default.
 
-`Container`, `Section`, `SectionHeader`, `Button`, `KeyFacts`, `DataTable`,
-`Steps`, `PersonCard`, `LogoStrip`, `Figure`, `Callout`, `FaqItem`.
+Il woff2 finisce in `src/assets/fonts/`, non in `public/`: così passa da Vite,
+che gli applica hash e base path. Un url assoluto scritto a mano nel CSS si
+romperebbe il giorno in cui il sito passa a un dominio custom.
 
-`FaqItem` è **l'unico accordion ammesso**: il resto del contenuto sta in pagina.
-`Figure` senza `src` disegna un segnaposto dichiarato («FOTO DA INSERIRE — …»)
-invece di un'immagine finta.
+Geist e Instrument Serif arrivano da Fontsource. **Nessuna richiesta a Google
+Fonts dal sito pubblicato**: è anche una promessa della cookie policy.
 
 ---
 
 ## Regole di scrittura
 
-Il registro è quello di una **call pubblica**, non di una campagna: la pagina
-deve risultare corretta a Lazio Innova e alle imprese partner tanto quanto
-comprensibile a un gruppo di ricerca.
+Il registro è quello di `CLAUDE.md`: una pagina di attrazione, non una pagina
+informativa. Candidatura e regolamento vivono su una piattaforma esterna.
 
-Nell'ordine: **correttezza** rispetto alla proposta VTL, **chiarezza**,
-**sobrietà**.
+- Budget testo: circa 300 parole nel `<main>` della home italiana. Non si
+  aggiungono sezioni, tabelle, accordion, FAQ o pagine di approfondimento senza
+  richiesta esplicita.
+- Tono sicuro e asciutto, mai commerciale. Niente superlativi, urgenza
+  artificiale o promesse di risultato. Si dà del tu.
+- Nessun dato che non sia nella proposta VTL. In particolare: la
+  sperimentazione con le imprese riguarda **solo** le soluzioni scelte dai
+  partner, e il programma è **cofinanziato da** Venture Tech Lazio, non «della
+  Regione Lazio».
 
-- **Nessun dato inventato.** Numeri, nomi, partner, date e loghi vengono dalla
-  proposta. Dove il documento tace, la pagina lo dice o rimanda alle condizioni.
-- **Precisione sulle cose che vincolano.** La sperimentazione riguarda le startup
-  *selezionate dalle imprese partner*, non tutte. Il follow-on riguarda *al
-  massimo tre* startup. Il corrispettivo per i servizi di incubazione è
-  dichiarato, non nascosto.
-- **Mai «l'acceleratore della Regione Lazio»**: la formula corretta è
-  «cofinanziato da Venture Tech Lazio».
-- **Seconda persona plurale** (vi rivolgete a un team), frasi brevi, verbi
-  concreti.
-- **Niente retorica**: la costruzione «non … ma», l'inciso «, non », «davvero»,
-  le terne nei titoli, le domande come titolo di sezione, e le parole della lista
-  dell'anti-pattern 20 del brief.
-
-`npm run lint:copy` controlla questi ultimi punti sui dizionari e sull'HTML
-costruito. Le poche eccezioni ammesse — precisazioni di merito, non figure
-retoriche — sono elencate e motivate dentro `scripts/lint-copy.mjs`.
-
-### Come modificare i contenuti
-
-Il copy sta **solo** nei dizionari: i componenti non contengono testo.
-Per cambiare una frase si tocca `src/i18n/it.ts` e la voce corrispondente in
-`src/i18n/en.ts`. Se una chiave manca in inglese, `npm run check` fallisce — e
-con esso la build in CI: non è possibile pubblicare una pagina inglese con
-dentro testo italiano.
+Il copy sta **solo** nei dizionari: i componenti non contengono testo. Dove il
+concept mette un accento in corsivo o una parola in evidenza, la stringa è
+spezzata in campi (`accent`, `strong`) invece che in HTML, così la traduzione
+resta allineata. Se una chiave manca in inglese `npm run check` fallisce, e con
+esso la build in CI.
 
 ---
 
 ## QA
 
 ```bash
-npm run check                  # type-check e parità dei dizionari
-npm run lint:copy              # anti-pattern lessicali
-npm run screens -- <nome>      # screenshot a 1440, 768 e 390 + report strutturale
+npm run check                    # type-check e parità dei dizionari
+npm run diff                     # fedeltà al concept
+npm run screens -- <nome>        # screenshot a 1440, 768 e 390 + report
 npm run screens -- <nome> --axe  # aggiunge l'analisi di accessibilità
 ```
 
-`screens.mjs` costruisce il sito, lo serve **sotto il base path di GitHub Pages**
-e fotografa ogni pagina e ogni sezione con `id` alle tre viewport. Segnala
-overflow orizzontale, `alt` mancanti, link vuoti o che ignorano il base path,
-gerarchia dei titoli e — con `--axe` — le violazioni WCAG serious e critical.
-Gli screenshot finiscono in `docs/redesign/screens/<nome>/`, che non è versionata.
+`screens.mjs` serve la build **sotto il base path di GitHub Pages** e fotografa
+ogni pagina e ogni sezione con `id`. Segnala overflow orizzontale, `alt`
+mancanti, link vuoti o che ignorano il base path, gerarchia dei titoli e — con
+`--axe` — le violazioni WCAG serious e critical.
+
+Prima di scattare applica `is-in` agli elementi `[data-in]` e poi congela le
+animazioni: invertire i due passaggi fotograferebbe la pagina a opacità zero.
+
+Gli screenshot finiscono in `docs/redesign-v2/`, che non è versionata.
 
 ---
 
@@ -221,10 +216,11 @@ del dominio): la sitemap va sottomessa a mano in Search Console come
 
 ## Scelte tecniche
 
-- **Zero JavaScript di framework.** Gli unici script sono il menu mobile e il
-  selettore di lingua, poche righe inline. Le FAQ usano `<details>` nativi.
-- **Nessuna animazione allo scroll.** Il contenuto è in pagina al primo paint.
-- **Font self-hosted** (Source Serif 4 + IBM Plex Sans via Fontsource): nessuna
+- **Zero JavaScript di framework.** Gli unici script sono la comparsa allo
+  scroll, la nav che diventa solida e il selettore di lingua: poche righe.
+- **Il movimento non nasconde il contenuto.** Senza JavaScript tutte le sezioni
+  sono visibili, e `prefers-reduced-motion` disattiva ogni animazione.
+- **Font self-hosted** (Bricolage Grotesque, Geist, Instrument Serif): nessuna
   richiesta a Google Fonts, quindi nessun trasferimento di IP a terzi e nessun
   banner cookie dovuto ai font.
 - **Accessibilità**: le pagine passano axe-core su WCAG 2.1 AA senza violazioni.
@@ -236,9 +232,9 @@ del dominio): la sitemap va sottomessa a mano in Search Console come
 ## Fonte dei contenuti
 
 Il copy si basa sulla proposta Venture Tech Lazio (documento non versionato, vedi
-*Struttura*) e su `docs/redesign/BRIEF.md`. Non contiene dati inventati: dove il
+*Struttura*) e sul concept approvato. Non contiene dati inventati: dove il
 documento non dice nulla — percentuale di equity, valutazione, date della call —
 la pagina rimanda alle condizioni e al colloquio invece di riempire il vuoto.
 
-I punti ancora da far validare sono elencati in `docs/redesign/DA-VERIFICARE.md`,
+I punti ancora da far validare sono elencati in `docs/redesign-v1/DA-VERIFICARE.md`,
 che resta fuori dal repository.
