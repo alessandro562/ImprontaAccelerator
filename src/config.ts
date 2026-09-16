@@ -24,6 +24,13 @@ export const APPLICATION_DEADLINE = '';
  */
 export const INDEXABLE = false;
 
+/**
+ * I nomi delle persone (team di programma e Advisory Board) restano fuori
+ * dalla pagina finche' il consenso alla pubblicazione non e' documentato.
+ * Con `true` si pubblicano; la struttura in pagina e' gia' pronta.
+ */
+export const SHOW_PEOPLE_NAMES = false;
+
 export const CONTACT_EMAIL = 'info@improntaaccelerator.it';
 
 /** Sedi e riferimenti fisici del programma. */

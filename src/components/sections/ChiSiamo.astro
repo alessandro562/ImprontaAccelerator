@@ -1,0 +1,52 @@
+---
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../i18n/utils';
+import { SHOW_PEOPLE_NAMES } from '../../config';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+<Section id="chi-siamo">
+  <SectionHeader title={t.chiSiamo.title} lead={t.chiSiamo.lead} />
+
+  <div class="mt-12 grid gap-10 border-t border-line md:grid-cols-3 md:gap-10">
+    {t.chiSiamo.orgs.map((org) => (
+      <article class="pt-6 md:border-t md:border-line">
+        <h3 class="t-h3 text-ink">
+          <a href={org.url} target="_blank" rel="noopener" class="t-link">{org.name}</a>
+        </h3>
+        <p class="t-label mt-2">{org.role}</p>
+        <p class="t-body mt-4 text-ink-muted">{org.text}</p>
+      </article>
+    ))}
+  </div>
+
+  <div class="mt-16 grid gap-10 lg:grid-cols-2 lg:gap-16">
+    <div>
+      <h3 class="t-h3 text-ink">{t.chiSiamo.corporatesTitle}</h3>
+      <p class="t-body mt-4 text-ink-muted">{t.chiSiamo.corporatesText}</p>
+    </div>
+    <div>
+      <h3 class="t-h3 text-ink">{t.chiSiamo.ecosystemTitle}</h3>
+      <p class="t-body mt-4 text-ink-muted">{t.chiSiamo.ecosystemText}</p>
+    </div>
+  </div>
+
+  <div class="mt-16">
+    <h3 class="t-h3 text-ink">{t.chiSiamo.peopleTitle}</h3>
+    {!SHOW_PEOPLE_NAMES && <p class="t-small mt-3 max-w-2xl text-ink-muted">{t.chiSiamo.peopleNote}</p>}
+    <ul class="mt-6 grid gap-x-10 border-t border-line sm:grid-cols-2 lg:grid-cols-3">
+      {t.chiSiamo.teamRoles.map((role) => (
+        <li class="t-body border-b border-line py-3 text-ink">{role}</li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="mt-16 max-w-3xl">
+    <h3 class="t-h3 text-ink">{t.chiSiamo.advisoryTitle}</h3>
+    <p class="t-body mt-4 text-ink-muted">{t.chiSiamo.advisoryText}</p>
+  </div>
+</Section>
