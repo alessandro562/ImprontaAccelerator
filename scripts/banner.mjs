@@ -48,6 +48,29 @@ async function bianco(percorso) {
 
 const dentro = (svg) => svg.match(/<svg[^>]*>([\s\S]*)<\/svg>/)[1];
 
+/**
+ * Il riquadro reale di un gruppo del logo, misurato dal browser.
+ *
+ * Stimarlo a occhio non funziona: il punto della «i» del logotipo arriva a
+ * y=6, molto piu' in alto di dove sembra, e un viewBox tirato a mano lo taglia.
+ * Qui lo si chiede a getBBox, cosi' resta giusto anche se il file del logo
+ * cambia.
+ */
+async function riquadri(browser, svg, ids, margine = 4) {
+  const page = await browser.newPage();
+  await page.setContent(`<body style="margin:0">${svg}</body>`);
+  const misure = await page.evaluate(({ ids, margine }) => {
+    const out = {};
+    for (const id of ids) {
+      const b = document.getElementById(id).getBBox();
+      out[id] = `${b.x - margine} ${b.y - margine} ${b.width + margine * 2} ${b.height + margine * 2}`;
+    }
+    return out;
+  }, { ids, margine });
+  await page.close();
+  return misure;
+}
+
 const [monoSvg, elisSvg, poppins500, poppins600] = await Promise.all([
   readFile('src/assets/logo-impronta-mono.svg', 'utf8'),
   readFile('brand/loghi/Logo2_Elis.svg', 'utf8'),
@@ -61,24 +84,31 @@ const [next4, wda] = await Promise.all([bianco(LOGHI.next4), bianco(LOGHI.wda)])
 const pittogramma = dentro(monoSvg).match(/<g id="mono-pittogramma">[\s\S]*?<\/g>/)[0];
 const testo = dentro(monoSvg).match(/<g id="mono-testo">[\s\S]*?<\/g>/)[0];
 
+const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' });
+const vb = await riquadri(browser, monoSvg, ['mono-pittogramma', 'mono-testo']);
+
 const html = `<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{font-family:P;src:url("data:font/woff2;base64,${poppins500}") format("woff2");font-weight:500}
 @font-face{font-family:P;src:url("data:font/woff2;base64,${poppins600}") format("woff2");font-weight:600}
 *{margin:0;padding:0;box-sizing:border-box}
 body{width:1920px;height:1080px;overflow:hidden;font-family:P,sans-serif}
-.tela{position:relative;width:1920px;height:1080px;overflow:hidden;
-  background:
-    radial-gradient(64% 86% at 30% 26%, rgba(249,178,51,.95) 0%, rgba(249,178,51,0) 64%),
-    linear-gradient(103deg,#7FBB36 0%,#C9C13C 14%,#F9B233 32%,#F0894A 52%,#E16251 70%,#D8456A 86%,#D22F64 100%);}
-/* Gli archi vanno tagliati dai bordi: e' il taglio che li fa leggere come
-   trama del marchio invece che come disegno appoggiato sopra. */
-.arco{position:absolute;fill:none;stroke:#fff;stroke-linecap:round}
-.arco--sx{left:-1180px;top:-380px;width:2000px;opacity:.15}
-.arco--giu{left:96px;bottom:-690px;width:1320px;opacity:.14}
-.colonna{position:absolute;right:104px;top:76px;bottom:80px;width:660px;
-  display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start}
+.tela{position:relative;width:1920px;height:1080px;overflow:hidden;background:#0F1412}
+/* Un alone freddo dietro gli archi: stacca la figura dal fondo senza
+   introdurre un colore che non sia del marchio. */
+.tela::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(44% 58% at 30% 78%, rgba(249,178,51,.15) 0%, rgba(226,98,81,.07) 42%, rgba(15,20,18,0) 74%)}
+
+/* Il marchio ingrandito e tagliato dal bordo inferiore: e' l'arco a portare il
+   colore, come nell'hero del sito. Niente gradiente steso sul fondo. */
+.marchio{position:absolute;left:88px;bottom:-78px;width:980px}
+.marchio path{fill:none;stroke-width:20;stroke-linecap:round}
+.colonna{position:absolute;right:104px;top:76px;bottom:80px;width:680px;
+  display:flex;flex-direction:column;align-items:flex-start}
+/* Il logotipo si centra nello spazio che gli resta sopra i promotori: in alto
+   da solo lasciava il lato destro sbilanciato. */
+.centro{flex:1;display:flex;align-items:center}
 .firma{width:310px}
-.logotipo{width:620px}
+.logotipo{width:660px}
 .promotori{width:100%}
 .promotori__linea{width:100%;height:1px;background:rgba(255,255,255,.34);margin-bottom:30px}
 .promotori__eti{font-size:19px;font-weight:500;letter-spacing:.17em;text-transform:uppercase;
@@ -92,11 +122,21 @@ body{width:1920px;height:1080px;overflow:hidden;font-family:P,sans-serif}
 .promotori__riga .wd{height:46px}
 </style></head><body>
 <div class="tela">
-  <svg class="arco arco--sx" viewBox="0 0 260 248"><path class="arco" d="M 17 229 C 17 91 55 16 129.5 16 C 204 16 242 91 242 229" stroke-width="20"/></svg>
-  <svg class="arco arco--giu" viewBox="0 0 260 248"><path class="arco" d="M 60 221 C 60 129 87 83 129 83 C 171 83 198 129 198 221" stroke-width="20"/></svg>
+  <svg class="marchio" viewBox="0 0 260 248" aria-hidden="true">
+    <defs>
+      <linearGradient id="g-est" gradientUnits="userSpaceOnUse" x1="17" y1="120" x2="242" y2="120">
+        <stop offset="0" stop-color="#76B830"/><stop offset="1" stop-color="#F9B233"/>
+      </linearGradient>
+      <linearGradient id="g-int" gradientUnits="userSpaceOnUse" x1="60" y1="150" x2="198" y2="150">
+        <stop offset="0" stop-color="#F9B233"/><stop offset=".5" stop-color="#E16251"/><stop offset=".82" stop-color="#D22F64"/>
+      </linearGradient>
+    </defs>
+    <path d="M 17 229 C 17 91 55 16 129.5 16 C 204 16 242 91 242 229" stroke="url(#g-est)"/>
+    <path d="M 60 221 C 60 129 87 83 129 83 C 171 83 198 129 198 221" stroke="url(#g-int)"/>
+    <ellipse cx="129" cy="188" rx="28.5" ry="35" fill="#D22F64"/>
+  </svg>
   <div class="colonna">
-    <svg class="firma" viewBox="0 0 260 248">${pittogramma}</svg>
-    <svg class="logotipo" viewBox="287 40 796 200">${testo}</svg>
+    <div class="centro"><svg class="logotipo" viewBox="${vb['mono-testo']}">${testo}</svg></div>
     <div class="promotori">
       <div class="promotori__linea"></div>
       <div class="promotori__eti">Un programma di</div>
@@ -111,7 +151,6 @@ body{width:1920px;height:1080px;overflow:hidden;font-family:P,sans-serif}
 </body></html>`;
 
 await mkdir(OUT, { recursive: true });
-const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' });
 for (const { scala, nome } of MISURE) {
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: scala });
   await page.setContent(html);
