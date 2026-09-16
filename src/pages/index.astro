@@ -6,6 +6,7 @@ import Hero from '../components/sections/Hero.astro';
 import Sintesi from '../components/sections/Sintesi.astro';
 import Programma from '../components/sections/Programma.astro';
 import Requisiti from '../components/sections/Requisiti.astro';
+import Investimento from '../components/sections/Investimento.astro';
 
 import { useTranslations } from '../i18n';
 import { currentLocale } from '../i18n/utils';
@@ -24,6 +25,7 @@ const faqFlat = t.faq.groups.flatMap((group) => group.items);
     <Sintesi locale={locale} />
     <Programma locale={locale} />
     <Requisiti locale={locale} />
+    <Investimento locale={locale} />
   </main>
   <Footer locale={locale} />
 </Base>

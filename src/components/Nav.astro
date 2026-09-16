@@ -3,7 +3,7 @@ import Logo from './Logo.astro';
 import Cta from './Cta.astro';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import { useTranslations } from '../i18n';
-import { localeUrl, type Locale } from '../i18n/utils';
+import { localeUrl, pageKeyFromUrl, type Locale } from '../i18n/utils';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
@@ -11,6 +11,10 @@ const t = useTranslations(locale);
 const home = localeUrl(locale);
 const conditions = localeUrl(locale, 'condizioni');
 const sectionsLabel = locale === 'it' ? 'Sezioni' : 'Sections';
+
+// Fuori dalla home le ancore devono tornare alla home, non cercare una
+// sezione che in quella pagina non esiste.
+const anchor = (id: string) => (pageKeyFromUrl(Astro.url.pathname) === '' ? `#${id}` : `${home}#${id}`);
 ---
 <header data-site-header class="sticky top-0 z-50 border-b border-line bg-paper">
   <div class="container-page flex h-16 items-center justify-between gap-6 md:h-[72px]">
@@ -20,7 +24,7 @@ const sectionsLabel = locale === 'it' ? 'Sezioni' : 'Sections';
 
     <nav class="hidden items-center gap-6 lg:flex" aria-label={sectionsLabel}>
       {t.nav.items.map((item) => (
-        <a href={`#${item.id}`} class="font-sans text-[15px] text-ink-muted transition-colors hover:text-ink">
+        <a href={anchor(item.id)} class="font-sans text-[15px] text-ink-muted transition-colors hover:text-ink">
           {item.label}
         </a>
       ))}
@@ -56,7 +60,7 @@ const sectionsLabel = locale === 'it' ? 'Sezioni' : 'Sections';
   <div id="mobile-menu" hidden class="border-t border-line bg-paper lg:hidden">
     <nav class="container-page flex flex-col py-2" aria-label={sectionsLabel}>
       {t.nav.items.map((item) => (
-        <a href={`#${item.id}`} class="border-b border-line py-3 font-sans text-base text-ink">{item.label}</a>
+        <a href={anchor(item.id)} class="border-b border-line py-3 font-sans text-base text-ink">{item.label}</a>
       ))}
       <a href={conditions} class="border-b border-line py-3 font-sans text-base text-ink">{t.nav.conditions}</a>
       <Cta locale={locale} source="nav-mobile" label={t.nav.cta} class="mt-4 mb-4 w-full" />
