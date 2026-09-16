@@ -108,16 +108,22 @@ npm run diff
 ```
 
 Lo script fotografa concept e build alle due viewport, con tutto rivelato e le
-animazioni ferme, e le confronta con pixelmatch. Soglie: meno dell'1% di pixel
-diversi e meno di 20px di differenza in altezza.
+animazioni ferme.
+
+**Il verdetto è sulla griglia**, non sui pixel: per una settantina di blocchi
+confronta posizione orizzontale, larghezza e ordine. Se cambiano, la struttura
+si è rotta. La percentuale di pixel diversi viene stampata come informazione,
+non come giudizio: il copy del sito è più asciutto di quello del concept, per
+richiesta successiva, quindi i testi più corti spostano tutto in verticale.
 
 Due cose da sapere prima di leggerne l'esito:
 
-- **Il concept carica i font da Google.** Dove quella rete non c'è — la CI, un
-  container — ripiegherebbe sui font di sistema, e il confronto misurerebbe la
-  differenza fra i caratteri invece che fra i layout. Per questo lo script
-  inietta nel concept le stesse `@font-face` della build. Il resto del CSS del
-  concept non viene toccato.
+- **Il concept carica i font da Google, e usa caratteri diversi dal sito.** In
+  un ambiente senza quella rete ripiegherebbe sui font di sistema, e comunque
+  confronterebbe Bricolage con Poppins. Per questo lo script inietta nel
+  concept le `@font-face` della build e le stesse famiglie. Va in fondo al
+  `<head>`: prima del `<style>` del concept perderebbe contro le sue stesse
+  dichiarazioni in `:root`. Il resto del CSS del concept non viene toccato.
 - **Due testi dipendono da `src/config.ts`** e restano fuori dal conteggio: lo
   stato della call nell'hero e la frase di chiusura con la data. Lo script
   dichiara quanti pixel ha escluso.
@@ -128,18 +134,33 @@ Due cose da sapere prima di leggerne l'esito:
 python3 scripts/fonts.py
 ```
 
-Scarica Bricolage Grotesque dal repo `google/fonts` e ne genera un subset
-`latin` + `latin-ext` **conservando gli assi variabili** (`opsz`, `wdth`,
-`wght`). Gli assi non sono un dettaglio: il concept li imposta a mano con
-`font-variation-settings`, e un subset statico farebbe collassare tutta la
-tipografia sui valori di default.
+I caratteri sono quelli di marca, presi dal deck ufficiale
+`brand/impronta_18_editabile.pptx`, che è composto in **Poppins** (337
+occorrenze) con **Inter** come secondario:
 
-Il woff2 finisce in `src/assets/fonts/`, non in `public/`: così passa da Vite,
-che gli applica hash e base path. Un url assoluto scritto a mano nel CSS si
-romperebbe il giorno in cui il sito passa a un dominio custom.
+| | |
+|---|---|
+| Poppins 500, 600, 700 | titoli e numeri |
+| Poppins 400 corsivo | le parole d'accento |
+| Inter variabile | tutto il testo corrente |
 
-Geist e Instrument Serif arrivano da Fontsource. **Nessuna richiesta a Google
-Fonts dal sito pubblicato**: è anche una promessa della cookie policy.
+Lo script li scarica da `google/fonts` e ne genera i subset `latin` +
+`latin-ext`. I woff2 finiscono in `src/assets/fonts/`, non in `public/`: così
+passano da Vite, che applica hash e base path. Un url assoluto scritto a mano
+nel CSS si romperebbe il giorno in cui il sito passa a un dominio custom.
+
+**Nessuna richiesta a Google Fonts dal sito pubblicato**: è anche una promessa
+della cookie policy.
+
+Il lettering del marchio non è Poppins — ha la «a» a due piani, Poppins a un
+piano — ma nei file del logo è vettorializzato, quindi come webfont non serve.
+
+Poppins è un font statico, e questo ha due conseguenze sul CSS: i
+`font-variation-settings` del concept sono stati rimossi invece che lasciati
+inerti, e i pesi `650` sono diventati `600`. Inoltre Poppins è più larga di
+Bricolage impostata a `wdth 86`: due titoli che nel concept stanno su una riga
+andavano a capo, e il loro corpo è ridotto quel tanto che basta. Le tre cose
+sono raccolte in fondo a `concept.css`, sotto *Adattamenti a Poppins*.
 
 ---
 
@@ -148,6 +169,7 @@ Fonts dal sito pubblicato**: è anche una promessa della cookie policy.
 Il registro è quello di `CLAUDE.md`: una pagina di attrazione, non una pagina
 informativa. Candidatura e regolamento vivono su una piattaforma esterna.
 
+- Si dice **batch**, non «coorte».
 - Budget testo: circa 300 parole nel `<main>` della home italiana. Non si
   aggiungono sezioni, tabelle, accordion, FAQ o pagine di approfondimento senza
   richiesta esplicita.

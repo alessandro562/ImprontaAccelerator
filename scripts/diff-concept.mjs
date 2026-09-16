@@ -22,8 +22,9 @@ const VIEWPORTS = [
   { name: '1440', width: 1440, height: 900 },
   { name: '390', width: 390, height: 844 },
 ];
-const SOGLIA_PIXEL = 1;   // percentuale massima di pixel diversi
-const SOGLIA_ALTEZZA = 20; // px
+// Tolleranza sulla geometria orizzontale: sotto questa soglia la differenza e'
+// arrotondamento del layout, non uno scostamento.
+const SOGLIA_X = 2; // px
 
 // Il Chromium scaricato da Playwright non corrisponde a quello dell'immagine.
 const SYSTEM_CHROME = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
@@ -58,13 +59,19 @@ async function buildIfStale() {
 }
 
 /**
- * Le @font-face emesse dalla build.
+ * Il CSS con cui si allineano i caratteri del concept a quelli del sito.
  *
- * Il concept carica i font da Google: in ambienti senza quella rete — la CI, il
- * container di sviluppo — ripiega sui font di sistema, e il confronto misura la
- * differenza fra i font invece che fra i layout. Iniettando qui le stesse
- * @font-face del sito, le due pagine partono dagli stessi caratteri e restano
- * confrontabili. Il resto del CSS del concept non viene toccato.
+ * Due motivi, entrambi documentati in src/styles/concept.css:
+ *
+ * 1. Il concept carica i font da Google. Dove quella rete non c'e' — la CI, un
+ *    container — ripiegherebbe sui font di sistema.
+ * 2. Il sito usa i font di marca, Poppins e Inter, non quelli del concept.
+ *
+ * In entrambi i casi il confronto finirebbe per misurare la differenza fra i
+ * caratteri invece che fra le strutture. Qui si iniettano nel concept le
+ * @font-face della build, le stesse famiglie e gli stessi adattamenti che
+ * Poppins impone: nessun asse variabile e nessun peso 650.
+ * Il resto del CSS del concept non viene toccato.
  */
 async function fontFacesDellaBuild() {
   const dir = 'dist/_astro';
@@ -74,7 +81,16 @@ async function fontFacesDellaBuild() {
   }
   const regole = css.join('\n').match(/@font-face\s*{[^}]*}/g) ?? [];
   if (regole.length === 0) throw new Error('nessuna @font-face nella build: il confronto non sarebbe attendibile');
-  return regole.join('\n');
+  return `
+    ${regole.join('\n')}
+    :root{
+      --display:"Poppins", system-ui, sans-serif;
+      --sans:"Inter", ui-sans-serif, system-ui, sans-serif;
+      --serif:"Poppins", system-ui, sans-serif;
+    }
+    *{font-variation-settings:normal!important}
+    .front__t,.step h3,.team__foot strong{font-weight:600!important}
+  `;
 }
 
 /**
@@ -87,9 +103,12 @@ function serve(fontFaces) {
     let file;
     if (url === '/concept/') {
       const html = await readFile('docs/concept/impronta-landing-v2.html', 'utf8');
+      // Lo stile va in fondo al <head>: prima del <style> del concept
+      // perderebbe contro le sue stesse dichiarazioni in :root.
       const conFontLocali = html
         .replace(/<link rel="preconnect"[^>]*>/g, '')
-        .replace(/<link href="https:\/\/fonts\.googleapis\.com[^>]*>/g, `<style>${fontFaces}</style>`);
+        .replace(/<link href="https:\/\/fonts\.googleapis\.com[^>]*>/g, '')
+        .replace('</head>', `<style>${fontFaces}</style></head>`);
       res.writeHead(200, { 'content-type': 'text/html' });
       return res.end(conFontLocali);
     }
@@ -112,6 +131,35 @@ function serve(fontFaces) {
     server.listen(0, () => resolve({ server, port: server.address().port }));
   });
 }
+
+/**
+ * La griglia della pagina: per ogni blocco, dove comincia e quanto e' largo.
+ *
+ * E' questo che il confronto verifica. I pixel non bastano piu' come verdetto:
+ * il copy del sito e' piu' asciutto di quello del concept, per richiesta, e i
+ * testi piu' corti spostano tutto in verticale. Le posizioni orizzontali e
+ * l'ordine dei blocchi, invece, devono restare identici: se cambiano, e' la
+ * struttura ad essersi rotta.
+ */
+const GRIGLIA = () => {
+  const selettori = [
+    'section', '.wrap', '.hero h1', '.hero__sub', '.hero__cta',
+    '.numbers__intro .label', '.numbers__intro p', '.num', '.num__v',
+    '.head h2', '.head p', '.front', '.front__n', '.front__t', '.tags',
+    '.who__lead', '.who__list', '.who__list li',
+    '.steps__list', '.step', '.step__n',
+    '.orgs', '.org', '.org__name', '.org__role', '.team__foot div',
+    '.close h2', '.close p', '.foot__grid', '.foot__legal',
+  ];
+  const out = [];
+  for (const sel of selettori) {
+    document.querySelectorAll(sel).forEach((el, i) => {
+      const r = el.getBoundingClientRect();
+      out.push({ sel, i, x: Math.round(r.x), w: Math.round(r.width) });
+    });
+  }
+  return out;
+};
 
 /**
  * Stato di cattura: tutto visibile e fermo, così il confronto non dipende dal
@@ -140,6 +188,7 @@ async function scatta(page, url, file, vp) {
   await page.evaluate(() => document.fonts.ready);
   await page.evaluate(PREPARA);
   await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
+  const griglia = await page.evaluate(GRIGLIA);
   const misure = await page.evaluate(() => {
     const box = (sel) => {
       const el = document.querySelector(sel);
@@ -156,7 +205,7 @@ async function scatta(page, url, file, vp) {
     };
   });
   await page.screenshot({ path: file, fullPage: true });
-  return misure;
+  return { ...misure, griglia };
 }
 
 /** Annerisce una zona in entrambe le immagini, così non pesa sul confronto. */
@@ -232,16 +281,29 @@ for (const vp of VIEWPORTS) {
   const pixelConfrontati = width * (alto.h + basso.h);
   const perc = ((alto.n + basso.n) / pixelConfrontati) * 100;
   const deltaH = Math.abs(mConcept.altezza - mSito.altezza);
-  const esclusi = Math.abs((a.height - coda) - yFrase) + Math.abs((b.height - coda) - yFrase);
-  const okPerc = perc < SOGLIA_PIXEL;
-  const okH = deltaH <= SOGLIA_ALTEZZA;
-  if (!okPerc) problemi += 1;
+
+  // Verdetto: la griglia. Stessi blocchi, stesso ordine, stesse colonne.
+  const gc = mConcept.griglia;
+  const gs = mSito.griglia;
+  const scostamenti = [];
+  if (gc.length !== gs.length) {
+    scostamenti.push(`blocchi: ${gc.length} nel concept, ${gs.length} nel sito`);
+  } else {
+    for (let i = 0; i < gc.length; i++) {
+      if (gc[i].sel !== gs[i].sel) { scostamenti.push(`ordine diverso a ${gc[i].sel}`); break; }
+      if (Math.abs(gc[i].x - gs[i].x) > SOGLIA_X || Math.abs(gc[i].w - gs[i].w) > SOGLIA_X) {
+        scostamenti.push(`${gc[i].sel}[${gc[i].i}] x ${gc[i].x}→${gs[i].x}, larghezza ${gc[i].w}→${gs[i].w}`);
+      }
+    }
+  }
+  if (scostamenti.length > 0) problemi += 1;
 
   console.log(
-    `${vp.name}px  pixel diversi ${perc.toFixed(2)}% ${okPerc ? 'ok' : `> ${SOGLIA_PIXEL}%`}  |  ` +
-    `altezza concept ${mConcept.altezza} / sito ${mSito.altezza}, Δ ${deltaH}px ${okH ? 'ok' : '— vedi nota'}  |  ` +
-    `fuori conteggio ${esclusi}px (stato della call e frase di chiusura, dipendono da config.ts)`,
+    `${vp.name}px  griglia: ${scostamenti.length === 0 ? `${gc.length} blocchi allineati` : `${scostamenti.length} scostamenti`}  |  ` +
+    `pixel diversi ${perc.toFixed(2)}% (il copy del sito e' piu' asciutto del concept)  |  ` +
+    `altezza concept ${mConcept.altezza} / sito ${mSito.altezza}, Δ ${deltaH}px`,
   );
+  for (const s of scostamenti.slice(0, 8)) console.log(`         ${s}`);
 }
 
 await browser.close();

@@ -141,7 +141,7 @@ for (const pagePath of pages) {
     await page.addStyleTag({ content: `
       *,*::before,*::after{animation-duration:0s!important;animation-delay:0s!important;
         animation-fill-mode:forwards!important;transition:none!important}
-      header{position:static!important}
+      header{position:absolute!important}
       html{scroll-behavior:auto!important}
       .rise{opacity:1!important;transform:none!important}
       .fade{opacity:1!important}

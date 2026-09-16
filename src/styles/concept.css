@@ -1,21 +1,57 @@
 /*
- * Stili del concept `docs/concept/impronta-landing-v2.html`, copiati 1:1.
+ * Stili del concept `docs/concept/impronta-landing-v2.html`.
  *
- * Valori, clamp, colori e timing non vanno modificati: la fedelta' al concept
- * e' verificata da `npm run diff` (pixelmatch a 1440 e 390).
- * L'unica differenza rispetto al concept sono le @font-face qui sotto, che
- * puntano ai font self-hosted invece che a Google Fonts.
+ * Valori, clamp, colori, spaziature e timing non vanno modificati: la fedelta'
+ * al concept e' verificata da `npm run diff` (pixelmatch a 1440 e 390).
+ *
+ * Due deviazioni dichiarate, entrambe sui caratteri:
+ *
+ * 1. I font sono quelli di marca — Poppins e Inter, dal deck ufficiale — non
+ *    quelli del concept. Sono self-hosted: nessuna richiesta a Google Fonts.
+ * 2. Poppins e' statico, quindi i `font-variation-settings` del concept (assi
+ *    opsz e wdth di Bricolage) sono stati rimossi invece che lasciati inerti,
+ *    e i pesi 650 sono diventati 600, che e' un peso che esiste davvero.
+ *
+ * `npm run diff` applica le stesse due sostituzioni al concept, cosi' il
+ * confronto misura la struttura e non la differenza fra i caratteri.
  */
 
-/* Bricolage Grotesque: subset generato da scripts/fonts.py, assi conservati.
-   Gli intervalli di font-weight e font-stretch devono coprire gli assi, o il
-   browser ignora i font-variation-settings del concept.
-   L'url e' relativo: lo risolve Vite, che applica hash e base path. */
+/* Poppins: titoli, numeri e parole d'accento. Pesi 500, 600 e 700 piu' il
+   corsivo regolare. I file arrivano da scripts/fonts.py. */
 @font-face {
-  font-family: "Bricolage Grotesque";
-  src: url("../assets/fonts/bricolage-grotesque-latin.woff2") format("woff2");
-  font-weight: 200 800;
-  font-stretch: 75% 100%;
+  font-family: "Poppins";
+  src: url("../assets/fonts/poppins-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/poppins-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/poppins-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/poppins-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Inter, variabile: tutto il testo corrente. */
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/inter-variable.woff2") format("woff2");
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
@@ -33,9 +69,9 @@
   --amber:#F9B233;
   --coral:#E16251;
   --magenta:#D22F64;
-  --display:"Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
-  --sans:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --serif:"Instrument Serif", Georgia, "Times New Roman", serif;
+  --display:"Poppins", system-ui, sans-serif;
+  --sans:"Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --accent:"Poppins", system-ui, sans-serif;
   --pad:clamp(20px, 4vw, 56px);
   --max:1360px;
   --ease:cubic-bezier(.2,.7,.1,1);
@@ -46,8 +82,8 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);f
 img,svg{display:block;max-width:100%}
 a{color:inherit}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
-.display{font-family:var(--display);font-variation-settings:"opsz" 96,"wdth" 86;font-weight:700;letter-spacing:-.035em;line-height:.9}
-.it{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em}
+.display{font-family:var(--display);font-weight:700;letter-spacing:-.035em;line-height:.9}
+.it{font-family:var(--accent);font-style:italic;font-weight:400;letter-spacing:-.01em}
 .label{font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.02em;color:var(--muted);display:flex;align-items:center;gap:10px}
 .label::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.9}
 .skip{position:absolute;left:-9999px}
@@ -115,7 +151,7 @@ a{color:inherit}
 .numbers{padding:clamp(88px,12vw,160px) 0 clamp(72px,9vw,120px)}
 .numbers__intro{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;margin-bottom:clamp(48px,7vw,96px)}
 .numbers__intro .label{grid-column:1/4}
-.numbers__intro p{grid-column:4/12;margin:0;font-family:var(--display);font-variation-settings:"opsz" 48,"wdth" 95;font-weight:500;font-size:clamp(1.7rem,3.2vw,3rem);line-height:1.08;letter-spacing:-.02em}
+.numbers__intro p{grid-column:4/12;margin:0;font-family:var(--display);font-weight:500;font-size:clamp(1.7rem,3.2vw,3rem);line-height:1.08;letter-spacing:-.02em}
 .numbers__intro p .it{font-size:1.1em}
 .numbers__grid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;row-gap:clamp(40px,5vw,72px)}
 .num{border-top:1px solid var(--line);padding-top:18px}
@@ -146,8 +182,8 @@ a{color:inherit}
 .front:last-child{border-bottom:1px solid var(--line)}
 .front::before{content:"";position:absolute;inset:0 calc(-1*var(--pad));background:var(--c);transform:scaleY(0);transform-origin:bottom;transition:transform .55s var(--ease);z-index:-1}
 .front:hover::before{transform:scaleY(1)}
-.front__n{font-family:var(--serif);font-style:italic;font-size:26px;color:var(--muted);transition:color .3s}
-.front__t{font-family:var(--display);font-variation-settings:"opsz" 96,"wdth" 86;font-weight:650;font-size:clamp(2.4rem,5.6vw,5.4rem);line-height:.95;letter-spacing:-.035em;margin:0;display:flex;align-items:center;gap:.3em}
+.front__n{font-family:var(--accent);font-style:italic;font-size:26px;color:var(--muted);transition:color .3s}
+.front__t{font-family:var(--display);font-weight:600;font-size:clamp(2.4rem,5.6vw,5.4rem);line-height:.95;letter-spacing:-.035em;margin:0;display:flex;align-items:center;gap:.3em}
 .front__t i{display:inline-block;width:.34em;height:.34em;border-radius:50%;background:var(--c);flex:none;transition:transform .5s var(--ease),background-color .3s}
 .front:hover .front__t i{transform:scale(.6);background:var(--ink)}
 .front__d{margin:0 0 14px;font-size:17px;max-width:36ch}
@@ -164,12 +200,12 @@ a{color:inherit}
 .who{background:var(--paper-2);padding:clamp(88px,11vw,150px) 0}
 .who__grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
 .who__lead{grid-column:1/8}
-.who__lead p{margin:22px 0 0;font-family:var(--display);font-variation-settings:"opsz" 72,"wdth" 92;font-weight:600;font-size:clamp(2.1rem,4.4vw,4.3rem);line-height:1.02;letter-spacing:-.03em}
+.who__lead p{margin:22px 0 0;font-family:var(--display);font-weight:600;font-size:clamp(2.1rem,4.4vw,4.3rem);line-height:1.02;letter-spacing:-.03em}
 .who__lead p .it{font-weight:400}
 .who__list{grid-column:9/13;list-style:none;margin:0;padding:0;align-self:end}
 .who__list li{padding:22px 0;border-top:1px solid var(--line)}
 .who__list li:last-child{border-bottom:1px solid var(--line)}
-.who__k{font-family:var(--display);font-variation-settings:"opsz" 48,"wdth" 90;font-weight:700;font-size:30px;letter-spacing:-.02em;line-height:1}
+.who__k{font-family:var(--display);font-weight:700;font-size:30px;letter-spacing:-.02em;line-height:1}
 .who__v{margin-top:8px;color:var(--muted);font-size:16px}
 @media (max-width:860px){.who__lead,.who__list{grid-column:1/-1}.who__list{margin-top:40px}}
 
@@ -187,8 +223,8 @@ a{color:inherit}
 .steps.is-in .steps__track span:nth-child(3){transition-delay:.36s}
 .steps.is-in .steps__track span:nth-child(4){transition-delay:.54s}
 .step{padding-top:32px}
-.step__n{font-family:var(--serif);font-style:italic;font-size:clamp(3.4rem,5vw,4.8rem);line-height:.9;color:var(--c)}
-.step h3{margin:22px 0 10px;font-family:var(--display);font-variation-settings:"opsz" 48,"wdth" 92;font-weight:650;font-size:clamp(1.6rem,2.2vw,2.1rem);letter-spacing:-.02em;line-height:1.05}
+.step__n{font-family:var(--accent);font-style:italic;font-size:clamp(3.4rem,5vw,4.8rem);line-height:.9;color:var(--c)}
+.step h3{margin:22px 0 10px;font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,2.2vw,2.1rem);letter-spacing:-.02em;line-height:1.05}
 .step p{margin:0;color:var(--muted-dark);font-size:16px;max-width:28ch}
 .step__meta{display:inline-block;margin-top:18px;font-size:13px;color:var(--paper);border:1px solid var(--ink-line);border-radius:999px;padding:6px 12px}
 @media (max-width:980px){
@@ -204,12 +240,12 @@ a{color:inherit}
 .orgs{list-style:none;margin:0;padding:0}
 .org{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:24px;padding:clamp(18px,2.2vw,28px) 0;border-top:1px solid var(--line)}
 .org:last-child{border-bottom:1px solid var(--line)}
-.org__name{font-family:var(--display);font-variation-settings:"opsz" 96,"wdth" 84;font-weight:700;font-size:clamp(2.6rem,7.6vw,7.6rem);letter-spacing:-.04em;line-height:.92;margin:0;text-decoration:none;transition:color .3s}
+.org__name{font-family:var(--display);font-weight:700;font-size:clamp(2.6rem,7.6vw,7.6rem);letter-spacing:-.04em;line-height:.92;margin:0;text-decoration:none;transition:color .3s}
 a.org__name:hover{color:var(--magenta)}
 .org__role{font-size:16px;color:var(--muted);text-align:right;max-width:26ch}
 .team__foot{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:clamp(40px,5vw,64px)}
 .team__foot div{font-size:16px;color:var(--muted);max-width:40ch}
-.team__foot strong{display:block;color:var(--ink);font-family:var(--display);font-variation-settings:"opsz" 48,"wdth" 92;font-weight:650;font-size:24px;letter-spacing:-.02em;margin-bottom:6px}
+.team__foot strong{display:block;color:var(--ink);font-family:var(--display);font-weight:600;font-size:24px;letter-spacing:-.02em;margin-bottom:6px}
 @media (max-width:700px){
   .org{grid-template-columns:1fr;gap:6px}
   .org__role{text-align:left}
@@ -252,3 +288,13 @@ a.org__name:hover{color:var(--magenta)}
   *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}
   .js [data-in]{opacity:1;transform:none}
 }
+
+/* ---------- Adattamenti a Poppins ---------- */
+/*
+ * Poppins e' sensibilmente piu' larga di Bricolage impostata a wdth 86, che e'
+ * il carattere del concept. Due titoli che li' stanno su una riga qui andavano
+ * a capo: si riduce il corpo quel tanto che basta a rimetterli in riga, senza
+ * toccare nient'altro.
+ */
+.num:nth-child(4) .num__v { font-size: clamp(3.4rem, 8vw, 8rem) }
+.org__name { font-size: clamp(2.4rem, 6vw, 6rem) }

@@ -30,19 +30,19 @@ export const it = {
 
   hero: {
     place: "Acceleratore d’impatto · Roma",
-    callOpen: "Candidature aperte · Coorte 2026",
-    callPending: "Coorte 2026 · Candidature in apertura",
+    callOpen: "Candidature aperte · Batch 2026",
+    callPending: "Batch 2026 · Candidature in apertura",
     h1: [
       { text: "Ricerca" },
       { text: "che lascia" },
       { text: "il ", accent: "segno." },
     ],
     sub: [
-      { text: "Ogni anno Impronta accelera " },
+      { text: "Ogni anno acceleriamo " },
       { text: "sei startup e spin-off", strong: true },
-      { text: " con tecnologie che migliorano l’ambiente, la salute e l’industria. Quattro mesi a Roma, " },
-      { text: "€150.000 di investimento", strong: true },
-      { text: " e un confronto diretto con le imprese." },
+      { text: " con tecnologie per l’ambiente, la salute e l’industria. Quattro mesi a Roma, " },
+      { text: "€150.000 in equity", strong: true },
+      { text: " e il confronto diretto con le imprese." },
     ],
     ctaPrimary: "Candidati",
     ctaSecondary: "Scopri il programma",
@@ -50,11 +50,11 @@ export const it = {
 
   programma: {
     label: "Il programma",
-    intro: { before: "Un percorso breve e intenso per portare una tecnologia ", accent: "dal laboratorio", after: " alle persone che ne hanno bisogno." },
+    intro: { before: "Un percorso breve per portare una tecnologia ", accent: "dal laboratorio", after: " a chi ne ha bisogno." },
     nums: [
-      { value: "6", label: "startup per coorte, dodici in due anni" },
-      { prefix: "€", value: "150", accent: "mila", label: "di investimento in equity per ciascuna startup" },
-      { value: "4", accent: "mesi", label: "di programma a Villa Fassini, Roma" },
+      { value: "6", label: "startup per batch, dodici in due anni" },
+      { prefix: "€", value: "150", accent: "mila", label: "in equity per ogni startup" },
+      { value: "4", accent: "mesi", label: "a Villa Fassini, Roma" },
       { value: "1", accent: "Demo Day", label: "davanti a imprese, investitori e istituzioni" },
     ],
   },
@@ -62,7 +62,7 @@ export const it = {
   fronti: {
     label: "Cosa cerchiamo",
     title: { before: "Tecnologie con un effetto ", accent: "misurabile" },
-    lead: "Ogni startup definisce all’ingresso i propri obiettivi d’impatto e li verifica a fine percorso con metodologia SROI.",
+    lead: "Obiettivi d’impatto fissati all’ingresso, verificati a fine percorso con metodologia SROI.",
     items: [
       {
         n: "01",
@@ -73,13 +73,13 @@ export const it = {
       {
         n: "02",
         name: "Salute",
-        text: "Cure, inclusione e servizi essenziali più vicini alle persone.",
+        text: "Cure, inclusione e servizi essenziali più vicini.",
         tags: ["Sanità digitale", "Biotech", "Tecnologie assistive"],
       },
       {
         n: "03",
         name: "Industria",
-        text: "Deep tech che diventa produzione e lavoro qualificato sul territorio.",
+        text: "Deep tech che diventa produzione e lavoro qualificato.",
         tags: ["Robotica", "Sensoristica", "AI per la manifattura"],
       },
     ],
@@ -89,21 +89,21 @@ export const it = {
     label: "Per chi",
     lead: { before: "Startup, spin-off universitari e gruppi di ricerca con una tecnologia ", accent: "già fuori", after: " dal laboratorio." },
     items: [
-      { k: "TRL 3–6", v: "Dal proof of concept al primo test sul campo" },
-      { k: "Lazio", v: "Sede operativa nella regione, anche da aprire prima dell’avvio" },
-      { k: "Pre-seed", v: "Società costituita o ancora da costituire" },
+      { k: "TRL 3–6", v: "Dal proof of concept al test sul campo" },
+      { k: "Lazio", v: "Sede operativa nel Lazio, anche da aprire prima dell’avvio" },
+      { k: "Pre-seed", v: "Costituita o ancora da costituire" },
     ],
   },
 
   comeFunziona: {
     label: "Come funziona",
     title: { before: "Quattro passaggi,", accent: "in un anno" },
-    lead: "Dalla candidatura online alla sperimentazione con le imprese partner.",
+    lead: "Dalla candidatura alla sperimentazione con le imprese.",
     steps: [
-      { n: "01", title: "Candidatura", text: "Racconti la tecnologia, il team e l’effetto che vuoi ottenere.", meta: "Online" },
-      { n: "02", title: "Selezione", text: "Un colloquio e un incontro con l’Advisory Board del programma.", meta: "Circa 9 settimane" },
-      { n: "03", title: "Accelerazione", text: "Moduli operativi, mentorship uno a uno e un investimento in equity.", meta: "4 mesi · Roma" },
-      { n: "04", title: "Demo Day", text: "La presentazione a imprese e investitori. Le soluzioni scelte dai partner passano alla sperimentazione.", meta: "Sperimentazione fino a 24 settimane" },
+      { n: "01", title: "Candidatura", text: "La tecnologia, il team e l’effetto che vuoi ottenere.", meta: "Online" },
+      { n: "02", title: "Selezione", text: "Un colloquio e l’incontro con l’Advisory Board.", meta: "Circa 9 settimane" },
+      { n: "03", title: "Accelerazione", text: "Moduli operativi, mentorship uno a uno, investimento in equity.", meta: "4 mesi · Roma" },
+      { n: "04", title: "Demo Day", text: "Presenti a imprese e investitori. Le soluzioni scelte dai partner passano alla sperimentazione.", meta: "Fino a 24 settimane" },
     ],
   },
 
@@ -111,17 +111,17 @@ export const it = {
     label: "Un programma di",
     orgs: [
       { name: "Next4", role: "Investitore Attivo del programma", url: "https://www.next4.it/" },
-      { name: "ELIS Innovation Hub", role: "Open innovation con le imprese e misurazione d’impatto", url: "https://www.elis.org/innovation-hub/" },
+      { name: "ELIS Innovation Hub", role: "Open innovation e misurazione d’impatto", url: "https://www.elis.org/innovation-hub/" },
       { name: "WDA", role: "Venture building al fianco dei founder", url: "https://wda.company" },
     ],
     notes: [
-      { title: "Villa Fassini, Roma", text: "Oltre 2.000 mq di spazi e 8 ettari di parco, a pochi minuti da Roma Tiburtina." },
-      { title: "Venture Tech Lazio", text: "Il programma è cofinanziato da Venture Tech Lazio, gestito da Lazio Innova." },
+      { title: "Villa Fassini, Roma", text: "2.000 mq e 8 ettari di parco, a pochi minuti da Roma Tiburtina." },
+      { title: "Venture Tech Lazio", text: "Cofinanziato da Venture Tech Lazio, gestito da Lazio Innova." },
     ],
   },
 
   chiusura: {
-    label: "Coorte 2026",
+    label: "Batch 2026",
     title: { before: "Lascia ", accent: "il segno." },
     deadlinePrefix: "Le candidature si raccolgono sulla piattaforma del programma fino al",
     deadlineSuffix: ".",

@@ -33,18 +33,18 @@ export const en: Dict = {
   // EN-DA-RIVEDERE
   hero: {
     place: "Impact accelerator · Rome",
-    callOpen: "Applications open · 2026 cohort",
-    callPending: "2026 cohort · Applications opening soon",
+    callOpen: "Applications open · 2026 batch",
+    callPending: "2026 batch · Applications opening soon",
     h1: [
       { text: "Research" },
       { text: "that leaves" },
       { text: "a ", accent: "mark." },
     ],
     sub: [
-      { text: "Each year Impronta accelerates " },
+      { text: "Each year we accelerate " },
       { text: "six startups and spin-offs", strong: true },
-      { text: " with technologies that improve the environment, health and industry. Four months in Rome, " },
-      { text: "€150,000 of investment", strong: true },
+      { text: " with technologies for the environment, health and industry. Four months in Rome, " },
+      { text: "€150,000 in equity", strong: true },
       { text: " and direct access to industry." },
     ],
     ctaPrimary: "Apply",
@@ -54,12 +54,12 @@ export const en: Dict = {
   // EN-DA-RIVEDERE
   programma: {
     label: "The programme",
-    intro: { before: "A short, intense programme to take a technology ", accent: "out of the lab", after: " and to the people who need it." },
+    intro: { before: "A short programme to take a technology ", accent: "out of the lab", after: " to the people who need it." },
     nums: [
-      { value: "6", label: "startups per cohort, twelve in two years" },
-      { prefix: "€", value: "150", accent: "k", label: "of equity investment in each startup" },
-      { value: "4", accent: "months", label: "of programme at Villa Fassini, Rome" },
-      { value: "1", accent: "Demo Day", label: "in front of companies, investors and institutions" },
+      { value: "6", label: "startups per batch, twelve in two years" },
+      { prefix: "€", value: "150", accent: "k", label: "in equity for each startup" },
+      { value: "4", accent: "months", label: "at Villa Fassini, Rome" },
+      { value: "1", accent: "Demo Day", label: "before companies, investors and institutions" },
     ],
   },
 
@@ -67,7 +67,7 @@ export const en: Dict = {
   fronti: {
     label: "What we look for",
     title: { before: "Technologies with a ", accent: "measurable" },
-    lead: "Each startup sets its impact goals on entry and verifies them at the end using the SROI methodology.",
+    lead: "Impact goals set on entry, verified at the end with the SROI methodology.",
     items: [
       {
         n: "01",
@@ -78,13 +78,13 @@ export const en: Dict = {
       {
         n: "02",
         name: "Health",
-        text: "Care, inclusion and essential services closer to people.",
+        text: "Care, inclusion and essential services, closer.",
         tags: ["Digital health", "Biotech", "Assistive technologies"],
       },
       {
         n: "03",
         name: "Industry",
-        text: "Deep tech that becomes production and skilled work in the region.",
+        text: "Deep tech that becomes production and skilled work.",
         tags: ["Robotics", "Sensing", "AI for manufacturing"],
       },
     ],
@@ -93,11 +93,11 @@ export const en: Dict = {
   // EN-DA-RIVEDERE
   perChi: {
     label: "Who it is for",
-    lead: { before: "Startups, university spin-offs and research groups with a technology ", accent: "already out", after: " of the lab." },
+    lead: { before: "Startups, spin-offs and research groups with a technology ", accent: "already out", after: " of the lab." },
     items: [
-      { k: "TRL 3–6", v: "From proof of concept to the first test in the field" },
-      { k: "Lazio", v: "An operating base in the region, which may be opened before the start" },
-      { k: "Pre-seed", v: "Incorporated, or still to be incorporated" },
+      { k: "TRL 3–6", v: "From proof of concept to the test in the field" },
+      { k: "Lazio", v: "An operating base in Lazio, which may be opened before the start" },
+      { k: "Pre-seed", v: "Incorporated, or still to be" },
     ],
   },
 
@@ -105,12 +105,12 @@ export const en: Dict = {
   comeFunziona: {
     label: "How it works",
     title: { before: "Four steps,", accent: "in one year" },
-    lead: "From the online application to the proof of concept with the partner companies.",
+    lead: "From the application to the proof of concept with industry.",
     steps: [
-      { n: "01", title: "Application", text: "You describe the technology, the team and the effect you are after.", meta: "Online" },
-      { n: "02", title: "Selection", text: "An interview and a meeting with the programme's Advisory Board.", meta: "About 9 weeks" },
-      { n: "03", title: "Acceleration", text: "Working modules, one-to-one mentorship and an equity investment.", meta: "4 months · Rome" },
-      { n: "04", title: "Demo Day", text: "The pitch to companies and investors. Solutions chosen by the partners move on to a proof of concept.", meta: "Proof of concept up to 24 weeks" },
+      { n: "01", title: "Application", text: "The technology, the team and the effect you are after.", meta: "Online" },
+      { n: "02", title: "Selection", text: "An interview and the meeting with the Advisory Board.", meta: "About 9 weeks" },
+      { n: "03", title: "Acceleration", text: "Working modules, one-to-one mentorship, equity investment.", meta: "4 months · Rome" },
+      { n: "04", title: "Demo Day", text: "You pitch to companies and investors. Solutions chosen by the partners move on to a proof of concept.", meta: "Up to 24 weeks" },
     ],
   },
 
@@ -119,18 +119,18 @@ export const en: Dict = {
     label: "A programme by",
     orgs: [
       { name: "Next4", role: "Active Investor in the programme", url: "https://www.next4.it/" },
-      { name: "ELIS Innovation Hub", role: "Open innovation with companies and impact measurement", url: "https://www.elis.org/innovation-hub/" },
-      { name: "WDA", role: "Venture building alongside the founders", url: "https://wda.company" },
+      { name: "ELIS Innovation Hub", role: "Open innovation and impact measurement", url: "https://www.elis.org/innovation-hub/" },
+      { name: "WDA", role: "Venture building alongside founders", url: "https://wda.company" },
     ],
     notes: [
-      { title: "Villa Fassini, Rome", text: "Over 2,000 sqm of space and 8 hectares of park, minutes from Roma Tiburtina." },
-      { title: "Venture Tech Lazio", text: "The programme is co-financed by Venture Tech Lazio, managed by Lazio Innova." },
+      { title: "Villa Fassini, Rome", text: "2,000 sqm and 8 hectares of park, minutes from Roma Tiburtina." },
+      { title: "Venture Tech Lazio", text: "Co-financed by Venture Tech Lazio, managed by Lazio Innova." },
     ],
   },
 
   // EN-DA-RIVEDERE
   chiusura: {
-    label: "2026 cohort",
+    label: "2026 batch",
     title: { before: "Leave ", accent: "a mark." },
     deadlinePrefix: "Applications are collected on the programme platform until",
     deadlineSuffix: ".",

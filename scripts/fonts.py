@@ -1,34 +1,39 @@
 #!/usr/bin/env python3
 """
-Genera il woff2 di Bricolage Grotesque usato per titoli e numeri.
+Genera i font di marca usati dal sito.
 
     python3 scripts/fonts.py
 
-Il concept imposta gli assi a mano (`font-variation-settings:"opsz" 96,"wdth" 86`):
-il subset deve restare variabile, altrimenti larghezza e dimensione ottica si
-perdono e la tipografia collassa sui valori di default. Per questo si passa da
-pyftsubset senza instancing e si conservano i tre assi opsz, wdth e wght.
+I caratteri sono quelli del deck ufficiale `brand/impronta_18_editabile.pptx`:
+Poppins per titoli, numeri e parole d'accento, Inter per il testo corrente.
 
-Geist e Instrument Serif arrivano da Fontsource e non passano di qui.
+Nota: il lettering del marchio non e' Poppins — ha la «a» a due piani, Poppins
+a un piano — ma e' vettorializzato nei file del logo e non serve come webfont.
 
-Il file finisce in `src/assets/`, non in `public/`: cosi' passa da Vite, che lo
-emette con hash e con il base path corretto. Un url assoluto scritto a mano nel
-CSS si romperebbe il giorno in cui il sito passa a un dominio custom, perche'
-`base` arriva da una variabile d'ambiente.
+I file finiscono in `src/assets/fonts/`, non in `public/`: cosi' passano da
+Vite, che applica hash e base path. Un url assoluto scritto a mano nel CSS si
+romperebbe il giorno in cui il sito passa a un dominio custom.
 """
 import subprocess
 import sys
 import urllib.request
 from pathlib import Path
 
-URL = (
-    "https://raw.githubusercontent.com/google/fonts/main/ofl/bricolagegrotesque/"
-    "BricolageGrotesque%5Bopsz,wdth,wght%5D.ttf"
-)
-OUT = Path("src/assets/fonts/bricolage-grotesque-latin.woff2")
+REPO = "https://raw.githubusercontent.com/google/fonts/main/ofl"
+OUT_DIR = Path("src/assets/fonts")
 
-# latin + latin-ext, gli stessi intervalli che Google Fonts serve per queste due
-# sottoparti, piu' i segni che il copy usa davvero (virgolette curve, euro, trattini).
+# Poppins e' statico: servono i pesi usati dal CSS (500, 600, 700) piu' il
+# corsivo regolare per le parole d'accento.
+FONTS = [
+    ("poppins/Poppins-Medium.ttf", "poppins-500.woff2"),
+    ("poppins/Poppins-SemiBold.ttf", "poppins-600.woff2"),
+    ("poppins/Poppins-Bold.ttf", "poppins-700.woff2"),
+    ("poppins/Poppins-Italic.ttf", "poppins-400-italic.woff2"),
+    ("inter/Inter%5Bopsz,wght%5D.ttf", "inter-variable.woff2"),
+]
+
+# latin + latin-ext, piu' i segni che il copy usa davvero (virgolette curve,
+# euro, trattini lunghi).
 UNICODES = (
     "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,"
     "U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,"
@@ -39,36 +44,31 @@ UNICODES = (
 )
 
 
-def main() -> int:
-    source = Path("/tmp/BricolageGrotesque-variable.ttf")
-    if not source.exists():
-        print(f"Scarico {URL}")
-        urllib.request.urlretrieve(URL, source)
+def genera(percorso: str, nome: str) -> None:
+    sorgente = Path("/tmp") / Path(percorso).name.replace("%5B", "[").replace("%5D", "]")
+    if not sorgente.exists():
+        urllib.request.urlretrieve(f"{REPO}/{percorso}", sorgente)
 
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    cmd = [
-        sys.executable, "-m", "fontTools.subset", str(source),
+    destinazione = OUT_DIR / nome
+    subprocess.run([
+        sys.executable, "-m", "fontTools.subset", str(sorgente),
         f"--unicodes={UNICODES}",
         "--layout-features=kern,liga,calt,tnum,case",
         "--flavor=woff2",
-        f"--output-file={OUT}",
-        # senza questi il subset perde gli assi e diventa statico
-        "--drop-tables-=fvar,STAT,avar,gvar,HVAR,MVAR",
-        "--name-IDs=*",
+        f"--output-file={destinazione}",
         "--no-hinting",
-    ]
-    subprocess.run(cmd, check=True)
+    ], check=True)
 
-    axes = subprocess.run(
-        [sys.executable, "-c",
-         "import sys;from fontTools.ttLib import TTFont;"
-         "f=TTFont(sys.argv[1]);"
-         "print(' '.join(f'{a.axisTag}:{a.minValue:g}-{a.maxValue:g}' for a in f['fvar'].axes))",
-         str(OUT)],
-        capture_output=True, text=True, check=True,
-    ).stdout.strip()
+    kb = destinazione.stat().st_size / 1024
+    print(f"{destinazione}  {kb:6.1f} KB")
 
-    print(f"{OUT} — {OUT.stat().st_size / 1024:.1f} KB — assi: {axes}")
+
+def main() -> int:
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    for vecchio in OUT_DIR.glob("bricolage*"):
+        vecchio.unlink()
+    for percorso, nome in FONTS:
+        genera(percorso, nome)
     return 0
 
 

@@ -1,11 +1,10 @@
 ---
-import '@fontsource-variable/geist';
-import '@fontsource/instrument-serif/400.css';
-import '@fontsource/instrument-serif/400-italic.css';
 import '../styles/concept.css';
 
-// Unico font precaricato: e' quello dei titoli, il primo che si vede.
-import bricolage from '../assets/fonts/bricolage-grotesque-latin.woff2?url';
+// Precaricati i due font del primo schermo: il titolo dell'hero e il testo.
+// Gli altri pesi di Poppins servono piu' in basso e possono arrivare dopo.
+import poppins700 from '../assets/fonts/poppins-700.woff2?url';
+import inter from '../assets/fonts/inter-variable.woff2?url';
 
 import LogoSprite from '../components/LogoSprite.astro';
 import { absoluteLocaleUrl, asset, LOCALES, type Locale } from '../i18n/utils';
@@ -67,7 +66,8 @@ const organization = {
     ))}
     <link rel="alternate" hreflang="x-default" href={absoluteLocaleUrl('it', pageKey)} />
 
-    <link rel="preload" href={bricolage} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={poppins700} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={inter} as="font" type="font/woff2" crossorigin />
 
     <link rel="icon" href={asset('favicon.svg')} type="image/svg+xml" />
     <link rel="icon" href={asset('favicon-32.png')} sizes="32x32" type="image/png" />
