@@ -54,7 +54,7 @@ export const en: Dict = {
   // EN-DA-RIVEDERE
   programma: {
     label: "The programme",
-    intro: { before: "A short programme to take a technology ", accent: "out of the lab", after: " to the people who need it." },
+    intro: { before: "We fund technologies that improve life in a community or a ", accent: "region", after: ". Impact arises in very different sectors: the programme looks at all of them." },
     nums: [
       { value: "6", label: "startups per batch, twelve in two years" },
       { prefix: "€", value: "150", accent: "k", label: "in equity for each startup" },
@@ -93,7 +93,7 @@ export const en: Dict = {
   // EN-DA-RIVEDERE
   perChi: {
     label: "Who it is for",
-    lead: { before: "Startups, spin-offs and research groups with a technology ", accent: "already out", after: " of the lab." },
+    lead: { before: "Startups, university spin-offs and research groups with a ", accent: "validated technology", after: " and a clear idea of where to apply it." },
     items: [
       { k: "TRL 3–6", v: "From proof of concept to the test in the field" },
       { k: "Lazio", v: "An operating base in Lazio, which may be opened before the start" },
@@ -104,12 +104,12 @@ export const en: Dict = {
   // EN-DA-RIVEDERE
   comeFunziona: {
     label: "How it works",
-    title: { before: "Four steps,", accent: "in one year" },
-    lead: "From the application to the proof of concept with industry.",
+    title: { before: "How you get in,", accent: "and what you get" },
+    lead: "Four steps, from the application to the proof of concept with industry.",
     steps: [
-      { n: "01", title: "Application", text: "The technology, the team and the effect you are after.", meta: "Online" },
-      { n: "02", title: "Selection", text: "An interview and the meeting with the Advisory Board.", meta: "About 9 weeks" },
-      { n: "03", title: "Acceleration", text: "Working modules, one-to-one mentorship, equity investment.", meta: "4 months · Rome" },
+      { n: "01", title: "Application", text: "You present the technology, the team and the impact you are after.", meta: "Online" },
+      { n: "02", title: "Selection", text: "We assess the technology, the team and the impact potential.", meta: "Interview and Advisory Board" },
+      { n: "03", title: "Acceleration", text: "Working modules, one-to-one mentorship and €150,000 in equity, co-invested with Venture Tech Lazio.", meta: "4 months at Villa Fassini" },
       { n: "04", title: "Demo Day", text: "You pitch to companies and investors. Solutions chosen by the partners move on to a proof of concept.", meta: "Up to 24 weeks" },
     ],
   },
@@ -118,9 +118,9 @@ export const en: Dict = {
   chiSiamo: {
     label: "A programme by",
     orgs: [
-      { name: "Next4", role: "Active Investor in the programme", url: "https://www.next4.it/" },
-      { name: "ELIS Innovation Hub", role: "Open innovation and impact measurement", url: "https://www.elis.org/innovation-hub/" },
-      { name: "WDA", role: "Venture building alongside founders", url: "https://wda.company" },
+      { slug: "next4", name: "Next4", role: "Active Investor in the programme", url: "https://www.next4.it/" },
+      { slug: "elis", name: "ELIS Innovation Hub", role: "Open innovation and impact measurement", url: "https://www.elis.org/innovation-hub/" },
+      { slug: "wda", name: "WDA", role: "Venture building alongside founders", url: "https://wda.company" },
     ],
     notes: [
       { title: "Villa Fassini, Rome", text: "2,000 sqm and 8 hectares of park, minutes from Roma Tiburtina." },

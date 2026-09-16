@@ -26,6 +26,16 @@ const VIEWPORTS = [
 // arrotondamento del layout, non uno scostamento.
 const SOGLIA_X = 2; // px
 
+/**
+ * Scostamenti voluti, non regressioni.
+ *
+ * La seconda riga dei numeri ha colonne simmetriche invece che 7+5: con
+ * Poppins «Demo Day» non ci stava, e rimpicciolire la cifra spezzava
+ * l'allineamento fra i quattro numeri, che e' quello che regge la sezione.
+ * Vedi «Adattamenti a Poppins» in src/styles/concept.css.
+ */
+const AMMESSI = new Set(['.num[2]', '.num[3]', '.num__v[2]', '.num__v[3]']);
+
 // Il Chromium scaricato da Playwright non corrisponde a quello dell'immagine.
 const SYSTEM_CHROME = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
 const launchOptions = existsSync(SYSTEM_CHROME) ? { executablePath: SYSTEM_CHROME } : {};
@@ -286,20 +296,24 @@ for (const vp of VIEWPORTS) {
   const gc = mConcept.griglia;
   const gs = mSito.griglia;
   const scostamenti = [];
+  let ammessi = 0;
   if (gc.length !== gs.length) {
     scostamenti.push(`blocchi: ${gc.length} nel concept, ${gs.length} nel sito`);
   } else {
     for (let i = 0; i < gc.length; i++) {
       if (gc[i].sel !== gs[i].sel) { scostamenti.push(`ordine diverso a ${gc[i].sel}`); break; }
+      const chiave = `${gc[i].sel}[${gc[i].i}]`;
+      if (AMMESSI.has(chiave)) { ammessi += 1; continue; }
       if (Math.abs(gc[i].x - gs[i].x) > SOGLIA_X || Math.abs(gc[i].w - gs[i].w) > SOGLIA_X) {
-        scostamenti.push(`${gc[i].sel}[${gc[i].i}] x ${gc[i].x}→${gs[i].x}, larghezza ${gc[i].w}→${gs[i].w}`);
+        scostamenti.push(`${chiave} x ${gc[i].x}→${gs[i].x}, larghezza ${gc[i].w}→${gs[i].w}`);
       }
     }
   }
   if (scostamenti.length > 0) problemi += 1;
 
   console.log(
-    `${vp.name}px  griglia: ${scostamenti.length === 0 ? `${gc.length} blocchi allineati` : `${scostamenti.length} scostamenti`}  |  ` +
+    `${vp.name}px  griglia: ${scostamenti.length === 0 ? `${gc.length} blocchi allineati` : `${scostamenti.length} scostamenti`}` +
+    `${ammessi > 0 ? `, ${ammessi} deroghe dichiarate` : ''}  |  ` +
     `pixel diversi ${perc.toFixed(2)}% (il copy del sito e' piu' asciutto del concept)  |  ` +
     `altezza concept ${mConcept.altezza} / sito ${mSito.altezza}, Δ ${deltaH}px`,
   );

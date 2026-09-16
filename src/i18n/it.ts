@@ -50,7 +50,7 @@ export const it = {
 
   programma: {
     label: "Il programma",
-    intro: { before: "Un percorso breve per portare una tecnologia ", accent: "dal laboratorio", after: " a chi ne ha bisogno." },
+    intro: { before: "Finanziamo tecnologie che migliorano la vita di una comunità o di un ", accent: "territorio", after: ". L’impatto nasce in settori molto diversi: il programma li guarda tutti." },
     nums: [
       { value: "6", label: "startup per batch, dodici in due anni" },
       { prefix: "€", value: "150", accent: "mila", label: "in equity per ogni startup" },
@@ -87,7 +87,7 @@ export const it = {
 
   perChi: {
     label: "Per chi",
-    lead: { before: "Startup, spin-off universitari e gruppi di ricerca con una tecnologia ", accent: "già fuori", after: " dal laboratorio." },
+    lead: { before: "Startup, spin-off universitari e gruppi di ricerca con una tecnologia ", accent: "già validata", after: " e un’idea chiara di dove applicarla." },
     items: [
       { k: "TRL 3–6", v: "Dal proof of concept al test sul campo" },
       { k: "Lazio", v: "Sede operativa nel Lazio, anche da aprire prima dell’avvio" },
@@ -97,12 +97,12 @@ export const it = {
 
   comeFunziona: {
     label: "Come funziona",
-    title: { before: "Quattro passaggi,", accent: "in un anno" },
-    lead: "Dalla candidatura alla sperimentazione con le imprese.",
+    title: { before: "Come si entra,", accent: "e cosa ricevi" },
+    lead: "Quattro passaggi, dalla candidatura alla sperimentazione con le imprese.",
     steps: [
-      { n: "01", title: "Candidatura", text: "La tecnologia, il team e l’effetto che vuoi ottenere.", meta: "Online" },
-      { n: "02", title: "Selezione", text: "Un colloquio e l’incontro con l’Advisory Board.", meta: "Circa 9 settimane" },
-      { n: "03", title: "Accelerazione", text: "Moduli operativi, mentorship uno a uno, investimento in equity.", meta: "4 mesi · Roma" },
+      { n: "01", title: "Candidatura", text: "Presenti la tecnologia, il team e l’impatto che vuoi ottenere.", meta: "Online" },
+      { n: "02", title: "Selezione", text: "Valutiamo tecnologia, team e potenziale di impatto.", meta: "Colloquio e Advisory Board" },
+      { n: "03", title: "Accelerazione", text: "Moduli operativi, mentorship uno a uno e €150.000 in equity, in co-investimento con Venture Tech Lazio.", meta: "4 mesi a Villa Fassini" },
       { n: "04", title: "Demo Day", text: "Presenti a imprese e investitori. Le soluzioni scelte dai partner passano alla sperimentazione.", meta: "Fino a 24 settimane" },
     ],
   },
@@ -110,9 +110,9 @@ export const it = {
   chiSiamo: {
     label: "Un programma di",
     orgs: [
-      { name: "Next4", role: "Investitore Attivo del programma", url: "https://www.next4.it/" },
-      { name: "ELIS Innovation Hub", role: "Open innovation e misurazione d’impatto", url: "https://www.elis.org/innovation-hub/" },
-      { name: "WDA", role: "Venture building al fianco dei founder", url: "https://wda.company" },
+      { slug: "next4", name: "Next4", role: "Investitore Attivo del programma", url: "https://www.next4.it/" },
+      { slug: "elis", name: "ELIS Innovation Hub", role: "Open innovation e misurazione d’impatto", url: "https://www.elis.org/innovation-hub/" },
+      { slug: "wda", name: "WDA", role: "Venture building al fianco dei founder", url: "https://wda.company" },
     ],
     notes: [
       { title: "Villa Fassini, Roma", text: "2.000 mq e 8 ettari di parco, a pochi minuti da Roma Tiburtina." },

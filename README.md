@@ -84,14 +84,16 @@ src/
     concept.css          il <style> del concept, copiato 1:1
     legal.css            solo per privacy, cookie e 404
   assets/
-    fonts/               il woff2 di Bricolage, generato da scripts/fonts.py
+    fonts/               i woff2 di marca, generati da scripts/fonts.py
+    partner/             i loghi dei promotori (vedi il suo README)
     logo-impronta*.svg   i tre SVG del logo
 public/                  favicon, icone, immagini Open Graph
 docs/concept/            il concept approvato: il riferimento visivo
 scripts/                 fonts.py, diff-concept.mjs, screens.mjs
 ```
 
-`brand/` contiene il materiale sorgente. I documenti riservati (la proposta VTL
+`brand/` contiene il materiale sorgente, compresi i kit completi dei loghi dei
+promotori in `brand/loghi/`. I documenti riservati (la proposta VTL
 in PDF e la presentazione) **non sono versionati**: `.gitignore` esclude
 `brand/*.pdf` e `brand/*.pptx`. Il repository è pubblico; quei file non devono
 tornarci dentro.

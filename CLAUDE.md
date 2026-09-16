@@ -26,7 +26,7 @@ Una pagina di attrazione, non una pagina informativa. La candidatura e il regola
 4. Si dice **batch**, non «coorte».
 5. Accuratezza (la fonte è `brand/VTL_Documento Complessivo.pdf`):
    - €150.000 in equity per startup;
-   - 6 startup per coorte;
+   - 6 startup per batch;
    - 4 mesi di programma a Villa Fassini;
    - la sperimentazione con le imprese riguarda solo le soluzioni scelte dai partner;
    - il programma è cofinanziato da Venture Tech Lazio e non è "della Regione Lazio";

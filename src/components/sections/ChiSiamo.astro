@@ -5,17 +5,43 @@ import type { Locale } from '../../i18n/utils';
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = useTranslations(locale);
+
+/**
+ * I loghi dei promotori, se ci sono.
+ *
+ * `import.meta.glob` risolve a build time: basta lasciare cadere il file in
+ * `src/assets/partner/` e il nome scritto diventa il logo, senza toccare il
+ * codice. Finche' il file manca resta il nome, che e' comunque leggibile.
+ * Le istruzioni per chi carica stanno in src/assets/partner/README.md.
+ */
+const files = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/partner/*.{svg,png,webp}',
+  { eager: true },
+);
+const loghi = new Map(
+  Object.entries(files).map(([percorso, modulo]) => [
+    percorso.split('/').pop()!.replace(/\.\w+$/, ''),
+    modulo.default,
+  ]),
+);
 ---
 <section class="team" id="chi-siamo" aria-labelledby="team-title">
   <div class="wrap">
     <span class="label" id="team-title" data-in>{t.chiSiamo.label}</span>
     <ul class="orgs">
-      {t.chiSiamo.orgs.map((org) => (
-        <li class="org" data-in>
-          <a class="org__name" href={org.url} target="_blank" rel="noopener">{org.name}</a>
-          <span class="org__role">{org.role}</span>
-        </li>
-      ))}
+      {t.chiSiamo.orgs.map((org) => {
+        const logo = loghi.get(org.slug);
+        return (
+          <li class="org" data-in>
+            <a class="org__name" href={org.url} target="_blank" rel="noopener">
+              {logo
+                ? <img class="org__logo" src={logo.src} alt={org.name} width={logo.width} height={logo.height} />
+                : org.name}
+            </a>
+            <span class="org__role">{org.role}</span>
+          </li>
+        );
+      })}
     </ul>
     <div class="team__foot">
       {t.chiSiamo.notes.map((note, i) => (

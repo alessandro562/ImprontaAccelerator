@@ -292,9 +292,49 @@ a.org__name:hover{color:var(--magenta)}
 /* ---------- Adattamenti a Poppins ---------- */
 /*
  * Poppins e' sensibilmente piu' larga di Bricolage impostata a wdth 86, che e'
- * il carattere del concept. Due titoli che li' stanno su una riga qui andavano
- * a capo: si riduce il corpo quel tanto che basta a rimetterli in riga, senza
- * toccare nient'altro.
+ * il carattere del concept, e certe righe non ci stavano piu'.
  */
-.num:nth-child(4) .num__v { font-size: clamp(3.4rem, 8vw, 8rem) }
+
+/* Il nome del promotore piu' lungo tornava a capo. */
 .org__name { font-size: clamp(2.4rem, 6vw, 6rem) }
+
+/*
+ * I quattro numeri devono avere lo stesso corpo: e' il loro allineamento a
+ * reggere la sezione. Il quarto non ci stava perche' «Demo Day» e' la parola
+ * d'accento piu' lunga, non perche' il numero fosse troppo grande. Quindi si
+ * danno a quella riga colonne simmetriche — cinque e sette come la prima — e
+ * si rimpicciolisce solo la parola, lasciando le cifre tutte uguali.
+ */
+/* Sopra i 700px, dove la griglia a dodici colonne esiste davvero: sotto, il
+   concept manda i numeri a tutta larghezza e va lasciato fare. */
+@media (min-width: 701px) {
+  .num:nth-child(3) { grid-column: 1/6 }
+  .num:nth-child(4) { grid-column: 6/13 }
+}
+.num:nth-child(4) .num__v { font-size: clamp(5rem, 15vw, 15rem) }
+.num:nth-child(4) .num__v .it { font-size: .5em }
+
+/*
+ * Loghi dei promotori. Compaiono al posto del nome scritto quando il file e'
+ * in src/assets/partner/; l'altezza e' vincolata perche' i tre loghi stiano
+ * sulla stessa riga ottica qualunque siano le loro proporzioni.
+ */
+.org__logo {
+  /* Nel concept il nome del promotore e' un titolo alto piu' di cento pixel:
+     i loghi tengono una scala vicina, o la sezione perde peso. */
+  height: clamp(40px, 6vw, 88px);
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: left center;
+}
+/* Con un logo al posto del testo l'allineamento alla linea di base non ha piu'
+   un riferimento: le due colonne si centrano fra loro. */
+.org:has(.org__logo) { align-items: center }
+
+/*
+ * Le targhette dei quattro passaggi si allineano fra loro: i testi hanno un
+ * numero di righe diverso, e senza questo finiscono su linee di base diverse.
+ */
+.step { display: flex; flex-direction: column }
+.step__meta { margin-top: auto; align-self: flex-start }
