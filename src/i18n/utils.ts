@@ -9,7 +9,16 @@ export const DEFAULT_LOCALE: Locale = 'it';
  * Restano identici in italiano e in inglese: se cambiassero, il selettore di
  * lingua non potrebbe conservare l’ancora su cui si trova il visitatore.
  */
-export const SECTIONS = ['impatto', 'target', 'sostegno', 'percorso', 'faq'] as const;
+export const SECTIONS = [
+  'sintesi',
+  'programma',
+  'requisiti',
+  'investimento',
+  'calendario',
+  'chi-siamo',
+  'sede',
+  'faq',
+] as const;
 
 const BASE = import.meta.env.BASE_URL; // termina sempre con "/" (trailingSlash: 'always')
 

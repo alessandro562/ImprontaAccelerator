@@ -10,26 +10,29 @@ const { locale, label, class: className = '' } = Astro.props;
 const pageKey = pageKeyFromUrl(Astro.url.pathname);
 const NAMES: Record<Locale, string> = { it: 'Italiano', en: 'English' };
 ---
-<nav class={`flex items-center gap-0.5 rounded-full border border-line bg-white/70 p-0.5 ${className}`} aria-label={label}>
-  {LOCALES.map((code) => {
+<nav class:list={['flex items-center', className]} aria-label={label}>
+  {LOCALES.map((code, index) => {
     const url = localeUrl(code, pageKey);
     const active = code === locale;
     return (
-      <a
-        href={url}
-        data-href={url}
-        data-lang-switch
-        hreflang={code}
-        lang={code}
-        aria-current={active ? 'true' : undefined}
-        title={NAMES[code]}
-        class:list={[
-          'rounded-full px-2.5 py-1 text-xs font-semibold uppercase transition-colors',
-          active ? 'bg-ink text-white' : 'text-slate hover:text-ink',
-        ]}
-      >
-        {code}
-      </a>
+      <>
+        {index > 0 && <span class="px-1.5 text-line" aria-hidden="true">/</span>}
+        <a
+          href={url}
+          data-href={url}
+          data-lang-switch
+          hreflang={code}
+          lang={code}
+          aria-current={active ? 'true' : undefined}
+          title={NAMES[code]}
+          class:list={[
+            'font-sans text-[13px] uppercase tracking-[0.04em] transition-colors',
+            active ? 'font-semibold text-ink' : 'text-ink-muted hover:text-ink',
+          ]}
+        >
+          {code}
+        </a>
+      </>
     );
   })}
 </nav>

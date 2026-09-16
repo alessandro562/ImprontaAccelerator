@@ -1,46 +1,35 @@
 ---
 import Cta from '../Cta.astro';
-import Brandmark from '../Brandmark.astro';
+import Button from '../ui/Button.astro';
+import Figure from '../ui/Figure.astro';
 import { useTranslations } from '../../i18n';
-import type { Locale } from '../../i18n/utils';
-import { CONTACT_EMAIL, formattedDeadline } from '../../config';
+import { localeUrl, type Locale } from '../../i18n/utils';
+import { formattedDeadline } from '../../config';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = useTranslations(locale);
+
 const deadline = formattedDeadline(locale);
-const subject = locale === 'it' ? 'Prossima coorte Impronta' : 'Next Impronta cohort';
+const callStatus = deadline ? `${t.hero.callOpenPrefix} ${deadline}` : t.hero.callPending;
 ---
-<section class="relative overflow-hidden">
-  <Brandmark
-    uid="hero"
-    class="pointer-events-none absolute -right-36 -top-16 h-[26rem] w-auto opacity-[0.06] sm:-right-24 md:-right-10 md:h-[38rem] md:opacity-[0.08]"
-  />
+<section class="border-b border-line bg-paper pb-16 pt-14 md:pb-20 md:pt-20">
+  <div class="container-page grid gap-12 lg:grid-cols-12 lg:gap-16">
+    <div class="lg:col-span-7">
+      <p class="t-label text-forest">{callStatus}</p>
 
-  <div class="shell relative pb-20 pt-16 md:pb-28 md:pt-28">
-    <!-- La frase clou, sola. Il gradiente sta su una parola: e' l'accento, non lo sfondo. -->
-    <h1 class="display-xl max-w-[14ch] text-balance text-ink">
-      {t.hero.titleBefore}{' '}<span class="text-gradient-word">{t.hero.titleAccent}</span>{' '}{t.hero.titleAfter}
-    </h1>
+      <h1 class="t-h1 mt-5 text-balance">{t.hero.h1}</h1>
 
-    <p class="measure-wide mt-8 text-lg leading-relaxed text-slate md:mt-10 md:text-xl">
-      {t.hero.sub}
-    </p>
+      <p class="t-lead mt-6 max-w-[62ch] text-ink-muted">{t.hero.lead}</p>
 
-    <div class="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-      <Cta locale={locale} source="hero" class="text-base" />
-      <a
-        href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}`}
-        class="text-sm font-medium text-slate underline decoration-line underline-offset-4 transition-colors hover:text-ink"
-      >
-        {t.hero.ctaSecondary}
-      </a>
+      <div class="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
+        <Cta locale={locale} source="hero" label={t.hero.ctaPrimary} />
+        <Button variant="link" href={localeUrl(locale, 'condizioni')}>{t.hero.ctaSecondary}</Button>
+      </div>
     </div>
 
-    {deadline && (
-      <p class="mt-6 text-sm text-slate">
-        {t.hero.deadlinePrefix} <strong class="font-semibold text-ink">{deadline}</strong>
-      </p>
-    )}
+    <div class="lg:col-span-5">
+      <Figure placeholder={t.hero.photoPlaceholder} ratio="4/3" />
+    </div>
   </div>
 </section>

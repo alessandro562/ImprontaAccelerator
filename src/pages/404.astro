@@ -14,11 +14,11 @@ const copy = {
 ---
 <Base locale={locale} title={`${copy.title} — Impronta Accelerator`} description={copy.text}>
   <Nav locale={locale} />
-  <main id="main" class="shell flex min-h-[55vh] flex-col items-center justify-center py-20 text-center">
-    <p class="font-display text-6xl font-extrabold text-gradient">404</p>
+  <main id="main" class="container-page flex min-h-[55vh] flex-col items-center justify-center py-20 text-center">
+    <p class="t-h1 text-forest">404</p>
     <h1 class="mt-5 text-2xl text-ink md:text-3xl">{copy.title}</h1>
-    <p class="mt-3 max-w-md text-base text-slate">{copy.text}</p>
-    <a href={localeUrl(locale)} class="btn btn-primary mt-8">{t.privacy.back}</a>
+    <p class="mt-3 max-w-md text-base text-ink-muted">{copy.text}</p>
+    <a href={localeUrl(locale)} class="inline-flex h-12 items-center rounded-[6px] bg-magenta px-5 font-sans text-[16px] font-medium leading-none text-white transition-colors hover:bg-magenta-hover mt-8">{t.privacy.back}</a>
   </main>
   <Footer locale={locale} />
 </Base>

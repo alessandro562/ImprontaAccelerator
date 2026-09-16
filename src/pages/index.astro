@@ -3,35 +3,23 @@ import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/sections/Hero.astro';
-import Funders from '../components/sections/Funders.astro';
-import Change from '../components/sections/Change.astro';
-import Target from '../components/sections/Target.astro';
-import Support from '../components/sections/Support.astro';
-import Journey from '../components/sections/Journey.astro';
-import Backers from '../components/sections/Backers.astro';
-import Venue from '../components/sections/Venue.astro';
-import Faq from '../components/sections/Faq.astro';
-import FinalCta from '../components/sections/FinalCta.astro';
+import Sintesi from '../components/sections/Sintesi.astro';
 
 import { useTranslations } from '../i18n';
 import { currentLocale } from '../i18n/utils';
 
 const locale = currentLocale(Astro.currentLocale);
 const t = useTranslations(locale);
+
+// Le FAQ sono raggruppate per tema in pagina; i dati strutturati vogliono una
+// lista piatta di domande.
+const faqFlat = t.faq.groups.flatMap((group) => group.items);
 ---
-<Base locale={locale} faq={t.faq.items}>
+<Base locale={locale} faq={faqFlat}>
   <Nav locale={locale} />
   <main id="main">
     <Hero locale={locale} />
-    <Funders locale={locale} />
-    <Change locale={locale} />
-    <Target locale={locale} />
-    <Support locale={locale} />
-    <Journey locale={locale} />
-    <Backers locale={locale} />
-    <Venue locale={locale} />
-    <Faq locale={locale} />
-    <FinalCta locale={locale} />
+    <Sintesi locale={locale} />
   </main>
   <Footer locale={locale} />
 </Base>

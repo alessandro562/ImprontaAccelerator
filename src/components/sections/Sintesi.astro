@@ -1,0 +1,21 @@
+---
+import KeyFacts from '../ui/KeyFacts.astro';
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../i18n/utils';
+import { formattedDeadline } from '../../config';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const deadline = formattedDeadline(locale);
+const items = [
+  ...t.keyFacts.items,
+  { label: t.keyFacts.deadlineLabel, value: deadline ?? t.keyFacts.deadlinePending },
+];
+---
+<section id="sintesi" class="bg-paper-alt py-10 md:py-12">
+  <div class="container-page">
+    <KeyFacts items={items} />
+  </div>
+</section>

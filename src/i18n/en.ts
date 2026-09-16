@@ -4,297 +4,383 @@ import type { Dict } from './it';
  * L'annotazione `: Dict` è deliberata: se una chiave manca o è di troppo
  * rispetto all'italiano, `astro check` fallisce in CI invece di lasciare
  * testo italiano dentro la pagina inglese.
+ *
+ * Traduzione provvisoria fedele all'italiano approvato. Le chiavi marcate
+ * `EN-DA-RIVEDERE` attendono la revisione madrelingua della fase 10.
  */
 export const en: Dict = {
+  // EN-DA-RIVEDERE
   meta: {
-    locale: "en_US",
-    title: "Impronta — the impact accelerator of Italy's Lazio Region",
+    locale: "en_GB",
+    title: "Impronta — acceleration and investment for impact startups in Lazio",
     description:
-      "We accelerate early-stage impact startups in Italy's Lazio Region: technologies that cut emissions, make care and services reachable, create skilled work. Researchers, spin-offs and technical teams welcome. A programme by Next4, ELIS Innovation Hub and WDA.",
-    ogImage: "og-image-en.png",
+      "Impronta selects six startups a year with technologies between TRL 3 and 6 in environment, health and industry. An initial equity investment of €150,000, a four-month programme at Villa Fassini, access to partner companies. A programme by Next4, ELIS Innovation Hub and WDA, co-financed by Venture Tech Lazio.",
+    ogImage: "og-image.png",
     skipToContent: "Skip to content",
   },
 
+  // EN-DA-RIVEDERE
   nav: {
     items: [
-      { id: "impatto", label: "What changes" },
-      { id: "target", label: "Who we work with" },
-      { id: "sostegno", label: "How we support you" },
-      { id: "percorso", label: "The four months" },
+      { id: "programma", label: "Programme" },
+      { id: "requisiti", label: "Eligibility" },
+      { id: "investimento", label: "Investment" },
+      { id: "calendario", label: "Timeline" },
+      { id: "chi-siamo", label: "About us" },
       { id: "faq", label: "FAQ" },
     ],
     cta: "Apply",
-    openMenu: "Open menu",
-    closeMenu: "Close menu",
-    langLabel: "Language",
+    openMenu: "Open the menu",
+    closeMenu: "Close the menu",
+    langLabel: "Site language",
+    conditions: "Terms",
   },
 
+  // EN-DA-RIVEDERE
   hero: {
-    badge: "Applications open · 2026 cohort",
-    titleBefore: "Building",
-    titleAccent: "impact",
-    titleAfter: "together.",
-    sub: "The impact accelerator of Italy's Lazio Region. Four months beside people turning research and technology into real benefits for communities and the environment.",
+    h1: "Acceleration and investment for impact startups in Lazio",
+    lead: "Each year Impronta selects six startups and spin-offs with technologies between technology readiness level (TRL) 3 and 6, in the environment, health and industry areas. Each receives €150,000 in equity, a four-month programme at Villa Fassini and access to the partner companies.",
+    callOpenPrefix: "Applications open until",
+    callPending: "Applications opening soon",
     ctaPrimary: "Apply",
-    ctaSecondary: "Not your moment yet? Write to us",
-    deadlinePrefix: "Applications close on",
+    ctaSecondary: "Read the terms",
+    photoPlaceholder: "Villa Fassini, exterior or agora",
   },
 
-  funders: {
-    promotersLabel: "A programme by",
-    promoters: ["Next4", "ELIS Innovation Hub", "WDA"],
-    fundingLabel: "Funded by",
-    funding: "Venture Tech Lazio · Lazio Innova · Lazio Region · ERDF ROP 2021/2027",
+  // EN-DA-RIVEDERE
+  keyFacts: {
+    deadlineLabel: "Applications",
+    deadlinePending: "Opening soon",
+    items: [
+      { label: "Places", value: "6 per cohort" },
+      { label: "Initial investment", value: "€150,000" },
+      { label: "Duration", value: "4 months" },
+      { label: "Location", value: "Villa Fassini, Rome" },
+    ],
   },
 
-  change: {
-    eyebrow: "What changes",
-    title: "Three ways a technology stops being a promise.",
-    lead: "We select solutions with an effect you can name: something that goes down, something that becomes reachable, someone who gets work.",
-    effects: [
+  // EN-DA-RIVEDERE
+  programma: {
+    title: "Three impact areas",
+    lead: "Impronta funds technologies that produce a measurable effect on the environment, on people's health or on the productive capacity of the region.",
+    areas: [
       {
-        headline: "Fewer emissions, less waste",
-        text: "Technologies for efficient use of resources, circular materials, clean energy.",
-        verticals: ["Cleantech", "Renewables", "Precision agriculture", "Bioplastics"],
+        name: "Environment",
+        text: "Technologies that reduce emissions, consumption and waste, and that make resource management sustainable.",
+        verticals: ["Cleantech", "Renewable energy", "Precision agriculture", "Bioplastics and circular materials"],
       },
       {
-        headline: "Care and services that arrive",
+        name: "Health and inclusion",
         text: "Solutions that improve health, inclusion and access to essential services in communities.",
-        verticals: ["Digital health", "Biotechnology", "Assistive technology", "Rehabilitation"],
+        verticals: ["Digital health", "Biotechnology", "Assistive technologies", "Rehabilitation and wellbeing"],
       },
       {
-        headline: "Skilled work",
-        text: "Scientific research and deep tech that become industrial applications, and bring skills to the region.",
-        verticals: ["Sustainable manufacturing", "Robotics", "Sensing", "AI for production"],
+        name: "Industry",
+        text: "Scientific research and deep tech applied to production, with effects on competitiveness and skilled employment.",
+        verticals: ["Sustainable manufacturing", "Robotics", "Industrial sensing", "Artificial intelligence for production"],
       },
     ],
-    measureTitle: "And then we measure it.",
+    emerging: "The programme also assesses applications in green hydrogen, environmental biotechnology, water technologies, advanced sensing and next-generation robotics.",
+    measureTitle: "How impact is measured",
     measureText:
-      "At the start you build an impact plan: which effects you expect, and with which indicators. At the end we check what actually happened, using the SROI methodology. That's the difference between claiming impact and showing it.",
-    measureStat: {
-      value: "1:4.16",
-      label: "the social return measured on the startups of ELIS Innovation Hub's ZERO accelerator",
-    },
-    detailsLabel: "The other fields we look at",
-    detailsText:
-      "We stay open to emerging verticals, still uncommon but moving fast across Italy and Europe.",
-    emerging: ["Green hydrogen", "Environmental biotechnology", "Water technologies", "Advanced sensing", "Next-generation robotics"],
+      "At the start of the programme each startup builds an impact plan: the expected effects and the indicators used to verify them. At the end of the programme the same indicators are measured using the SROI methodology, which expresses the social return on each euro invested.",
+    measureSource:
+      "The module is run by ELIS Innovation Hub, which applies the same methodology in the ZERO cleantech accelerator: across the 34 startups of that programme the measured social return was 1:4.16.",
   },
 
-  target: {
-    eyebrow: "Who we work with",
-    title: "Early-stage impact startups. Even before incorporation.",
-    lead: "Six places per cohort, twelve in total. Founding teams, university spin-offs and research groups: what counts is the technology and the effect, not where you come from.",
-    yesTitle: "You're in if",
+  // EN-DA-RIVEDERE
+  requisiti: {
+    title: "Who can apply",
+    lead: "All requirements must be met. An operating base in Lazio and full participation are conditions precedent: without them the investment lapses.",
+    yesTitle: "You can apply if",
     yes: [
-      "Your technology is between TRL 3 and 6: from proof of concept to first field test.",
-      "You built it, and it isn't just a new business model.",
-      "You work in Lazio, or you'll open an office there before the programme starts.",
-      "The effect on people or the environment is part of the solution, not an add-on.",
-      "You haven't incorporated yet: we'll walk you through it.",
+      "You are an incorporated startup, or a research group or university spin-off in the process of incorporating. WDA supports you through incorporation before the investment.",
+      "Your technology sits between TRL 3 and TRL 6: from experimental validation of the principle to testing in a limited operational context.",
+      "You are at pre-seed or early seed stage.",
+      "Your solution falls within one of the three impact areas, or within the emerging areas.",
+      "You have an operating base in Lazio, or you commit to opening one before the investment is paid out.",
     ],
-    noTitle: "Probably not if",
+    noTitle: "The programme is not suitable if",
     no: [
-      "You've already closed a significant seed round: we're late.",
-      "The technology isn't yours.",
-      "You can't follow the whole programme.",
-      "You don't intend to build in Lazio.",
+      "You have already closed a seed round of significant size.",
+      "The technology is not owned by the company or group applying.",
+      "The founders cannot commit to working full time on the company.",
+      "You do not intend to open an operating base in Lazio.",
+      "You cannot take part in the programme in full.",
     ],
-    detailsLabel: "How we read applications",
-    criteriaTitle: "What we look at",
+    criteriaTitle: "Assessment criteria",
+    criteriaHeaders: ["Criterion", "What we assess"],
     criteria: [
-      { title: "The technology", text: "Real scientific or technical content, at a maturity consistent with the early stages." },
-      { title: "The effect", text: "A social or environmental benefit you can describe and measure, not just state." },
-      { title: "The reach", text: "A concrete chance that the solution leaves the prototype and gets to people." },
-      { title: "The industrial fit", text: "Proximity to the supply chains and companies the programme works with." },
-      { title: "The team", text: "Skills that match what you're building, and real time to give it." },
+      ["Innovation and maturity", "The scientific or technological substance and the degree of validation reached"],
+      ["Impact", "The expected effect on environment, health or employment, and whether it can be measured"],
+      ["Fit with the areas", "Whether the solution belongs to one of the programme's impact areas"],
+      ["Scalability", "The ability to attract capital in subsequent rounds"],
+      ["Industrial fit", "Proximity to the supply chains and partner companies of the promoters"],
+      ["Team", "The skills relative to what you are building and the time you can devote to it"],
     ],
   },
 
-  support: {
-    eyebrow: "How we support you",
-    title: "Capital, method, and an open door into industry.",
-    lead: "The three things that, taken one at a time, are never enough to get a technology in front of people.",
-    pillars: [
-      {
-        title: "Capital at the start",
-        text: "€150,000 in equity paid when the programme begins, and up to €200,000 for those who carry on over the following two years. The board stays with a founder majority.",
-      },
-      {
-        title: "A team that works with you",
-        text: "Four months with people who have built startups: model, market, positioning. Plus work on your own growth as a founder, not only on the company.",
-      },
-      {
-        title: "Industry, for real",
-        text: "After Demo Day an experiment of up to 24 weeks opens with a corporate partner, with objectives and indicators agreed up front.",
-      },
+  // EN-DA-RIVEDERE
+  investimento: {
+    title: "Investment and commitments",
+    lead: "The programme invests €150,000 in equity per startup, co-invested by Venture Tech Lazio and Next4. The investment carries obligations that are worth knowing before applying.",
+    receiveTitle: "What you receive",
+    receive: [
+      { title: "Initial investment", text: "€150,000 in equity. The investment is paid out under the terms of the investment agreement." },
+      { title: "Follow-on investment", text: "€200,000 for a maximum of three startups, over 2028–2029, assessed on progress against the monitoring sheet, on traction, on the team and on impact." },
+      { title: "Four months of programme", text: "Nine operational modules and individual mentorship, run by WDA and ELIS Innovation Hub." },
+      { title: "Premises", text: "Dedicated space at Villa Fassini, in Rome, for the duration of the programme." },
+      { title: "Access to the partner companies", text: "Startups selected by the partner companies begin a proof of concept or a joint development agreement, of up to 24 weeks." },
     ],
-    detailsLabel: "The conditions, in full",
-    details: [
-      {
-        h: "Where the capital comes from",
-        p: "Every deal is co-invested by Venture Tech Lazio, which brings €1,680,000 to the programme, and Next4 as Active Investor, which brings €720,000. €2,400,000 in total, across twelve startups and three continuations.",
-      },
-      {
-        h: "Two conditions, stated up front",
-        p: "Support only takes effect if you have an operating office in Lazio — or commit to opening one before payout — and if you take part in the whole programme. These aren't our preferences: they are conditions of the Venture Tech Lazio call.",
-      },
-      {
-        h: "How it continues after the first year",
-        p: "We look at progress against the objectives agreed on entry, the first signals from the market — pilot users, letters of intent, industrial collaborations — and the time founders actually give the project.",
-      },
-      {
-        h: "Stake and terms",
-        p: "The investment is in equity. The specific stake and terms are set in the term sheet based on the assessment of the project, and it is one of the topics discussed with the Advisory Board before the proposal.",
-      },
+    commitTitle: "What you commit to",
+    commit: [
+      { title: "Operating base in Lazio", text: "To be opened before the investment is paid out, if you do not already have one." },
+      { title: "Full participation", text: "Attendance at all programme activities is part of the investment agreement." },
+      { title: "Founders' operational commitment", text: "A full operational role and non-competition for up to twelve months after leaving the company." },
+      { title: "Fee for incubation services", text: "The company pays Next4 a fee for incubation services and for use of the premises, invoiced under the investment agreement." },
+      { title: "Governance", text: "A board of at least three members, investor voting rights over certain transactions, reporting at least quarterly." },
     ],
+    calloutTitle: "Conditions precedent",
+    calloutText:
+      "An operating base in Lazio and full participation in the programme are conditions precedent of the agreement: failure to meet them causes the investment to lapse.",
+    capitalTitle: "Where the capital comes from",
+    capitalHeaders: ["Item", "Amount"],
+    capital: [
+      ["Venture Tech Lazio", "€1,680,000 (70%)"],
+      ["Next4, Active Investor", "€720,000 (30%)"],
+      ["Total", "€2,400,000"],
+      ["Initial investments", "12 of €150,000"],
+      ["Follow-on", "up to 3 of €200,000"],
+    ],
+    cta: "Read all the terms",
   },
 
-  journey: {
-    eyebrow: "The four months",
-    title: "Demo Day isn't the finish line. It's where the technology gets tested.",
-    lead: "One cohort a year. Support arrives at the start, and the work with industry carries on after the programme ends.",
-    phases: [
-      {
-        name: "Scouting and selection",
-        duration: "2 months",
-        weeks: 8,
-        text: "Application, interview, meeting with the Advisory Board.",
-      },
-      {
-        name: "The programme",
-        duration: "4 months",
-        weeks: 17,
-        text: "Nine hands-on modules and 1:1 mentorship, while you build.",
-      },
-      {
-        name: "Demo Day",
-        duration: "1 day",
-        weeks: 1,
-        text: "Companies, investors and institutions, at Villa Fassini.",
-      },
-      {
-        name: "Testing with industry",
-        duration: "up to 24 weeks",
-        weeks: 24,
-        text: "The solution is tried in a real setting, in sprints, with a final review of the results.",
-      },
+  // EN-DA-RIVEDERE
+  calendario: {
+    title: "Programme timeline",
+    lead: "One cohort a year, six startups per cohort, twelve in total between 2026 and 2027.",
+    selectionTitle: "Selection, nine weeks",
+    selection: [
+      { name: "Online application", when: "W1–W2", detail: "Eligibility check" },
+      { name: "Online interview", when: "W3" },
+      { name: "Advisory Board", when: "W4–W5", detail: "Individual meeting and monitoring sheet" },
+      { name: "Investment proposal", when: "W6–W7", detail: "Resolution of the investment committees" },
+      { name: "Acceptance", when: "W8", detail: "Verification of the conditions precedent" },
+      { name: "Start and payment", when: "W9" },
     ],
-    detailsLabel: "The nine modules and the six steps of selection",
-    modulesTitle: "What happens in the four months",
+    programTitle: "Programme, four months",
+    moduleHeaders: ["Module", "Content", "Run by"],
     modules: [
-      { name: "Personal impact plan", by: "WDA", text: "The E.m.p.a.c.t. framework: your purpose as a founder, a personal development plan, and work on the barriers that make getting there harder." },
-      { name: "Design thinking", by: "WDA", text: "From the real problem to an MVP tested with the people who should be using it." },
-      { name: "Business model", by: "WDA", text: "Business Model Canvas, Lean Canvas and Value Proposition Canvas, starting from what validation told you." },
-      { name: "Positioning", by: "WDA", text: "Context analysis, segmentation, naming, tone of voice and visual identity." },
-      { name: "Reaching your first users", by: "WDA", text: "The commercial cycle towards companies, people and public bodies, with hands-on practice." },
-      { name: "Impact measurement", by: "ELIS", text: "The SROI methodology: expected outcomes, indicators, financial proxies and how to present results." },
-      { name: "Market discovery", by: "ELIS", text: "The needs companies are actually trying to solve, in one-to-one meetings." },
-      { name: "Building a collaboration", by: "ELIS", text: "The «Why Collaborate» toolkit: how to propose an experiment to a company." },
-      { name: "1:1 mentorship", by: "ELIS + WDA", text: "Dedicated hours with mentors and experts from the joint network." },
+      ["Personal impact plan", "E.m.p.a.c.t. framework: entrepreneurial purpose, individual development plan, overcoming barriers of gender, geography and socio-economic condition", "WDA"],
+      ["Design thinking", "Problem analysis, prototyping and MVP testing with real users", "WDA"],
+      ["Business model", "Business Model Canvas, Lean Canvas and Value Proposition Canvas", "WDA"],
+      ["Strategic marketing", "Context analysis, segmentation, positioning, visual identity", "WDA"],
+      ["Sales techniques", "The sales cycle towards companies, individuals and public administration", "WDA"],
+      ["Impact assessment", "SROI methodology: outcomes, indicators, financial proxies", "ELIS Innovation Hub"],
+      ["Market discovery", "The needs of the partner companies, gathered in individual meetings", "ELIS Innovation Hub"],
+      ["Corporate solution identification", "The «Why Collaborate» toolkit: how to propose a proof of concept to a company", "ELIS Innovation Hub"],
+      ["Individual mentorship", "Dedicated hours with mentors and experts from the joint network", "WDA and ELIS Innovation Hub"],
     ],
-    processTitle: "From application to kick-off: nine weeks",
-    steps: [
-      { name: "Online application", text: "Preliminary eligibility check." },
-      { name: "Interview", text: "Maturity of the technology, expected effect, team composition." },
-      { name: "Advisory Board", text: "Project review and a sheet with objectives and indicators." },
-      { name: "Proposal", text: "Approval by the Investment Committee and the Venture Tech Lazio committee." },
-      { name: "Acceptance", text: "Signing the agreement and verifying the two conditions." },
-      { name: "Kick-off", text: "The programme begins and support is paid out." },
-    ],
+    afterTitle: "Demo Day and after the programme",
+    afterText:
+      "The programme closes with Demo Day, a day of presentations to companies, investors and institutions.",
+    afterText2:
+      "After Demo Day, startups selected by the partner companies begin a proof of concept of up to 24 weeks, organised in sprints with interim reviews and a final assessment of results, run by ELIS Innovation Hub. In parallel WDA continues with three to six months of coaching on growth and fundraising.",
   },
 
-  backers: {
-    eyebrow: "Who's behind it",
-    title: "Three organisations that have done this work before.",
-    lead: "Impronta doesn't start from scratch: it starts with people who have been bringing research and industry together for years, covering the whole stretch from the lab to industrial scale.",
-    corporatesLabel: "Technologies from this network have already been tested inside",
-    corporates: ["Eni", "Acea", "FS", "Microsoft", "Vodafone", "Saipem", "Maire Tecnimont", "CNR", "SACE", "European Space Agency"],
-    corporatesNote: "Partners of ELIS Innovation Hub's OPEN ITALY, ZERO and CrossConnect programmes. A solution adopted by a company at that scale is impact that multiplies.",
-    stats: [
-      { value: "200+", label: "experiments completed in ten years of OPEN ITALY" },
-      { value: "34", label: "startups supported in the ZERO cleantech accelerator" },
-      { value: "60+", label: "startups built by WDA since 2021" },
-      { value: "100+", label: "companies, universities and research centres in the network" },
-    ],
+  // EN-DA-RIVEDERE
+  chiSiamo: {
+    title: "Who runs the programme",
+    lead: "Impronta comes from three organisations with distinct roles, and is co-financed by Venture Tech Lazio.",
     orgs: [
-      { name: "Next4", role: "Active Investor of the programme", text: "An investment holding and innovation platform, accredited on CDP Venture Capital SGR's Fondo Rilancio platform.", url: "https://www.next4.it/" },
-      { name: "ELIS Innovation Hub", role: "Open innovation and impact measurement", text: "Runs OPEN ITALY since 2015 and the ZERO and CrossConnect accelerators in CDP Venture Capital's National Network. In Rome since 1965.", url: "https://www.elis.org/innovation-hub/" },
-      { name: "WDA", role: "Venture building beside the founders", text: "Works with teams as an executive co-founder: from validation to incorporation and first users.", url: "https://wda.company" },
+      {
+        name: "Next4",
+        role: "Proposing entity and Active Investor",
+        text: "An investment holding and innovation platform, accredited on the Fondo Rilancio platform of CDP Venture Capital. It holds eleven direct and more than fifty indirect shareholdings.",
+        url: "https://www.next4.it/",
+      },
+      {
+        name: "ELIS Innovation Hub",
+        role: "Operating partner for open innovation and impact measurement",
+        text: "Since 2015 it has run OPEN ITALY, which has led to more than 200 proofs of concept with over 100 partner companies, and the ZERO cleantech accelerator, with 34 startups accelerated, 12 proofs of concept and more than 800 hours of mentorship. In Rome since 1965.",
+        url: "https://www.elis.org/innovation-hub/",
+      },
+      {
+        name: "WDA",
+        role: "Operating partner for venture building",
+        text: "Since 2021 it has supported more than 60 startups, which have mobilised over €3 million in capital. It works alongside founding teams from validation through incorporation to the first users.",
+        url: "https://wda.company",
+      },
     ],
-    detailsLabel: "The other ecosystem partners",
-    ecosystemIntro: "Agreements for scouting, technology transfer and growth after acceleration.",
-    ecosystem: ["Sapienza University of Rome", "University of Cassino and Southern Lazio", "CNR", "CDP Venture Capital", "Fondazione Rome Technopole", "ROAD — Rome Advanced District", "InnovUP", "Enactus Italia"],
+    corporatesTitle: "Partner companies of the ELIS programmes",
+    corporatesText:
+      "The OPEN ITALY, ZERO and CrossConnect programmes run by ELIS Innovation Hub have involved, among others, Eni, Acea, FS, Microsoft, Vodafone, Saipem, Maire Tecnimont, CNR, SACE and the European Space Agency. They are partners of those programmes, not of Impronta.",
+    ecosystemTitle: "Collaborations in the region",
+    ecosystemText:
+      "Enactus Italia works with the programme as an academic originator. Collaborations with Sapienza University of Rome, the University of Cassino and Southern Lazio, CNR, CDP Venture Capital, InnovUp, ROAD and Fondazione Rome Technopole are being defined.",
+    peopleTitle: "Programme team",
+    peopleNote:
+      "Names are published once consent has been confirmed. The roles set out by the programme are listed below.",
+    teamRoles: [
+      "Program Manager",
+      "Investment Manager",
+      "Investment Specialist",
+      "Innovation Program Manager",
+      "Innovation Specialist",
+      "Innovation Specialist",
+      "Acceleration and Venture Expert",
+    ],
+    advisoryTitle: "Advisory Board",
+    advisoryText:
+      "One representative of Venture Tech Lazio and four independent members with expertise in digital health, sustainable mobility and the energy transition, entrepreneurship and industrial technology transfer.",
   },
 
-  venue: {
-    eyebrow: "The venue",
-    title: "Villa Fassini, Rome.",
-    text: "Dedicated space inside an innovation hub: an agora for gatherings and Demo Day, an equipped coworking area, and a park where companies, educators and non-profits cross paths.",
+  // EN-DA-RIVEDERE
+  sede: {
+    title: "Villa Fassini, Rome",
+    text: "The programme takes place at Villa Fassini, the operating base of ELIS Innovation Hub. Startups have the use of an agora for meetings and Demo Day, an equipped coworking space and the common areas.",
+    factsHeaders: ["Item", "Value"],
     facts: [
-      { value: "2,000+ sqm", label: "of space" },
-      { value: "8 hectares", label: "of park" },
-      { value: "3 km", label: "from Rome Tiburtina" },
+      ["Space", "over 2,000 sqm"],
+      ["Park", "8 hectares"],
+      ["Distance from Roma Tiburtina", "under 3 km"],
+      ["Parking", "86 spaces"],
     ],
     addressLabel: "Address",
+    mapLabel: "Open in Maps",
+    photoPlaceholder: "Villa Fassini, agora or coworking space",
   },
 
+  // EN-DA-RIVEDERE
   faq: {
-    eyebrow: "Frequently asked questions",
-    title: "What you'd want to ask before applying.",
-    items: [
+    title: "Frequently asked questions",
+    groups: [
       {
-        q: "Should I apply?",
-        a: "If your technology is between TRL 3 and 6, if you built it, and if you're willing to develop it in Lazio: yes. If you've already closed a significant seed round, no — we're late and we know it.",
+        name: "Eligibility",
+        items: [
+          { q: "Can we apply if we have not incorporated yet?", a: "Yes. The programme is open to research groups and university spin-offs in the process of incorporating. WDA supports you through incorporation, which must be completed before the investment is paid out." },
+          { q: "How do we establish whether our technology is between TRL 3 and 6?", a: "TRL 3 and 4 correspond to experimental validation of the technological principle, TRL 5 to a first prototype or MVP, TRL 6 to testing in a limited operational context. If the technology has not yet been validated experimentally, the application is premature." },
+          { q: "Do we already need a base in Lazio?", a: "No, but you must commit to opening one before the investment is paid out. It is a condition precedent of the agreement." },
+          { q: "Can founders with a university role take part?", a: "The investment agreement requires a full operational commitment from the founders. Compatibility with academic positions must be assessed case by case with the relevant institution." },
+          { q: "Our technology is licensed from the university. Is that a problem?", a: "The investment agreement requires the intellectual property to be owned by the company. Licensing arrangements with a technology transfer office must be examined before the investment." },
+        ],
       },
       {
-        q: "What do you mean by impact?",
-        a: "A benefit for people or the environment that can be described and measured: emissions avoided, services that become reachable, skilled employment. Not a statement of intent at the end of a pitch, but an effect with indicators, verified at the end of the programme using the SROI methodology.",
+        name: "Investment",
+        items: [
+          { q: "How much equity is acquired?", a: "The stake is set in the term sheet on the basis of the valuation of the project. The minimum clauses of the agreement are published on the Terms page." },
+          { q: "Does the programme have costs for the startup?", a: "Yes. The company pays Next4 a fee for incubation services and for use of the premises, invoiced under the investment agreement. The amount and the arrangements are set out on the Terms page." },
+          { q: "When is the investment paid out?", a: "After acceptance of the proposal and verification of the conditions precedent, under the terms of the investment agreement." },
+        ],
       },
       {
-        q: "We haven't incorporated yet.",
-        a: "Not a problem. Teams, university spin-offs and research groups can apply: WDA walks you through incorporation, which has to be completed before the programme starts.",
+        name: "Programme",
+        items: [
+          { q: "Is the proof of concept with the partner companies guaranteed?", a: "No. The proof of concept applies to the startups selected by the partner companies at the end of the programme." },
+          { q: "How much presence is required at Villa Fassini?", a: "The programme includes activities held in person at Villa Fassini. The weekly frequency is communicated with the cohort calendar." },
+        ],
       },
       {
-        q: "Do I have to move to Rome?",
-        a: "You need an operating office in Lazio, or a commitment to open one before kick-off: that's a condition of the Venture Tech Lazio call. The programme has space at Villa Fassini, and taking part in full is part of the agreement.",
-      },
-      {
-        q: "How does the financial support work?",
-        a: "€150,000 in equity at the start of the programme, and up to €200,000 for those who carry on over the following two years. It's co-invested by Venture Tech Lazio and Next4; the stake is set in the term sheet, and the board stays with a founder majority.",
-      },
-      {
-        q: "What happens after Demo Day?",
-        a: "The part where the technology leaves the programme begins. ELIS starts an experiment with a corporate partner — up to 24 weeks, with objectives, interim checks and a final review of results — while WDA carries on supporting you on growth and fundraising.",
+        name: "Applying",
+        items: [
+          { q: "What happens if we are not selected?", a: "Applications that are not selected may be resubmitted to the following cohort. Scouting remains active for the whole duration of the programme." },
+        ],
       },
     ],
+    contactPrefix: "For questions not covered on this page:",
   },
 
-  finalCta: {
-    title: "If what you're building could be useful to someone, let's build it together.",
-    text: "Applying takes a few minutes. Then an interview and a meeting with the Advisory Board: no commitment before the proposal.",
-    cta: "Apply",
-    deadlinePrefix: "Applications close on",
-    contactPrefix: "Got a question before applying? Write to",
+  // EN-DA-RIVEDERE
+  chiusura: {
+    text: "Impronta is selecting six startups for the 2026 cohort.",
+    ctaPrimary: "Apply",
+    contactPrefix: "For questions before applying:",
   },
 
+  // EN-DA-RIVEDERE
   footer: {
-    tagline: "The impact accelerator of Italy's Lazio Region.",
+    tagline: "Acceleration and investment programme for impact startups.",
     promotersTitle: "Promoted by",
-    fundingTitle: "Funded by",
-    funding:
-      "Venture Tech Lazio — FARE Venture 2 section of the FARE Lazio Participation Fund, under the Lazio Region ERDF ROP 2021/2027 programme. Fund manager: Lazio Innova.",
-    linksTitle: "Navigate",
+    navTitle: "Navigation",
+    contactTitle: "Contact",
     legalTitle: "Legal",
+    conditions: "Investment terms",
     privacy: "Privacy policy",
     cookie: "Cookie policy",
+    institutionalLabel: "Co-financed by",
+    institutionalPlaceholder: "EU emblem, Regione Lazio, Lazio Innova — logos to be added",
+    funding:
+      "Impronta is co-financed by Venture Tech Lazio, the FARE Venture 2 section of the FARE Lazio Participation Fund, under the 2021/2027 ERDF Regional Programme of Regione Lazio. Fund manager: Lazio Innova. Programme name in the proposal: IMPACT BUILDER.",
     rights: "All rights reserved.",
-    contact: "Contact",
   },
 
+  // EN-DA-RIVEDERE
   formMissing: {
     label: "Application form not configured yet",
-    text: "Set APPLICATION_FORM_URL in src/config.ts to activate the CTAs.",
+    text: "Set APPLICATION_FORM_URL in src/config.ts to activate the calls to action.",
+  },
+
+  // EN-DA-RIVEDERE
+  condizioni: {
+    title: "Investment terms",
+    lead: "A summary of the minimum clauses set out by the investment agreement. The binding terms are those of the agreement signed by each company.",
+    tocLabel: "On this page",
+    backHome: "Back to home",
+    clauseHeaders: ["Clause", "What it provides", "What it means for you"],
+    sections: [
+      {
+        id: "investimento-follow-on",
+        title: "Investment and follow-on",
+        text: "An initial investment of €150,000 in equity per startup, co-invested by Venture Tech Lazio (70%) and Next4 as Active Investor (30%). A follow-on of €200,000 for a maximum of three startups over 2028–2029.",
+        rows: [],
+      },
+      {
+        id: "condizioni-sospensive",
+        title: "Conditions precedent",
+        text: "",
+        rows: [
+          ["Operating base in Lazio", "The company must have or open an operating base in the Lazio Region before the investment is paid out", "If you do not have a base in Lazio you must open one: without it, the investment is not completed"],
+          ["Full participation", "The company undertakes to take part in all programme activities", "Systematic absence from activities can cause the investment to lapse"],
+        ],
+      },
+      {
+        id: "governance",
+        title: "Governance and investor rights",
+        text: "",
+        rows: [
+          ["Board of directors", "At least three members: two appointed by the founders, one by Next4. Venture Tech Lazio designates an observer with no voting rights", "You keep the majority of the board. The observer attends meetings but does not vote"],
+          ["Reserved matters", "Extraordinary transactions, amendments to the articles, distribution of dividends, transfer or licensing of intellectual property and stock option plans require the favourable vote of Next4 and Venture Tech Lazio", "On these matters you cannot resolve without the investors' agreement"],
+          ["Reporting", "Reporting to investors at least quarterly", "You must produce periodic reporting"],
+          ["Liquidation preference", "Non-participating, equal to the amount paid in", "On a liquidation the investors first recover what they paid in, without participating further"],
+          ["Co-sale and drag-along", "A co-sale right. Drag-along after four years for offers covering at least 50% of the capital at a valuation of no less than €2,000,000", "After four years a purchase offer meeting those thresholds can oblige you to sell"],
+        ],
+      },
+      {
+        id: "impegni-fondatori",
+        title: "Founders' commitments",
+        text: "",
+        rows: [
+          ["Lock-up", "The founders do not transfer their shares for three years", "You cannot sell your shareholding in the first three years"],
+          ["Operational role and non-competition", "A full operational commitment and a non-competition undertaking for up to twelve months after leaving", "The programme assumes you work full time on the company"],
+          ["Intellectual property", "Full ownership of the intellectual property vested in the company", "Patents and licences must be held by the company, not by individuals"],
+          ["Bad leaver", "Reverse vesting within four years, with a call option at nominal value", "If you leave the company within four years without good cause, part of your shares can be bought back at nominal value"],
+        ],
+      },
+      {
+        id: "costi",
+        title: "Costs borne by the startup",
+        text: "The company pays Next4 a fee for incubation services and for use of the premises, invoiced under the investment agreement.",
+        rows: [],
+      },
+      {
+        id: "criteri-follow-on",
+        title: "Follow-on criteria",
+        text: "Achievement of at least 70% of the milestones on the monitoring sheet, market validation, availability of the founders and financial sustainability of the project.",
+        rows: [],
+      },
+    ],
+    regulationLabel: "Full programme rules",
+    regulationNote: "Document not yet available.",
   },
 
   privacy: {

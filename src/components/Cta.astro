@@ -1,4 +1,5 @@
 ---
+import Button from './ui/Button.astro';
 import { APPLICATION_FORM_URL, CONTACT_EMAIL, hasApplicationForm } from '../config';
 import { useTranslations } from '../i18n';
 import type { Locale } from '../i18n/utils';
@@ -8,7 +9,7 @@ interface Props {
   /** da dove parte il click: finisce in utm_content per l'attribuzione */
   source: string;
   label?: string;
-  variant?: 'primary' | 'on-dark';
+  variant?: 'primary' | 'secondary' | 'link' | 'on-dark';
   class?: string;
 }
 
@@ -34,16 +35,11 @@ if (hasApplicationForm) {
   url = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}`;
 }
 
-const classes = `btn ${variant === 'on-dark' ? 'btn-on-dark' : 'btn-primary'} ${className}`;
+// Su fondo scuro il magenta perde contrasto: si passa al bianco pieno.
+const onDark = variant === 'on-dark';
+const buttonVariant = onDark ? 'primary' : variant;
+const classes = [onDark ? 'bg-white text-ink hover:bg-paper-alt' : '', className].filter(Boolean).join(' ');
 ---
-<a
-  href={url}
-  class={classes}
-  target={hasApplicationForm ? '_blank' : undefined}
-  rel={hasApplicationForm ? 'noopener' : undefined}
->
+<Button variant={buttonVariant} href={url} external={hasApplicationForm} class={classes}>
   {text}
-  <svg viewBox="0 0 16 16" class="h-3.5 w-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M3 8h10M9 4l4 4-4 4" />
-  </svg>
-</a>
+</Button>

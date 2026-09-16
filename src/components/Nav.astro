@@ -9,49 +9,57 @@ interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 const home = localeUrl(locale);
+const conditions = localeUrl(locale, 'condizioni');
+const sectionsLabel = locale === 'it' ? 'Sezioni' : 'Sections';
 ---
-<header class="sticky top-0 z-50 border-b border-line/70 bg-cream/85 backdrop-blur-md">
-  <div class="shell flex h-16 items-center justify-between gap-4 md:h-20">
+<header data-site-header class="sticky top-0 z-50 border-b border-line bg-paper">
+  <div class="container-page flex h-16 items-center justify-between gap-6 md:h-[72px]">
     <a href={home} class="shrink-0" aria-label="Impronta Accelerator">
       <Logo class="h-8 w-auto md:h-9" />
     </a>
 
-    <nav class="hidden items-center gap-7 lg:flex" aria-label="Sezioni">
+    <nav class="hidden items-center gap-6 lg:flex" aria-label={sectionsLabel}>
       {t.nav.items.map((item) => (
-        <a href={`#${item.id}`} class="text-sm font-medium text-slate transition-colors hover:text-ink">
+        <a href={`#${item.id}`} class="font-sans text-[15px] text-ink-muted transition-colors hover:text-ink">
           {item.label}
         </a>
       ))}
+      <a href={conditions} class="font-sans text-[15px] text-ink-muted transition-colors hover:text-ink">
+        {t.nav.conditions}
+      </a>
     </nav>
 
-    <div class="flex items-center gap-2 md:gap-3">
+    <div class="flex items-center gap-4">
       <LanguageSwitcher locale={locale} label={t.nav.langLabel} />
-      <Cta locale={locale} source="nav" label={t.nav.cta} class="hidden text-sm sm:inline-flex" />
+      <!-- il contenitore nasconde la CTA: `hidden` sul pulsante perderebbe
+           contro l'`inline-flex` della sua classe di base -->
+      <span class="hidden sm:block">
+        <Cta locale={locale} source="nav" label={t.nav.cta} />
+      </span>
       <button
         type="button"
         id="menu-toggle"
-        class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink lg:hidden"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-[6px] border border-line text-ink lg:hidden"
         aria-controls="mobile-menu"
         aria-expanded="false"
         aria-label={t.nav.openMenu}
         data-open-label={t.nav.openMenu}
         data-close-label={t.nav.closeMenu}
       >
-        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
           <path d="M4 7h16M4 12h16M4 17h16" />
         </svg>
       </button>
     </div>
   </div>
 
-  <div id="mobile-menu" hidden class="border-t border-line bg-cream lg:hidden">
-    <nav class="shell flex flex-col gap-1 py-4" aria-label="Sezioni">
+  <div id="mobile-menu" hidden class="border-t border-line bg-paper lg:hidden">
+    <nav class="container-page flex flex-col py-2" aria-label={sectionsLabel}>
       {t.nav.items.map((item) => (
-        <a href={`#${item.id}`} class="rounded-xl px-3 py-3 text-base font-medium text-ink hover:bg-white">
-          {item.label}
-        </a>
+        <a href={`#${item.id}`} class="border-b border-line py-3 font-sans text-base text-ink">{item.label}</a>
       ))}
-      <Cta locale={locale} source="nav-mobile" label={t.nav.cta} class="mt-2 w-full" />
+      <a href={conditions} class="border-b border-line py-3 font-sans text-base text-ink">{t.nav.conditions}</a>
+      <Cta locale={locale} source="nav-mobile" label={t.nav.cta} class="mt-4 mb-4 w-full" />
     </nav>
   </div>
 </header>
