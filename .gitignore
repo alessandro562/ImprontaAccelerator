@@ -11,8 +11,11 @@ dist/
 brand/*.pdf
 brand/*.pptx
 
-# Materiali di lavoro del redesign: contengono term sheet e nomi.
+# Materiali di lavoro del redesign v1, archiviati: contengono term sheet e nomi.
 # In repo va solo la versione redatta del brief.
-docs/redesign/*
-!docs/redesign/BRIEF.md
+docs/redesign-v1/*
+!docs/redesign-v1/BRIEF.md
+
+# Screenshot e immagini di diff della v2: si rigenerano con npm run diff.
+docs/redesign-v2/
 .qa-serve/
