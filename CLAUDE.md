@@ -24,14 +24,22 @@ Una pagina di attrazione, non una pagina informativa. La candidatura e il regola
 2. Tono: sicuro, asciutto, mai commerciale. Niente superlativi, punti esclamativi, urgenza artificiale ("ultimi posti", "non perdere"), promesse di risultato.
 3. Si dà del tu al lettore.
 4. Si dice **batch**, non «coorte».
-5. Accuratezza (la fonte è `brand/VTL_Documento Complessivo.pdf`):
+5. **Nessun riferimento a Venture Tech Lazio**, per ora: richiesta esplicita del
+   14 settembre. Vale anche per il footer. Da ripristinare prima di togliere il
+   `noindex` se l'obbligo di visibilità FESR è attivo.
+6. Non legare la durata alla sede: «4 mesi a Villa Fassini» si legge come
+   quattro mesi di trasferta e spaventa. La durata sta con il programma, la
+   sede ha la sua sezione.
+7. Accuratezza (la fonte è `brand/VTL_Documento Complessivo.pdf`):
    - €150.000 in equity per startup;
    - 6 startup per batch;
-   - 4 mesi di programma a Villa Fassini;
+   - 4 mesi di programma;
+   - TRL 3–9 (deciso dal team: la proposta diceva 3–6);
+   - quattro ambiti: ambiente, salute, industria, sociale (il quarto è stato
+     aggiunto dopo la proposta, i suoi verticali sono da validare);
    - la sperimentazione con le imprese riguarda solo le soluzioni scelte dai partner;
-   - il programma è cofinanziato da Venture Tech Lazio e non è "della Regione Lazio";
    - nessun nome di corporate;
-   - nessun dato non presente nella proposta.
+   - nessun altro dato non presente nella proposta.
 
 ## Regole di design
 
@@ -39,7 +47,9 @@ Una pagina di attrazione, non una pagina informativa. La candidatura e il regola
   e self-hosted da `scripts/fonts.py`:
   - **Poppins** (500, 600, 700) per titoli e numeri;
   - **Inter** per il testo;
-  - **Poppins corsivo** solo per una o due parole d'accento per titolo.
+  - **Poppins corsivo** solo nell'hero e nella chiusura, sulla parola «segno»:
+    è la firma. Nei titoli intermedi il corsivo è stato tolto dopo il feedback
+    del 14 settembre.
   Niente font «di tendenza» scelti fuori dalla marca.
   Nota: il lettering del marchio non è Poppins — ha la «a» a due piani — ma è
   vettorializzato nei file del logo e non serve come webfont. Se salta fuori il

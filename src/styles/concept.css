@@ -338,3 +338,57 @@ a.org__name:hover{color:var(--magenta)}
  */
 .step { display: flex; flex-direction: column }
 .step__meta { margin-top: auto; align-self: flex-start }
+
+/* ---------- Sezioni aggiunte dopo il concept ---------- */
+/*
+ * La sede e la community. Non c'e' nel concept: nasce dal feedback, sul modello
+ * della slide del deck — foto a sinistra, voci a destra.
+ */
+.sede { background: var(--paper-2); padding: clamp(88px, 11vw, 150px) 0 }
+.sede__grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 24px;
+  row-gap: clamp(32px, 4vw, 48px);
+  align-items: start;
+}
+.sede__foto { grid-column: 1/6 }
+.sede__foto img,
+.sede__segnaposto {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 6px;
+  object-fit: cover;
+  display: block;
+}
+.sede__segnaposto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  border: 1px dashed var(--line);
+  /* Senza velo: anche un tre per cento di inchiostro basta a portare il testo
+     muted sotto il 4,5:1. */
+  text-align: center;
+  font-size: 15px;
+  color: var(--muted);
+}
+.sede__testo { grid-column: 7/13 }
+.sede__testo h2 {
+  margin: 18px 0 0;
+  font-size: clamp(2.4rem, 4.6vw, 4.2rem);
+}
+.sede__lead { margin: 20px 0 0; color: var(--muted); max-width: 46ch }
+.sede__voci { margin: clamp(28px, 3.4vw, 44px) 0 0 }
+.sede__voci > div { padding: 18px 0; border-top: 1px solid var(--line) }
+.sede__voci > div:last-child { border-bottom: 1px solid var(--line) }
+.sede__voci dt {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -.01em;
+}
+.sede__voci dd { margin: 6px 0 0; color: var(--muted); font-size: 16px; max-width: 44ch }
+@media (max-width: 860px) {
+  .sede__foto, .sede__testo { grid-column: 1/-1 }
+}

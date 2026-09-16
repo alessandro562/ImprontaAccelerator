@@ -50,18 +50,18 @@ export const it = {
 
   programma: {
     label: "Il programma",
-    intro: { before: "Finanziamo tecnologie che migliorano la vita di una comunità o di un ", accent: "territorio", after: ". L’impatto nasce in settori molto diversi: il programma li guarda tutti." },
+    intro: "Finanziamo tecnologie che migliorano la vita di una comunità o di un territorio. L’impatto nasce in settori molto diversi: il programma li guarda tutti.",
     nums: [
       { value: "6", label: "startup per batch, dodici in due anni" },
       { prefix: "€", value: "150", accent: "mila", label: "in equity per ogni startup" },
-      { value: "4", accent: "mesi", label: "a Villa Fassini, Roma" },
+      { value: "4", accent: "mesi", label: "di programma, fra incontri e lavoro sul campo" },
       { value: "1", accent: "Demo Day", label: "davanti a imprese, investitori e istituzioni" },
     ],
   },
 
   fronti: {
     label: "Cosa cerchiamo",
-    title: { before: "Tecnologie con un effetto ", accent: "misurabile" },
+    title: "Tecnologie con un effetto misurabile",
     lead: "Obiettivi d’impatto fissati all’ingresso, verificati a fine percorso con metodologia SROI.",
     items: [
       {
@@ -82,14 +82,20 @@ export const it = {
         text: "Deep tech che diventa produzione e lavoro qualificato.",
         tags: ["Robotica", "Sensoristica", "AI per la manifattura"],
       },
+      {
+        n: "04",
+        name: "Sociale",
+        text: "Inclusione, educazione e servizi che rafforzano le comunità.",
+        tags: ["Inclusione", "Educazione", "Servizi di comunità", "Economia sociale"],
+      },
     ],
   },
 
   perChi: {
     label: "Per chi",
-    lead: { before: "Startup, spin-off universitari e gruppi di ricerca con una tecnologia ", accent: "già validata", after: " e un’idea chiara di dove applicarla." },
+    lead: "Startup, spin-off universitari e gruppi di ricerca con una tecnologia già validata e un’idea chiara di dove applicarla.",
     items: [
-      { k: "TRL 3–6", v: "Dal proof of concept al test sul campo" },
+      { k: "TRL 3–9", v: "Dal proof of concept al mercato" },
       { k: "Lazio", v: "Sede operativa nel Lazio, anche da aprire prima dell’avvio" },
       { k: "Pre-seed", v: "Costituita o ancora da costituire" },
     ],
@@ -97,12 +103,12 @@ export const it = {
 
   comeFunziona: {
     label: "Come funziona",
-    title: { before: "Come si entra,", accent: "e cosa ricevi" },
+    title: { riga1: "Come si entra,", riga2: "e cosa ricevi" },
     lead: "Quattro passaggi, dalla candidatura alla sperimentazione con le imprese.",
     steps: [
       { n: "01", title: "Candidatura", text: "Presenti la tecnologia, il team e l’impatto che vuoi ottenere.", meta: "Online" },
       { n: "02", title: "Selezione", text: "Valutiamo tecnologia, team e potenziale di impatto.", meta: "Colloquio e Advisory Board" },
-      { n: "03", title: "Accelerazione", text: "Moduli operativi, mentorship uno a uno e €150.000 in equity, in co-investimento con Venture Tech Lazio.", meta: "4 mesi a Villa Fassini" },
+      { n: "03", title: "Accelerazione", text: "Moduli operativi, mentorship uno a uno e €150.000 in equity.", meta: "4 mesi" },
       { n: "04", title: "Demo Day", text: "Presenti a imprese e investitori. Le soluzioni scelte dai partner passano alla sperimentazione.", meta: "Fino a 24 settimane" },
     ],
   },
@@ -114,10 +120,19 @@ export const it = {
       { slug: "elis", name: "ELIS Innovation Hub", role: "Open innovation e misurazione d’impatto", url: "https://www.elis.org/innovation-hub/" },
       { slug: "wda", name: "WDA", role: "Venture building al fianco dei founder", url: "https://wda.company" },
     ],
-    notes: [
-      { title: "Villa Fassini, Roma", text: "2.000 mq e 8 ettari di parco, a pochi minuti da Roma Tiburtina." },
-      { title: "Venture Tech Lazio", text: "Cofinanziato da Venture Tech Lazio, gestito da Lazio Innova." },
+  },
+
+  sede: {
+    label: "Villa Fassini, Roma",
+    title: "La sede e la community",
+    lead: "Uno spazio in cui startup, imprese, università e organizzazioni sociali si incontrano, sperimentano e costruiscono collaborazioni.",
+    voci: [
+      { t: "Spazi di lavoro", d: "Coworking e postazioni attrezzate per startup e partner." },
+      { t: "Agorà Impronta", d: "Eventi, workshop e incontri con comunità e stakeholder." },
+      { t: "Aree di sperimentazione", d: "Spazi per prototipi, test, formazione e sessioni di co-design." },
+      { t: "Community", d: "Accesso al network ELIS di imprese, università, startup ed esperti." },
     ],
+    foto: "Villa Fassini — foto da inserire in src/assets/sede/",
   },
 
   chiusura: {
@@ -133,9 +148,6 @@ export const it = {
   footer: {
     promoters: "Un programma di Next4, ELIS Innovation Hub e WDA",
     address: "Villa Fassini · Via Giuseppe Donati 174, Roma",
-    funding: "Cofinanziato da Venture Tech Lazio",
-    programme: "PR FESR Lazio 2021–2027",
-    institutionalPlaceholder: ["Loghi istituzionali", "UE · Regione Lazio · Lazio Innova"],
     rights: "© 2026 Impronta",
     legalLabel: "Note legali",
     privacy: "Privacy",
@@ -163,7 +175,7 @@ export const it = {
       },
       {
         h: "Conservazione e comunicazione dei dati",
-        p: "I dati delle candidature sono conservati per il tempo necessario alla valutazione e alla gestione del programma, e possono essere comunicati ai partner operativi coinvolti nella selezione e agli organi previsti dal bando Venture Tech Lazio, nel rispetto della normativa applicabile.",
+        p: "I dati delle candidature sono conservati per il tempo necessario alla valutazione e alla gestione del programma, e possono essere comunicati ai partner operativi coinvolti nella selezione e agli organi previsti dal bando, nel rispetto della normativa applicabile.",
       },
       {
         h: "I tuoi diritti",

@@ -10,9 +10,7 @@ const t = useTranslations(locale);
   <div class="wrap">
     <div class="numbers__intro">
       <span class="label" data-in>{t.programma.label}</span>
-      <p id="numbers-title" data-in="2">
-        {t.programma.intro.before}<span class="it">{t.programma.intro.accent}</span>{t.programma.intro.after}
-      </p>
+      <p id="numbers-title" data-in="2">{t.programma.intro}</p>
     </div>
     <div class="numbers__grid">
       {t.programma.nums.map((num, i) => (

@@ -54,11 +54,11 @@ export const en: Dict = {
   // EN-DA-RIVEDERE
   programma: {
     label: "The programme",
-    intro: { before: "We fund technologies that improve life in a community or a ", accent: "region", after: ". Impact arises in very different sectors: the programme looks at all of them." },
+    intro: "We fund technologies that improve life in a community or a region. Impact arises in very different sectors: the programme looks at all of them.",
     nums: [
       { value: "6", label: "startups per batch, twelve in two years" },
       { prefix: "€", value: "150", accent: "k", label: "in equity for each startup" },
-      { value: "4", accent: "months", label: "at Villa Fassini, Rome" },
+      { value: "4", accent: "months", label: "of programme, between sessions and fieldwork" },
       { value: "1", accent: "Demo Day", label: "before companies, investors and institutions" },
     ],
   },
@@ -66,7 +66,7 @@ export const en: Dict = {
   // EN-DA-RIVEDERE
   fronti: {
     label: "What we look for",
-    title: { before: "Technologies with a ", accent: "measurable" },
+    title: "Technologies with a measurable effect",
     lead: "Impact goals set on entry, verified at the end with the SROI methodology.",
     items: [
       {
@@ -87,15 +87,21 @@ export const en: Dict = {
         text: "Deep tech that becomes production and skilled work.",
         tags: ["Robotics", "Sensing", "AI for manufacturing"],
       },
+      {
+        n: "04",
+        name: "Social",
+        text: "Inclusion, education and services that strengthen communities.",
+        tags: ["Inclusion", "Education", "Community services", "Social economy"],
+      },
     ],
   },
 
   // EN-DA-RIVEDERE
   perChi: {
     label: "Who it is for",
-    lead: { before: "Startups, university spin-offs and research groups with a ", accent: "validated technology", after: " and a clear idea of where to apply it." },
+    lead: "Startups, university spin-offs and research groups with a validated technology and a clear idea of where to apply it.",
     items: [
-      { k: "TRL 3–6", v: "From proof of concept to the test in the field" },
+      { k: "TRL 3–9", v: "From proof of concept to market" },
       { k: "Lazio", v: "An operating base in Lazio, which may be opened before the start" },
       { k: "Pre-seed", v: "Incorporated, or still to be" },
     ],
@@ -104,12 +110,12 @@ export const en: Dict = {
   // EN-DA-RIVEDERE
   comeFunziona: {
     label: "How it works",
-    title: { before: "How you get in,", accent: "and what you get" },
+    title: { riga1: "How you get in,", riga2: "and what you get" },
     lead: "Four steps, from the application to the proof of concept with industry.",
     steps: [
       { n: "01", title: "Application", text: "You present the technology, the team and the impact you are after.", meta: "Online" },
       { n: "02", title: "Selection", text: "We assess the technology, the team and the impact potential.", meta: "Interview and Advisory Board" },
-      { n: "03", title: "Acceleration", text: "Working modules, one-to-one mentorship and €150,000 in equity, co-invested with Venture Tech Lazio.", meta: "4 months at Villa Fassini" },
+      { n: "03", title: "Acceleration", text: "Working modules, one-to-one mentorship and €150,000 in equity.", meta: "4 months" },
       { n: "04", title: "Demo Day", text: "You pitch to companies and investors. Solutions chosen by the partners move on to a proof of concept.", meta: "Up to 24 weeks" },
     ],
   },
@@ -122,13 +128,22 @@ export const en: Dict = {
       { slug: "elis", name: "ELIS Innovation Hub", role: "Open innovation and impact measurement", url: "https://www.elis.org/innovation-hub/" },
       { slug: "wda", name: "WDA", role: "Venture building alongside founders", url: "https://wda.company" },
     ],
-    notes: [
-      { title: "Villa Fassini, Rome", text: "2,000 sqm and 8 hectares of park, minutes from Roma Tiburtina." },
-      { title: "Venture Tech Lazio", text: "Co-financed by Venture Tech Lazio, managed by Lazio Innova." },
-    ],
   },
 
   // EN-DA-RIVEDERE
+  sede: {
+    label: "Villa Fassini, Rome",
+    title: "The venue and the community",
+    lead: "A place where startups, companies, universities and social organisations meet, experiment and build collaborations.",
+    voci: [
+      { t: "Workspaces", d: "Coworking and equipped desks for startups and partners." },
+      { t: "Agorà Impronta", d: "Events, workshops and meetings with communities and stakeholders." },
+      { t: "Testing areas", d: "Space for prototypes, testing, training and co-design sessions." },
+      { t: "Community", d: "Access to the ELIS network of companies, universities, startups and experts." },
+    ],
+    foto: "Villa Fassini — photo to be added in src/assets/sede/",
+  },
+
   chiusura: {
     label: "2026 batch",
     title: { before: "Leave ", accent: "a mark." },
@@ -143,9 +158,6 @@ export const en: Dict = {
   footer: {
     promoters: "A programme by Next4, ELIS Innovation Hub and WDA",
     address: "Villa Fassini · Via Giuseppe Donati 174, Rome",
-    funding: "Co-financed by Venture Tech Lazio",
-    programme: "ERDF Regional Programme Lazio 2021–2027",
-    institutionalPlaceholder: ["Institutional logos", "EU · Regione Lazio · Lazio Innova"],
     rights: "© 2026 Impronta",
     legalLabel: "Legal",
     privacy: "Privacy",
@@ -173,7 +185,7 @@ export const en: Dict = {
       },
       {
         h: "Retention and disclosure",
-        p: "Application data is kept for as long as necessary to assess applications and run the programme, and may be shared with the operating partners involved in selection and with the bodies required by the Venture Tech Lazio call, in accordance with applicable law.",
+        p: "Application data is kept for as long as necessary to assess applications and run the programme, and may be shared with the operating partners involved in selection and with the bodies required by the call, in accordance with applicable law.",
       },
       {
         h: "Your rights",

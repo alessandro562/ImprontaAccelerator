@@ -161,14 +161,19 @@ const GRIGLIA = () => {
     '.orgs', '.org', '.org__name', '.org__role', '.team__foot div',
     '.close h2', '.close p', '.foot__grid', '.foot__legal',
   ];
+  // Le sezioni nate dopo il concept non hanno un corrispettivo da confrontare.
+  const DOPO_IL_CONCEPT = ['.sede'];
   const out = [];
   for (const sel of selettori) {
-    document.querySelectorAll(sel).forEach((el, i) => {
+    document.querySelectorAll(sel).forEach((el) => {
+      if (DOPO_IL_CONCEPT.some((s) => el.closest(s))) return;
       const r = el.getBoundingClientRect();
-      out.push({ sel, i, x: Math.round(r.x), w: Math.round(r.width) });
+      out.push({ sel, x: Math.round(r.x), w: Math.round(r.width) });
     });
   }
-  return out;
+  // L'indice si assegna dopo le esclusioni, o salterebbe dei numeri.
+  const conta = {};
+  return out.map((b) => ({ ...b, i: (conta[b.sel] = (conta[b.sel] ?? -1) + 1) }));
 };
 
 /**
@@ -295,25 +300,53 @@ for (const vp of VIEWPORTS) {
   // Verdetto: la griglia. Stessi blocchi, stesso ordine, stesse colonne.
   const gc = mConcept.griglia;
   const gs = mSito.griglia;
+  /*
+   * Il confronto e' per gruppi di selettore, non su un elenco piatto: il sito
+   * ha un fronte in piu' del concept, e in fila l'elenco si disallineerebbe da
+   * li' in poi facendo sembrare rotto tutto il resto.
+   *
+   * Quello che il sito ha in piu' si conta come aggiunta, non come rottura: e'
+   * voluto, e questo controllo serve a vedere se cede la griglia.
+   */
+  const perSelettore = (griglia) => {
+    const m = new Map();
+    for (const b of griglia) {
+      if (!m.has(b.sel)) m.set(b.sel, []);
+      m.get(b.sel).push(b);
+    }
+    return m;
+  };
+  const mc = perSelettore(gc);
+  const ms = perSelettore(gs);
+
   const scostamenti = [];
   let ammessi = 0;
-  if (gc.length !== gs.length) {
-    scostamenti.push(`blocchi: ${gc.length} nel concept, ${gs.length} nel sito`);
-  } else {
-    for (let i = 0; i < gc.length; i++) {
-      if (gc[i].sel !== gs[i].sel) { scostamenti.push(`ordine diverso a ${gc[i].sel}`); break; }
-      const chiave = `${gc[i].sel}[${gc[i].i}]`;
+  let aggiunti = 0;
+  for (const [sel, blocchiConcept] of mc) {
+    const blocchiSito = ms.get(sel) ?? [];
+    // Le due note del concept sotto i promotori sono diventate la sezione
+    // «La sede e la community»: la loro assenza e' voluta.
+    if (blocchiSito.length === 0) {
+      if (sel !== '.team__foot div') scostamenti.push(`${sel}: sparito dal sito`);
+      continue;
+    }
+    aggiunti += Math.max(0, blocchiSito.length - blocchiConcept.length);
+    for (let i = 0; i < Math.min(blocchiConcept.length, blocchiSito.length); i++) {
+      const chiave = `${sel}[${i}]`;
       if (AMMESSI.has(chiave)) { ammessi += 1; continue; }
-      if (Math.abs(gc[i].x - gs[i].x) > SOGLIA_X || Math.abs(gc[i].w - gs[i].w) > SOGLIA_X) {
-        scostamenti.push(`${chiave} x ${gc[i].x}→${gs[i].x}, larghezza ${gc[i].w}→${gs[i].w}`);
+      const a = blocchiConcept[i];
+      const b = blocchiSito[i];
+      if (Math.abs(a.x - b.x) > SOGLIA_X || Math.abs(a.w - b.w) > SOGLIA_X) {
+        scostamenti.push(`${chiave} x ${a.x}→${b.x}, larghezza ${a.w}→${b.w}`);
       }
     }
   }
+
   if (scostamenti.length > 0) problemi += 1;
 
   console.log(
     `${vp.name}px  griglia: ${scostamenti.length === 0 ? `${gc.length} blocchi allineati` : `${scostamenti.length} scostamenti`}` +
-    `${ammessi > 0 ? `, ${ammessi} deroghe dichiarate` : ''}  |  ` +
+    `${ammessi > 0 ? `, ${ammessi} deroghe` : ''}${aggiunti > 0 ? `, ${aggiunti} blocchi aggiunti dopo il concept` : ''}  |  ` +
     `pixel diversi ${perc.toFixed(2)}% (il copy del sito e' piu' asciutto del concept)  |  ` +
     `altezza concept ${mConcept.altezza} / sito ${mSito.altezza}, Δ ${deltaH}px`,
   );

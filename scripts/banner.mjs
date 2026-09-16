@@ -59,17 +59,25 @@ async function tinta(percorso, [r, g, b]) {
 const rgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
 const dentro = (svg) => svg.match(/<svg[^>]*>([\s\S]*)<\/svg>/)[1];
 
-const [monoSvg, elisSvg, posSvg, poppins500] = await Promise.all([
+const [monoSvg, elisSvg, posSvg, negSvg, poppins500] = await Promise.all([
   readFile('src/assets/logo-impronta-mono.svg', 'utf8'),
   readFile('brand/loghi/Logo2_Elis.svg', 'utf8'),
   readFile('src/assets/logo-impronta.svg', 'utf8'),
+  readFile('src/assets/logo-impronta-negativo.svg', 'utf8'),
   readFile('src/assets/fonts/poppins-500.woff2').then((b) => b.toString('base64')),
 ]);
 
 const testoMono = dentro(monoSvg).match(/<g id="mono-testo">[\s\S]*?<\/g>/)[0];
 const testoPos = dentro(posSvg).match(/<g id="pos-testo">[\s\S]*?<\/g>/)[0];
-/** Il logotipo in una tinta sola: si parte dal mono e si sostituisce il bianco. */
-const logotipo = (colore) => (colore === 'originale' ? testoPos : testoMono.replace(/#FFFFFF/g, colore));
+const testoNeg = dentro(negSvg).match(/<g id="neg-testo">[\s\S]*?<\/g>/)[0];
+/**
+ * Il logotipo.
+ *
+ * `originale` e `negativo` sono i due file ufficiali, con il payoff in magenta;
+ * qualunque altro valore e' una tinta unita, ottenuta dal mono.
+ */
+const logotipo = (colore) =>
+  colore === 'originale' ? testoPos : colore === 'negativo' ? testoNeg : testoMono.replace(/#FFFFFF/g, colore);
 const elis = (colore) => elisSvg.replace(/#035172/g, colore);
 
 /** I due archi del marchio, con le tinte passate. */
@@ -138,10 +146,10 @@ const VARIANTI = [
   {
     nome: 'gradiente',
     titolo: 'Gradiente di marca con gli archi a filo bianco',
-    fondo: `background:linear-gradient(118deg, ${VERDE} 0%, ${AMBRA} 38%, ${CORALLO} 70%, ${MAGENTA} 100%)`,
-    marchio: marchio({ esterno: '#fff', interno: '#fff', punto: 'none', larghezza: 5, opacita: 0.9 }),
-    posMarchio: 'left:-120px;bottom:-200px;width:1340px',
-    logo: logotipo('#FFFFFF'),
+    fondo: `background:linear-gradient(118deg, ${VERDE} 0%, ${AMBRA} 32%, ${CORALLO} 56%, ${MAGENTA} 78%, #B8043F 100%)`,
+    marchio: marchio({ esterno: '#fff', interno: '#fff', punto: '#fff', opacita: 0.92 }),
+    posMarchio: 'left:-220px;bottom:-190px;width:1180px',
+    logo: logotipo('negativo'),
     tintaTesto: '#FFFFFF',
     promotori: 'bianco',
     linea: 'rgba(255,255,255,.4)',
@@ -156,6 +164,17 @@ const VARIANTI = [
     tintaTesto: INK,
     promotori: 'colore',
     linea: 'rgba(15,20,18,.22)',
+  },
+  {
+    nome: 'gradiente-payoff-bianco',
+    titolo: 'Come sopra, ma con il payoff in bianco invece che in magenta',
+    fondo: `background:linear-gradient(118deg, ${VERDE} 0%, ${AMBRA} 32%, ${CORALLO} 56%, ${MAGENTA} 78%, #B8043F 100%)`,
+    marchio: marchio({ esterno: '#fff', interno: '#fff', punto: '#fff', opacita: 0.92 }),
+    posMarchio: 'left:-220px;bottom:-190px;width:1180px',
+    logo: logotipo('#FFFFFF'),
+    tintaTesto: '#FFFFFF',
+    promotori: 'bianco',
+    linea: 'rgba(255,255,255,.4)',
   },
   {
     nome: 'due-campi',
@@ -190,6 +209,7 @@ async function riquadro(svg, id, margine = 4) {
 
 const vbMono = await riquadro(monoSvg, 'mono-testo');
 const vbPos = await riquadro(posSvg, 'pos-testo');
+const vbNeg = await riquadro(negSvg, 'neg-testo');
 
 const loghi = {
   colore: {
@@ -235,7 +255,7 @@ body{width:1920px;height:1080px;overflow:hidden;font-family:P,sans-serif}
 </style></head><body><div class="tela">
   ${v.marchio}
   <div class="colonna">
-    <div class="centro"><svg class="logotipo" viewBox="${v.logo === testoPos ? vbPos : vbMono}">${v.logo}</svg></div>
+    <div class="centro"><svg class="logotipo" viewBox="${v.logo === testoPos ? vbPos : v.logo === testoNeg ? vbNeg : vbMono}">${v.logo}</svg></div>
     <div class="promotori">
       <div class="promotori__linea"></div>
       <div class="promotori__eti">Un programma di</div>

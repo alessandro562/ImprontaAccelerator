@@ -7,7 +7,7 @@ const { locale } = Astro.props;
 const t = useTranslations(locale);
 
 // Un colore del marchio per fronte, nell'ordine del concept.
-const COLORS = ['var(--green)', 'var(--amber)', 'var(--coral)'];
+const COLORS = ['var(--green)', 'var(--amber)', 'var(--coral)', 'var(--magenta)'];
 ---
 <section class="fronts" aria-labelledby="fronts-title">
   <div class="wrap">
@@ -15,9 +15,7 @@ const COLORS = ['var(--green)', 'var(--amber)', 'var(--coral)'];
       <div>
         <span class="label" data-in>{t.fronti.label}</span>
       </div>
-      <h2 class="display" id="fronts-title" data-in="2">
-        {t.fronti.title.before}<span class="it">{t.fronti.title.accent}</span>
-      </h2>
+      <h2 class="display" id="fronts-title" data-in="2">{t.fronti.title}</h2>
       <p data-in="3">{t.fronti.lead}</p>
     </div>
 

@@ -10,9 +10,7 @@ const t = useTranslations(locale);
   <div class="wrap who__grid">
     <div class="who__lead">
       <span class="label" id="who-title" data-in>{t.perChi.label}</span>
-      <p data-in="2">
-        {t.perChi.lead.before}<span class="it">{t.perChi.lead.accent}</span>{t.perChi.lead.after}
-      </p>
+      <p data-in="2">{t.perChi.lead}</p>
     </div>
     <ul class="who__list">
       {t.perChi.items.map((item, i) => (
