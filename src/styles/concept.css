@@ -315,6 +315,19 @@ a.org__name:hover{color:var(--magenta)}
 .num:nth-child(4) .num__v .it { font-size: .5em }
 
 /*
+ * Titolo dell'hero sotto gli 860px. Il concept diceva «Ricerca» (sette
+ * lettere) e poteva permettersi 17vw; il titolo approvato dice «Innovazione»,
+ * che a 390px chiede 392px dentro una colonna di 350 — e siccome `.line` ha
+ * `overflow:hidden` la parola verrebbe tagliata in silenzio, senza che il
+ * documento segnali overflow orizzontale. Il corpo si lega quindi alla
+ * larghezza della colonna (100vw meno i 2x20px di padding) invece che alla
+ * viewport: cosi' la parola piu' lunga entra a qualunque larghezza.
+ */
+@media (max-width: 860px) {
+  .hero h1 { font-size: clamp(2.6rem, calc((100vw - 40px) / 6.2), 5rem) }
+}
+
+/*
  * Loghi dei promotori. Compaiono al posto del nome scritto quando il file e'
  * in src/assets/partner/; l'altezza e' vincolata perche' i tre loghi stiano
  * sulla stessa riga ottica qualunque siano le loro proporzioni.
