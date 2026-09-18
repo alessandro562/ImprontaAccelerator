@@ -39,6 +39,11 @@ jobs:
         run: |
           SITE_URL="${{ steps.pages.outputs.origin }}"
           BASE_PATH="${{ steps.pages.outputs.base_path }}"
+          # Finche' GitHub non ha emesso il certificato per il dominio custom,
+          # l'API di Pages riporta l'origine in http. I canonical, la sitemap e
+          # le og:image sono URL assoluti e resterebbero in http anche dopo:
+          # si normalizza qui invece di rifare la build il giorno dopo.
+          SITE_URL="${SITE_URL/#http:\/\//https://}"
           if [ -z "$SITE_URL" ]; then
             SITE_URL="https://${{ github.repository_owner }}.github.io"
             BASE_PATH="/${{ github.event.repository.name }}"
@@ -55,15 +60,26 @@ jobs:
 
       - run: npm run build
 
-      - name: Verifica che nessun link salti il base path
+      - name: Verifica che i link abbiano il base path giusto
         run: |
           if [ -n "$BASE_PATH" ] && [ "$BASE_PATH" != "/" ]; then
+            # Project site: ogni link assoluto deve stare dentro il base path.
             BAD=$(grep -rhoE '(href|src)="/[^"]*' dist --include='*.html' | grep -v "\"$BASE_PATH/" || true)
             if [ -n "$BAD" ]; then
               echo "::error::Link o asset che ignorano il base path:"; echo "$BAD" | sort -u; exit 1
             fi
+            echo "Nessun link assoluto fuori dal base path."
+          else
+            # Dominio custom: il caso opposto, e quello che ci e' sfuggito il
+            # 18 settembre. Il vecchio percorso non deve comparire piu' da
+            # nessuna parte, o il sito chiede CSS e font dove non ci sono.
+            BAD=$(grep -rhoE '(href|src)="/ImprontaAccelerator[^"]*' dist --include='*.html' || true)
+            if [ -n "$BAD" ]; then
+              echo "::error::Il sito e' alla radice del dominio ma i link portano ancora il vecchio percorso:"
+              echo "$BAD" | sort -u; exit 1
+            fi
+            echo "Nessun residuo del vecchio percorso: il sito e' alla radice."
           fi
-          echo "Nessun link assoluto fuori dal base path."
 
       - uses: actions/upload-pages-artifact@v5
         with:
