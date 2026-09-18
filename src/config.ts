@@ -18,22 +18,25 @@ export const APPLICATION_FORM_URL = '';
 export const APPLICATION_DEADLINE = '';
 
 /**
- * Apertura ai motori di ricerca. Deciso dal team il 18 settembre 2026.
+ * Apertura ai motori di ricerca.
  *
- * Il valore va in `<meta name="robots">` e in `robots.txt`. Va pubblicato
- * **insieme al dominio custom**, non prima: finché il sito vive su
- * `alessandro562.github.io/ImprontaAccelerator/`, aprire l’indicizzazione
- * significa far indicizzare quell’indirizzo e poi doverlo far migrare a
- * colpi di redirect.
+ * **Il team ha deciso il 18 settembre 2026 di aprirla.** Resta `false` per una
+ * ragione di sequenza, non di merito: finché il sito vive su
+ * `alessandro562.github.io/ImprontaAccelerator/`, togliere il noindex vuol dire
+ * far indicizzare quell’indirizzo e poi doverlo far migrare a colpi di
+ * redirect. Si mette a `true` nel momento in cui il dominio custom risponde:
+ * è l’ultimo passo di `docs/DOMINIO.md`.
  *
- * Due cose restano fuori dal codice e in carico al team, entrambe da
- * chiudere prima che Google passi:
+ * Il valore governa il `<meta name="robots">` e `robots.txt`.
+ *
+ * Due cose restano fuori dal codice e in carico al team, da chiudere prima di
+ * accenderlo:
  * - l’obbligo di visibilità FESR: se è attivo, i riferimenti a Venture Tech
  *   Lazio vanno rimessi in pagina (regola 5 di CLAUDE.md);
  * - i testi di privacy e cookie, che oggi dichiarano di essere una base di
  *   partenza non validata.
  */
-export const INDEXABLE = true;
+export const INDEXABLE = false;
 
 /**
  * I nomi delle persone (team di programma e Advisory Board) restano fuori
