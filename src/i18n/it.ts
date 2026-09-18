@@ -10,7 +10,7 @@ export const it = {
     locale: "it_IT",
     title: "Impronta — Acceleratore d’impatto",
     description:
-      "Impronta accelera ogni anno sei startup e spin-off con tecnologie a impatto su ambiente, salute e industria. Quattro mesi a Roma e un investimento di €150.000.",
+      "L’acceleratore di impatto di Next4, ELIS Innovation Hub e WDA. Sei startup per batch, €150.000 in equity, tecnologie per ambiente, salute, industria e sociale.",
     ogImage: "og-image.png",
     skipToContent: "Vai al contenuto",
     logoLabel: "Impronta, acceleratore d’impatto",

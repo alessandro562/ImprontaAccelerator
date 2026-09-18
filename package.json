@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "screens": "node scripts/screens.mjs",
-    "diff": "node scripts/diff-concept.mjs"
+    "diff": "node scripts/diff-concept.mjs",
+    "og": "node scripts/og.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

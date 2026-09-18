@@ -4,21 +4,25 @@ import type { Dict } from './it';
  * L'annotazione `: Dict` è deliberata: se una chiave manca o è di troppo
  * rispetto all'italiano, `astro check` fallisce in CI invece di lasciare
  * testo italiano dentro la pagina inglese.
+ *
+ * Traduzione riletta per intero il 18 settembre 2026: non è più provvisoria,
+ * ma non è ancora passata da chi in Impronta risponde del testo inglese.
+ * L'inglese è britannico (programme, organisation) come il `locale` en_GB.
+ * Le sigle e i nomi propri non si traducono: TRL, SROI, Villa Fassini,
+ * Agorà Impronta, i nomi dei promotori.
  */
 export const en: Dict = {
-  // EN-DA-RIVEDERE
   meta: {
     locale: "en_GB",
     title: "Impronta — Impact accelerator",
     description:
-      "Each year Impronta accelerates six startups and spin-offs with technologies that improve the environment, health and industry. Four months in Rome and a €150,000 investment.",
+      "The impact accelerator by Next4, ELIS Innovation Hub and WDA. Six startups per batch, €150,000 in equity, technologies for environment, health, industry and society.",
     ogImage: "og-image-en.png",
     skipToContent: "Skip to content",
     logoLabel: "Impronta, impact accelerator",
     homeLabel: "Impronta, back to the top",
   },
 
-  // EN-DA-RIVEDERE
   nav: {
     items: [
       { id: "programma", label: "The programme" },
@@ -30,7 +34,6 @@ export const en: Dict = {
     langLabel: "Site language",
   },
 
-  // EN-DA-RIVEDERE
   hero: {
     place: "Impact accelerator · Rome",
     callOpen: "Applications open · 2026 batch",
@@ -51,7 +54,6 @@ export const en: Dict = {
     ctaSecondary: "See the programme",
   },
 
-  // EN-DA-RIVEDERE
   programma: {
     label: "The programme",
     intro: "We fund technologies that improve life in a community or a region. Impact arises in very different sectors: the programme looks at all of them.",
@@ -63,7 +65,6 @@ export const en: Dict = {
     ],
   },
 
-  // EN-DA-RIVEDERE
   fronti: {
     label: "What we look for",
     title: "Technologies with a measurable effect",
@@ -96,18 +97,16 @@ export const en: Dict = {
     ],
   },
 
-  // EN-DA-RIVEDERE
   perChi: {
     label: "Who it is for",
     lead: "Startups, university spin-offs and research groups with a validated technology and a clear idea of where to apply it.",
     items: [
       { k: "TRL 3–9", v: "From proof of concept to market" },
-      { k: "Lazio", v: "An operating base in Lazio, which may be opened before the start" },
+      { k: "Lazio", v: "An operating base in Lazio, which you may open before the start" },
       { k: "Pre-seed", v: "Incorporated, or still to be" },
     ],
   },
 
-  // EN-DA-RIVEDERE
   comeFunziona: {
     label: "How it works",
     title: { riga1: "How you get in,", riga2: "and what you get" },
@@ -120,7 +119,6 @@ export const en: Dict = {
     ],
   },
 
-  // EN-DA-RIVEDERE
   chiSiamo: {
     label: "A programme by",
     orgs: [
@@ -130,7 +128,6 @@ export const en: Dict = {
     ],
   },
 
-  // EN-DA-RIVEDERE
   sede: {
     label: "Villa Fassini, Rome",
     title: "The venue and the community",
@@ -154,7 +151,6 @@ export const en: Dict = {
     mailPrefix: "Questions?",
   },
 
-  // EN-DA-RIVEDERE
   footer: {
     promoters: "A programme by Next4, ELIS Innovation Hub and WDA",
     address: "Villa Fassini · Via Giuseppe Donati 174, Rome",
@@ -221,7 +217,6 @@ export const en: Dict = {
       "This text must be updated if analytics tools, marketing pixels or embedded third-party content are added in future.",
   },
 
-  // EN-DA-RIVEDERE
   notFound: {
     title: "Page not found",
     text: "The link you followed does not lead to any page on this site.",
