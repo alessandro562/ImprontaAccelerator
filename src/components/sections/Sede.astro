@@ -7,10 +7,14 @@ const { locale } = Astro.props;
 const t = useTranslations(locale);
 
 /**
- * La foto della sede, se c'e'.
+ * Le foto della sede.
  *
  * Stesso meccanismo dei loghi dei promotori: `import.meta.glob` risolve a build
- * time, quindi basta lasciare il file in `src/assets/sede/`. Finche' manca
+ * time, quindi basta lasciare i file in `src/assets/sede/`. L'ordine e' quello
+ * alfabetico dei nomi — per questo i file sono numerati — e combacia con
+ * `t.sede.galleria.scatti`, che tiene i testi alternativi.
+ *
+ * Con una sola foto il carosello non compare: resta l'immagine. Con nessuna
  * resta un segnaposto dichiarato, cosi' non si pubblica per sbaglio un vuoto.
  * Istruzioni in src/assets/sede/README.md.
  */
@@ -18,14 +22,71 @@ const files = import.meta.glob<{ default: ImageMetadata }>(
   '../../assets/sede/*.{jpg,jpeg,png,webp}',
   { eager: true },
 );
-const foto = Object.values(files)[0]?.default;
+const scatti = Object.keys(files).sort().map((k) => files[k].default);
+const alt = (i: number) => t.sede.galleria.scatti[i]?.alt ?? t.sede.galleria.label;
 ---
 <section class="sede" id="sede" aria-labelledby="sede-title">
   <div class="wrap sede__grid">
     <div class="sede__foto" data-in>
-      {foto
-        ? <img src={foto.src} alt={t.sede.label} width={foto.width} height={foto.height} />
-        : <div class="sede__segnaposto" data-asset={t.sede.foto}><span>{t.sede.foto}</span></div>}
+      {scatti.length === 0 && (
+        <div class="sede__segnaposto"><span>{t.sede.foto}</span></div>
+      )}
+
+      {scatti.length === 1 && (
+        <img src={scatti[0].src} alt={alt(0)} width={scatti[0].width} height={scatti[0].height} />
+      )}
+
+      {scatti.length > 1 && (
+        <div
+          class="carosello"
+          data-carosello
+          role="group"
+          aria-roledescription="carosello"
+          aria-label={t.sede.galleria.label}
+        >
+          {/*
+            La pista e' un contenitore con scroll-snap: senza JavaScript resta
+            scorrevole con dito e trackpad, e le frecce semplicemente non
+            compaiono. `tabindex` perche' un'area scorrevole dev'essere
+            raggiungibile da tastiera.
+          */}
+          <div class="carosello__pista" data-pista tabindex="0">
+            {scatti.map((s, i) => (
+              <img
+                class="carosello__slide"
+                src={s.src}
+                alt={alt(i)}
+                width={s.width}
+                height={s.height}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            ))}
+          </div>
+
+          <div class="carosello__nav">
+            <button type="button" class="carosello__freccia" data-prec aria-label={t.sede.galleria.prec}>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg>
+            </button>
+
+            <div class="carosello__punti">
+              {scatti.map((_, i) => (
+                <button
+                  type="button"
+                  class="carosello__punto"
+                  data-punto={i}
+                  aria-label={`${t.sede.galleria.vai} ${i + 1}`}
+                  aria-current={i === 0 ? 'true' : undefined}
+                />
+              ))}
+            </div>
+
+            <button type="button" class="carosello__freccia" data-succ aria-label={t.sede.galleria.succ}>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg>
+            </button>
+          </div>
+        </div>
+      )}
     </div>
 
     <div class="sede__testo">
@@ -43,3 +104,59 @@ const foto = Object.values(files)[0]?.default;
     </div>
   </div>
 </section>
+
+<script>
+  /**
+   * Il carosello della sede.
+   *
+   * Non c'e' avanzamento automatico: una foto che si muove da sola accanto a un
+   * testo da leggere ruba l'attenzione, e chi legge lentamente perde il segno.
+   * Si avanza con le frecce, con i punti, con la tastiera o trascinando.
+   *
+   * La posizione la tiene lo scroll della pista, non una variabile: cosi' il
+   * trascinamento col dito e i pulsanti non possono raccontare due storie
+   * diverse. I punti si aggiornano ascoltando lo scroll.
+   */
+  const caroselli = document.querySelectorAll<HTMLElement>('[data-carosello]');
+
+  caroselli.forEach((carosello) => {
+    const pista = carosello.querySelector<HTMLElement>('[data-pista]');
+    const punti = [...carosello.querySelectorAll<HTMLButtonElement>('[data-punto]')];
+    const prec = carosello.querySelector<HTMLButtonElement>('[data-prec]');
+    const succ = carosello.querySelector<HTMLButtonElement>('[data-succ]');
+    if (!pista || punti.length < 2) return;
+
+    const lente = matchMedia('(prefers-reduced-motion: reduce)');
+    const indice = () => Math.round(pista.scrollLeft / pista.clientWidth);
+
+    const vaiA = (i: number) => {
+      const n = Math.max(0, Math.min(punti.length - 1, i));
+      pista.scrollTo({ left: n * pista.clientWidth, behavior: lente.matches ? 'auto' : 'smooth' });
+    };
+
+    /* Il carosello e' circolare: dall'ultima si torna alla prima. */
+    prec?.addEventListener('click', () => vaiA(indice() === 0 ? punti.length - 1 : indice() - 1));
+    succ?.addEventListener('click', () => vaiA(indice() === punti.length - 1 ? 0 : indice() + 1));
+    punti.forEach((punto, i) => punto.addEventListener('click', () => vaiA(i)));
+
+    pista.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); vaiA(indice() - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); vaiA(indice() + 1); }
+    });
+
+    let attesa = 0;
+    const aggiorna = () => {
+      const n = indice();
+      punti.forEach((punto, i) => {
+        if (i === n) punto.setAttribute('aria-current', 'true');
+        else punto.removeAttribute('aria-current');
+      });
+    };
+    pista.addEventListener('scroll', () => {
+      cancelAnimationFrame(attesa);
+      attesa = requestAnimationFrame(aggiorna);
+    }, { passive: true });
+
+    aggiorna();
+  });
+</script>

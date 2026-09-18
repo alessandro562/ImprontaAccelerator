@@ -133,6 +133,18 @@ export const it = {
       { t: "Community", d: "Accesso al network ELIS di imprese, università, startup ed esperti." },
     ],
     foto: "Villa Fassini — foto da inserire in src/assets/sede/",
+    galleria: {
+      label: "Villa Fassini, fotografie",
+      prec: "Foto precedente",
+      succ: "Foto successiva",
+      vai: "Vai alla foto",
+      /* Un alt per scatto, nell’ordine alfabetico dei file in
+         src/assets/sede/. Se le foto diventano tre, qui va la terza riga. */
+      scatti: [
+        { alt: "La palazzina di Villa Fassini vista dal giardino, con una palma in primo piano." },
+        { alt: "Il fronte di Villa Fassini e il piazzale alberato all’ingresso." },
+      ],
+    },
   },
 
   chiusura: {

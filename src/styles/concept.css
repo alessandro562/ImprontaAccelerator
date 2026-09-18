@@ -369,6 +369,12 @@ a.org__name:hover{color:var(--magenta)}
 .sede__foto img,
 .sede__segnaposto {
   width: 100%;
+  /* `height: auto` non e' ridondante: gli attributi width e height dell'<img>
+     valgono come dichiarazioni CSS d'autore a specificita' zero, e finche'
+     l'altezza resta quella dell'attributo la scatola ha due lati fissi e
+     `aspect-ratio` non ha niente da calcolare. Senza questa riga ogni foto si
+     presenta con le sue proporzioni native invece che in 4:3. */
+  height: auto;
   aspect-ratio: 4/3;
   border-radius: 6px;
   object-fit: cover;
@@ -404,4 +410,92 @@ a.org__name:hover{color:var(--magenta)}
 .sede__voci dd { margin: 6px 0 0; color: var(--muted); font-size: 16px; max-width: 44ch }
 @media (max-width: 860px) {
   .sede__foto, .sede__testo { grid-column: 1/-1 }
+}
+
+/*
+ * Il carosello della sede.
+ *
+ * La pista e' un contenitore con scroll-snap: e' lo scroll nativo a fare il
+ * lavoro, quindi il trascinamento col dito e' quello del sistema — nessuna
+ * inerzia simulata — e senza JavaScript resta comunque scorrevole. Le frecce
+ * e i punti compaiono solo con JavaScript attivo, perche' senza non farebbero
+ * niente: `html.js` lo dichiara gia' per il resto della pagina.
+ */
+.carosello { position: relative }
+.carosello__pista {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  border-radius: 6px;
+  /* La barra di scorrimento sotto la foto sporcherebbe il bordo: il controllo
+     e' delegato a frecce e punti, che sono visibili e raggiungibili. */
+  scrollbar-width: none;
+}
+.carosello__pista::-webkit-scrollbar { display: none }
+.carosello__pista:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px }
+.carosello__slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+  scroll-snap-align: start;
+}
+
+.carosello__nav { display: none }
+html.js .carosello__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 14px;
+}
+.carosello__freccia {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background .25s var(--ease), border-color .25s var(--ease);
+}
+.carosello__freccia svg { width: 16px; height: 16px }
+.carosello__freccia:hover { background: var(--ink); border-color: var(--ink); color: var(--paper) }
+.carosello__freccia:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px }
+
+.carosello__punti { display: flex; gap: 8px }
+.carosello__punto {
+  /* L'area cliccabile e' 24px, il pallino ne misura 7: sotto i 24px il
+     bersaglio diventa scomodo su un telefono. */
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.carosello__punto::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink);
+  opacity: .28;
+  transition: opacity .25s var(--ease), transform .25s var(--ease);
+}
+.carosello__punto:hover::before { opacity: .55 }
+.carosello__punto[aria-current]::before { opacity: 1; transform: scale(1.28) }
+.carosello__punto:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; border-radius: 50% }
+
+@media (prefers-reduced-motion: reduce) {
+  .carosello__pista { scroll-behavior: auto }
+  .carosello__freccia, .carosello__punto::before { transition: none }
 }

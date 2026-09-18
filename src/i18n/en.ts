@@ -139,6 +139,16 @@ export const en: Dict = {
       { t: "Community", d: "Access to the ELIS network of companies, universities, startups and experts." },
     ],
     foto: "Villa Fassini — photo to be added in src/assets/sede/",
+    galleria: {
+      label: "Villa Fassini, photographs",
+      prec: "Previous photo",
+      succ: "Next photo",
+      vai: "Go to photo",
+      scatti: [
+        { alt: "The Villa Fassini building seen from the garden, with a palm tree in the foreground." },
+        { alt: "The front of Villa Fassini and the tree-lined forecourt at the entrance." },
+      ],
+    },
   },
 
   chiusura: {
