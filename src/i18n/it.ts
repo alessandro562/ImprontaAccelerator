@@ -152,6 +152,10 @@ export const it = {
     title: { before: "Lascia ", accent: "il segno." },
     deadlinePrefix: "Le candidature si raccolgono sulla piattaforma del programma fino al",
     deadlineSuffix: ".",
+    /* Tre stati, non due: con la data si annuncia la scadenza, senza data ma
+       con la piattaforma attiva si usa il presente, e prima che la piattaforma
+       esista si usa il futuro. Il secondo caso e' quello di oggi. */
+    open: "Le candidature si raccolgono sulla piattaforma del programma.",
     pending: "Le candidature si raccoglieranno sulla piattaforma del programma.",
     cta: "Vai alla candidatura",
     mailPrefix: "Domande?",

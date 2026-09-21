@@ -156,6 +156,7 @@ export const en: Dict = {
     title: { before: "Leave ", accent: "a mark." },
     deadlinePrefix: "Applications are collected on the programme platform until",
     deadlineSuffix: ".",
+    open: "Applications are collected on the programme platform.",
     pending: "Applications will be collected on the programme platform.",
     cta: "Go to the application",
     mailPrefix: "Questions?",

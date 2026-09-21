@@ -3,14 +3,20 @@ import Cta from '../Cta.astro';
 import Pittogramma from '../Pittogramma.astro';
 import { useTranslations } from '../../i18n';
 import type { Locale } from '../../i18n/utils';
-import { CONTACT_EMAIL, formattedDeadline } from '../../config';
+import { CONTACT_EMAIL, formattedDeadline, hasApplicationForm } from '../../config';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 
-// Senza data la frase non la annuncia: il futuro al posto del presente.
+/*
+ * La frase di chiusura ha tre stati. Con la data si annuncia la scadenza.
+ * Senza data ma con la piattaforma gia' attiva si usa il presente, perche' le
+ * candidature si raccolgono davvero adesso. Prima che la piattaforma esista,
+ * il futuro.
+ */
 const deadline = formattedDeadline(locale);
+const raccolta = deadline ? null : hasApplicationForm ? t.chiusura.open : t.chiusura.pending;
 ---
 <section class="close" aria-labelledby="close-title">
   <div class="wrap" style="position:relative;z-index:2">
@@ -22,7 +28,7 @@ const deadline = formattedDeadline(locale);
     <p data-in="3">
       {deadline
         ? <>{t.chiusura.deadlinePrefix} <strong style="color:var(--paper);font-weight:500">{deadline}</strong>{t.chiusura.deadlineSuffix}</>
-        : t.chiusura.pending}
+        : raccolta}
     </p>
     <div data-in="3">
       <Cta locale={locale} source="chiusura" label={t.chiusura.cta} />

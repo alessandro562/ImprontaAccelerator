@@ -5,11 +5,14 @@
  */
 
 /**
- * URL del form di candidatura esterno (Typeform / Tally / Google Form).
- * Finché resta vuoto, le CTA mostrano un avviso invece di puntare a un link
- * rotto: vedi `hasApplicationForm`.
+ * URL della candidatura sulla piattaforma esterna.
+ *
+ * Impostarlo cambia tre cose da solo: le CTA puntano alla piattaforma invece
+ * che alla mail di contatto, l’etichetta dell’hero passa da «Candidature in
+ * apertura» a «Candidature aperte», e la chiusura usa il presente.
+ * Se un giorno torna vuoto, tutto ricade sulla mail senza rompersi.
  */
-export const APPLICATION_FORM_URL = '';
+export const APPLICATION_FORM_URL = 'https://onesquare.elis.org/challenge/24';
 
 /**
  * Scadenza della call, in formato ISO (es. '2026-03-31').
