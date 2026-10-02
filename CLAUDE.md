@@ -24,9 +24,16 @@ Una pagina di attrazione, non una pagina informativa. La candidatura e il regola
 2. Tono: sicuro, asciutto, mai commerciale. Niente superlativi, punti esclamativi, urgenza artificiale ("ultimi posti", "non perdere"), promesse di risultato.
 3. Si dà del tu al lettore.
 4. Si dice **batch**, non «coorte».
-5. **Nessun riferimento a Venture Tech Lazio**, per ora: richiesta esplicita del
-   14 settembre. Vale anche per il footer. Da ripristinare prima di togliere il
-   `noindex` se l'obbligo di visibilità FESR è attivo.
+5. **Visibilità FESR nel footer**, dal 2 ottobre: i quattro marchi — Coesione
+   Italia, Unione europea, Repubblica Italiana, Regione Lazio — e la formula
+   «Cofinanziato dall'Unione europea, PR FESR Lazio 2021–2027, attraverso Lazio
+   Innova (LAZIO Venture 2)». La formula non si riscrive: è quella del
+   programma. I marchi non si ricolorano né si invertono, per questo stanno su
+   un pannello bianco. Dettagli e cosa resta da verificare in
+   `src/assets/fesr/README.md`.
+   Resta valido che **il nome «Venture Tech Lazio» non compare**, per la
+   richiesta del 14 settembre: il footer nomina Lazio Innova e LAZIO Venture 2,
+   che sono le diciture del documento di visibilità.
 6. Non legare la durata alla sede: «4 mesi a Villa Fassini» si legge come
    quattro mesi di trasferta e spaventa. La durata sta con il programma, la
    sede ha la sua sezione.

@@ -165,6 +165,14 @@ export const it = {
     promoters: "Un programma di Next4, ELIS Innovation Hub e WDA",
     address: "Villa Fassini · Via Giuseppe Donati 174, Roma",
     rights: "© 2026 Impronta",
+    /*
+     * Visibilità FESR. La formula è quella del programma e non si riscrive:
+     * qui cambiano solo i segni tipografici — apostrofo curvo e lineetta fra
+     * gli anni — perché il testo non è più cotto dentro un PNG ma composto
+     * con i caratteri della landing.
+     */
+    fesr: "Cofinanziato dall’Unione europea, PR FESR Lazio 2021–2027, attraverso Lazio Innova (LAZIO Venture 2).",
+    fesrLoghi: "Coesione Italia 21-27 Lazio, Cofinanziato dall’Unione europea, Repubblica Italiana, Regione Lazio",
     legalLabel: "Note legali",
     privacy: "Privacy",
     cookie: "Cookie",

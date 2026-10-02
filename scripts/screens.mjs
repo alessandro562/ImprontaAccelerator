@@ -138,6 +138,19 @@ for (const pagePath of pages) {
     await page.evaluate(() => {
       document.querySelectorAll('[data-in], #steps').forEach((el) => el.classList.add('is-in'));
     });
+
+    /*
+     * Le immagini con loading="lazy" sotto la piega non partono mai, perche'
+     * la cattura non scorre la pagina: venivano fotografate come riquadri
+     * vuoti. E' successo con la striscia dei loghi FESR nel footer, che per un
+     * momento ha fatto sembrare rotto un blocco che funzionava. Si forza il
+     * caricamento e si aspetta che siano davvero decodificate.
+     */
+    await page.evaluate(async () => {
+      const lazy = [...document.querySelectorAll('img[loading="lazy"]')];
+      lazy.forEach((img) => { img.loading = 'eager'; });
+      await Promise.all(lazy.map((img) => img.decode().catch(() => {})));
+    });
     await page.addStyleTag({ content: `
       *,*::before,*::after{animation-duration:0s!important;animation-delay:0s!important;
         animation-fill-mode:forwards!important;transition:none!important}

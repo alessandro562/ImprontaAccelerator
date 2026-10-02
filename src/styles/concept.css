@@ -270,7 +270,6 @@ a.org__name:hover{color:var(--magenta)}
 .foot p{margin:0 0 6px}
 .foot a{text-decoration:none}
 .foot a:hover{color:var(--paper)}
-.foot__eu{display:flex;align-items:center;justify-content:center;width:190px;height:56px;border:1px dashed var(--ink-line);border-radius:6px;font-size:12px;text-align:center;line-height:1.3}
 .foot__legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:40px;font-size:13px}
 .foot__legal nav{display:flex;gap:20px}
 @media (max-width:860px){.foot__grid{grid-template-columns:1fr 1fr}}
@@ -326,6 +325,59 @@ a.org__name:hover{color:var(--magenta)}
 @media (max-width: 860px) {
   .hero h1 { font-size: clamp(2.6rem, calc((100vw - 40px) / 6.2), 5rem) }
 }
+
+/*
+ * Visibilita' FESR nel footer.
+ *
+ * Il concept aveva al suo posto un riquadro tratteggiato di 190x56 px, un
+ * segnaposto. I loghi veri stanno in 15,7:1, quindi dentro quel riquadro
+ * sarebbero stati alti dodici pixel: il blocco si prende la larghezza che la
+ * striscia chiede per restare leggibile.
+ */
+.foot__fesr {
+  margin-top: clamp(32px, 4vw, 48px);
+  padding-top: clamp(28px, 3.4vw, 40px);
+  border-top: 1px solid var(--ink-line);
+}
+
+/* Il pannello chiaro e' obbligato: i marchi istituzionali non si ricolorano,
+   e sull'inchiostro il blu su nero non si legge. */
+/*
+ * Il pannello chiaro e' obbligato: i marchi istituzionali non si ricolorano,
+ * e sull'inchiostro il blu su nero non si legge.
+ *
+ * I quattro marchi vanno a capo invece di stare per forza in fila: su un
+ * telefono una fila sola li ridurrebbe a venti pixel d'altezza.
+ */
+.foot__fesr-loghi {
+  background: #FFFFFF;
+  border-radius: 6px;
+  padding: clamp(14px, 1.6vw, 20px) clamp(16px, 1.8vw, 26px);
+  /* Il pannello aderisce ai marchi invece di stendersi: bianco vuoto a destra
+     dei loghi sembrerebbe un errore di impaginazione. */
+  width: fit-content;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(16px, 2.4vw, 34px);
+}
+.foot__fesr-loghi img {
+  /* Stessa altezza per tutti: cosi' l'emblema europeo non e' mai piu' piccolo
+     degli altri marchi, che e' la regola di visibilita'. `width: auto` perche'
+     l'attributo width dell'<img> vale come dichiarazione CSS. */
+  height: clamp(30px, 3.4vw, 40px);
+  width: auto;
+  display: block;
+}
+
+.foot__fesr-testo {
+  margin: 16px 0 0;
+  max-width: 68ch;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
 
 /*
  * Loghi dei promotori. Compaiono al posto del nome scritto quando il file e'

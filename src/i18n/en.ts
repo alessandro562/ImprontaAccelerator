@@ -166,6 +166,11 @@ export const en: Dict = {
     promoters: "A programme by Next4, ELIS Innovation Hub and WDA",
     address: "Villa Fassini · Via Giuseppe Donati 174, Rome",
     rights: "© 2026 Impronta",
+    /* «Co-funded by the European Union» è la versione inglese ufficiale della
+       formula. Il nome del programma resta in italiano, perché è un nome
+       proprio. */
+    fesr: "Co-funded by the European Union, PR FESR Lazio 2021–2027, through Lazio Innova (LAZIO Venture 2).",
+    fesrLoghi: "Coesione Italia 21-27 Lazio, Co-funded by the European Union, Italian Republic, Regione Lazio",
     legalLabel: "Legal",
     privacy: "Privacy",
     cookie: "Cookies",

@@ -3,6 +3,17 @@ import Logo from './Logo.astro';
 import { useTranslations } from '../i18n';
 import { localeUrl, type Locale } from '../i18n/utils';
 import { CONTACT_EMAIL } from '../config';
+/*
+ * I quattro marchi stanno in quattro file e non in una striscia sola: in
+ * un'immagine unica da 15,7:1, su un telefono, l'emblema europeo sarebbe alto
+ * venti pixel. Separati vanno a capo e restano leggibili. L'ordine e'
+ * alfabetico, cioe' quello del documento originale.
+ */
+const loghiFesr = Object.entries(
+  import.meta.glob<{ default: ImageMetadata }>('../assets/fesr/*.webp', { eager: true }),
+)
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([, modulo]) => modulo.default);
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
@@ -14,6 +25,24 @@ const t = useTranslations(locale);
       <div><Logo class="foot__logo" label="Impronta" /></div>
       <div><p>{t.footer.promoters}</p><p>{t.footer.address}</p></div>
     </div>
+    {/*
+      Visibilita' FESR. I loghi stanno su un pannello bianco e non sul fondo
+      della pagina per due ragioni che vanno insieme: sull'inchiostro
+      «COESIONE ITALIA» e «REGIONE LAZIO» sono blu scuro su quasi nero e non
+      si leggono; e l'emblema europeo e quello della Repubblica non si possono
+      ricolorare ne' invertire, quindi il fondo chiaro e' anche l'unica strada
+      consentita. Il testo invece non e' piu' cotto dentro il PNG: e' composto
+      con i caratteri della landing, sotto i loghi.
+    */}
+    <div class="foot__fesr">
+      <div class="foot__fesr-loghi" role="img" aria-label={t.footer.fesrLoghi}>
+        {loghiFesr.map((logo) => (
+          <img src={logo.src} alt="" width={logo.width} height={logo.height} loading="lazy" decoding="async" />
+        ))}
+      </div>
+      <p class="foot__fesr-testo">{t.footer.fesr}</p>
+    </div>
+
     <div class="foot__legal">
       <span>{t.footer.rights}</span>
       <nav aria-label={t.footer.legalLabel}>
