@@ -343,24 +343,18 @@ a.org__name:hover{color:var(--magenta)}
 /* Il pannello chiaro e' obbligato: i marchi istituzionali non si ricolorano,
    e sull'inchiostro il blu su nero non si legge. */
 /*
- * Il pannello chiaro e' obbligato: i marchi istituzionali non si ricolorano,
- * e sull'inchiostro il blu su nero non si legge.
+ * I marchi stanno direttamente sul fondo della pagina, senza pannello: sono
+ * nella versione negativa, con il lettering bianco, che e' quella prevista per
+ * i fondi scuri. Vedi scripts/fesr.mjs.
  *
- * I quattro marchi vanno a capo invece di stare per forza in fila: su un
- * telefono una fila sola li ridurrebbe a venti pixel d'altezza.
+ * Vanno a capo invece di stare per forza in fila: su un telefono una fila sola
+ * li ridurrebbe a venti pixel d'altezza.
  */
 .foot__fesr-loghi {
-  background: #FFFFFF;
-  border-radius: 6px;
-  padding: clamp(14px, 1.6vw, 20px) clamp(16px, 1.8vw, 26px);
-  /* Il pannello aderisce ai marchi invece di stendersi: bianco vuoto a destra
-     dei loghi sembrerebbe un errore di impaginazione. */
-  width: fit-content;
-  max-width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: clamp(16px, 2.4vw, 34px);
+  gap: clamp(20px, 2.8vw, 40px);
 }
 .foot__fesr-loghi img {
   /* Stessa altezza per tutti: cosi' l'emblema europeo non e' mai piu' piccolo
@@ -372,7 +366,9 @@ a.org__name:hover{color:var(--magenta)}
 }
 
 .foot__fesr-testo {
-  margin: 16px 0 0;
+  /* Senza il bordo del pannello a fare da stacco, la frase ha bisogno di piu'
+     aria sotto i marchi, o sembra attaccata all'ultimo. */
+  margin: clamp(20px, 2.4vw, 28px) 0 0;
   max-width: 68ch;
   font-size: 13px;
   line-height: 1.55;
