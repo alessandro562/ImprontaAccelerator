@@ -14,6 +14,7 @@ import { spawnSync } from 'node:child_process';
 import { readFile, mkdir, rm, cp, stat, readdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
+import { opzioniChromium } from './chromium.mjs';
 
 const BASE_PATH = '/ImprontaAccelerator';
 const OUT_ROOT = 'docs/redesign-v2/screens';
@@ -23,10 +24,7 @@ const VIEWPORTS = [
   { name: '390', width: 390, height: 844 },
 ];
 
-// Il Chromium scaricato da Playwright non corrisponde a quello presente
-// nell'immagine: si usa quello di sistema quando c'e'.
-const SYSTEM_CHROME = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
-const launchOptions = existsSync(SYSTEM_CHROME) ? { executablePath: SYSTEM_CHROME } : {};
+const launchOptions = opzioniChromium;
 
 const label = process.argv[2];
 const withAxe = process.argv.includes('--axe');

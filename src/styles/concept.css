@@ -124,7 +124,14 @@ a{color:inherit}
 .hero__meta .label--live span{color:var(--paper)}
 .hero h1{margin:clamp(28px,5vh,64px) 0 0;font-size:clamp(4.1rem,10vw,10rem);max-width:11ch}
 .hero h1 .it{color:var(--amber);font-size:1.08em;line-height:.8;letter-spacing:-.02em}
-.hero h1 .line{display:block;overflow:hidden;padding-bottom:.16em;margin-bottom:-.1em}
+/*
+ * `overflow:hidden` e' la maschera da cui le righe del titolo salgono: non si
+ * puo' togliere. Ma ritagliava anche la punta della coda della «g» corsiva di
+ * «segno», che scende 1-3px oltre il fondo della riga. La maschera scende di
+ * .04em in piu' e il margine negativo la riassorbe: l'interlinea resta
+ * identica, la coda non si taglia.
+ */
+.hero h1 .line{display:block;overflow:hidden;padding-bottom:.2em;margin-bottom:-.14em}
 .hero h1 .line > span{display:inline-block}
 .hero__foot{display:flex;flex-direction:column;align-items:flex-start;gap:28px;margin-top:clamp(32px,5vh,56px);max-width:560px}
 .hero__sub{margin:0;max-width:46ch;font-size:clamp(17px,1.35vw,20px);color:var(--muted-dark)}
@@ -256,7 +263,14 @@ a.org__name:hover{color:var(--magenta)}
 .close{position:relative;background:var(--ink);color:var(--paper);overflow:hidden;padding:clamp(100px,13vw,180px) 0 clamp(100px,12vw,170px);text-align:center}
 .close .label{justify-content:center;color:var(--green)}
 .close .label span{color:var(--paper)}
-.close h2{margin:26px auto 0;font-size:clamp(3.6rem,11vw,11rem)}
+/*
+ * Il padding-bottom non e' decorativo: con line-height .9 la discendente della
+ * «g» corsiva esce dal riquadro di circa .155em, e il margine del paragrafo
+ * sotto e' fisso a 24px. A 1440px, dove il titolo arriva a 158px, i due si
+ * toccavano. In em perche' il rimedio deve crescere col corpo come il
+ * problema: cosi' l'aria sotto la «g» resta sui 25px a ogni larghezza.
+ */
+.close h2{margin:26px auto 0;padding-bottom:.16em;font-size:clamp(3.6rem,11vw,11rem)}
 .close h2 .it{color:var(--amber)}
 .close p{margin:24px auto 36px;color:var(--muted-dark);font-size:18px;max-width:44ch}
 .close__mail{display:block;margin-top:26px;color:var(--muted-dark);font-size:15px}

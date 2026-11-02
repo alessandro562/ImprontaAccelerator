@@ -56,7 +56,7 @@ export const en: Dict = {
 
   programma: {
     label: "The programme",
-    intro: "We fund technologies that improve life in a community or a region. Impact arises in very different sectors: the programme looks at all of them.",
+    intro: "We fund technologies that improve life in a community or a region, across four areas.",
     nums: [
       { value: "6", label: "startups per batch, twelve in two years" },
       { prefix: "€", value: "150", accent: "k", label: "in equity for each startup" },
@@ -79,7 +79,7 @@ export const en: Dict = {
       {
         n: "02",
         name: "Health",
-        text: "Care, inclusion and essential services, closer.",
+        text: "Care that reaches where it does not reach today.",
         tags: ["Digital health", "Biotech", "Assistive technologies"],
       },
       {
@@ -91,7 +91,7 @@ export const en: Dict = {
       {
         n: "04",
         name: "Social",
-        text: "Inclusion, education and services that strengthen communities.",
+        text: "Services that hold a community together where the market alone does not reach.",
         tags: ["Inclusion", "Education", "Community services", "Social economy"],
       },
     ],
@@ -113,7 +113,7 @@ export const en: Dict = {
     lead: "Four steps, from the application to the proof of concept with industry.",
     steps: [
       { n: "01", title: "Application", text: "You present the technology, the team and the impact you are after.", meta: "Online" },
-      { n: "02", title: "Selection", text: "We assess the technology, the team and the impact potential.", meta: "Interview and Advisory Board" },
+      { n: "02", title: "Selection", text: "We look at how solid the technology is and how far it can go.", meta: "Interview and Advisory Board" },
       { n: "03", title: "Acceleration", text: "Working modules, one-to-one mentorship and €150,000 in equity.", meta: "4 months" },
       { n: "04", title: "Demo Day", text: "You pitch to companies and investors. Solutions chosen by the partners move on to a proof of concept.", meta: "Up to 24 weeks" },
     ],
@@ -131,11 +131,11 @@ export const en: Dict = {
   sede: {
     label: "Villa Fassini, Rome",
     title: "The venue and the community",
-    lead: "A place where startups, companies, universities and social organisations meet, experiment and build collaborations.",
+    lead: "The place where you work, and where you meet the companies and the people you are building for.",
     voci: [
       { t: "Workspaces", d: "Coworking and equipped desks for startups and partners." },
-      { t: "Agorà Impronta", d: "Events, workshops and meetings with communities and stakeholders." },
-      { t: "Testing areas", d: "Space for prototypes, testing, training and co-design sessions." },
+      { t: "Agorà Impronta", d: "Events and meetings open to people outside the programme too." },
+      { t: "Testing areas", d: "Where prototypes get built and tried out." },
       { t: "Community", d: "Access to the ELIS network of companies, universities, startups and experts." },
     ],
     foto: "Villa Fassini — photo to be added in src/assets/sede/",

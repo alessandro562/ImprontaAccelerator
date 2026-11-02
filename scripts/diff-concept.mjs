@@ -15,6 +15,7 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import pixelmatch from 'pixelmatch';
 import { PNG } from 'pngjs';
+import { opzioniChromium } from './chromium.mjs';
 
 const BASE_PATH = '/ImprontaAccelerator';
 const OUT = 'docs/redesign-v2/diff';
@@ -37,8 +38,7 @@ const SOGLIA_X = 2; // px
 const AMMESSI = new Set(['.num[2]', '.num[3]', '.num__v[2]', '.num__v[3]']);
 
 // Il Chromium scaricato da Playwright non corrisponde a quello dell'immagine.
-const SYSTEM_CHROME = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
-const launchOptions = existsSync(SYSTEM_CHROME) ? { executablePath: SYSTEM_CHROME } : {};
+const launchOptions = opzioniChromium;
 
 const TYPES = {
   '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript',

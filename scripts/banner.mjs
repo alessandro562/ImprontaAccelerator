@@ -18,6 +18,7 @@
 import { chromium } from 'playwright';
 import { readFile, mkdir } from 'node:fs/promises';
 import sharp from 'sharp';
+import { opzioniChromium } from './chromium.mjs';
 
 const OUT = 'brand/piattaforma';
 const INK = '#0F1412';
@@ -189,7 +190,7 @@ const VARIANTI = [
   },
 ];
 
-const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' });
+const browser = await chromium.launch(opzioniChromium);
 
 /**
  * Il riquadro reale dei gruppi del logo, misurato dal browser: stimarlo a

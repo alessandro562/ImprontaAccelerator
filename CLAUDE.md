@@ -1,6 +1,6 @@
 # Impronta — regole di lavoro (v2)
 
-Questo file sostituisce la versione precedente. `docs/redesign/BRIEF.md` non è più valido per design, struttura e tono: resta come archivio in `docs/redesign-v1/`.
+Questo file sostituisce la versione precedente. Il brief della v1 non è più valido per design, struttura e tono: resta come archivio in `docs/redesign-v1/BRIEF.md`.
 
 ## Riferimento
 

@@ -50,7 +50,7 @@ export const it = {
 
   programma: {
     label: "Il programma",
-    intro: "Finanziamo tecnologie che migliorano la vita di una comunità o di un territorio. L’impatto nasce in settori molto diversi: il programma li guarda tutti.",
+    intro: "Finanziamo tecnologie che migliorano la vita di una comunità o di un territorio, in quattro ambiti diversi.",
     nums: [
       { value: "6", label: "startup per batch, dodici in due anni" },
       { prefix: "€", value: "150", accent: "mila", label: "in equity per ogni startup" },
@@ -73,7 +73,7 @@ export const it = {
       {
         n: "02",
         name: "Salute",
-        text: "Cure, inclusione e servizi essenziali più vicini.",
+        text: "Cure e assistenza che arrivano dove oggi non arrivano.",
         tags: ["Sanità digitale", "Biotech", "Tecnologie assistive"],
       },
       {
@@ -85,7 +85,7 @@ export const it = {
       {
         n: "04",
         name: "Sociale",
-        text: "Inclusione, educazione e servizi che rafforzano le comunità.",
+        text: "Servizi che tengono insieme una comunità dove il mercato da solo non arriva.",
         tags: ["Inclusione", "Educazione", "Servizi di comunità", "Economia sociale"],
       },
     ],
@@ -107,9 +107,9 @@ export const it = {
     lead: "Quattro passaggi, dalla candidatura alla sperimentazione con le imprese.",
     steps: [
       { n: "01", title: "Candidatura", text: "Presenti la tecnologia, il team e l’impatto che vuoi ottenere.", meta: "Online" },
-      { n: "02", title: "Selezione", text: "Valutiamo tecnologia, team e potenziale di impatto.", meta: "Colloquio e Advisory Board" },
+      { n: "02", title: "Selezione", text: "Guardiamo quanto regge la tecnologia e quanto lontano può arrivare.", meta: "Colloquio e Advisory Board" },
       { n: "03", title: "Accelerazione", text: "Moduli operativi, mentorship uno a uno e €150.000 in equity.", meta: "4 mesi" },
-      { n: "04", title: "Demo Day", text: "Presenti a imprese e investitori. Le soluzioni scelte dai partner passano alla sperimentazione.", meta: "Fino a 24 settimane" },
+      { n: "04", title: "Demo Day", text: "Porti il risultato davanti a imprese e investitori. Le soluzioni scelte dai partner passano alla sperimentazione.", meta: "Fino a 24 settimane" },
     ],
   },
 
@@ -125,11 +125,11 @@ export const it = {
   sede: {
     label: "Villa Fassini, Roma",
     title: "La sede e la community",
-    lead: "Uno spazio in cui startup, imprese, università e organizzazioni sociali si incontrano, sperimentano e costruiscono collaborazioni.",
+    lead: "Lo spazio dove lavori, e dove incontri le imprese e le persone per cui stai costruendo.",
     voci: [
       { t: "Spazi di lavoro", d: "Coworking e postazioni attrezzate per startup e partner." },
-      { t: "Agorà Impronta", d: "Eventi, workshop e incontri con comunità e stakeholder." },
-      { t: "Aree di sperimentazione", d: "Spazi per prototipi, test, formazione e sessioni di co-design." },
+      { t: "Agorà Impronta", d: "Eventi e incontri aperti anche a chi nel programma non c’è." },
+      { t: "Aree di sperimentazione", d: "Dove si montano i prototipi e si prova se funzionano." },
       { t: "Community", d: "Accesso al network ELIS di imprese, università, startup ed esperti." },
     ],
     foto: "Villa Fassini — foto da inserire in src/assets/sede/",

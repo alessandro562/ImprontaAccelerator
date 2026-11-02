@@ -13,6 +13,7 @@
  */
 import { chromium } from 'playwright';
 import { readFile, writeFile } from 'node:fs/promises';
+import { opzioniChromium } from './chromium.mjs';
 
 const INK = '#0F1412';
 const PAPER = '#F5F2EB';
@@ -94,7 +95,7 @@ em{font-family:Poppins,serif;font-style:italic;font-weight:400;color:${AMBRA};fo
   <p class="piede"><span>${c.piede}</span><span class="coda">${c.coda}</span></p>
 </div></body></html>`;
 
-const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' });
+const browser = await chromium.launch(opzioniChromium);
 const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
 for (const c of CARTE) {
   await page.setContent(pagina(c), { waitUntil: 'load' });
