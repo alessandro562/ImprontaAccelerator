@@ -17,12 +17,12 @@ export const APPLICATION_FORM_URL = 'https://onesquare.elis.org/challenge/24';
 /**
  * Candidatura su F6S, dove il programma è anche elencato.
  *
- * **Non è il canale principale**: la candidatura ufficiale resta quella sopra.
- * F6S chiede però che il link alla sua pagina sia presente sul sito, in un
- * pulsante. Sta nella chiusura, sotto la CTA principale, introdotto da
- * «Arrivi da F6S?»: chi non viene da F6S legge la domanda e tira dritto, chi
- * ci viene trova la sua strada. Due pulsanti «Candidati» affiancati
- * costringerebbero a scegliere fra due porte senza sapere qual è quella buona.
+ * **Non è un canale da cui arriva qualcuno**: è un adempimento. F6S chiede
+ * che il link alla sua pagina sia presente sul sito, e tanto basta. Sta nel
+ * footer, accanto a privacy, cookie e ai marchi FESR, che è dove stanno le
+ * cose dovute. Vicino alla CTA occuperebbe il punto che converte per parlare
+ * a nessuno. L'etichetta non dice «candidati»: la candidatura è una sola, ed
+ * è quella su APPLICATION_FORM_URL.
  *
  * Il link resta nudo, senza parametri di tracciamento: è un requisito di F6S,
  * e non vale la pena rischiare che una coda di query rompa il loro controllo.

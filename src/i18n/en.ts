@@ -159,8 +159,6 @@ export const en: Dict = {
     open: "Applications are collected on the programme platform.",
     pending: "Applications will be collected on the programme platform.",
     cta: "Go to the application",
-    f6sPrefix: "Coming from F6S?",
-    f6sCta: "Apply there",
     mailPrefix: "Questions?",
   },
 
@@ -168,6 +166,7 @@ export const en: Dict = {
     promoters: "A programme by Next4, ELIS Innovation Hub and WDA",
     address: "Villa Fassini · Via Giuseppe Donati 174, Rome",
     rights: "© 2026 Impronta",
+    f6s: "Impronta on F6S",
     /* «Co-funded by the European Union» è la versione inglese ufficiale della
        formula. Il nome del programma resta in italiano, perché è un nome
        proprio. */

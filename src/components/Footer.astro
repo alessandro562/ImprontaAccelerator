@@ -2,7 +2,7 @@
 import Logo from './Logo.astro';
 import { useTranslations } from '../i18n';
 import { localeUrl, type Locale } from '../i18n/utils';
-import { CONTACT_EMAIL } from '../config';
+import { CONTACT_EMAIL, F6S_APPLICATION_URL, hasF6sApplication } from '../config';
 /*
  * I quattro marchi stanno in quattro file e non in una striscia sola: in
  * un'immagine unica da 15,7:1, su un telefono, l'emblema europeo sarebbe alto
@@ -24,15 +24,27 @@ const t = useTranslations(locale);
     <div class="foot__grid">
       <div><Logo class="foot__logo" label="Impronta" /></div>
       <div><p>{t.footer.promoters}</p><p>{t.footer.address}</p></div>
+      {/*
+        F6S. Non e' un canale da cui arriva qualcuno: e' un adempimento, il
+        link che F6S chiede di avere sul sito. Sta qui e non vicino alla CTA
+        perche' li' occuperebbe il punto che converte per parlare a nessuno.
+        L'etichetta non dice «candidati»: la candidatura e' una sola, ed e'
+        quella sulla piattaforma del programma.
+      */}
+      {hasF6sApplication && (
+        <div>
+          <a class="foot__f6s" href={F6S_APPLICATION_URL} target="_blank" rel="noopener">
+            {t.footer.f6s}
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7"/></svg>
+          </a>
+        </div>
+      )}
     </div>
     {/*
-      Visibilita' FESR. I loghi stanno su un pannello bianco e non sul fondo
-      della pagina per due ragioni che vanno insieme: sull'inchiostro
-      «COESIONE ITALIA» e «REGIONE LAZIO» sono blu scuro su quasi nero e non
-      si leggono; e l'emblema europeo e quello della Repubblica non si possono
-      ricolorare ne' invertire, quindi il fondo chiaro e' anche l'unica strada
-      consentita. Il testo invece non e' piu' cotto dentro il PNG: e' composto
-      con i caratteri della landing, sotto i loghi.
+      Visibilita' FESR. I marchi sono le versioni negative, generate da
+      `npm run fesr`: sul fondo scuro i marchi colorati si leggono, a sparire
+      e' solo il lettering blu, che li' e' bianco. Il testo non e' piu' cotto
+      dentro il PNG: e' composto con i caratteri della landing, sotto i marchi.
     */}
     <div class="foot__fesr">
       <div class="foot__fesr-loghi" role="img" aria-label={t.footer.fesrLoghi}>

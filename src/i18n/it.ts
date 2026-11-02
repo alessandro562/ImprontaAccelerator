@@ -158,10 +158,6 @@ export const it = {
     open: "Le candidature si raccolgono sulla piattaforma del programma.",
     pending: "Le candidature si raccoglieranno sulla piattaforma del programma.",
     cta: "Vai alla candidatura",
-    /* La domanda fa da filtro: chi non arriva da F6S non ha niente da
-       decidere. Vedi F6S_APPLICATION_URL in config.ts. */
-    f6sPrefix: "Arrivi da F6S?",
-    f6sCta: "Candidati da lì",
     mailPrefix: "Domande?",
   },
 
@@ -169,6 +165,9 @@ export const it = {
     promoters: "Un programma di Next4, ELIS Innovation Hub e WDA",
     address: "Villa Fassini · Via Giuseppe Donati 174, Roma",
     rights: "© 2026 Impronta",
+    /* Non dice «candidati» di proposito: la candidatura è una sola, ed è
+       quella sulla piattaforma del programma. Vedi F6S_APPLICATION_URL. */
+    f6s: "Impronta su F6S",
     /*
      * Visibilità FESR. La formula è quella del programma e non si riscrive:
      * qui cambiano solo i segni tipografici — apostrofo curvo e lineetta fra
