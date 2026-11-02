@@ -260,6 +260,15 @@ a.org__name:hover{color:var(--magenta)}
 .close h2 .it{color:var(--amber)}
 .close p{margin:24px auto 36px;color:var(--muted-dark);font-size:18px;max-width:44ch}
 .close__mail{display:block;margin-top:26px;color:var(--muted-dark);font-size:15px}
+/* La riga F6S: subordinata alla CTA, non alternativa. Piu' piccola del
+   pulsante principale e sopra la riga dei contatti. */
+.close__f6s{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
+  margin:28px auto 0;color:var(--muted-dark);font-size:15px}
+.close__f6s .link{font-size:15px;color:var(--paper);white-space:nowrap}
+/* La freccia «porta fuori dal sito», come sulla CTA principale. La misura la
+   da' .btn svg, che qui non si applica: senza questa riga l'SVG prende la sua
+   dimensione intrinseca e sballa la riga. */
+.close__f6s .link svg{width:14px;height:14px;flex:none}
 .close__mail a{color:var(--paper)}
 .close__art{width:clamp(72px,8vw,108px);margin:0 auto 34px}
 

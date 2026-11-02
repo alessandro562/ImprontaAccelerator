@@ -3,7 +3,7 @@ import Cta from '../Cta.astro';
 import Pittogramma from '../Pittogramma.astro';
 import { useTranslations } from '../../i18n';
 import type { Locale } from '../../i18n/utils';
-import { CONTACT_EMAIL, formattedDeadline, hasApplicationForm } from '../../config';
+import { CONTACT_EMAIL, F6S_APPLICATION_URL, formattedDeadline, hasApplicationForm, hasF6sApplication } from '../../config';
 
 interface Props { locale: Locale }
 const { locale } = Astro.props;
@@ -33,6 +33,22 @@ const raccolta = deadline ? null : hasApplicationForm ? t.chiusura.open : t.chiu
     <div data-in="3">
       <Cta locale={locale} source="chiusura" label={t.chiusura.cta} />
     </div>
+
+    {/*
+      F6S non e' il canale principale: la candidatura ufficiale e' quella del
+      pulsante qui sopra. La riga sta sotto, piu' piccola, e si apre con una
+      domanda invece che con un invito — chi non arriva da F6S non ha niente
+      da decidere. Vedi F6S_APPLICATION_URL in config.ts.
+    */}
+    {hasF6sApplication && (
+      <p class="close__f6s" data-in="3">
+        <span>{t.chiusura.f6sPrefix}</span>
+        <a class="link" href={F6S_APPLICATION_URL} target="_blank" rel="noopener">
+          {t.chiusura.f6sCta}
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12 12 4M5 4h7v7"/></svg>
+        </a>
+      </p>
+    )}
     <span class="close__mail" data-in="4">
       {t.chiusura.mailPrefix} <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
     </span>

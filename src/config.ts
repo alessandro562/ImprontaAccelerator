@@ -15,6 +15,22 @@
 export const APPLICATION_FORM_URL = 'https://onesquare.elis.org/challenge/24';
 
 /**
+ * Candidatura su F6S, dove il programma è anche elencato.
+ *
+ * **Non è il canale principale**: la candidatura ufficiale resta quella sopra.
+ * F6S chiede però che il link alla sua pagina sia presente sul sito, in un
+ * pulsante. Sta nella chiusura, sotto la CTA principale, introdotto da
+ * «Arrivi da F6S?»: chi non viene da F6S legge la domanda e tira dritto, chi
+ * ci viene trova la sua strada. Due pulsanti «Candidati» affiancati
+ * costringerebbero a scegliere fra due porte senza sapere qual è quella buona.
+ *
+ * Il link resta nudo, senza parametri di tracciamento: è un requisito di F6S,
+ * e non vale la pena rischiare che una coda di query rompa il loro controllo.
+ * Svuotarlo fa sparire la riga dalla pagina.
+ */
+export const F6S_APPLICATION_URL = 'https://www.f6s.com/impronta-accelerator-batch-2026/apply';
+
+/**
  * Scadenza della call, in formato ISO (es. '2026-03-31').
  * Lasciare vuoto per nascondere ovunque i riferimenti alla deadline.
  */
@@ -73,6 +89,7 @@ export const PARTNER_URLS = {
 } as const;
 
 export const hasApplicationForm = APPLICATION_FORM_URL.trim().length > 0;
+export const hasF6sApplication = F6S_APPLICATION_URL.trim().length > 0;
 export const hasDeadline = APPLICATION_DEADLINE.trim().length > 0;
 
 /** Deadline formattata nella lingua corrente, o null se non impostata. */

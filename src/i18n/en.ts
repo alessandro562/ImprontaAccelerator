@@ -159,6 +159,8 @@ export const en: Dict = {
     open: "Applications are collected on the programme platform.",
     pending: "Applications will be collected on the programme platform.",
     cta: "Go to the application",
+    f6sPrefix: "Coming from F6S?",
+    f6sCta: "Apply there",
     mailPrefix: "Questions?",
   },
 

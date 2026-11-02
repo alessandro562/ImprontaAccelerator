@@ -158,6 +158,10 @@ export const it = {
     open: "Le candidature si raccolgono sulla piattaforma del programma.",
     pending: "Le candidature si raccoglieranno sulla piattaforma del programma.",
     cta: "Vai alla candidatura",
+    /* La domanda fa da filtro: chi non arriva da F6S non ha niente da
+       decidere. Vedi F6S_APPLICATION_URL in config.ts. */
+    f6sPrefix: "Arrivi da F6S?",
+    f6sCta: "Candidati da lì",
     mailPrefix: "Domande?",
   },
 
