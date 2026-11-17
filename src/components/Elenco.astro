@@ -1,0 +1,24 @@
+---
+import Testo from './Testo.astro';
+import type { Locale } from '../i18n/utils';
+import type { Elenco } from '../i18n/tipi';
+
+interface Props { elenco: Elenco; locale: Locale }
+const { elenco, locale } = Astro.props;
+
+/*
+ * I numeri e le lettere non sono nel testo: li mette il browser, come li metteva
+ * Word. Un elenco a lettere e' un <ol> con `lista--let`, e i sotto-elenchi si
+ * annidano nella voce a cui appartengono: la numerazione riparte da sola.
+ */
+const Tag = elenco.tipo === 'pun' ? 'ul' : 'ol';
+const Self = Astro.self;
+---
+<Tag class={`lista lista--${elenco.tipo}`}>
+  {elenco.voci.map((voce) => (
+    <li>
+      <Testo testo={voce.testo} locale={locale} />
+      {voce.sotto && <Self elenco={voce.sotto} locale={locale} />}
+    </li>
+  ))}
+</Tag>

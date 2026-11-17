@@ -1,0 +1,19 @@
+---
+import { localeUrl, type Locale } from '../i18n/utils';
+import type { Testo } from '../i18n/tipi';
+
+interface Props { testo: Testo; locale: Locale }
+const { testo, locale } = Astro.props;
+
+const parti = typeof testo === 'string' ? [testo] : testo;
+/** `page:privacy` e' una pagina del sito, nella lingua di chi legge. */
+const indirizzo = (href: string) => (href.startsWith('page:') ? localeUrl(locale, href.slice(5)) : href);
+const fuori = (href: string) => /^https?:/.test(href);
+---
+{/* Il collegamento sta su una riga sola: a capo dentro il tag, il browser lo renderebbe come uno spazio dentro il link, sottolineato. */}
+{parti.map((p) =>
+  typeof p === 'string' ? p
+  : p.href ? <a href={indirizzo(p.href)} target={fuori(p.href) ? '_blank' : undefined} rel={fuori(p.href) ? 'noopener' : undefined}>{p.b ? <strong>{p.t}</strong> : p.t}</a>
+  : p.b ? <strong>{p.t}</strong>
+  : p.t,
+)}

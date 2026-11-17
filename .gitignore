@@ -19,3 +19,6 @@ docs/redesign-v1/*
 # Screenshot e immagini di diff della v2: si rigenerano con npm run diff.
 docs/redesign-v2/
 .qa-serve/
+
+# Generato da Python quando gli script si importano fra loro.
+__pycache__/

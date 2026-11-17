@@ -58,6 +58,7 @@ const t = useTranslations(locale);
     <div class="foot__legal">
       <span>{t.footer.rights}</span>
       <nav aria-label={t.footer.legalLabel}>
+        <a href={localeUrl(locale, 'regolamento')}>{t.footer.regolamento}</a>
         <a href={localeUrl(locale, 'privacy')}>{t.footer.privacy}</a>
         <a href={localeUrl(locale, 'cookie')}>{t.footer.cookie}</a>
         <a href={`mailto:${CONTACT_EMAIL}`}>{t.footer.contact}</a>

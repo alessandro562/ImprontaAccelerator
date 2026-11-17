@@ -11,7 +11,6 @@
 }
 .legal h1 {
   font-family: var(--display);
-  font-variation-settings: "opsz" 72, "wdth" 92;
   font-weight: 700;
   letter-spacing: -.03em;
   line-height: 1;
@@ -29,8 +28,7 @@
 }
 .legal h2 {
   font-family: var(--display);
-  font-variation-settings: "opsz" 48, "wdth" 92;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: -.02em;
   font-size: 24px;
   line-height: 1.15;
@@ -49,4 +47,46 @@
 }
 .legal__back {
   margin-top: 44px;
+}
+
+/*
+ * Il regolamento: un documento lungo, a articoli, con un indice in testa. Gli
+ * elenchi sono quelli di concept.css (.lista).
+ */
+.legal__lingua {
+  margin: 28px 0 0;
+  padding: 12px 16px;
+  border-left: 3px solid var(--amber);
+  background: var(--paper-2);
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.legal .indice {
+  margin-top: 32px;
+  padding: 22px 26px;
+  background: var(--paper-2);
+  border-radius: 6px;
+}
+.legal .indice ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 2;
+  column-gap: 36px;
+}
+.legal .indice li { break-inside: avoid; padding: 5px 0; font-size: 15px; line-height: 1.35 }
+.legal .indice a { text-decoration: none }
+
+/* Ogni articolo parte da un titolo che si puo' linkare: `scroll-padding-top`
+   di concept.css lo tiene sotto la barra di navigazione. */
+/* Nel regolamento il testo e' in inchiostro, non nel grigio delle pagine brevi:
+   e' un documento da leggere con attenzione, e i commi degli elenchi lo sono
+   gia' di loro. Dentro uno stesso articolo i due colori si vedevano. */
+.legal .articolo p { color: var(--ink) }
+.legal .articolo h2 { margin-top: 52px }
+.legal .articolo > :first-child + * { margin-top: 14px }
+
+@media (max-width: 640px) {
+  .legal .indice ol { columns: 1 }
 }

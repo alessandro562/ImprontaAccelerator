@@ -97,7 +97,7 @@ async function serve() {
 
 /** Pagine da fotografare: quelle presenti nella build. */
 async function discoverPages() {
-  const wanted = ['/', '/en/', '/privacy/', '/cookie/', '/en/privacy/', '/en/cookie/'];
+  const wanted = ['/', '/en/', '/privacy/', '/cookie/', '/regolamento/', '/en/privacy/', '/en/cookie/', '/en/regolamento/'];
   return wanted.filter((p) => existsSync(path.join('dist', p, 'index.html')) || (p === '/' && existsSync('dist/index.html')));
 }
 

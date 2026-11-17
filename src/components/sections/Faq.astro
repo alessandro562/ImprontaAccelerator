@@ -1,0 +1,45 @@
+---
+import Blocchi from '../Blocchi.astro';
+import Testo from '../Testo.astro';
+import { useTranslations } from '../../i18n';
+import type { Locale } from '../../i18n/utils';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+<section class="faq" id="faq" aria-labelledby="faq-title">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <span class="label" data-in>{t.faq.label}</span>
+      </div>
+      <h2 class="display" id="faq-title" data-in="2">{t.faq.title}</h2>
+      <p data-in="3"><Testo testo={t.faq.lead} locale={locale} /></p>
+    </div>
+
+    {t.faq.gruppi.map((gruppo) => (
+      <div class="faq__gruppo" data-in>
+        <h3 class="faq__titolo">{gruppo.titolo}</h3>
+        {/*
+          <details> nativo: si apre con la tastiera e senza JavaScript, e le
+          risposte restano nel documento anche chiuse. Nessuna animazione di
+          apertura, perche' il movimento del sito e' solo quello del concept.
+        */}
+        <div class="faq__lista">
+          {gruppo.domande.map((d) => (
+            <details class="faq__voce">
+              <summary>
+                <span class="faq__q">{d.q}</span>
+                <span class="faq__segno" aria-hidden="true"></span>
+              </summary>
+              <div class="faq__r">
+                <Blocchi blocchi={d.r} locale={locale} />
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

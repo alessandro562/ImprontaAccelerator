@@ -27,9 +27,10 @@ Da rivedere prima della pubblicazione:
 - **Privacy e cookie policy** (`src/i18n/it.ts` → `privacy`, `cookie`): sono una
   base di partenza, non un testo validato legalmente. Ogni pagina lo dichiara in
   un riquadro che va rimosso quando il testo è definitivo.
-- **Loghi istituzionali** di Lazio Innova / Regione Lazio e dei partner
-  dell'ecosistema: al momento nel footer compaiono solo come testo, perché i file
-  non sono in repo.
+- **FAQ e regolamento in inglese.** Le FAQ sono tradotte ma non riviste da chi in
+  Impronta risponde del testo inglese (diritto societario e aiuti di Stato in
+  particolare). Il regolamento non ha una versione inglese: la pagina `/en/regolamento/`
+  ha la cornice in inglese, un avviso e il testo italiano.
 
 ---
 
@@ -75,21 +76,26 @@ src/
     it.ts                tutto il copy italiano
     en.ts                inglese, tipizzato su it.ts -> la parità delle chiavi è forzata
     utils.ts             asset(), localeUrl(), pageKeyFromUrl()
+    faq.it.ts            le FAQ: GENERATO da un .docx, non si modifica a mano
+    faq.en.ts            le FAQ in inglese, a mano; la build fallisce se divergono dall'italiano
+    regolamento.it.ts    il regolamento: GENERATO da un .docx; solo in italiano
+    tipi.ts              forma di quei testi + verificaParita()
   layouts/               Base (meta, OG, hreflang, JSON-LD), Legal
   components/
-    sections/            le sette sezioni della home
+    sections/            le sezioni della home, FAQ compresa
     Nav, Footer, Logo, LogoSprite, Pittogramma, Cta
-  pages/                 index, privacy, cookie, 404, robots.txt + gli stessi sotto en/
+    Testo, Elenco, Blocchi   disegnano i testi lunghi (grassetti, collegamenti, elenchi annidati)
+  pages/                 index, regolamento, privacy, cookie, 404, robots.txt + gli stessi sotto en/
   styles/
-    concept.css          il <style> del concept, copiato 1:1
-    legal.css            solo per privacy, cookie e 404
+    concept.css          il <style> del concept, copiato 1:1, piu' le sezioni nate dopo
+    legal.css            solo per regolamento, privacy, cookie e 404
   assets/
     fonts/               i woff2 di marca, generati da scripts/fonts.py
     partner/             i loghi dei promotori (vedi il suo README)
     logo-impronta*.svg   i tre SVG del logo
 public/                  favicon, icone, immagini Open Graph
 docs/concept/            il concept approvato: il riferimento visivo
-scripts/                 fonts.py, diff-concept.mjs, screens.mjs
+scripts/                 fonts.py, diff-concept.mjs, screens.mjs, docx_a_testi.py, verifica_testi.py, fesr.mjs, og.mjs
 ```
 
 `brand/` contiene il materiale sorgente, compresi i kit completi dei loghi dei
@@ -169,12 +175,14 @@ sono raccolte in fondo a `concept.css`, sotto *Adattamenti a Poppins*.
 ## Regole di scrittura
 
 Il registro è quello di `CLAUDE.md`: una pagina di attrazione, non una pagina
-informativa. Candidatura e regolamento vivono su una piattaforma esterna.
+informativa. La candidatura vive su una piattaforma esterna; il regolamento e le
+FAQ, su richiesta esplicita, sono pubblicati qui ma fuori dal budget di testo.
 
 - Si dice **batch**, non «coorte».
-- Budget testo: circa 300 parole nel `<main>` della home italiana. Non si
-  aggiungono sezioni, tabelle, accordion, FAQ o pagine di approfondimento senza
-  richiesta esplicita.
+- Budget testo: circa 300 parole nel `<main>` della home italiana, **FAQ
+  escluse**. Le FAQ in fondo alla home e il regolamento in `/regolamento/` ci
+  sono perché richiesti il 17 novembre; altre sezioni, tabelle, accordion o pagine
+  di approfondimento no, senza richiesta esplicita.
 - Tono sicuro e asciutto, mai commerciale. Niente superlativi, urgenza
   artificiale o promesse di risultato. Si dà del tu.
 - Nessun dato che non sia nella proposta VTL. In particolare: la
@@ -262,3 +270,40 @@ la pagina rimanda alle condizioni e al colloquio invece di riempire il vuoto.
 
 I punti ancora da far validare sono elencati in `docs/redesign-v1/DA-VERIFICARE.md`,
 che resta fuori dal repository.
+
+
+---
+
+## FAQ e regolamento: dal documento alla pagina
+
+Sono testi che impegnano, e non si ricopiano a mano. Il documento Word è la fonte;
+uno script lo converte e un altro verifica che la pagina dica **le stesse parole**.
+
+```sh
+# 1. converti (da lanciare dalla radice del progetto)
+python3 scripts/docx_a_testi.py faq          FAQ.docx         > src/i18n/faq.it.ts
+python3 scripts/docx_a_testi.py regolamento  Regolamento.docx > src/i18n/regolamento.it.ts
+
+# 2. costruisci e verifica il testo, parola per parola
+npm run build
+python3 scripts/verifica_testi.py faq          FAQ.docx         dist/index.html
+python3 scripts/verifica_testi.py regolamento  Regolamento.docx dist/regolamento/index.html
+```
+
+La verifica deve dire `IDENTICI`. Controlla le **parole**: ne cattura una persa,
+un refuso o un paragrafo spostato, ma non la formattazione. Se nel documento
+compare qualcosa che lo script non conosce (un titolo di livello 3, una tabella)
+quel pezzo viene letto come testo semplice, e va guardato a occhio nella pagina.
+Un titolo di articolo scritto in modo diverso da «Art. N – Titolo», invece, lo
+ferma con un errore.
+
+Cosa va fatto a mano dopo una nuova versione:
+
+- **`src/i18n/faq.en.ts`**: la traduzione. Se le domande o le voci cambiano, la
+  build fallisce dicendo dove (`verificaParita`), invece di pubblicare una pagina
+  inglese con una domanda in meno.
+- **`regolamento.version` in `it.ts` ed `en.ts`**: la data della versione mostrata
+  in pagina. Oggi «ottobre 2026», ricavata dal nome del file.
+
+Il regolamento non ha versione inglese e non va inventata: è un testo legale e la
+traduzione la deve fare chi ne risponde.

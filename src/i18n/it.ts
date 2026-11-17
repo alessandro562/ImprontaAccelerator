@@ -5,6 +5,9 @@
  * testo e' spezzato in campi (`accent`, `strong`) invece che in HTML: cosi' la
  * traduzione resta allineata e nessun componente contiene stringhe visibili.
  */
+import { faqIt } from './faq.it';
+import type { Parte } from './tipi';
+
 export const it = {
   meta: {
     locale: "it_IT",
@@ -147,6 +150,14 @@ export const it = {
     },
   },
 
+  faq: {
+    label: "FAQ",
+    title: "Domande frequenti",
+    /* Il testo delle risposte sta in faq.it.ts, generato dal documento. */
+    lead: ["Le risposte in breve. Il testo completo delle regole è nel ", { t: "regolamento", href: "page:regolamento" }, "."] as Parte[],
+    gruppi: faqIt,
+  },
+
   chiusura: {
     label: "Batch 2026",
     title: { before: "Lascia ", accent: "il segno." },
@@ -177,9 +188,24 @@ export const it = {
     fesr: "Cofinanziato dall’Unione europea, PR FESR Lazio 2021–2027, attraverso Lazio Innova (LAZIO Venture 2).",
     fesrLoghi: "Coesione Italia 21-27 Lazio, Cofinanziato dall’Unione europea, Repubblica Italiana, Regione Lazio",
     legalLabel: "Note legali",
+    regolamento: "Regolamento",
     privacy: "Privacy",
     cookie: "Cookie",
     contact: "Contatti",
+  },
+
+  /* Solo la cornice della pagina: gli articoli stanno in regolamento.it.ts,
+     generato dal documento, e non hanno una versione inglese. */
+  regolamento: {
+    title: "Regolamento",
+    intro: "IMPRONTA Accelerator – Batch 2026",
+    description: "Il regolamento della call del batch 2026 di IMPRONTA Accelerator: destinatari, requisiti, selezione, investimento e obblighi.",
+    versionLabel: "Versione",
+    version: "ottobre 2026",
+    indexLabel: "Indice degli articoli",
+    articolo: "Art.",
+    soloItaliano: "",
+    back: "Torna alla home",
   },
 
   privacy: {

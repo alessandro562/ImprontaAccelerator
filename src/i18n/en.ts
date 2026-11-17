@@ -1,4 +1,6 @@
 import type { Dict } from './it';
+import type { Parte } from './tipi';
+import { faqEn } from './faq.en';
 
 /**
  * L'annotazione `: Dict` è deliberata: se una chiave manca o è di troppo
@@ -151,6 +153,13 @@ export const en: Dict = {
     },
   },
 
+  faq: {
+    label: "FAQ",
+    title: "Frequently asked questions",
+    lead: ["The short answers. The full text of the rules is in the ", { t: "rules", href: "page:regolamento" }, "."] as Parte[],
+    gruppi: faqEn,
+  },
+
   chiusura: {
     label: "2026 batch",
     title: { before: "Leave ", accent: "a mark." },
@@ -173,9 +182,23 @@ export const en: Dict = {
     fesr: "Co-funded by the European Union, PR FESR Lazio 2021–2027, through Lazio Innova (LAZIO Venture 2).",
     fesrLoghi: "Coesione Italia 21-27 Lazio, Co-funded by the European Union, Italian Republic, Regione Lazio",
     legalLabel: "Legal",
+    regolamento: "Rules",
     privacy: "Privacy",
     cookie: "Cookies",
     contact: "Contact",
+  },
+
+  /* The articles are published in Italian only: this is the page frame. */
+  regolamento: {
+    title: "Rules",
+    intro: "IMPRONTA Accelerator – 2026 batch",
+    description: "The rules of the 2026 batch call of IMPRONTA Accelerator: who can apply, requirements, selection, investment and obligations. Published in Italian.",
+    versionLabel: "Version",
+    version: "October 2026",
+    indexLabel: "Index of articles",
+    articolo: "Art.",
+    soloItaliano: "This document is available in Italian only.",
+    back: "Back to home",
   },
 
   privacy: {

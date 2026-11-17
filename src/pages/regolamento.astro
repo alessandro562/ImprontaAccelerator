@@ -1,0 +1,40 @@
+---
+import Legal from '../layouts/Legal.astro';
+import Blocchi from '../components/Blocchi.astro';
+import { articoliIt } from '../i18n/regolamento.it';
+import { useTranslations } from '../i18n';
+import { currentLocale } from '../i18n/utils';
+
+const locale = currentLocale(Astro.currentLocale);
+const t = useTranslations(locale);
+const r = t.regolamento;
+const titolo = (a: { n: number; titolo: string }) => `${r.articolo} ${a.n} – ${a.titolo}`;
+---
+<Legal
+  locale={locale}
+  pageKey="regolamento"
+  title={r.title}
+  updated={r.version}
+  updatedLabel={r.versionLabel}
+  intro={r.intro}
+  description={r.description}
+  back={r.back}
+>
+  {/* La pagina inglese ha la cornice in inglese e il testo in italiano: l'attributo lang lo dice a chi legge con uno screen reader. */}
+  {r.soloItaliano && <p class="legal__lingua">{r.soloItaliano}</p>}
+
+  <div lang="it">
+    <nav class="indice" aria-label={r.indexLabel}>
+      <ol>
+        {articoliIt.map((a) => <li><a href={`#art-${a.n}`}>{titolo(a)}</a></li>)}
+      </ol>
+    </nav>
+
+    {articoliIt.map((a) => (
+      <section class="articolo" aria-labelledby={`art-${a.n}`}>
+        <h2 id={`art-${a.n}`}>{titolo(a)}</h2>
+        <Blocchi blocchi={a.blocchi} locale={locale} />
+      </section>
+    ))}
+  </div>
+</Legal>

@@ -566,3 +566,100 @@ html.js .carosello__nav {
   .carosello__pista { scroll-behavior: auto }
   .carosello__freccia, .carosello__punto::before { transition: none }
 }
+
+/*
+ * Le FAQ. Non ci sono nel concept: nascono da una richiesta del 17 novembre, e
+ * stanno prima della chiusura, che resta l'ultima cosa che si legge prima del
+ * footer.
+ *
+ * Gruppi con il titolo a sinistra e le domande a destra, come le voci della
+ * sede. Le domande sono <details>: si aprono con la tastiera, funzionano senza
+ * JavaScript e non hanno animazione di apertura, perche' il movimento del sito
+ * e' solo quello del concept.
+ */
+.faq { padding: clamp(24px, 3vw, 40px) 0 clamp(88px, 11vw, 150px) }
+.faq__gruppo {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 24px;
+  margin-top: clamp(44px, 5.5vw, 80px);
+}
+.faq__gruppo:first-of-type { margin-top: 0 }
+.faq__titolo {
+  grid-column: 1/4;
+  margin: 0;
+  padding-top: 22px;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+}
+.faq__lista { grid-column: 4/13; border-bottom: 1px solid var(--line) }
+.faq__voce { border-top: 1px solid var(--line) }
+.faq__voce > summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 0;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  line-height: 1.22;
+  letter-spacing: -.015em;
+}
+.faq__voce > summary::-webkit-details-marker { display: none }
+.faq__voce > summary:hover { color: var(--magenta) }
+.faq__voce > summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px }
+
+/* Il segno piu'/meno si disegna con due barre e non cambia con un movimento:
+   da aperta la barra verticale sparisce e basta. */
+.faq__segno { flex: none; position: relative; width: 16px; height: 16px; margin-top: .3em }
+.faq__segno::before,
+.faq__segno::after { content: ""; position: absolute; background: currentColor; border-radius: 1px }
+.faq__segno::before { left: 0; right: 0; top: calc(50% - 1px); height: 2px }
+.faq__segno::after { top: 0; bottom: 0; left: calc(50% - 1px); width: 2px }
+.faq__voce[open] .faq__segno::after { display: none }
+
+.faq__r {
+  /* Il margine a destra tiene il testo allineato sotto la domanda, non sotto il segno. */
+  padding: 0 calc(16px + 24px) 28px 0;
+  max-width: 72ch;
+  color: var(--muted);
+  font-size: 17px;
+}
+.faq__r > :first-child { margin-top: 0 }
+.faq__r p { margin: 12px 0 0 }
+
+@media (max-width: 860px) {
+  .faq__titolo { grid-column: 1/-1; padding: 0 0 14px }
+  .faq__lista { grid-column: 1/-1 }
+  .faq__r { padding-right: 0 }
+}
+
+/*
+ * Elenchi dei testi lunghi, nelle FAQ e nel regolamento. Numeri e lettere li
+ * mette il browser (list-style-type), come li metteva Word: non sono nel testo.
+ */
+.lista { margin: 12px 0 0; padding-left: 1.4em }
+.lista li { margin-top: 8px; padding-left: .3em }
+.lista li::marker { color: var(--ink); font-weight: 500 }
+.lista--num { list-style-type: decimal }
+.lista--let { list-style-type: lower-alpha }
+.lista--pun { list-style-type: disc }
+.lista .lista { margin-top: 8px }
+.lista strong, .faq__r strong { color: var(--ink); font-weight: 600 }
+
+/* Collegamenti dentro un testo: sottolineati e in inchiostro, perche' il
+   colore del testo e' il grigio e un link grigio non si riconoscerebbe. */
+.faq__r a, .faq .head p a, .legal a:not(.btn) {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: .18em;
+  text-decoration-thickness: 1px;
+  overflow-wrap: anywhere;
+}
+.faq__r a:hover, .faq .head p a:hover, .legal a:not(.btn):hover { color: var(--magenta) }

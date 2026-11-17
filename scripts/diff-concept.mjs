@@ -163,7 +163,7 @@ const GRIGLIA = () => {
     '.close h2', '.close p', '.foot__grid', '.foot__legal',
   ];
   // Le sezioni nate dopo il concept non hanno un corrispettivo da confrontare.
-  const DOPO_IL_CONCEPT = ['.sede'];
+  const DOPO_IL_CONCEPT = ['.sede', '.faq'];
   const out = [];
   for (const sel of selettori) {
     document.querySelectorAll(sel).forEach((el) => {

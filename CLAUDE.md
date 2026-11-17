@@ -16,11 +16,11 @@ Il riferimento visivo, di struttura e di copy approvato è il concept `docs/conc
 
 ## Cos'è la landing
 
-Una pagina di attrazione, non una pagina informativa. La candidatura e il regolamento vivono su una piattaforma esterna. La landing ha un solo compito: far capire in pochi secondi che cos'è Impronta e portare le persone giuste al pulsante "Candidati".
+Una pagina di attrazione, non una pagina informativa. La candidatura vive su una piattaforma esterna; il regolamento è pubblicato qui, in una pagina a parte, e le FAQ chiudono la home. La landing ha un solo compito: far capire in pochi secondi che cos'è Impronta e portare le persone giuste al pulsante "Candidati".
 
 ## Regole di contenuto
 
-1. Budget testo: massimo circa 300 parole nel `<main>` della home in italiano. Non si aggiungono sezioni, tabelle, accordion, FAQ o pagine di approfondimento senza richiesta esplicita.
+1. Budget testo: massimo circa 300 parole nel `<main>` della home in italiano, **FAQ escluse**. Le FAQ in fondo alla home e il regolamento in `/regolamento/` ci sono per richiesta esplicita del 17 novembre, e vengono dai documenti del team (`FAQ` e `Regolamento`, ottobre 2026): si generano con `scripts/docx_a_testi.py`, non si riscrivono, e `scripts/verifica_testi.py` controlla che la pagina dica le stesse parole del documento. Altre sezioni, tabelle, accordion o pagine di approfondimento restano da non aggiungere senza richiesta esplicita.
 2. Tono: sicuro, asciutto, mai commerciale. Niente superlativi, punti esclamativi, urgenza artificiale ("ultimi posti", "non perdere"), promesse di risultato.
 3. Si dà del tu al lettore.
 4. Si dice **batch**, non «coorte».
@@ -33,9 +33,11 @@ Una pagina di attrazione, non una pagina informativa. La candidatura e il regola
    cerotto. Dei marchi non si cambia nessun colore — solo le scritte passano
    al bianco. Dettagli e cosa resta da verificare in
    `src/assets/fesr/README.md`.
-   Resta valido che **il nome «Venture Tech Lazio» non compare**, per la
-   richiesta del 14 settembre: il footer nomina Lazio Innova e LAZIO Venture 2,
-   che sono le diciture del documento di visibilità.
+   Il nome **«Venture Tech Lazio» non compare nel copy della landing**, per la
+   richiesta del 14 settembre: il footer nomina Lazio Innova e LAZIO Venture 2.
+   **Compare invece nelle FAQ e nel regolamento**, dal 17 novembre: sono i testi
+   ufficiali del team e lo nominano, anche come parte definita (VTL) e con il CUP.
+   Non si omette né si sostituisce in quei testi: sono documenti, non copy.
 6. Non legare la durata alla sede: «4 mesi a Villa Fassini» si legge come
    quattro mesi di trasferta e spaventa. La durata sta con il programma, la
    sede ha la sua sezione.
@@ -45,10 +47,14 @@ Una pagina di attrazione, non una pagina informativa. La candidatura e il regola
    - 4 mesi di programma;
    - TRL 3–9 (deciso dal team: la proposta diceva 3–6);
    - quattro ambiti: ambiente, salute, industria, sociale (il quarto è stato
-     aggiunto dopo la proposta, i suoi verticali sono da validare);
+     aggiunto dopo la proposta; i suoi verticali — inclusione, educazione, servizi
+     di comunità, economia sociale — sono ora quelli dell'art. 6 del regolamento);
    - la sperimentazione con le imprese riguarda solo le soluzioni scelte dai partner;
    - nessun nome di corporate;
-   - nessun altro dato non presente nella proposta.
+   - nessun altro dato non presente nella proposta. Fanno eccezione le FAQ e il
+     regolamento, che portano i termini dell'investimento (SAFE, follow-on,
+     corrispettivo dei servizi) perché sono i documenti del team: nel copy della
+     landing quei dati non si ripetono.
 
 ## Regole di design
 

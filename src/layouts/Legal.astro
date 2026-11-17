@@ -12,15 +12,19 @@ interface Props {
   updated: string;
   updatedLabel: string;
   intro: string;
-  sections: { h: string; p: string }[];
+  /** Per la meta description, se la sola intro non basta. */
+  description?: string;
+  /** Sezioni brevi, un titolo e un paragrafo: privacy e cookie. Un documento con altra forma passa dallo slot. */
+  sections?: { h: string; p: string }[];
   back: string;
-  placeholder: string;
+  /** L'avviso «testo non validato»: solo dove il testo e' una base di partenza. */
+  placeholder?: string;
   contact?: { prefix: string; email: string };
 }
 
-const { locale, pageKey, title, updated, updatedLabel, intro, sections, back, placeholder, contact } = Astro.props;
+const { locale, pageKey, title, updated, updatedLabel, intro, description, sections = [], back, placeholder, contact } = Astro.props;
 ---
-<Base locale={locale} pageKey={pageKey} title={`${title} — Impronta`} description={intro}>
+<Base locale={locale} pageKey={pageKey} title={`${title} — Impronta`} description={description ?? intro}>
   <Nav locale={locale} solida />
   <main id="main" class="legal">
     <div class="wrap">
@@ -36,6 +40,8 @@ const { locale, pageKey, title, updated, updatedLabel, intro, sections, back, pl
           </section>
         ))}
 
+        <slot />
+
         {contact && (
           <p>
             {contact.prefix}{' '}
@@ -43,7 +49,7 @@ const { locale, pageKey, title, updated, updatedLabel, intro, sections, back, pl
           </p>
         )}
 
-        <p class="legal__note">{placeholder}</p>
+        {placeholder && <p class="legal__note">{placeholder}</p>}
 
         <div class="legal__back">
           <a class="btn btn--dark" href={localeUrl(locale)}>

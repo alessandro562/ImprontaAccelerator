@@ -1,0 +1,14 @@
+---
+import Testo from './Testo.astro';
+import Elenco from './Elenco.astro';
+import type { Locale } from '../i18n/utils';
+import type { Blocco } from '../i18n/tipi';
+
+interface Props { blocchi: Blocco[]; locale: Locale }
+const { blocchi, locale } = Astro.props;
+---
+{blocchi.map((blocco) => (
+  'p' in blocco
+    ? <p><Testo testo={blocco.p} locale={locale} /></p>
+    : <Elenco elenco={blocco.elenco} locale={locale} />
+))}
